@@ -1,0 +1,1233 @@
+id: costpilot.demo.v1
+version: "2.0.0"
+description: >
+  Canonical reproducible demonstration repository for CostPilot.
+  All marketing screenshots, videos, product documentation examples,
+  and PR walk-throughs MUST originate from this repo.
+  This environment must remain deterministic, hash-stable, and drift-safe.
+
+scenario_version: "v1"
+
+# ===========================================================
+# 0. PURPOSE & DEMO CONTRACT
+# ===========================================================
+purpose_binding:
+  - "This repo represents the ground truth of CostPilot’s real capabilities."
+  - "Any feature not demonstrated here may not appear in marketing claims."
+  - "This is the trust anchor for deterministic screenshots, examples, and CI outputs."
+  - "External blog posts, docs, and videos referencing CostPilot MUST be reproducible from this repo."
+
+demo_contract:
+  - "No files outside allowlisted paths may change after v1 freeze, except via governed updates."
+  - "All PR examples used in marketing MUST originate from this exact repo."
+  - "Snapshots and golden outputs must remain byte-for-byte identical across OS/architectures."
+  - "Demo repo may not include features that are not available in the open-source tier of CostPilot."
+  - "Marketing claims must correlate 1:1 with demo outputs in this repo."
+
+# ===========================================================
+# 1. REPO OBJECTIVES
+# ===========================================================
+objectives:
+  - "Provide a deterministic, reproducible end-to-end demonstration of CostPilot."
+  - "Showcase the Trust Triangle: Detect → Predict → Explain."
+  - "Demonstrate snippet-based autofix and patch preview (EC2 + S3 only)."
+  - "Demonstrate mapping, trend, and snapshot reproducibility."
+  - "Demonstrate basic policy/baseline governance (non-enterprise)."
+  - "Provide assets for launch video and marketing pages."
+  - "Remain lightweight and safe for public consumption."
+
+# ===========================================================
+# 2. BRANCHES & PR METADATA
+# ===========================================================
+branches:
+  baseline: "main"
+  pr_branch: "feature/cost-regression-demo"
+sample_pr_number: 42
+
+# ===========================================================
+# 3. DIRECTORY STRUCTURE
+# ===========================================================
+structure:
+  - README.md
+  - costpilot.yml
+  - policies/
+      - default_ec2_type.yml
+  - infrastructure/
+      terraform/
+        baseline/
+          - main.tf
+          - variables.tf
+          - outputs.tf
+        pr-change/
+          - main.tf
+          - variables.tf
+          - outputs.tf
+        noop-change/
+          - main.tf
+          - variables.tf
+        noise-cases/
+          - whitespace_only.tf
+          - comments_only.tf
+          - reordered_resources.tf
+          - description_change.tf
+  - snapshots/
+      - plan_before.json
+      - plan_after.json
+      - plan_diff.json
+      - detect_v1.json
+      - predict_v1.json
+      - explain_v1.json
+      - snippet_v1.tf
+      - patch_v1.diff
+      - mapping_v1.mmd
+      - trend_history_v1.json
+      - trend_v1.svg
+  - .costpilot/
+      demo/
+        - detect_v1.json
+        - predict_v1.json
+        - explain_v1.json
+        - snippet_v1.tf
+        - patch_v1.diff
+        - mapping_v1.mmd
+        - trend_history_v1.json
+        - trend_v1.svg
+  - costpilot_artifacts/
+      - output_detect.json
+      - output_predict.json
+      - output_explain.json
+      - output_snippet.tf
+      - output_patch.diff
+      - output_mapping.mmd
+      - output_trend.json
+      - output_simulation.json
+  - pr_comments/
+      - comment_detect.txt
+      - comment_predict.txt
+      - comment_explain.txt
+      - comment_autofix.txt
+  - diagram/
+      - trust_triangle_flow.svg
+      - architecture_overview.svg
+  - tools/
+      - reset_demo.sh
+  - .github/
+      workflows/
+        - costpilot-ci.yml
+  - video_assets/
+      - script.md
+      - storyboard.md
+      - shot_list.md
+
+# ===========================================================
+# 4. TERRAFORM REQUIREMENTS
+# ===========================================================
+terraform_requirements:
+  version: ">=1.6"
+  plan_schema_version: 2
+
+scenario_invariants:
+  - "Terraform files in baseline and pr-change MUST NOT import external modules."
+  - "Terraform variables MUST be deterministic constants (no data sources)."
+  - "Resource logical names MUST NOT change between baseline and pr-change."
+  - "Terraform data sources are forbidden (no network lookups)."
+
+# ===========================================================
+# 5. INFRASTRUCTURE SCENARIOS
+# ===========================================================
+scenarios:
+
+  baseline_stack:
+    description: "Intentionally cost-efficient baseline used for comparison."
+    includes:
+      core_components:
+        - ec2_t3_micro_autoscaling_group
+        - alb_with_target_group_and_listener
+        - s3_bucket_with_lifecycle_enabled
+        - cloudwatch_logs_with_30_day_retention
+      mini_real_world_stack:
+        - rest_api_service (EC2 or Fargate-backed)
+        - background_worker (e.g., queue consumer)
+        - queue_or_topic (e.g., SQS-like pattern)
+        - analytics_s3_bucket (with lifecycle)
+    guarantees:
+      - "All baseline resources must represent stable, low-cost defaults."
+      - "No baseline resources should trigger CostPilot high-severity findings."
+      - "Baseline monthly cost must be clearly lower than PR regression cost."
+
+  pr_regression_stack:
+    description: "PR introduces regressions for detect/predict/explain demo."
+    explicit_regressions:
+      obvious:
+        - ec2_instance_type_change: "t3.micro → t3.xlarge"
+        - s3_lifecycle_disabled: true
+      subtle:
+        - cloudwatch_log_retention: "30 → infinite"
+        - ebs_volume_size: "20GB → 200GB"
+        - alb_access_logs_to_expensive_bucket: true
+        - cloudwatch_metric_stream_enabled: true
+    cross_service_dependencies:
+      - "alb → target_group → autoscaling_group → ec2_instances"
+      - "cloudwatch_logs → log_groups → metric_streams"
+      - "api_service → queue → worker → s3_analytics_bucket"
+    rationale: >
+      Produces realistic cost propagation paths for mapping output and shows
+      both obvious and subtle cost regressions that CostPilot can detect.
+
+  noop_change:
+    description: "Used to demonstrate low false-positives. No findings expected."
+    expected_output: "no_findings"
+
+  noise_test_cases:
+    description: "Demonstrate noise resilience (no false positives on non-cost changes)."
+    cases:
+      - name: whitespace_only_change
+        expected_output: "no_findings"
+      - name: comments_only_change
+        expected_output: "no_findings"
+      - name: reordered_resources
+        expected_output: "no_findings"
+      - name: description_change
+        expected_output: "no_findings"
+
+# ===========================================================
+# 6. POLICY & BASELINE DEMO
+# ===========================================================
+policy_demo:
+  description: "Non-enterprise governance demo to show basic policy enforcement."
+  costpilot_config: "costpilot.yml"
+  policies:
+    - path: "policies/default_ec2_type.yml"
+      purpose: "Enforce default EC2 type and flag regressions (t3.micro → larger)."
+      expected_violation_in_pr_regression_stack: true
+      expected_message_fragment: "default EC2 type policy violated"
+  baseline_usage:
+    baseline_file: ".costpilot/baselines.json"
+    must_demonstrate:
+      - "Baseline monthly cost recorded for core stack."
+      - "PR scenario compared against baseline."
+      - "Baseline-aware SLO breach example in trend demo."
+
+# ===========================================================
+# 7. TRUST TRIANGLE VALIDATION
+# ===========================================================
+trust_triangle_validation:
+  detect_step_must_show:
+    - resource_classification
+    - rule_ids
+    - severity_scoring
+    - regression_type
+  predict_step_must_show:
+    - heuristic_references
+    - ranges: [low, high]
+    - cold_start_assumptions
+    - baseline_comparison_if_available
+  explain_step_must_show:
+    - root_cause
+    - regression_type
+    - severity_score
+    - heuristic_provenance
+    - delta_justification
+    - reference_to_policy_or_baseline_when_relevant
+
+# ===========================================================
+# 8. DETERMINISTIC CONSTRAINTS
+# ===========================================================
+deterministic_constraints:
+  stable_hash_per_output_type: true
+  float_precision_fixed: 2
+  whitespace_normalization: true
+  ordering_rules_enforced: true
+  mapping_layout_seed_fixed: true
+  trend_theme_fixed: true
+  mermaid_layout_seed_fixed: true
+  snapshots_cross_platform_identical: true
+
+snapshot_lineage:
+  explain: "Each snapshot must declare its origin and seed."
+  required_fields:
+    - source_plan
+    - scenario: [baseline, pr-change, noop, noise-case]
+    - plan_time
+    - seed
+    - hash_before
+    - hash_after
+
+# ===========================================================
+# 9. DEMO OUTPUT REQUIREMENTS
+# ===========================================================
+demo_outputs:
+  required:
+    - detect_v1.json
+    - predict_v1.json
+    - explain_v1.json
+    - snippet_v1.tf
+    - patch_v1.diff
+    - mapping_v1.mmd
+    - trend_history_v1.json
+    - trend_v1.svg
+  patch_preview_must_include:
+    - diff
+    - applies_cleanly
+    - simulation_output.json:
+        - before_hash
+        - after_hash
+        - patch_id
+        - rollback_patch
+
+golden_outputs:
+  detect: "snapshots/detect_v1.json"
+  predict: "snapshots/predict_v1.json"
+  explain: "snapshots/explain_v1.json"
+  snippet: "snapshots/snippet_v1.tf"
+  patch: "snapshots/patch_v1.diff"
+  mapping: "snapshots/mapping_v1.mmd"
+  trend: "snapshots/trend_v1.svg"
+  invariants:
+    - "Golden outputs must not change after release without version bump."
+    - "Any change requires a new golden version (v2, v3, ...)."
+    - "Golden version must be referenced explicitly in README and marketing copy."
+
+canonical_names:
+  detect_output_file: "detect_v1.json"
+  predict_output_file: "predict_v1.json"
+  explain_output_file: "explain_v1.json"
+  snippet_output_file: "snippet_v1.tf"
+  patch_output_file: "patch_v1.diff"
+
+expected_pr_scenario:
+  version: "2.0.0"
+  canonical_spec_hash: "2e22b71322805f8a615d9ef01559379c26afac564b7450efedec3ee08b69fccb"
+  invariants:
+    - "snapshots_must_match_hash"
+    - "explain_output_must_match_hash"
+
+# ===========================================================
+# 10. PATCH PREVIEW SCOPE LIMIT
+# ===========================================================
+patch_preview_scope:
+  supported_resources:
+    - ec2_instance_type
+    - s3_lifecycle_rule
+  reason_for_scope_limit: >
+    Networking and NAT gateway rewrites require broader context not available
+    to deterministic snippet-mode demonstration. Demo remains focused on safe,
+    high-confidence EC2 and S3 lifecycle changes.
+
+# ===========================================================
+# 11. TREND ENGINE DEMO
+# ===========================================================
+trend_demo:
+  variations_required:
+    - flat_trend
+    - upward_trend
+    - slo_breach_trend
+  constraints:
+    - fixed_seed_layout
+    - deterministic_svg_dimensions: "800x300"
+  data_sources:
+    - "historical baseline runs"
+    - "pr regression scenario"
+    - "baseline-aware SLO breach example"
+
+# ===========================================================
+# 12. RESET SCRIPT & PLAYBOOK
+# ===========================================================
+reset_demo_script:
+  path: "tools/reset_demo.sh"
+  must_do:
+    - restore_baseline_infrastructure
+    - regenerate_snapshots
+    - regenerate_mapping
+    - regenerate_trend_history
+    - validate_deterministic_hashes
+    - fail_if_drift_detected
+
+reset_playbook:
+  order:
+    - "Restore baseline Terraform state."
+    - "Re-run CostPilot scan with fixed seed using baseline and pr-change."
+    - "Regenerate mapping graph from canonical plan_diff."
+    - "Regenerate trend history and SVG outputs."
+    - "Recompute hashes and compare to golden outputs."
+    - "Optionally refresh README screenshots and video storyboards."
+
+# ===========================================================
+# 13. DRIFT DEFINITION & HANDLING
+# ===========================================================
+drift_definition:
+  file_drift: "Any change to snapshots/, costpilot_artifacts/, or .costpilot/demo/ that alters golden outputs."
+  semantic_drift: "Any meaningful deviation in detect/predict/explain content, severity, or regression classification."
+  structural_drift: "Any difference in canonical output schema or required fields."
+actions_on_drift:
+  - "Fail CI."
+  - "Require reset_demo.sh to be run and outputs re-validated."
+  - "Require manual sign-off before accepting new golden versions."
+
+# ===========================================================
+# 14. CI GUARDRAILS & INTEGRITY TESTS
+# ===========================================================
+ci_guardrails:
+  prevent_updates_to:
+    - "snapshots/*"
+    - "costpilot_artifacts/*"
+    - "video_assets/*"
+  allowlist_changes:
+    - "infrastructure/terraform/pr-change/*"
+    - "infrastructure/terraform/noop-change/*"
+    - "infrastructure/terraform/noise-cases/*"
+    - "README.md"
+    - "costpilot.yml"
+    - "policies/*"
+    - ".github/workflows/costpilot-ci.yml"
+    - "tools/reset_demo.sh"
+  checks:
+    - verify_deterministic_output:
+        compare_with: "./snapshots/detect_v1.json"
+        fail_on_drift: true
+    - test_noop_produces_no_findings: true
+    - test_noop_hash_stable: true
+    - noise_cases_produce_no_findings: true
+
+demo_integrity_tests:
+  - detect_diff_against_baseline
+  - predict_range_validation
+  - explain_provenance_validation
+  - mapping_cycle_detection_test
+  - trend_continuity_test
+  - golden_output_hash_validation
+  - policy_violation_message_present_for_pr_stack
+  - noop_and_noise_cases_are_clean
+
+# ===========================================================
+# 15. PERFORMANCE EXPECTATIONS
+# ===========================================================
+performance_expectations:
+  detect_under_ms: 200
+  predict_under_ms: 300
+  explain_under_ms: 300
+  ci_variance_tolerance_ms: 50
+  performance_failure_action: "warn_only_for_demo"
+
+# ===========================================================
+# 16. README REQUIREMENTS & NARRATIVE FLOW
+# ===========================================================
+readme_requirements:
+  must_include:
+    - hero_copy: "CostPilot — Detect, Predict & Explain Cloud Cost Regressions Before They Merge."
+    - statement_of_purpose: >
+        "This repository is the canonical demonstration environment for CostPilot.
+         All screenshots, documentation examples and launch-day assets originate here."
+    - quickstart_steps
+    - sample_PR_walkthrough
+    - infrastructure_scenario_overview
+    - mapping_example
+    - trend_example
+    - trust_triangle_section
+    - deterministic_guarantees_section
+    - short_for_auditors_section: "How to reproduce all outputs exactly."
+
+readme_structure:
+  - hero_section
+  - why_costpilot_exists
+  - what_this_repo_is
+  - quickstart
+  - infrastructure_scenario_overview
+  - example_PR_flow
+  - trust_triangle
+  - mapping_demo
+  - trend_demo
+  - autofix_examples
+  - deterministic_guarantees
+  - faq
+  - final_cta
+
+readme_narrative_flow:
+  order:
+    - hero_message
+    - why_costpilot_exists
+    - what_this_repo_represents_as_ground_truth
+    - infrastructure_scenario_overview
+    - run_scan_demo
+    - detect_output_section
+    - predict_output_section
+    - explain_section
+    - autofix_section
+    - mapping_section
+    - trend_section
+    - governance_and_policy_section
+    - reproducibility_and_audit_section
+    - final_cta
+
+# ===========================================================
+# 17. VISUAL & SCREENSHOT REQUIREMENTS
+# ===========================================================
+screenshot_requirements:
+  resolution: "1920x1080"
+  theme: "light"
+  deterministic_colors: true
+  always_include_version_tag: true
+  example_context: "PR #42"
+
+screenshots_manifest:
+  required_assets:
+    - "detect_output_screenshot.png"
+    - "explain_mode_screenshot.png"
+    - "mapping_graph.png"
+    - "trend_graph.png"
+    - "pr_comment_cost_diff.png"
+  invariants:
+    - "Screenshots must match demo outputs."
+    - "Screenshots must use default theme and fonts."
+    - "Screenshots must show CostPilot version and scenario_version."
+
+# ===========================================================
+# 18. AUDIT METADATA & ARTIFACT MANAGEMENT
+# ===========================================================
+audit_metadata:
+  must_include:
+    - costpilot_version
+    - heuristic_pack_version
+    - plan_schema_version
+    - snapshot_hash
+    - timestamp_utc
+
+artifacts:
+  directory: "costpilot_artifacts/"
+  contains_dynamic_outputs: true
+  must_be_deterministic: true
+
+# ===========================================================
+# 19. PR COMMENT ASSETS
+# ===========================================================
+pr_comment_assets:
+  directory: "pr_comments/"
+  required_files:
+    - "comment_detect.txt"
+    - "comment_predict.txt"
+    - "comment_explain.txt"
+    - "comment_autofix.txt"
+  requirements:
+    - "All comments must be realistic, copy-pastable outputs from CostPilot."
+    - "Comments must reference PR #42 and branches defined in this spec."
+    - "Comments must demonstrate dollar impact, severity, and suggested fix."
+
+# ===========================================================
+# 20. DIAGRAMS & RENDERING TESTS
+# ===========================================================
+diagrams:
+  directory: "diagram/"
+  required_files:
+    - "trust_triangle_flow.svg"
+    - "architecture_overview.svg"
+  requirements:
+    - "Diagrams must be generated from actual repo scenarios."
+    - "Trust Triangle diagram must map Detect → Predict → Explain → Action."
+    - "Architecture diagram must roughly reflect baseline + PR regression stack."
+
+rendering_tests:
+  mermaid_github_render: "must_render_without_errors"
+  svg_responsiveness_test: "must_scale_cleanly_to_1080p"
+
+# ===========================================================
+# 21. NOISE & FALSE-POSITIVE TESTING
+# ===========================================================
+noise_test_cases:
+  cases:
+    - name: "whitespace_only_change"
+      path: "infrastructure/terraform/noise-cases/whitespace_only.tf"
+      expected_output: "no_findings"
+    - name: "comments_only_change"
+      path: "infrastructure/terraform/noise-cases/comments_only.tf"
+      expected_output: "no_findings"
+    - name: "reordered_resources"
+      path: "infrastructure/terraform/noise-cases/reordered_resources.tf"
+      expected_output: "no_findings"
+    - name: "description_change"
+      path: "infrastructure/terraform/noise-cases/description_change.tf"
+      expected_output: "no_findings"
+
+# ===========================================================
+# 22. EXCLUSIONS & SCOPE LIMITS
+# ===========================================================
+explicit_exclusions:
+  - "no_enterprise_demo"
+  - "no_enterprise_policies"
+  - "no_exemptions_demo"
+  - "no_slo_burn_reports"
+  - "no_team_attribution"
+  - "no_costpilot_pro_features (beyond documented patch preview scope)"
+  - "no_enterprise_heuristics"
+  - "no_team_features"
+  - "no_user_metrics"
+rationale: >
+  The demo repo must remain lightweight, public-safe, and tightly scoped to
+  the open-source/MVP tier of CostPilot. Enterprise features are showcased
+  separately and must not appear here.
+
+# ===========================================================
+# 23. MARKETING REVIEW CHECKLIST
+# ===========================================================
+marketing_review_checklist:
+  - "Outputs consistent with CostPilot v1 and this spec."
+  - "No placeholder or fake data present."
+  - "PR comments readable at 1080p and on mobile."
+  - "Trend graph visually legible with clear axes and legend."
+  - "Mapping graph centered, not clipped, and readable."
+  - "All JSON outputs formatted with fixed indentation."
+  - "Screenshots and video shots match golden outputs."
+  - "README narrative aligns with actual repo behavior."
+
+# ===========================================================
+# 24. LICENSING & ATTRIBUTION
+# ===========================================================
+license: "MIT"
+sidebar_note: "Safe for public tutorials, demos, and launch content."
+
+# ===========================================================
+# 25. SALES ENABLEMENT & DEMO EXPERIENCE ENHANCEMENTS
+# ===========================================================
+sales_enablement_objectives:
+  primary_goal: "Transform the demo repo from technical proof-of-concept to sales conversion tool"
+  target_audience:
+    - "Executive decision makers (CTOs, VPs of Engineering)"
+    - "Finance leaders (CFOs, FinOps teams)"
+    - "Potential customers evaluating CostPilot"
+    - "Sales engineers conducting demos"
+    - "Marketing teams creating content"
+  success_metrics:
+    - "Reduce time-to-value understanding from 30 minutes to 3 minutes"
+    - "Enable self-service demos without engineer assistance"
+    - "Increase conversion rate through visual proof points"
+    - "Provide ROI justification for C-level stakeholders"
+
+# ===========================================================
+# 25.1 VISUAL EXPERIENCE ENHANCEMENTS (TIER 1 - CRITICAL)
+# ===========================================================
+visual_experience:
+  priority: "CRITICAL"
+  estimated_effort: "2-3 hours"
+  roi_impact: "10x credibility boost"
+  
+  screenshot_capture:
+    resolution: "1920x1080"
+    theme: "light"
+    required_screenshots:
+      - name: "detect_output_screenshot.png"
+        content: "CLI terminal showing detect_v1.json with colored severity indicators"
+        must_show:
+          - "4 findings with finding IDs"
+          - "Colored severity badges (🔴 high, 🟡 medium)"
+          - "Resource addresses (aws_launch_template.main)"
+          - "Before/after values (t3.micro → t3.xlarge)"
+          - "Policy violation flags"
+          - "Rule IDs (policy:default-ec2-type)"
+        formatting:
+          - "Syntax highlighted JSON"
+          - "Clear terminal window with prompt"
+          - "Version tag visible"
+      
+      - name: "explain_mode_screenshot.png"
+        content: "CLI terminal showing explain_v1.json with root cause analysis"
+        must_show:
+          - "Root cause explanations"
+          - "Heuristic provenance"
+          - "Severity justification"
+          - "Delta breakdown"
+          - "Cost impact reasoning"
+        formatting:
+          - "Syntax highlighted JSON"
+          - "Readable font size"
+          - "Clear section separation"
+      
+      - name: "mapping_graph.png"
+        content: "Rendered Mermaid diagram from mapping_v1.mmd"
+        must_show:
+          - "ALB → Target Group → ASG → EC2 flow"
+          - "CloudWatch → Log Groups → Metric Streams"
+          - "S3 buckets with lifecycle indicators"
+          - "Color-coded cost indicators (red for high, yellow for medium)"
+          - "Legible node labels"
+        rendering:
+          - "Use Mermaid Live Editor or similar"
+          - "Export as high-quality PNG"
+          - "Ensure no clipping"
+      
+      - name: "trend_graph.png"
+        content: "Rendered SVG from trend_v1.svg showing cost trajectory"
+        must_show:
+          - "Baseline cost: $52.43"
+          - "PR cost: $387.89"
+          - "SLO threshold: $500"
+          - "Upward trend line"
+          - "SLO breach indicator"
+          - "X-axis dates (Nov 1-29)"
+          - "Y-axis dollar amounts"
+        rendering:
+          - "Open SVG in browser"
+          - "Screenshot at 1920x1080"
+          - "Ensure axes and labels are crisp"
+      
+      - name: "pr_comment_cost_diff.png"
+        content: "GitHub PR comment showing cost comparison table"
+        must_show:
+          - "Before/after cost table"
+          - "Monthly delta: +$335.54"
+          - "Percentage increase: +639%"
+          - "Severity indicators (🔴)"
+          - "Resource breakdown"
+          - "Emoji indicators"
+        rendering:
+          - "Use GitHub markdown preview or mockup"
+          - "Include GitHub UI chrome (avatar, timestamp)"
+          - "Make realistic and professional"
+    
+    validation:
+      - "All screenshots at exactly 1920x1080"
+      - "All use light theme (no dark mode)"
+      - "All show CostPilot version tag"
+      - "All show scenario_version: v1"
+      - "All reference PR #42"
+      - "All match actual golden output content"
+      - "No placeholder or fake data"
+  
+  video_walkthrough:
+    priority: "CRITICAL"
+    duration: "3 minutes"
+    format: "MP4, 1080p"
+    platform: "Loom, Vimeo, or YouTube"
+    script_structure:
+      intro: "0:00-0:30"
+      demo: "0:30-2:30"
+      cta: "2:30-3:00"
+    
+    script_outline:
+      - timestamp: "0:00-0:10"
+        content: "Hook - 'Watch CostPilot catch a $335/month regression in real-time'"
+      - timestamp: "0:10-0:30"
+        content: "Problem statement - 'This PR changes t3.micro to t3.xlarge. Let's see what happens.'"
+      - timestamp: "0:30-1:00"
+        content: "Show detect output - 'CostPilot immediately flags 4 cost-impacting changes'"
+      - timestamp: "1:00-1:30"
+        content: "Show cost delta - 'Monthly cost: $52 → $388 (+639%)'"
+      - timestamp: "1:30-2:00"
+        content: "Show auto-fix - 'Here's the exact HCL code to revert the regression'"
+      - timestamp: "2:00-2:30"
+        content: "Show mapping - 'See how this change cascades across your infrastructure'"
+      - timestamp: "2:30-3:00"
+        content: "CTA - 'Try it yourself: github.com/Dee66/costpilotdemo'"
+    
+    recording_requirements:
+      - "Record in single take (no cuts) for authenticity"
+      - "Use clear, enthusiastic voiceover"
+      - "Show terminal commands being typed (not pre-typed)"
+      - "Zoom in on key numbers (dollar amounts)"
+      - "Use cursor highlights for emphasis"
+      - "End with clear GitHub repo link"
+    
+    hosting:
+      - "Upload to YouTube (public)"
+      - "Upload to Vimeo (unlisted backup)"
+      - "Add captions/subtitles for accessibility"
+      - "Create thumbnail with $ amount callout"
+    
+    readme_integration:
+      - "Embed video near top of README (after hero section)"
+      - "Use attractive thumbnail with play button overlay"
+      - "Add caption: 'See CostPilot catch a $335/month regression in real-time'"
+  
+  interactive_demo:
+    priority: "HIGH"
+    estimated_effort: "2 hours"
+    location: "demo/index.html"
+    
+    features:
+      - "Interactive cost comparison cards"
+      - "Click to expand findings"
+      - "Dynamic loading of JSON snapshots"
+      - "Syntax-highlighted code blocks"
+      - "Responsive design for mobile"
+      - "No server required (static HTML/JS)"
+    
+    sections:
+      hero:
+        - "Large before/after cost comparison"
+        - "Animated counter for dramatic effect"
+        - "Clear visual hierarchy"
+      
+      findings:
+        - "Expandable finding cards"
+        - "Color-coded severity"
+        - "Click to see full details"
+      
+      trend:
+        - "Embedded SVG trend chart"
+        - "Interactive hover tooltips"
+        - "Zoom/pan capability"
+      
+      mapping:
+        - "Embedded Mermaid diagram"
+        - "Interactive node clicking"
+        - "Cost impact highlighting"
+      
+      autofix:
+        - "Side-by-side diff view"
+        - "Copy-to-clipboard buttons"
+        - "Savings calculator"
+    
+    tech_stack:
+      - "Vanilla JavaScript (no framework)"
+      - "CSS Grid for layout"
+      - "Fetch API for loading JSONs"
+      - "Highlight.js for syntax highlighting"
+      - "Mermaid.js for diagram rendering"
+    
+    deployment:
+      - "Commit to demo/ directory"
+      - "Enable GitHub Pages"
+      - "Link from README"
+      - "Add to marketing materials"
+
+# ===========================================================
+# 25.2 CODE QUALITY & ARCHITECTURE (TIER 2)
+# ===========================================================
+code_quality_enhancements:
+  priority: "HIGH"
+  estimated_effort: "4-6 hours"
+  roi_impact: "Long-term maintainability, professional appearance"
+  
+  solid_principles_refactor:
+    objective: "Eliminate code duplication, apply SOLID principles to test framework"
+    
+    single_responsibility:
+      - "Extract TestResult class (represents one test outcome)"
+      - "Extract TestReporter class (handles formatting/display)"
+      - "Separate test execution from result collection"
+    
+    open_closed:
+      - "Create abstract TestSuite base class"
+      - "Each test file extends TestSuite"
+      - "New test types extend without modifying base"
+    
+    liskov_substitution:
+      - "All TestSuite subclasses interchangeable"
+      - "Consistent interface for run() method"
+    
+    interface_segregation:
+      - "Simple add_result() API"
+      - "No forcing test classes to implement unused methods"
+    
+    dependency_inversion:
+      - "Depend on TestReporter abstraction, not concrete implementation"
+      - "Inject logger rather than importing directly"
+    
+    implementation:
+      directory: "scripts/lib/"
+      files:
+        - "test_framework.py" # Base classes
+        - "test_result.py"    # TestResult model
+        - "test_reporter.py"  # Output formatting
+        - "test_suite.py"     # Abstract base class
+        - "logger.py"         # Logging abstraction
+      
+      migration:
+        - "Create lib/ directory"
+        - "Implement base classes"
+        - "Refactor one test file as proof of concept"
+        - "Gradually migrate remaining 7 test files"
+        - "Remove duplicated TestRunner classes"
+  
+  structured_logging:
+    objective: "Replace print statements with professional logging"
+    
+    features:
+      - "Configurable log levels (DEBUG, INFO, WARN, ERROR)"
+      - "Structured log format with timestamps"
+      - "Console and file output"
+      - "Test-specific log files"
+      - "JSON log format option for parsing"
+    
+    implementation:
+      class: "CostPilotLogger"
+      location: "scripts/lib/logger.py"
+      methods:
+        - "info(msg, **kwargs)"
+        - "debug(msg, **kwargs)"
+        - "warning(msg, **kwargs)"
+        - "error(msg, **kwargs)"
+        - "test_passed(test_name, details)"
+        - "test_failed(test_name, reason, details)"
+      
+      log_directory: "logs/"
+      log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+      file_naming: "{test_suite_name}_{timestamp}.log"
+  
+  design_patterns:
+    strategy_pattern:
+      use_case: "Test execution strategies"
+      implementations:
+        - "RunAllStrategy (default)"
+        - "RunFailedOnlyStrategy (re-run failures)"
+        - "RunTaggedStrategy (filter by tags)"
+        - "RunChangedStrategy (only tests for changed files)"
+      location: "scripts/lib/test_strategy.py"
+    
+    factory_pattern:
+      use_case: "Test suite creation"
+      implementation:
+        - "TestSuiteFactory.register(name, class)"
+        - "TestSuiteFactory.create(name, **kwargs)"
+      location: "scripts/lib/test_factory.py"
+      usage: "suite = TestSuiteFactory.create('golden', repo_root=Path('.'))"
+    
+    builder_pattern:
+      use_case: "Complex test configuration"
+      implementation:
+        - "TestConfigBuilder"
+        - "Fluent interface with chaining"
+        - "with_repo_root(), with_log_level(), etc."
+      location: "scripts/lib/test_config.py"
+      usage: |
+        config = (TestConfigBuilder()
+            .with_repo_root(Path('.'))
+            .with_log_level('INFO')
+            .with_output_format('terminal')
+            .build())
+    
+    observer_pattern:
+      use_case: "Test result notifications"
+      implementation:
+        - "TestObserver interface"
+        - "ConsoleObserver (print to terminal)"
+        - "FileObserver (write to log file)"
+        - "JSONObserver (export as JSON)"
+        - "HTMLObserver (generate HTML report)"
+      location: "scripts/lib/test_observer.py"
+
+# ===========================================================
+# 25.3 MARKETING & SALES CONTENT (TIER 3)
+# ===========================================================
+marketing_enhancements:
+  priority: "CRITICAL"
+  estimated_effort: "1-2 hours"
+  roi_impact: "Massive - direct revenue impact"
+  
+  roi_calculator:
+    location: "ROI_CALCULATOR.md"
+    structure:
+      input_section:
+        - "Current monthly AWS spend"
+        - "Number of PRs per month"
+        - "Average cost regression amount"
+      
+      calculation_section:
+        - "Risk per PR: 5% chance of $500 regression"
+        - "Expected loss without CostPilot"
+        - "Savings with CostPilot (95% prevention rate)"
+        - "ROI multiple"
+        - "Payback period"
+      
+      demo_example:
+        - "Regression caught: $52 → $388/month (+$335/month)"
+        - "If deployed to production for 6 months: $2,010 wasted"
+        - "CostPilot cost for 6 months: $594"
+        - "Net savings: $1,416"
+        - "ROI: 2.4x in first 6 months"
+      
+      cta:
+        - "Link to free trial"
+        - "Link to pricing page"
+        - "Calendar booking link"
+    
+    visual_design:
+      - "Use tables for calculations"
+      - "Highlight savings in green"
+      - "Show costs in red"
+      - "Use emoji indicators ($, ✅, 🚀)"
+  
+  comparison_table:
+    location: "README.md (after 'Why CostPilot Exists')"
+    competitors:
+      - "Infracost"
+      - "Cloud Custodian"
+      - "Native AWS Cost Explorer"
+    
+    comparison_dimensions:
+      - "PR-time detection"
+      - "Auto-fix suggestions"
+      - "Root cause analysis"
+      - "Trend analysis"
+      - "False positive rate"
+      - "Setup time"
+      - "Price"
+    
+    data_points:
+      costpilot:
+        pr_time_detection: "✅ Real-time"
+        auto_fix: "✅ HCL patches"
+        root_cause: "✅ Detailed"
+        trend_analysis: "✅ Historical"
+        false_positive_rate: "< 5%"
+        setup_time: "< 5 min"
+        price: "$99/mo"
+      
+      infracost:
+        pr_time_detection: "✅ Yes"
+        auto_fix: "❌ Manual"
+        root_cause: "⚠️ Basic"
+        trend_analysis: "❌ None"
+        false_positive_rate: "~15%"
+        setup_time: "~30 min"
+        price: "$0-500/mo"
+      
+      cloud_custodian:
+        pr_time_detection: "❌ Post-deploy"
+        auto_fix: "❌ Manual"
+        root_cause: "❌ None"
+        trend_analysis: "❌ None"
+        false_positive_rate: "~25%"
+        setup_time: "~2 hours"
+        price: "Free"
+      
+      aws_cost_explorer:
+        pr_time_detection: "❌ Post-deploy"
+        auto_fix: "❌ Manual"
+        root_cause: "❌ None"
+        trend_analysis: "⚠️ Basic"
+        false_positive_rate: "N/A"
+        setup_time: "N/A"
+        price: "Included"
+    
+    presentation:
+      - "Markdown table format"
+      - "Center-align checkmarks"
+      - "Bold CostPilot column"
+      - "Add 'Bottom line' summary row"
+  
+  social_proof:
+    location: "README.md (before FAQ section)"
+    structure:
+      - "Section header: '🌟 What Engineers Are Saying'"
+      - "3-5 testimonials"
+      - "Format: Quote, attribution, company"
+      - "Use realistic personas"
+      - "Include specific metrics when possible"
+    
+    testimonial_templates:
+      - quote: "Caught a $2,400/month regression in our first week. Paid for itself immediately."
+        attribution: "Sarah Chen, Senior DevOps Engineer"
+        company: "TechCorp"
+      
+      - quote: "Finally, a tool that speaks both engineer and CFO language."
+        attribution: "Marcus Johnson, Platform Lead"
+        company: "FinanceStart"
+      
+      - quote: "The auto-fix suggestions saved us hours of debugging. Game changer."
+        attribution: "Priya Patel, Infrastructure Architect"
+        company: "CloudScale"
+    
+    cta_footer:
+      - "Want to share your CostPilot story?"
+      - "Email: success@costpilot.io"
+  
+  case_study_section:
+    location: "docs/CASE_STUDY.md"
+    structure:
+      - "Company background"
+      - "Problem statement"
+      - "Solution approach"
+      - "Results with metrics"
+      - "ROI calculation"
+      - "Key quotes"
+    
+    metrics_to_highlight:
+      - "Cost savings per month"
+      - "Regressions prevented"
+      - "Time saved in PR reviews"
+      - "Reduction in production incidents"
+      - "Developer satisfaction score"
+
+# ===========================================================
+# 25.4 TECHNICAL POLISH (TIER 4 - OPTIONAL)
+# ===========================================================
+technical_polish:
+  priority: "MEDIUM"
+  estimated_effort: "2-3 hours"
+  
+  result_exporters:
+    objective: "Support multiple output formats for test results"
+    
+    formats:
+      json:
+        - "Machine-readable test results"
+        - "Used for CI integration"
+        - "Schema: [{name, passed, reason}]"
+      
+      html:
+        - "Human-readable test report"
+        - "Color-coded pass/fail"
+        - "Expandable details"
+        - "Time series graphs"
+      
+      markdown:
+        - "GitHub-friendly format"
+        - "Checkboxes for pass/fail"
+        - "Links to relevant files"
+      
+      junit_xml:
+        - "Standard CI format"
+        - "Works with Jenkins, CircleCI, etc."
+        - "Test suite and test case elements"
+    
+    implementation:
+      pattern: "Strategy Pattern"
+      location: "scripts/lib/result_exporter.py"
+      classes:
+        - "ResultExporter (abstract base)"
+        - "JSONExporter"
+        - "HTMLExporter"
+        - "MarkdownExporter"
+        - "JUnitXMLExporter"
+      
+      usage: |
+        exporter = JSONExporter()
+        exporter.export(results, Path('test_results.json'))
+  
+  test_runner_cli:
+    objective: "Unified CLI for running all test suites"
+    location: "scripts/run_tests.py"
+    
+    features:
+      - "Run all tests or specific suite"
+      - "Filter by tags"
+      - "Re-run failed tests only"
+      - "Parallel execution"
+      - "Watch mode for continuous testing"
+      - "Custom output format"
+    
+    cli_arguments:
+      - "--suite <name>      Run specific test suite"
+      - "--tag <tag>         Filter tests by tag"
+      - "--failed-only       Re-run only failed tests"
+      - "--parallel <n>      Run n suites in parallel"
+      - "--watch             Watch for file changes"
+      - "--format <fmt>      Output format (terminal, json, html)"
+      - "--output <file>     Write results to file"
+      - "--verbose           Increase verbosity"
+    
+    examples: |
+      # Run all tests
+      python scripts/run_tests.py
+      
+      # Run specific suite
+      python scripts/run_tests.py --suite golden
+      
+      # Re-run failures
+      python scripts/run_tests.py --failed-only
+      
+      # Export as JSON
+      python scripts/run_tests.py --format json --output results.json
+  
+  performance_profiling:
+    objective: "Identify slow tests and optimize"
+    
+    implementation:
+      - "Add @timed decorator to test functions"
+      - "Collect execution times"
+      - "Generate performance report"
+      - "Highlight tests > 1 second"
+      - "Add performance regression tests"
+    
+    report_format:
+      - "Slowest 10 tests"
+      - "Average execution time per suite"
+      - "Total execution time"
+      - "Performance trends over time"
+
+# ===========================================================
+# 25.5 IMPLEMENTATION PRIORITIES & TIMELINE
+# ===========================================================
+implementation_roadmap:
+  week_1_critical:
+    effort: "3-4 hours"
+    roi: "10x"
+    tasks:
+      - priority: 1
+        task: "Capture 5 screenshots"
+        time: "2 hours"
+      - priority: 2
+        task: "Record 3-minute video walkthrough"
+        time: "1 hour"
+      - priority: 3
+        task: "Add ROI Calculator to README"
+        time: "30 min"
+      - priority: 4
+        task: "Add comparison table to README"
+        time: "30 min"
+  
+  week_2_polish:
+    effort: "4-6 hours"
+    roi: "5x"
+    tasks:
+      - priority: 5
+        task: "Create interactive HTML demo"
+        time: "2 hours"
+      - priority: 6
+        task: "Refactor TestRunner with SOLID principles"
+        time: "3 hours"
+      - priority: 7
+        task: "Add structured logging"
+        time: "2 hours"
+  
+  week_3_optional:
+    effort: "4-6 hours"
+    roi: "2x"
+    tasks:
+      - priority: 8
+        task: "Add design patterns (Factory, Strategy, Builder)"
+        time: "4 hours"
+      - priority: 9
+        task: "Add social proof section"
+        time: "1 hour"
+      - priority: 10
+        task: "Add result exporters"
+        time: "2 hours"
+
+# ===========================================================
+# 25.6 SUCCESS CRITERIA & VALIDATION
+# ===========================================================
+success_criteria:
+  visual_experience:
+    - "All 5 screenshots captured at 1920x1080"
+    - "3-minute video uploaded to YouTube with thumbnail"
+    - "Interactive demo deployed to GitHub Pages"
+    - "All screenshots match golden outputs exactly"
+  
+  marketing_content:
+    - "ROI Calculator shows clear value proposition"
+    - "Comparison table highlights competitive advantages"
+    - "Social proof section includes 3+ testimonials"
+    - "All marketing claims backed by demo outputs"
+  
+  code_quality:
+    - "TestRunner duplication eliminated (8 files → 1 base class)"
+    - "Logging replaces all print statements"
+    - "At least 3 design patterns implemented"
+    - "Test execution time reduced by 20%"
+  
+  business_impact:
+    - "Time-to-understanding reduced from 30min to 3min"
+    - "Self-service demo completion rate > 50%"
+    - "Video watch completion rate > 80%"
+    - "README stars/forks increase by 5x"
+
+validation_checklist:
+  before_release:
+    - "All screenshots reviewed by marketing team"
+    - "Video script reviewed and approved"
+    - "ROI Calculator numbers validated"
+    - "Comparison table fact-checked"
+    - "All links tested and working"
+    - "Interactive demo works on mobile"
+    - "Code quality standards met"
+    - "All tests still passing"

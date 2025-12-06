@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CostPilot Interactive Demo - See Cost Regressions Caught in Real-Time</title>
+    <meta name="description" content="Interactive demonstration of CostPilot catching a $335/month AWS cost regression before deployment">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg: #f9fafb;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cost-delta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cost-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+
+        .cost-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cost-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .cost-arrow {
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .findings-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .finding-card {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .finding-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .finding-card.high {
+            border-left: 4px solid var(--danger);
+        }
+
+        .finding-card.medium {
+            border-left: 4px solid var(--warning);
+        }
+
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .finding-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text);
+        }
+
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-badge.high {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .severity-badge.medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .finding-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .finding-detail strong {
+            color: var(--text);
+        }
+
+        .change-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin: 0.5rem 0;
+        }
+
+        .change-before {
+            color: var(--primary);
+        }
+
+        .change-after {
+            color: var(--danger);
+        }
+
+        .finding-details-expanded {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+
+        .finding-card.expanded .finding-details-expanded {
+            display: block;
+        }
+
+        .rationale {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .policy-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--info);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--text);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .trend-chart {
+            width: 100%;
+            height: 300px;
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .expand-hint {
+            color: var(--primary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .cost-delta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cost-value {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>💸 CostPilot Caught This Before Deployment</h1>
+        <p>Watch how one innocent infrastructure change could have cost <strong>$2,010 over 6 months</strong></p>
+        
+        <div class="cost-delta">
+            <div class="cost-box">
+                <div class="cost-label">Before (Baseline)</div>
+                <div class="cost-value" id="beforeCost">$52</div>
+                <div class="cost-label">per month</div>
+            </div>
+            
+            <div class="cost-arrow">→</div>
+            
+            <div class="cost-box">
+                <div class="cost-label">After (PR #42)</div>
+                <div class="cost-value" id="afterCost">$388</div>
+                <div class="cost-label">per month</div>
+            </div>
+        </div>
+        
+        <div class="savings-badge">
+            🚨 +$335.46/month (+639%)
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Cost-Impacting Findings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2</div>
+                <div class="stat-label">High Severity Issues</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">&lt; 5 min</div>
+                <div class="stat-label">Detection Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Prevented Before Deploy</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Detected Cost Regressions</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                Click any finding to see detailed analysis and auto-fix suggestions
+            </p>
+            
+            <div class="findings-grid" id="findingsContainer">
+                <div class="loading">Loading findings...</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Cost Trend Analysis</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                This change would breach your SLO threshold of $500/month
+            </p>
+            <div class="trend-chart">
+                <img src="../visual_assets/trend_v1.svg" alt="Cost Trend Chart" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display: none; text-align: center; padding: 3rem; color: var(--text-muted);">
+                    Trend chart will be displayed here once visual assets are captured
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>🚀 Try CostPilot on Your Infrastructure</h2>
+            <p style="opacity: 0.9; margin-bottom: 2rem;">
+                This demo is fully open source. Clone it, explore the code, and see exactly how CostPilot works.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="https://github.com/Dee66/costpilotdemo" class="btn btn-primary" target="_blank">
+                    📦 Clone This Demo
+                </a>
+                <a href="https://costpilot.io/trial" class="btn btn-secondary" target="_blank">
+                    🎯 Start Free Trial
+                </a>
+                <a href="../ROI_CALCULATOR.md" class="btn btn-secondary">
+                    💰 Calculate Your ROI
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch and display findings from detect_v1.json
+        async function loadFindings() {
+            try {
+                const response = await fetch('../snapshots/detect_v1.json');
+                const data = await response.json();
+                const container = document.getElementById('findingsContainer');
+                
+                if (!data.detection_results || !data.detection_results.findings) {
+                    container.innerHTML = '<p style="color: var(--text-muted);">No findings data available</p>';
+                    return;
+                }
+
+                const findings = data.detection_results.findings;
+                container.innerHTML = '';
+
+                findings.forEach((finding, index) => {
+                    const card = createFindingCard(finding, index);
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Error loading findings:', error);
+                document.getElementById('findingsContainer').innerHTML = 
+                    '<p style="color: var(--danger);">Failed to load findings. Make sure detect_v1.json is available.</p>';
+            }
+        }
+
+        function createFindingCard(finding, index) {
+            const card = document.createElement('div');
+            card.className = `finding-card ${finding.severity}`;
+            
+            const severityEmoji = finding.severity === 'high' ? '🔴' : '🟡';
+            const policyViolation = finding.policy_violation_detected ? '⚠️ Policy Violation' : '';
+            
+            card.innerHTML = `
+                <div class="finding-header">
+                    <div class="finding-title">
+                        ${severityEmoji} ${finding.resource_address}
+                    </div>
+                    <span class="severity-badge ${finding.severity}">${finding.severity}</span>
+                </div>
+                
+                <div class="finding-detail">
+                    <strong>Type:</strong> ${finding.resource_type} (${finding.classification})
+                </div>
+                
+                <div class="finding-detail">
+                    <strong>Change:</strong> ${finding.attribute_changed}
+                </div>
+                
+                <div class="change-indicator">
+                    <span class="change-before">${formatValue(finding.before_value)}</span>
+                    <span>→</span>
+                    <span class="change-after">${formatValue(finding.after_value)}</span>
+                </div>
+                
+                ${policyViolation ? `<div style="color: var(--warning); font-weight: 600; margin-top: 0.5rem;">${policyViolation}</div>` : ''}
+                
+                <div class="expand-hint">▼ Click to see full analysis</div>
+                
+                <div class="finding-details-expanded">
+                    <div class="rationale">
+                        <strong>Analysis:</strong><br>
+                        ${finding.rationale}
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong style="display: block; margin-bottom: 0.5rem;">Triggered Rules:</strong>
+                        ${finding.rule_ids.map(rule => `<span class="policy-tag">${rule}</span>`).join('')}
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong>Cost Impact Likelihood:</strong> 
+                        <span style="color: var(--danger); font-weight: 600; text-transform: uppercase;">${finding.cost_impact_likelihood}</span>
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong>Regression Type:</strong> ${finding.regression_type}
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                card.classList.toggle('expanded');
+            });
+            
+            return card;
+        }
+
+        function formatValue(value) {
+            if (typeof value === 'number') {
+                return value;
+            }
+            if (typeof value === 'string') {
+                return `"${value}"`;
+            }
+            return JSON.stringify(value);
+        }
+
+        // Animated counter for cost values
+        function animateCounter(elementId, start, end, duration) {
+            const element = document.getElementById(elementId);
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (end - start) * progress);
+                element.textContent = `$${current}`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            update();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFindings();
+            animateCounter('beforeCost', 0, 52, 1500);
+            animateCounter('afterCost', 52, 388, 2000);
+        });
+    </script>
+</body>
+</html>
