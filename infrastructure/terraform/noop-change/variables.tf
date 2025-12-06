@@ -1,1 +1,21 @@
-# No-op Change Variables
+# CostPilot Demo - Noop Change Variables
+# Cosmetic changes only
+
+variable "aws_region" {
+  description = "AWS region for resources"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "project_name" {
+  description = "Project name for resource naming"
+  type        = string
+  default     = "costpilot"
+}
+
+variable "environment" {
+  description = "Environment name"
+  type        = string
+  default     = "noop-change"
+}
+

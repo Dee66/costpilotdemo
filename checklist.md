@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="15" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:15.9%; background:linear-gradient(90deg,#dc2626,#ea580c,#f59e0b); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">15.9% · 24/151</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="23" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:23.8%; background:linear-gradient(90deg,#dc2626,#ea580c,#f59e0b); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">23.8% · 36/151</span>
   </div>
 </div>
 
@@ -52,22 +52,22 @@
 - [x] validate_terraform_format_baseline
 
 ### Terraform PR Change Stack
-- [ ] write_main_tf_pr_change
-- [ ] add_ec2_instance_upgrade_regression
-- [ ] disable_s3_lifecycle_regression
-- [ ] increase_cloudwatch_retention_regression
-- [ ] increase_ebs_volume_size_regression
-- [ ] maintain_cross_service_dependencies
-- [ ] validate_terraform_format_pr_change
+- [x] write_main_tf_pr_change
+- [x] add_ec2_instance_upgrade_regression
+- [x] disable_s3_lifecycle_regression
+- [x] increase_cloudwatch_retention_regression
+- [x] increase_ebs_volume_size_regression
+- [x] maintain_cross_service_dependencies
+- [x] validate_terraform_format_pr_change
 
 ### Terraform Noop Change Stack
-- [ ] write_main_tf_noop
-- [ ] guarantee_no_semantic_cost_differences
-- [ ] validate_terraform_format_noop
+- [x] write_main_tf_noop
+- [x] guarantee_no_semantic_cost_differences
+- [x] validate_terraform_format_noop
 
 ### Terraform Requirements Validation
-- [ ] enforce_minimum_version_1_6
-- [ ] enforce_plan_schema_version_2
+- [x] enforce_minimum_version_1_6
+- [x] enforce_plan_schema_version_2
 
 ---
 
@@ -284,9 +284,9 @@
 ## Summary
 
 **Total Tasks:** 151  
-**Completed:** 24  
-**Remaining:** 127  
-**Progress:** 15.9%
+**Completed:** 36  
+**Remaining:** 115  
+**Progress:** 23.8%
 
 ---
 
