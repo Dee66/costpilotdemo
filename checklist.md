@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="59" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:59.9%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">59.9% · 91/152</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:62.5%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">62.5% · 95/152</span>
   </div>
 </div>
 
@@ -88,10 +88,10 @@
 - [x] copy_all_snapshots_to_costpilot_demo_directory
 
 ### Snapshot Invariants
-- [ ] enforce_deterministic_hashes
-- [ ] enforce_float_precision_2
-- [ ] enforce_stable_whitespace
-- [ ] enforce_stable_ordering_rules
+- [x] enforce_deterministic_hashes
+- [x] enforce_float_precision_2
+- [x] enforce_stable_whitespace
+- [x] enforce_stable_ordering_rules
 
 ---
 
@@ -285,9 +285,9 @@
 ## Summary
 
 **Total Tasks:** 152  
-**Completed:** 91  
-**Remaining:** 61  
-**Progress:** 59.9%
+**Completed:** 95  
+**Remaining:** 57  
+**Progress:** 62.5%
 
 ---
 
