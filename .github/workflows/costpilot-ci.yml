@@ -1,0 +1,15 @@
+name: CostPilot CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  costpilot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run CostPilot
+        run: echo "CostPilot workflow"
