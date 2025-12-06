@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:45.0%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">45.0% · 68/151</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="46" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:46.7%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">46.7% · 71/152</span>
   </div>
 </div>
 
@@ -245,14 +245,15 @@
 - [x] confirm_clarity
 - [x] confirm_asset_paths_correct
 - [x] confirm_no_enterprise_features_mentioned
+- [x] include_scenario_version_badge
 
 ---
 
 ## 12. Versioning & Checksum
 
 ### Scenario Versioning
-- [ ] embed_scenario_version_in_snapshots
-- [ ] embed_scenario_version_in_README
+- [x] embed_scenario_version_in_snapshots
+- [x] embed_scenario_version_in_README
 
 ### Canonical Hash Generation
 - [ ] compute_canonical_spec_hash
@@ -283,10 +284,10 @@
 
 ## Summary
 
-**Total Tasks:** 151  
-**Completed:** 68  
-**Remaining:** 83  
-**Progress:** 45.0%
+**Total Tasks:** 152  
+**Completed:** 71  
+**Remaining:** 81  
+**Progress:** 46.7%
 
 ---
 

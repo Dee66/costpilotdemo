@@ -1,1 +1,362 @@
 # CostPilot Configuration
+# Scenario Version: v1
+# This configuration defines how CostPilot analyzes infrastructure changes
+
+version: "1.0"
+scenario_version: "v1"
+
+# ===========================================================
+# PROJECT SETTINGS
+# ===========================================================
+project:
+  name: "costpilot-demo"
+  description: "Canonical demonstration repository for CostPilot"
+  repository: "https://github.com/Dee66/costpilotdemo"
+
+# ===========================================================
+# TERRAFORM SETTINGS
+# ===========================================================
+terraform:
+  version: ">=1.6"
+  plan_schema_version: 2
+  
+  # Paths to Terraform configurations
+  paths:
+    baseline: "infrastructure/terraform/baseline"
+    pr_change: "infrastructure/terraform/pr-change"
+    noop_change: "infrastructure/terraform/noop-change"
+  
+  # Plan output locations
+  plans:
+    before: "snapshots/plan_before.json"
+    after: "snapshots/plan_after.json"
+    diff: "snapshots/plan_diff.json"
+
+# ===========================================================
+# COSTPILOT ANALYSIS PHASES
+# ===========================================================
+analysis:
+  
+  # DETECT PHASE: Identify cost-impacting changes
+  detect:
+    enabled: true
+    output: "snapshots/detect_v1.json"
+    
+    rules:
+      # EC2 instance type changes
+      - id: "ec2-instance-type-upgrade"
+        severity: "high"
+        description: "Detect EC2 instance type upgrades that increase cost"
+        
+      # Storage lifecycle changes
+      - id: "s3-lifecycle-disabled"
+        severity: "high"
+        description: "Detect removal or disabling of S3 lifecycle policies"
+        
+      # Log retention changes
+      - id: "cloudwatch-retention-infinite"
+        severity: "medium"
+        description: "Detect CloudWatch log retention set to infinite"
+        
+      # Volume size increases
+      - id: "ebs-volume-size-increase"
+        severity: "medium"
+        description: "Detect EBS volume size increases"
+    
+    # Resource classification
+    resource_classification:
+      enabled: true
+      include_cross_service_dependencies: true
+    
+    # Severity scoring
+    severity_scoring:
+      enabled: true
+      thresholds:
+        critical: 90
+        high: 70
+        medium: 50
+        low: 30
+  
+  # PREDICT PHASE: Estimate cost impact
+  predict:
+    enabled: true
+    output: "snapshots/predict_v1.json"
+    
+    # Heuristic-based estimation
+    heuristics:
+      enabled: true
+      include_references: true
+      
+      # Cost estimation parameters
+      estimation:
+        precision: 2  # decimal places
+        ranges:
+          confidence: "moderate"  # low, moderate, high
+          include_low_high: true
+        
+      # Cold-start assumptions
+      cold_start:
+        enabled: true
+        document_assumptions: true
+        default_region: "us-east-1"
+        default_utilization: 0.7  # 70% utilization
+    
+    # Historical trend analysis
+    trend_analysis:
+      enabled: true
+      lookback_days: 30
+      include_projections: true
+  
+  # EXPLAIN PHASE: Root cause analysis
+  explain:
+    enabled: true
+    output: "snapshots/explain_v1.json"
+    
+    # Root cause analysis
+    root_cause:
+      enabled: true
+      max_depth: 3  # levels of dependency tracing
+      
+    # Regression classification
+    regression_types:
+      - "obvious"     # Direct cost increases (e.g., instance upgrades)
+      - "subtle"      # Indirect cost increases (e.g., retention changes)
+      - "cascading"   # Multi-resource impact (e.g., ALB → ASG → EC2)
+    
+    # Provenance tracking
+    provenance:
+      enabled: true
+      include_heuristic_sources: true
+      include_confidence_scores: true
+    
+    # Delta justification
+    justification:
+      enabled: true
+      include_alternatives: true
+      include_severity_rationale: true
+
+# ===========================================================
+# PATCH PREVIEW (AUTOFIX)
+# ===========================================================
+autofix:
+  enabled: true
+  
+  # Snippet generation
+  snippet:
+    output: "snapshots/snippet_v1.tf"
+    scope:
+      # Only EC2 and S3 supported in v1
+      - "aws_instance"
+      - "aws_autoscaling_group"
+      - "aws_s3_bucket"
+      - "aws_s3_bucket_lifecycle_configuration"
+    
+    exclusions:
+      # Networking requires broader context
+      - "aws_nat_gateway"
+      - "aws_vpc"
+      - "aws_subnet"
+  
+  # Patch generation
+  patch:
+    output: "snapshots/patch_v1.diff"
+    format: "unified"
+    
+    # Simulation before application
+    simulation:
+      enabled: true
+      output: "snapshots/simulation_output.json"
+      include_hashes: true
+      include_rollback: true
+
+# ===========================================================
+# MAPPING ENGINE
+# ===========================================================
+mapping:
+  enabled: true
+  output: "snapshots/mapping_v1.mmd"
+  format: "mermaid"
+  
+  # Cross-service dependency tracking
+  dependencies:
+    enabled: true
+    max_depth: 5
+    include_cost_propagation: true
+  
+  # Visualization settings
+  visualization:
+    layout: "TD"  # Top-Down
+    seed: 42      # Fixed seed for deterministic layout
+    
+    # Node styling by cost impact
+    styling:
+      high_cost: "fill:#ff6b6b"
+      medium_cost: "fill:#ffd93d"
+      low_cost: "fill:#6bcf7f"
+      no_change: "fill:#95a5a6"
+
+# ===========================================================
+# TREND ENGINE
+# ===========================================================
+trend:
+  enabled: true
+  
+  # Historical data
+  history:
+    output: "snapshots/trend_history.json"
+    retention_days: 90
+  
+  # Visualization
+  visualization:
+    output: "snapshots/trend_v1.svg"
+    format: "svg"
+    dimensions:
+      width: 800
+      height: 300
+    
+    # Theme settings
+    theme:
+      background: "#ffffff"
+      grid: "#e0e0e0"
+      line: "#2196F3"
+      slo_threshold: "#ff5252"
+    
+    # Fixed seed for deterministic rendering
+    seed: 42
+  
+  # SLO tracking
+  slo:
+    enabled: true
+    thresholds:
+      breach: 1000  # dollars per month
+      warning: 750
+
+# ===========================================================
+# PERFORMANCE EXPECTATIONS
+# ===========================================================
+performance:
+  detect_max_ms: 200
+  predict_max_ms: 300
+  explain_max_ms: 300
+  
+  # Timeout settings
+  timeouts:
+    detect: 5000
+    predict: 10000
+    explain: 10000
+
+# ===========================================================
+# OUTPUT CONSTRAINTS
+# ===========================================================
+output:
+  # Deterministic output requirements
+  deterministic:
+    enabled: true
+    float_precision: 2
+    whitespace_normalization: true
+    ordering_enforced: true
+  
+  # Output locations
+  artifacts:
+    directory: "costpilot_artifacts"
+    subdirectories:
+      demo: ".costpilot/demo"
+      snapshots: "snapshots"
+
+# ===========================================================
+# CI/CD INTEGRATION
+# ===========================================================
+ci:
+  # Noop scenario validation
+  noop_validation:
+    enabled: true
+    expected_findings: 0
+    fail_on_findings: true
+  
+  # Drift detection
+  drift_detection:
+    enabled: true
+    compare_with: "snapshots/"
+    fail_on_drift: true
+  
+  # Hash validation
+  hash_validation:
+    enabled: true
+    algorithm: "sha256"
+    store_in: "snapshots/snapshot_hashes.txt"
+
+# ===========================================================
+# EXCLUSIONS
+# ===========================================================
+exclusions:
+  # Features not included in demo
+  enterprise:
+    enabled: false
+    reason: "Demo repo must remain lightweight and public-safe"
+  
+  features_excluded:
+    - "enterprise_policies"
+    - "team_attribution"
+    - "slo_burn_reports"
+    - "exemptions_workflow"
+  
+  # Public safety
+  redact_sensitive_data: true
+  exclude_account_ids: true
+  exclude_resource_arns: true
+
+# ===========================================================
+# RESET SCRIPT INTEGRATION
+# ===========================================================
+reset:
+  script: "tools/reset_demo.sh"
+  
+  # Steps executed by reset script
+  steps:
+    - restore_baseline
+    - regenerate_plans
+    - run_costpilot_detect
+    - run_costpilot_predict
+    - run_costpilot_explain
+    - generate_snippets
+    - generate_patches
+    - generate_mapping
+    - generate_trends
+    - validate_hashes
+  
+  # Validation after reset
+  validation:
+    compare_hashes: true
+    fail_on_drift: true
+    verify_determinism: true
+
+# ===========================================================
+# LOGGING & DEBUGGING
+# ===========================================================
+logging:
+  level: "info"  # debug, info, warn, error
+  format: "json"
+  
+  # Output locations
+  outputs:
+    console: true
+    file: "costpilot.log"
+  
+  # Debug mode
+  debug:
+    enabled: false
+    include_stack_traces: false
+    verbose_heuristics: false
+
+# ===========================================================
+# METADATA
+# ===========================================================
+metadata:
+  spec_version: "1.0.0"
+  last_updated: "2025-12-06"
+  maintainer: "CostPilot Demo Team"
+  license: "MIT"
+  
+  # Canonical hash (to be computed)
+  canonical_spec_hash: "<to_be_generated_by_reset_script>"
+

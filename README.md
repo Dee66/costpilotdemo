@@ -3,10 +3,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Terraform](https://img.shields.io/badge/Terraform-%3E%3D1.6-623CE4)](https://www.terraform.io/)
 [![Demo](https://img.shields.io/badge/demo-v1.0.0-blue)](https://github.com/Dee66/costpilotdemo)
+[![Scenario](https://img.shields.io/badge/scenario-v1-green)](./snapshots/)
 
 ## 📋 Statement of Purpose
 
-**This repository is the canonical demonstration environment for CostPilot.**
+**This repository is the canonical demonstration environment for CostPilot.**  
+**Scenario Version:** `v1`
 
 All screenshots, documentation examples, and launch-day assets originate here. This environment is designed to be deterministic, hash-stable, and drift-safe, ensuring reproducible demonstrations of CostPilot's capabilities.
 
