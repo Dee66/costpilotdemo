@@ -1,3 +1,38 @@
 {
-  "demo": "trend_history"
+  "scenario_version": "v1",
+  "trends": [
+    {
+      "name": "flat_trend",
+      "description": "Stable costs, expected behavior",
+      "data_points": [
+        {"date": "2025-11-01", "cost": 50.00},
+        {"date": "2025-11-08", "cost": 51.20},
+        {"date": "2025-11-15", "cost": 49.80},
+        {"date": "2025-11-22", "cost": 50.50},
+        {"date": "2025-11-29", "cost": 50.10}
+      ]
+    },
+    {
+      "name": "upward_trend",
+      "description": "Gradual increase, requires attention",
+      "data_points": [
+        {"date": "2025-11-01", "cost": 50.00},
+        {"date": "2025-11-08", "cost": 120.00},
+        {"date": "2025-11-15", "cost": 245.00},
+        {"date": "2025-11-22", "cost": 450.00},
+        {"date": "2025-11-29", "cost": 720.00}
+      ]
+    },
+    {
+      "name": "slo_breach_trend",
+      "description": "Budget threshold exceeded",
+      "data_points": [
+        {"date": "2025-11-01", "cost": 50.00, "slo": 500.00},
+        {"date": "2025-11-08", "cost": 120.00, "slo": 500.00},
+        {"date": "2025-11-15", "cost": 245.00, "slo": 500.00},
+        {"date": "2025-11-22", "cost": 450.00, "slo": 500.00},
+        {"date": "2025-11-29", "cost": 720.00, "slo": 500.00, "breach": true}
+      ]
+    }
+  ]
 }

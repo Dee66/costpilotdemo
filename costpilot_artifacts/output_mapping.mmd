@@ -1,2 +1,23 @@
 graph TD
-    A[Artifact Mapping]
+    ALB[Application Load Balancer]
+    TG[Target Group]
+    ASG[Auto Scaling Group]
+    EC2[EC2 Instances - t3.xlarge]
+    EBS[EBS Volumes - 200GB]
+    S3[S3 Bucket - No Lifecycle]
+    CW[CloudWatch Logs - Infinite]
+    
+    ALB --> TG
+    TG --> ASG
+    ASG --> EC2
+    EC2 --> EBS
+    EC2 --> CW
+    ASG --> S3
+    
+    style EC2 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style EBS fill:#ffd93d,stroke:#f59f00,color:#000
+    style S3 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style CW fill:#ffd93d,stroke:#f59f00,color:#000
+    
+    classDef highCost fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    classDef mediumCost fill:#ffd93d,stroke:#f59f00,color:#000

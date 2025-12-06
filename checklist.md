@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="47" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:47.4%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">47.4% · 72/152</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:55.3%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">55.3% · 84/152</span>
   </div>
 </div>
 
@@ -143,11 +143,11 @@
 ## 6. Mapping Engine Demo
 
 ### Mapping Demo
-- [ ] ensure_cross_service_dependencies_exist
+- [x] ensure_cross_service_dependencies_exist
 - [ ] run_costpilot_map_mermaid
-- [ ] fix_mermaid_layout_seed
-- [ ] store_output_mapping_mmd
-- [ ] copy_to_snapshots_and_demo
+- [x] fix_mermaid_layout_seed
+- [x] store_output_mapping_mmd
+- [x] copy_to_snapshots_and_demo
 
 ### Mapping Validation
 - [ ] ensure_no_cycles
@@ -158,18 +158,18 @@
 ## 7. Trend Engine Demo
 
 ### Variations
-- [ ] generate_flat_trend
-- [ ] generate_upward_trend
-- [ ] generate_slo_breach_trend
+- [x] generate_flat_trend
+- [x] generate_upward_trend
+- [x] generate_slo_breach_trend
 
 ### Constraints
-- [ ] fixed_layout_seed
-- [ ] fixed_svg_dimensions_800_300
-- [ ] deterministic_coloring
+- [x] fixed_layout_seed
+- [x] fixed_svg_dimensions_800_300
+- [x] deterministic_coloring
 
 ### Trend Tasks
-- [ ] create_trend_history_json
-- [ ] create_trend_svg_snapshot
+- [x] create_trend_history_json
+- [x] create_trend_svg_snapshot
 - [ ] validate_trend_is_deterministic
 
 ---
@@ -285,9 +285,9 @@
 ## Summary
 
 **Total Tasks:** 152  
-**Completed:** 72  
-**Remaining:** 80  
-**Progress:** 47.4%
+**Completed:** 84  
+**Remaining:** 68  
+**Progress:** 55.3%
 
 ---
 
