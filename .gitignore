@@ -1,12 +1,45 @@
 # Terraform
 *.tfstate
 *.tfstate.*
+*.tfstate.backup
 .terraform/
 .terraform.lock.hcl
+*.tfvars
+!terraform.tfvars.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+costpilot.log
+
+# Temporary files
+*.tmp
+*.bak
+.*.swp
+
+# AWS
+.aws/
+
+# Node (if needed)
+node_modules/
+package-lock.json
