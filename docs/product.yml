@@ -863,46 +863,169 @@ code_quality_enhancements:
       file_naming: "{test_suite_name}_{timestamp}.log"
   
   design_patterns:
-    strategy_pattern:
-      use_case: "Test execution strategies"
-      implementations:
-        - "RunAllStrategy (default)"
-        - "RunFailedOnlyStrategy (re-run failures)"
-        - "RunTaggedStrategy (filter by tags)"
-        - "RunChangedStrategy (only tests for changed files)"
-      location: "scripts/lib/test_strategy.py"
+    implementation_philosophy: >
+      Pragmatic approach: Implement 3 core patterns that solve real problems,
+      avoid over-engineering. Additional patterns (Strategy, Adapter, Observer,
+      Decorator, Chain of Responsibility) deferred until complexity justifies them.
     
-    factory_pattern:
-      use_case: "Test suite creation"
-      implementation:
-        - "TestSuiteFactory.register(name, class)"
-        - "TestSuiteFactory.create(name, **kwargs)"
-      location: "scripts/lib/test_factory.py"
-      usage: "suite = TestSuiteFactory.create('golden', repo_root=Path('.'))"
+    rationale: >
+      For a demo repository, excessive pattern usage adds complexity without
+      clear benefit. Focus on patterns that eliminate duplication and improve
+      maintainability. Save advanced patterns for when:
+      - Noise cases exceed 10+ variants (Strategy)
+      - Multiple TF versions needed (Adapter)
+      - Plugin architecture required (Observer)
+      - Validation becomes conditional (Chain of Responsibility)
     
-    builder_pattern:
-      use_case: "Complex test configuration"
-      implementation:
-        - "TestConfigBuilder"
-        - "Fluent interface with chaining"
-        - "with_repo_root(), with_log_level(), etc."
-      location: "scripts/lib/test_config.py"
-      usage: |
-        config = (TestConfigBuilder()
-            .with_repo_root(Path('.'))
-            .with_log_level('INFO')
-            .with_output_format('terminal')
-            .build())
+    core_patterns_phase_1:
+      template_method:
+        priority: "P0-Critical"
+        status: "IN PROGRESS"
+        use_case: "Unified test execution framework"
+        implementation:
+          base_class: "TestSuite (scripts/lib/test_suite.py)"
+          template_method: "run() - defined by subclasses"
+          concrete_classes:
+            - "GoldenOutputTestSuite"
+            - "InfrastructureTestSuite"
+            - "PRCommentTestSuite"
+            - "DocumentationTestSuite"
+            - "VisualAssetsTestSuite"
+            - "HashLineageTestSuite"
+            - "CICDTestSuite"
+            - "RegressionTestSuite"
+        benefits:
+          - "Eliminates ~500 lines of duplicated TestRunner code"
+          - "Ensures consistent test execution pattern"
+          - "Makes adding new test suites trivial"
+        location: "scripts/lib/test_suite.py"
+        migration_required: "8 test files"
+      
+      factory_pattern:
+        priority: "P0-Critical"
+        status: "NOT STARTED"
+        use_case: "Centralized scenario creation"
+        implementation:
+          class: "ScenarioFactory"
+          location: "scripts/lib/scenario_factory.py"
+          methods:
+            - "create(scenario_name: str) -> Scenario"
+            - "list_available() -> List[str]"
+          scenarios:
+            - "baseline"
+            - "pr-change"
+            - "noop"
+            - "noise-whitespace"
+            - "noise-comments"
+            - "noise-reorder"
+            - "noise-description"
+        scenario_dataclass:
+          fields:
+            - "name: str"
+            - "description: str"
+            - "terraform_path: Path"
+            - "expected_findings: int"
+            - "expected_severity: Optional[str]"
+            - "seed: int (for determinism)"
+            - "metadata: Dict[str, Any]"
+        usage_example: |
+          scenario = ScenarioFactory.create('pr-change')
+          # Returns: Scenario(
+          #   name='pr-change',
+          #   terraform_path=Path('infrastructure/terraform/pr-change'),
+          #   expected_findings=4,
+          #   expected_severity='high',
+          #   seed=42
+          # )
+        benefits:
+          - "Eliminates hardcoded scenario paths across test files"
+          - "Centralizes scenario metadata (findings, severity, seed)"
+          - "Makes adding new scenarios trivial"
+          - "Enables scenario-driven testing"
+      
+      builder_pattern:
+        priority: "P1-High"
+        status: "NOT STARTED"
+        use_case: "Golden output generation pipeline"
+        implementation:
+          class: "SnapshotBuilder"
+          location: "scripts/lib/snapshot_builder.py"
+          methods:
+            - "load_scenario(scenario: Scenario) -> Self"
+            - "detect() -> Self"
+            - "predict() -> Self"
+            - "explain() -> Self"
+            - "snippet() -> Self"
+            - "patch() -> Self"
+            - "mapping() -> Self"
+            - "trend() -> Self"
+            - "build() -> SnapshotBundle"
+            - "write_to(directory: Path) -> None"
+          usage_example: |
+            scenario = ScenarioFactory.create('pr-change')
+            builder = SnapshotBuilder(seed=42)
+            bundle = (builder
+                .load_scenario(scenario)
+                .detect()
+                .predict()
+                .explain()
+                .snippet()
+                .patch()
+                .mapping()
+                .trend()
+                .build())
+            builder.write_to(Path('snapshots/'))
+        benefits:
+          - "Clean, readable golden output regeneration"
+          - "Enforces deterministic ordering (detect → predict → explain → ...)"
+          - "Single place to enforce normalization rules"
+          - "Makes reset_demo.sh logic cleaner"
+          - "Enables partial regeneration (e.g., only detect + predict)"
+        snapshot_bundle_dataclass:
+          fields:
+            - "detect: Dict[str, Any]"
+            - "predict: Dict[str, Any]"
+            - "explain: Dict[str, Any]"
+            - "snippet: str"
+            - "patch: str"
+            - "mapping: str"
+            - "trend: Dict[str, Any]"
+            - "metadata: Dict[str, Any]"
     
-    observer_pattern:
-      use_case: "Test result notifications"
-      implementation:
-        - "TestObserver interface"
-        - "ConsoleObserver (print to terminal)"
-        - "FileObserver (write to log file)"
-        - "JSONObserver (export as JSON)"
-        - "HTMLObserver (generate HTML report)"
-      location: "scripts/lib/test_observer.py"
+    deferred_patterns:
+      note: >
+        The following patterns are valuable but deferred until complexity justifies them.
+        They represent over-engineering for current demo scope.
+      
+      strategy_pattern:
+        deferred_reason: "Only 4 noise cases currently. Wait until 10+ cases."
+        future_use_case: "Noise case transformation strategies"
+        implement_when: "noise-cases/ directory exceeds 10 test cases"
+      
+      adapter_pattern:
+        deferred_reason: "Locked to Terraform 1.6+. No multi-version support needed."
+        future_use_case: "Terraform plan normalization across versions"
+        implement_when: "Supporting TF 1.5, 1.6, 1.7+ simultaneously"
+      
+      observer_pattern:
+        deferred_reason: "Simple callbacks sufficient for 5 listeners."
+        future_use_case: "Plugin architecture for artifact generation"
+        implement_when: "Need runtime plugin system (10+ listeners)"
+      
+      decorator_pattern:
+        deferred_reason: "Function composition clearer than decorator stacking."
+        future_use_case: "Normalization pipeline"
+        implement_when: "Normalization steps exceed 5+ transformations"
+      
+      chain_of_responsibility:
+        deferred_reason: "Validation is linear, not conditional."
+        future_use_case: "Conditional validation pipeline"
+        implement_when: "Validators need dynamic branching logic"
+      
+      facade_pattern:
+        deferred_reason: "reset_demo.sh already serves as facade."
+        future_use_case: "Python wrapper for demo execution"
+        implement_when: "Need programmatic demo API or better error handling"
 
 # ===========================================================
 # 25.3 MARKETING & SALES CONTENT (TIER 3)

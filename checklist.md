@@ -1016,47 +1016,165 @@
 - [ ] configure_log_file_naming_convention (suite_name_timestamp.log)
 - [ ] test_log_file_creation_and_rotation
 
-### 15.10 Code Quality - Design Patterns (P2-Medium, 4 hours)
+### 15.10 Code Quality - Design Patterns (P0-Critical, 3 hours)
 
 **Section:** 25.2 Design Patterns  
-**Goal:** Apply industry-standard patterns
+**Goal:** Apply 3 core patterns that eliminate duplication and improve maintainability  
+**Philosophy:** Pragmatic approach - avoid over-engineering, implement patterns that solve real problems
 
-#### Strategy Pattern
-- [ ] create_scripts_lib_test_strategy_py
-- [ ] implement_test_strategy_interface
-- [ ] implement_run_all_strategy
-- [ ] implement_run_failed_only_strategy
-- [ ] implement_run_tagged_strategy
-- [ ] implement_run_changed_strategy
-- [ ] integrate_strategy_pattern_into_test_runner
+#### Phase 1: Template Method Pattern (P0-Critical, 1 hour)
+**Status:** Foundation complete (TestSuite base class exists)  
+**Goal:** Eliminate ~500 lines of duplicated TestRunner code across 8 test files
 
-#### Factory Pattern
-- [ ] create_scripts_lib_test_factory_py
-- [ ] implement_test_suite_factory_class
-- [ ] add_register_method
-- [ ] add_create_method
-- [ ] register_all_test_suites
-- [ ] test_factory_creation_golden_suite
-- [ ] test_factory_creation_infrastructure_suite
+- [x] create_test_suite_base_class (scripts/lib/test_suite.py) ✅
+- [x] create_test_result_model (scripts/lib/test_result.py) ✅
+- [x] create_test_reporter_formatter (scripts/lib/test_reporter.py) ✅
+- [ ] refactor_test_golden_deep_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 208 tests still pass
+- [ ] refactor_test_infrastructure_deep_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 135 tests still pass
+- [ ] refactor_test_pr_comments_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 96 tests still pass
+- [ ] refactor_test_documentation_deep_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 119 tests still pass
+- [ ] refactor_test_visual_assets_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 108 tests still pass
+- [ ] refactor_test_hash_lineage_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 106 tests still pass
+- [ ] refactor_test_cicd_deep_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 75 tests still pass
+- [ ] refactor_test_regressions_py_to_extend_test_suite
+  - [ ] import TestSuite from lib
+  - [ ] remove duplicated TestRunner class
+  - [ ] implement run() method
+  - [ ] verify all 112 tests still pass
+- [ ] run_all_tests_verify_1367_tests_still_pass
+- [ ] verify_code_duplication_eliminated
+- [ ] measure_lines_of_code_reduction (expect ~500 lines removed)
 
-#### Builder Pattern
-- [ ] create_scripts_lib_test_config_py
-- [ ] implement_test_config_builder_class
-- [ ] add_with_repo_root_method
-- [ ] add_with_log_level_method
-- [ ] add_with_output_format_method
-- [ ] add_build_method
-- [ ] implement_fluent_interface_with_chaining
-- [ ] test_builder_configuration
+#### Phase 2: Factory Pattern - ScenarioFactory (P0-Critical, 1 hour)
+**Goal:** Centralize scenario creation, eliminate hardcoded paths
 
-#### Observer Pattern
-- [ ] create_scripts_lib_test_observer_py
-- [ ] implement_test_observer_interface
-- [ ] implement_console_observer
-- [ ] implement_file_observer
-- [ ] implement_json_observer
-- [ ] implement_html_observer
-- [ ] integrate_observer_pattern_into_test_runner
+- [ ] create_scripts_lib_scenario_factory_py
+- [ ] define_scenario_dataclass
+  - [ ] add_name_field
+  - [ ] add_description_field
+  - [ ] add_terraform_path_field
+  - [ ] add_expected_findings_field
+  - [ ] add_expected_severity_field
+  - [ ] add_seed_field_for_determinism
+  - [ ] add_metadata_dict_field
+- [ ] implement_scenario_factory_class
+  - [ ] add_create_method (scenario_name: str -> Scenario)
+  - [ ] add_list_available_method (returns scenario names)
+  - [ ] register_baseline_scenario
+  - [ ] register_pr_change_scenario
+  - [ ] register_noop_scenario
+  - [ ] register_noise_whitespace_scenario
+  - [ ] register_noise_comments_scenario
+  - [ ] register_noise_reorder_scenario
+  - [ ] register_noise_description_scenario
+- [ ] update_test_files_to_use_scenario_factory
+  - [ ] replace_hardcoded_paths_in_test_golden_deep
+  - [ ] replace_hardcoded_paths_in_test_infrastructure_deep
+  - [ ] replace_hardcoded_paths_in_test_pr_comments
+  - [ ] replace_hardcoded_paths_in_test_documentation_deep
+- [ ] write_unit_tests_for_scenario_factory
+  - [ ] test_create_baseline_scenario
+  - [ ] test_create_pr_change_scenario
+  - [ ] test_create_noop_scenario
+  - [ ] test_list_available_scenarios
+  - [ ] test_invalid_scenario_name_raises_error
+- [ ] verify_all_tests_still_pass_after_factory_integration
+
+#### Phase 3: Builder Pattern - SnapshotBuilder (P1-High, 1 hour)
+**Goal:** Clean pipeline for golden output generation
+
+- [ ] create_scripts_lib_snapshot_builder_py
+- [ ] define_snapshot_bundle_dataclass
+  - [ ] add_detect_field (Dict)
+  - [ ] add_predict_field (Dict)
+  - [ ] add_explain_field (Dict)
+  - [ ] add_snippet_field (str)
+  - [ ] add_patch_field (str)
+  - [ ] add_mapping_field (str)
+  - [ ] add_trend_field (Dict)
+  - [ ] add_metadata_field (Dict)
+- [ ] implement_snapshot_builder_class
+  - [ ] add_init_with_seed_parameter
+  - [ ] add_load_scenario_method (returns self for chaining)
+  - [ ] add_detect_method (runs detect, stores result, returns self)
+  - [ ] add_predict_method (runs predict, stores result, returns self)
+  - [ ] add_explain_method (runs explain, stores result, returns self)
+  - [ ] add_snippet_method (generates snippet, stores result, returns self)
+  - [ ] add_patch_method (generates patch, stores result, returns self)
+  - [ ] add_mapping_method (generates mapping, stores result, returns self)
+  - [ ] add_trend_method (generates trend, stores result, returns self)
+  - [ ] add_build_method (returns SnapshotBundle)
+  - [ ] add_write_to_method (writes bundle to directory)
+- [ ] add_normalization_to_builder
+  - [ ] enforce_float_precision_2_decimals
+  - [ ] enforce_stable_whitespace
+  - [ ] enforce_stable_ordering
+  - [ ] enforce_deterministic_layout_seed
+- [ ] update_reset_demo_script_to_use_builder
+  - [ ] replace_manual_snapshot_generation_with_builder
+  - [ ] simplify_reset_demo_sh_logic
+- [ ] write_unit_tests_for_snapshot_builder
+  - [ ] test_fluent_interface_chaining
+  - [ ] test_partial_build (only detect + predict)
+  - [ ] test_full_build_all_outputs
+  - [ ] test_deterministic_output_with_same_seed
+  - [ ] test_write_to_directory
+- [ ] verify_golden_outputs_unchanged_after_builder_integration
+
+#### Pattern Validation
+- [ ] verify_3_patterns_implemented_and_documented
+- [ ] measure_code_quality_improvements
+  - [ ] lines_of_code_reduction (target: 500+ lines)
+  - [ ] duplication_elimination (target: 0 duplicate TestRunner classes)
+  - [ ] test_maintainability_score
+- [ ] document_pattern_usage_in_readme
+  - [ ] add_design_patterns_section_to_readme
+  - [ ] explain_template_method_benefits
+  - [ ] explain_factory_pattern_benefits
+  - [ ] explain_builder_pattern_benefits
+- [ ] update_spec_with_pattern_completion_status
+
+#### Deferred Patterns Documentation
+- [x] document_deferred_patterns_in_spec ✅
+  - [x] strategy_pattern (wait until 10+ noise cases) ✅
+  - [x] adapter_pattern (wait until multi-TF-version support) ✅
+  - [x] observer_pattern (wait until 10+ listeners) ✅
+  - [x] decorator_pattern (wait until 5+ normalization steps) ✅
+  - [x] chain_of_responsibility (wait until conditional validation) ✅
+- [x] add_implementation_triggers_to_spec ✅
+  - [x] define_when_to_implement_strategy ✅
+  - [x] define_when_to_implement_adapter ✅
+  - [x] define_when_to_implement_observer ✅
+  - [x] define_when_to_implement_decorator ✅
+  - [x] define_when_to_implement_chain ✅
 
 ### 15.11 Technical Polish - Result Exporters (P3-Optional, 2 hours)
 
