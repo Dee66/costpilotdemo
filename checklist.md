@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:55.3%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">55.3% · 84/152</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="57" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:57.2%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">57.2% · 87/152</span>
   </div>
 </div>
 
@@ -150,8 +150,8 @@
 - [x] copy_to_snapshots_and_demo
 
 ### Mapping Validation
-- [ ] ensure_no_cycles
-- [ ] ensure_deterministic_node_ordering
+- [x] ensure_no_cycles
+- [x] ensure_deterministic_node_ordering
 
 ---
 
@@ -170,7 +170,7 @@
 ### Trend Tasks
 - [x] create_trend_history_json
 - [x] create_trend_svg_snapshot
-- [ ] validate_trend_is_deterministic
+- [x] validate_trend_is_deterministic
 
 ---
 
@@ -285,9 +285,9 @@
 ## Summary
 
 **Total Tasks:** 152  
-**Completed:** 84  
-**Remaining:** 68  
-**Progress:** 55.3%
+**Completed:** 87  
+**Remaining:** 65  
+**Progress:** 57.2%
 
 ---
 
