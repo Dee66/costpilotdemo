@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="31" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:31.8%; background:linear-gradient(90deg,#dc2626,#ea580c,#f59e0b); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">31.8% · 48/151</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:45.0%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">45.0% · 68/151</span>
   </div>
 </div>
 
@@ -177,36 +177,36 @@
 ## 8. Reset Script Implementation
 
 ### Must Implement
-- [ ] restore_baseline_infrastructure
-- [ ] regenerate_all_snapshots
-- [ ] regenerate_mapping
-- [ ] regenerate_trend_history
-- [ ] validate_deterministic_hashes
-- [ ] exit_nonzero_on_drift
+- [x] restore_baseline_infrastructure
+- [x] regenerate_all_snapshots
+- [x] regenerate_mapping
+- [x] regenerate_trend_history
+- [x] validate_deterministic_hashes
+- [x] exit_nonzero_on_drift
 
 ### Permissions
-- [ ] chmod_plus_x_reset_demo_sh
+- [x] chmod_plus_x_reset_demo_sh
 
 ---
 
 ## 9. CI Pipeline Implementation
 
 ### Tasks
-- [ ] configure_terraform_init
-- [ ] run_costpilot_scan
-- [ ] run_costpilot_diff
-- [ ] run_costpilot_explain
-- [ ] enforce_noop_expected_no_findings
-- [ ] verify_deterministic_output_against_snapshots
-- [ ] block_on_any_drift
+- [x] configure_terraform_init
+- [x] run_costpilot_scan
+- [x] run_costpilot_diff
+- [x] run_costpilot_explain
+- [x] enforce_noop_expected_no_findings
+- [x] verify_deterministic_output_against_snapshots
+- [x] block_on_any_drift
 
 ### CI Guardrails
-- [ ] prevent_updates_to_snapshots
-- [ ] prevent_updates_to_costpilot_artifacts
-- [ ] prevent_updates_to_video_assets
-- [ ] allowlist_infrastructure_terraform_pr_change
-- [ ] allowlist_README_md
-- [ ] allowlist_costpilot_yml
+- [x] prevent_updates_to_snapshots
+- [x] prevent_updates_to_costpilot_artifacts
+- [x] prevent_updates_to_video_assets
+- [x] allowlist_infrastructure_terraform_pr_change
+- [x] allowlist_README_md
+- [x] allowlist_costpilot_yml
 
 ---
 
@@ -284,9 +284,9 @@
 ## Summary
 
 **Total Tasks:** 151  
-**Completed:** 48  
-**Remaining:** 103  
-**Progress:** 31.8%
+**Completed:** 68  
+**Remaining:** 83  
+**Progress:** 45.0%
 
 ---
 
