@@ -1,0 +1,2 @@
+# This directory stores dynamic CostPilot outputs from CI/CD pipeline runs.
+# Outputs are deterministic and hash-validated against snapshots/.

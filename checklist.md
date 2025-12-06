@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="46" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:46.7%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">46.7% · 71/152</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="47" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:47.4%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">47.4% · 72/152</span>
   </div>
 </div>
 
@@ -136,7 +136,7 @@
 - [ ] include_rollback_patch
 
 ### Patch Scope Limit Rationale
-- [ ] document_reason_for_scope_limit_in_README
+- [x] document_reason_for_scope_limit_in_README
 
 ---
 
@@ -285,9 +285,9 @@
 ## Summary
 
 **Total Tasks:** 152  
-**Completed:** 71  
-**Remaining:** 81  
-**Progress:** 46.7%
+**Completed:** 72  
+**Remaining:** 80  
+**Progress:** 47.4%
 
 ---
 
