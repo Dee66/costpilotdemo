@@ -4,9 +4,9 @@
 **Source Spec:** products.yml  
 **Last Updated:** 2025-12-06
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="57" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:57.2%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">57.2% · 87/152</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="59" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:59.9%; background:linear-gradient(90deg,#f59e0b,#eab308,#84cc16); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">59.9% · 91/152</span>
   </div>
 </div>
 
@@ -82,10 +82,10 @@
 - [ ] run_costpilot_explain_store_explain_v1_json
 - [ ] run_costpilot_autofix_snippet_store_snippet_v1_tf
 - [ ] run_costpilot_autofix_patch_store_patch_v1_diff
-- [ ] generate_mapping_mmd_snapshot
-- [ ] generate_trend_history_json
-- [ ] generate_trend_svg_snapshot
-- [ ] copy_all_snapshots_to_costpilot_demo_directory
+- [x] generate_mapping_mmd_snapshot
+- [x] generate_trend_history_json
+- [x] generate_trend_svg_snapshot
+- [x] copy_all_snapshots_to_costpilot_demo_directory
 
 ### Snapshot Invariants
 - [ ] enforce_deterministic_hashes
@@ -285,9 +285,9 @@
 ## Summary
 
 **Total Tasks:** 152  
-**Completed:** 87  
-**Remaining:** 65  
-**Progress:** 57.2%
+**Completed:** 91  
+**Remaining:** 61  
+**Progress:** 59.9%
 
 ---
 
