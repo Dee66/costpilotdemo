@@ -1,0 +1,41 @@
+name: Publish Demo to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "demo/**"
+      - "visual_assets/**"
+      - "snapshots/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy demo to publishing folder
+        run: |
+          rm -rf public
+          mkdir public
+          cp -R demo/* public/
+          cp -R visual_assets public/
+          cp -R snapshots public/
+          
+      - name: Fix asset paths in index.html
+        run: |
+          cd public
+          sed -i 's|"\.\./visual_assets/|"./visual_assets/|g' index.html
+          sed -i 's|"\.\./snapshots/|"./snapshots/|g' index.html
+          sed -i 's|href="\.\./ROI_CALCULATOR\.md"|style="display:none"|g' index.html
+
+      - name: Add .nojekyll
+        run: touch public/.nojekyll
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          force_orphan: true
