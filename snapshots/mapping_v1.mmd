@@ -1,0 +1,20 @@
+%%{init: {'theme':'base', 'themeVariables': {'fontSize':'14px'}}}%%
+graph LR
+    ALB["Application Load Balancer"]
+    TG["Target Group"]
+    ASG["Auto Scaling Group"]
+    EC2["EC2 Instances – t3.xlarge"]
+    EBS["EBS Volumes – 200GB"]
+    S3["S3 Bucket – No Lifecycle"]
+    CW["CloudWatch Logs – Infinite Retention"]
+
+    ALB --> TG --> ASG --> EC2
+    EC2 --> EBS
+    EC2 --> CW
+    ASG --> S3
+
+    classDef highCost fill:#ff6b6b,stroke:#c92a2a,color:#ffffff;
+    classDef mediumCost fill:#ffd93d,stroke:#f59f00,color:#000000;
+
+    class EC2,S3 highCost;
+    class EBS,CW mediumCost;
