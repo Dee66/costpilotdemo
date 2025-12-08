@@ -366,6 +366,25 @@
             margin-top: 0.5rem;
             font-weight: 500;
         }
+    </style>
+    
+    <style>
+        /* Fix clipping for the Infrastructure Impact Map */
+        #mappingChart {
+            height: auto !important;
+            min-height: 300px !important;
+            overflow: visible !important;
+            text-align: center !important;
+            padding: 1rem !important;
+            background: var(--bg) !important;
+            border-radius: 8px !important;
+        }
+        
+        #mappingChart svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
 
         @media (max-width: 768px) {
             .hero h1 {
