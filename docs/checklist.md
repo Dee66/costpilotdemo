@@ -4,9 +4,9 @@
 **Source Spec:** product.yml v2.0.0 → v3.0.0 (Section 25)  
 **Last Updated:** 2025-12-08
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="84" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:84.9%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">84.9% · 455/536</span>
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:85.9%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">85.9% · 463/539</span>
   </div>
 </div>
 
@@ -286,10 +286,10 @@
 
 ## Summary (v1.0.0 Spec)
 
-**Total Tasks:** 536  
-**Completed:** 455  
-**Remaining:** 81  
-**Progress:** 84.9%
+**Total Tasks:** 539  
+**Completed:** 463  
+**Remaining:** 76  
+**Progress:** 85.9%
 
 ---
 
@@ -491,11 +491,14 @@
 ### 14.9 Visual Assets & Screenshots
 
 **Screenshot Requirements:**
-- [ ] Capture detect_output_screenshot.png (1920x1080, light theme) *[Manual capture required]*
-- [ ] Capture explain_mode_screenshot.png (1920x1080, light theme) *[Manual capture required]*
-- [ ] Capture mapping_graph.png (1920x1080, light theme) *[Manual capture required]*
-- [ ] Capture trend_graph.png (1920x1080, light theme) *[Manual capture required]*
-- [ ] Capture pr_comment_cost_diff.png (1920x1080, light theme) *[Manual capture required]*
+- [x] Capture detect_output_screenshot.png (1920x1080, light theme) *[Captured: Findings.png]*
+- [x] Capture explain_mode_screenshot.png (1920x1080, light theme) *[Captured: FindingOne.png, FindingTwo.png, FindingThree.png, FindingFour.png]*
+- [x] Capture mapping_graph.png (1920x1080, light theme) *[Captured: InfrastructureImpact.png]*
+- [x] Capture trend_graph.png (1920x1080, light theme) *[Captured: CostTrendAnalysis.png]*
+- [x] Capture pr_comment_cost_diff.png (1920x1080, light theme) *[Captured: MonthlyDelta.png]*
+- [x] Capture hero section (1920x1080, light theme) *[Captured: Hero.png, HeroStats.png]*
+- [x] Capture auto-fix section (1920x1080, light theme) *[Captured: AutoFixSuggestions.png]*
+- [x] Capture footer section (1920x1080, light theme) *[Captured: Footer.png]*
 
 **Screenshot Standards:**
 - [x] All screenshots at 1920x1080 resolution *[Documented in manifest]*

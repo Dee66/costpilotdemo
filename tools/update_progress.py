@@ -166,7 +166,7 @@ def main():
     """Main entry point."""
     # Locate checklist.md
     repo_root = Path(__file__).parent.parent
-    checklist_path = repo_root / "checklist.md"
+    checklist_path = repo_root / "docs/checklist.md"
     
     if not checklist_path.exists():
         print(f"Error: checklist.md not found at {checklist_path}", file=sys.stderr)
