@@ -1,0 +1,21 @@
+file 'video_assets/final/Hero.png'
+duration 1.2
+
+file 'video_assets/final/Findings.png'
+duration 1.0
+
+file 'video_assets/final/CostTrendAnalysis.png'
+duration 1.0
+
+file 'video_assets/final/AutoFixSuggestions.png'
+duration 1.0
+
+file 'video_assets/final/InfrastructureImpact.png'
+duration 1.0
+
+file 'video_assets/final/Footer.png'
+duration 1.2
+
+# Smooth loop
+file 'video_assets/final/Hero.png'
+duration 0.4

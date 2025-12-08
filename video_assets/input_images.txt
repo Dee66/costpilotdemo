@@ -1,0 +1,29 @@
+file 'video_assets/final/Hero.png'
+duration 11
+
+file 'video_assets/final/HeroStats.png'
+duration 9
+
+file 'video_assets/final/Findings.png'
+duration 7
+
+file 'video_assets/final/FindingOne.png'
+duration 6
+
+file 'video_assets/final/FindingTwo.png'
+duration 5
+
+file 'video_assets/final/FindingThree.png'
+duration 3
+
+file 'video_assets/final/CostTrendAnalysis.png'
+duration 3
+
+file 'video_assets/final/AutoFixSuggestions.png'
+duration 6
+
+file 'video_assets/final/InfrastructureImpact.png'
+duration 9
+
+file 'video_assets/final/Footer.png'
+duration 12
