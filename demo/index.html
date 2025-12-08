@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CostPilot Interactive Demo - See Cost Regressions Caught in Real-Time</title>
     <meta name="description" content="Interactive demonstration of CostPilot catching a $335/month AWS cost regression before deployment">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
     <style>
         * {
@@ -328,6 +330,34 @@
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .trend-chart.zoomed {
+            height: 600px;
+        }
+
+        .trend-chart img {
+            transition: transform 0.3s ease;
+        }
+
+        .trend-chart.zoomed img {
+            transform: scale(1.5);
+        }
+
+        .trend-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            white-space: nowrap;
         }
 
         .expand-hint {
@@ -347,12 +377,41 @@
                 gap: 1rem;
             }
 
+            .cost-arrow {
+                transform: rotate(90deg);
+                font-size: 2rem;
+            }
+
             .cost-value {
                 font-size: 2rem;
             }
 
             .container {
                 padding: 1rem;
+            }
+            
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .finding-card {
+                padding: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            
+            pre {
+                font-size: 0.75rem;
             }
         }
 
@@ -364,6 +423,11 @@
     </style>
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    
     <div class="hero">
         <h1>💸 CostPilot Caught This Before Deployment</h1>
         <p>Watch how one innocent infrastructure change could have cost <strong>$2,010 over 6 months</strong></p>
@@ -421,14 +485,102 @@
         </div>
 
         <div class="section">
+            <h2>🗺️ Infrastructure Impact Map</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                See how changes cascade through your infrastructure
+            </p>
+            <div class="trend-chart" id="mappingChart">
+                <div class="mermaid" style="background: white; padding: 1rem; border-radius: 8px;">
+graph TD
+    ALB[Application Load Balancer]
+    TG[Target Group]
+    ASG[Auto Scaling Group]
+    EC2[EC2 Instances - t3.xlarge]
+    EBS[EBS Volumes - 200GB]
+    S3[S3 Bucket - No Lifecycle]
+    CW[CloudWatch Logs - Infinite]
+    
+    ALB --> TG
+    TG --> ASG
+    ASG --> EC2
+    EC2 --> EBS
+    EC2 --> CW
+    ASG --> S3
+    
+    style EC2 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style EBS fill:#ffd93d,stroke:#f59f00,color:#000
+    style S3 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style CW fill:#ffd93d,stroke:#f59f00,color:#000
+    
+    classDef highCost fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    classDef mediumCost fill:#ffd93d,stroke:#f59f00,color:#000
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
             <h2>📊 Cost Trend Analysis</h2>
             <p style="color: var(--text-muted); margin-bottom: 1rem;">
                 This change would breach your SLO threshold of $500/month
             </p>
-            <div class="trend-chart">
-                <img src="../visual_assets/trend_v1.svg" alt="Cost Trend Chart" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="trend-chart" id="trendChart" onclick="this.classList.toggle('zoomed')">
+                <div class="trend-tooltip" id="trendTooltip"></div>
+                <img src="../visual_assets/trend_v1.svg" alt="Cost Trend Chart" style="width: 100%; height: 100%; object-fit: contain;" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                     onmousemove="showTrendTooltip(event)" onmouseout="hideTrendTooltip()">
                 <div style="display: none; text-align: center; padding: 3rem; color: var(--text-muted);">
                     Trend chart will be displayed here once visual assets are captured
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Auto-Fix Suggestions</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                CostPilot provides exact HCL patches to revert cost regressions
+            </p>
+            
+            <div style="background: var(--surface); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="margin: 0;">Recommended Fixes</h3>
+                    <button class="btn btn-primary" onclick="copyPatchToClipboard()" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        📋 Copy Patch
+                    </button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <h4 style="color: var(--danger); margin-bottom: 0.5rem;">❌ Current (Expensive)</h4>
+                        <pre style="background: #fee; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.875rem; margin: 0;"><code>instance_type = "t3.xlarge"
+volume_size = 200
+retention_in_days = 0
+# lifecycle missing</code></pre>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">✅ Suggested (Optimized)</h4>
+                        <pre style="background: #efe; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.875rem; margin: 0;"><code>instance_type = "t3.large"
+volume_size = 50
+retention_in_days = 30
+# lifecycle: enabled</code></pre>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg); padding: 1rem; border-radius: 6px;">
+                    <strong>💰 Savings Calculator</strong>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.75rem; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$335</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Monthly Savings</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$2,010</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">6-Month Savings</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$4,020</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Annual Savings</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -551,6 +703,76 @@
                 return `"${value}"`;
             }
             return JSON.stringify(value);
+        }
+
+        function showTrendTooltip(event) {
+            const tooltip = document.getElementById('trendTooltip');
+            const chart = document.getElementById('trendChart');
+            const rect = chart.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Simple tooltip showing approximate cost based on position
+            const percentX = x / rect.width;
+            const baseCost = 52.43;
+            const targetCost = 387.89;
+            const estimatedCost = baseCost + (targetCost - baseCost) * percentX;
+            
+            tooltip.textContent = `Estimated: $${estimatedCost.toFixed(2)}/month`;
+            tooltip.style.left = `${x + 10}px`;
+            tooltip.style.top = `${y - 30}px`;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTrendTooltip() {
+            const tooltip = document.getElementById('trendTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        // Make mapping nodes clickable
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const mappingNodes = document.querySelectorAll('#mappingChart .node');
+                mappingNodes.forEach(node => {
+                    node.style.cursor = 'pointer';
+                    node.addEventListener('click', function() {
+                        const label = this.textContent;
+                        alert(`Resource: ${label}\nClick for detailed analysis (feature coming soon)`);
+                    });
+                });
+            }, 1000);
+        });
+
+        async function copyPatchToClipboard() {
+            try {
+                const patch = `--- a/infrastructure/terraform/pr-change/main.tf
++++ b/infrastructure/terraform/pr-change/main.tf
+@@ -123,7 +123,7 @@
+ resource "aws_launch_template" "main" {
+   name_prefix   = "costpilot-demo-"
+   image_id      = data.aws_ami.amazon_linux_2.id
+-  instance_type = "t3.xlarge"
++  instance_type = "t3.large"
+ 
+@@ -135,7 +135,7 @@
+   block_device_mappings {
+     device_name = "/dev/xvda"
+     ebs {
+-      volume_size           = 200
++      volume_size           = 50
+       volume_type           = "gp3"
+       
+@@ -242,7 +242,7 @@
+ resource "aws_cloudwatch_log_group" "application" {
+   name              = "/aws/costpilot-demo/application"
+-  retention_in_days = 0
++  retention_in_days = 30`;
+                
+                await navigator.clipboard.writeText(patch);
+                alert('✅ Patch copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy patch. Please select and copy manually.');
+            }
         }
 
         // Animated counter for cost values

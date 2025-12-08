@@ -7,14 +7,14 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-TREND_JSON="$REPO_ROOT/snapshots/trend_history.json"
+TREND_JSON="$REPO_ROOT/snapshots/trend_history_v1.json"
 TREND_SVG="$REPO_ROOT/snapshots/trend_v1.svg"
 
 echo "🔍 Validating trend determinism..."
 
 # Check if files exist
 if [ ! -f "$TREND_JSON" ]; then
-    echo "❌ ERROR: trend_history.json not found"
+    echo "❌ ERROR: trend_history_v1.json not found"
     exit 1
 fi
 
@@ -27,7 +27,7 @@ echo "✓ Trend files exist"
 
 # Validate JSON structure
 echo ""
-echo "📊 Validating trend_history.json..."
+echo "📊 Validating trend_history_v1.json..."
 
 # Check required fields
 REQUIRED_FIELDS=("scenario_version" "trends")
@@ -106,7 +106,7 @@ echo "🔐 Computing deterministic hashes..."
 JSON_HASH=$(sha256sum "$TREND_JSON" | awk '{print $1}')
 SVG_HASH=$(sha256sum "$TREND_SVG" | awk '{print $1}')
 
-echo "   trend_history.json: ${JSON_HASH:0:16}..."
+echo "   trend_history_v1.json: ${JSON_HASH:0:16}..."
 echo "   trend_v1.svg:       ${SVG_HASH:0:16}..."
 
 # Store hashes for future validation
@@ -114,7 +114,7 @@ HASH_FILE="$REPO_ROOT/.trend_hashes"
 cat > "$HASH_FILE" << EOF
 # Trend File Hashes (for determinism validation)
 # Generated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-trend_history.json:$JSON_HASH
+trend_history_v1.json:$JSON_HASH
 trend_v1.svg:$SVG_HASH
 EOF
 
@@ -126,7 +126,7 @@ echo "🔄 Testing reproducibility..."
 
 # Create temporary backup
 TMP_DIR=$(mktemp -d)
-cp "$TREND_JSON" "$TMP_DIR/trend_history.json.backup"
+cp "$TREND_JSON" "$TMP_DIR/trend_history_v1.json.backup"
 cp "$TREND_SVG" "$TMP_DIR/trend_v1.svg.backup"
 
 # Re-generate
@@ -148,7 +148,7 @@ if [ -x "$REPO_ROOT/scripts/generate_trend.sh" ]; then
         echo "   New SVG hash:       $NEW_SVG_HASH"
         
         # Restore backups
-        cp "$TMP_DIR/trend_history.json.backup" "$TREND_JSON"
+        cp "$TMP_DIR/trend_history_v1.json.backup" "$TREND_JSON"
         cp "$TMP_DIR/trend_v1.svg.backup" "$TREND_SVG"
         rm -rf "$TMP_DIR"
         exit 1

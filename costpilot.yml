@@ -5,17 +5,39 @@
 version: "1.0"
 scenario_version: "v1"
 
-# ===========================================================
+
 # PROJECT SETTINGS
-# ===========================================================
+
 project:
   name: "costpilot-demo"
   description: "Canonical demonstration repository for CostPilot"
   repository: "https://github.com/Dee66/costpilotdemo"
 
-# ===========================================================
+
+# POLICY & GOVERNANCE (v2.0.0)
+
+policies:
+  enabled: true
+  enforcement_mode: "advisory" # advisory, blocking, or audit-only
+  
+  # Policy file locations
+  policy_paths:
+    - "policies/"
+  
+  # Baseline definitions for cost optimization
+  baselines:
+    config: ".costpilot/baselines.json"
+    enabled: true
+  
+  # Policy violations reporting
+  violations:
+    report_format: "json"
+    output: "costpilot_artifacts/policy_violations.json"
+    fail_on_violation: false # advisory mode
+
+
 # TERRAFORM SETTINGS
-# ===========================================================
+
 terraform:
   version: ">=1.6"
   plan_schema_version: 2
@@ -25,6 +47,7 @@ terraform:
     baseline: "infrastructure/terraform/baseline"
     pr_change: "infrastructure/terraform/pr-change"
     noop_change: "infrastructure/terraform/noop-change"
+    noise_cases: "infrastructure/terraform/noise-cases"
   
   # Plan output locations
   plans:
@@ -32,9 +55,9 @@ terraform:
     after: "snapshots/plan_after.json"
     diff: "snapshots/plan_diff.json"
 
-# ===========================================================
+
 # COSTPILOT ANALYSIS PHASES
-# ===========================================================
+
 analysis:
   
   # DETECT PHASE: Identify cost-impacting changes
@@ -135,9 +158,9 @@ analysis:
       include_alternatives: true
       include_severity_rationale: true
 
-# ===========================================================
+
 # PATCH PREVIEW (AUTOFIX)
-# ===========================================================
+
 autofix:
   enabled: true
   
@@ -169,9 +192,9 @@ autofix:
       include_hashes: true
       include_rollback: true
 
-# ===========================================================
+
 # MAPPING ENGINE
-# ===========================================================
+
 mapping:
   enabled: true
   output: "snapshots/mapping_v1.mmd"
@@ -195,15 +218,15 @@ mapping:
       low_cost: "fill:#6bcf7f"
       no_change: "fill:#95a5a6"
 
-# ===========================================================
+
 # TREND ENGINE
-# ===========================================================
+
 trend:
   enabled: true
   
   # Historical data
   history:
-    output: "snapshots/trend_history.json"
+    output: "snapshots/trend_history_v1.json"
     retention_days: 90
   
   # Visualization
@@ -231,9 +254,9 @@ trend:
       breach: 1000  # dollars per month
       warning: 750
 
-# ===========================================================
+
 # PERFORMANCE EXPECTATIONS
-# ===========================================================
+
 performance:
   detect_max_ms: 200
   predict_max_ms: 300
@@ -245,9 +268,9 @@ performance:
     predict: 10000
     explain: 10000
 
-# ===========================================================
+
 # OUTPUT CONSTRAINTS
-# ===========================================================
+
 output:
   # Deterministic output requirements
   deterministic:
@@ -263,9 +286,9 @@ output:
       demo: ".costpilot/demo"
       snapshots: "snapshots"
 
-# ===========================================================
+
 # CI/CD INTEGRATION
-# ===========================================================
+
 ci:
   # Noop scenario validation
   noop_validation:
@@ -285,9 +308,9 @@ ci:
     algorithm: "sha256"
     store_in: "snapshots/snapshot_hashes.txt"
 
-# ===========================================================
+
 # EXCLUSIONS
-# ===========================================================
+
 exclusions:
   # Features not included in demo
   enterprise:
@@ -305,9 +328,9 @@ exclusions:
   exclude_account_ids: true
   exclude_resource_arns: true
 
-# ===========================================================
+
 # RESET SCRIPT INTEGRATION
-# ===========================================================
+
 reset:
   script: "tools/reset_demo.sh"
   
@@ -330,9 +353,9 @@ reset:
     fail_on_drift: true
     verify_determinism: true
 
-# ===========================================================
+
 # LOGGING & DEBUGGING
-# ===========================================================
+
 logging:
   level: "info"  # debug, info, warn, error
   format: "json"
@@ -348,9 +371,9 @@ logging:
     include_stack_traces: false
     verbose_heuristics: false
 
-# ===========================================================
+
 # METADATA
-# ===========================================================
+
 metadata:
   spec_version: "1.0.0"
   last_updated: "2025-12-06"

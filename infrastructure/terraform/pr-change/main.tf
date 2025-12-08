@@ -1,5 +1,10 @@
 # CostPilot Demo - PR Change Infrastructure
 # This introduces cost regressions for demonstration
+#
+# ⚠️  WARNING: DO NOT RUN 'terraform apply' ⚠️
+# This is a DEMONSTRATION REPOSITORY for documentation only.
+# Running terraform apply will create real AWS resources and incur costs.
+# See: infrastructure/terraform/SAFEGUARDS.md
 
 terraform {
   required_version = ">=1.6"
@@ -343,3 +348,406 @@ data "aws_ami" "amazon_linux_2" {
 
 data "aws_caller_identity" "current" {}
 
+
+# Mini Real-World Stack - PR Regression Version
+
+# Same stack as baseline, but with additional cost regressions
+
+# SQS Queue (same as baseline)
+resource "aws_sqs_queue" "jobs" {
+  name                       = "costpilot-demo-job-queue"
+  delay_seconds              = 0
+  max_message_size           = 262144
+  message_retention_seconds  = 345600 # 4 days
+  receive_wait_time_seconds  = 10
+  visibility_timeout_seconds = 300
+
+  tags = {
+    Name        = "costpilot-demo-job-queue"
+    Environment = "pr-change"
+    Purpose     = "async-job-processing"
+  }
+}
+
+# Dead Letter Queue
+resource "aws_sqs_queue" "jobs_dlq" {
+  name                       = "costpilot-demo-job-queue-dlq"
+  message_retention_seconds  = 1209600 # 14 days
+  
+  tags = {
+    Name        = "costpilot-demo-job-queue-dlq"
+    Environment = "pr-change"
+    Purpose     = "dead-letter-queue"
+  }
+}
+
+# Security Group for Background Worker
+resource "aws_security_group" "worker" {
+  name        = "costpilot-demo-worker-sg"
+  description = "Security group for background worker instances"
+  vpc_id      = aws_vpc.main.id
+
+  egress {
+    description = "All outbound traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "costpilot-demo-worker-sg"
+  }
+}
+
+# Launch Template for Background Worker
+resource "aws_launch_template" "worker" {
+  name_prefix   = "costpilot-demo-worker-"
+  image_id      = data.aws_ami.amazon_linux_2.id
+  instance_type = "t3.small" # REGRESSION: Upgraded from t3.micro for worker
+
+  vpc_security_group_ids = [aws_security_group.worker.id]
+
+  user_data = base64encode(<<-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y aws-cli
+              
+              # Simulate background worker that processes jobs from SQS
+              cat > /home/ec2-user/worker.sh << 'WORKER'
+              #!/bin/bash
+              while true; do
+                echo "$(date) - Processing jobs from queue..."
+                # Worker would poll SQS and process jobs here
+                sleep 30
+              done
+              WORKER
+              
+              chmod +x /home/ec2-user/worker.sh
+              nohup /home/ec2-user/worker.sh > /var/log/worker.log 2>&1 &
+              EOF
+  )
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.worker.name
+  }
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+
+    ebs {
+      volume_size           = 50 # REGRESSION: Increased from 20GB
+      volume_type           = "gp3"
+      delete_on_termination = true
+      encrypted             = true
+    }
+  }
+
+  metadata_options {
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 1
+  }
+
+  tags = {
+    Name = "costpilot-demo-worker-lt"
+  }
+}
+
+# Auto Scaling Group for Worker
+resource "aws_autoscaling_group" "worker" {
+  name                = "costpilot-demo-worker-asg"
+  vpc_zone_identifier = [aws_subnet.public_a.id, aws_subnet.public_b.id]
+  health_check_type   = "EC2"
+
+  min_size         = 2 # REGRESSION: Increased from 1
+  max_size         = 4 # REGRESSION: Increased from 2
+  desired_capacity = 2 # REGRESSION: Increased from 1
+
+  launch_template {
+    id      = aws_launch_template.worker.id
+    version = "$Latest"
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "costpilot-demo-worker"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Role"
+    value               = "background-worker"
+    propagate_at_launch = true
+  }
+}
+
+# IAM Role for Worker (same as baseline)
+resource "aws_iam_role" "worker" {
+  name = "costpilot-demo-worker-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name = "costpilot-demo-worker-role"
+  }
+}
+
+# IAM Policy for SQS Access
+resource "aws_iam_role_policy" "worker_sqs" {
+  name = "costpilot-demo-worker-sqs-policy"
+  role = aws_iam_role.worker.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes",
+          "sqs:ChangeMessageVisibility"
+        ]
+        Resource = aws_sqs_queue.jobs.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject"
+        ]
+        Resource = "${aws_s3_bucket.analytics.arn}/*"
+      }
+    ]
+  })
+}
+
+# IAM Instance Profile
+resource "aws_iam_instance_profile" "worker" {
+  name = "costpilot-demo-worker-profile"
+  role = aws_iam_role.worker.name
+}
+
+# Analytics S3 Bucket
+resource "aws_s3_bucket" "analytics" {
+  bucket = "${var.project_name}-analytics-${data.aws_caller_identity.current.account_id}"
+
+  tags = {
+    Name        = "costpilot-demo-analytics"
+    Environment = "pr-change"
+    Purpose     = "job-results-storage"
+  }
+}
+
+# REGRESSION: Analytics bucket lifecycle disabled
+# This means data accumulates indefinitely, increasing storage costs
+# resource "aws_s3_bucket_lifecycle_configuration" "analytics" {
+#   bucket = aws_s3_bucket.analytics.id
+#
+#   rule {
+#     id     = "transition-analytics-data"
+#     status = "Enabled"
+#
+#     transition {
+#       days          = 30
+#       storage_class = "STANDARD_IA"
+#     }
+#
+#     transition {
+#       days          = 90
+#       storage_class = "GLACIER"
+#     }
+#
+#     expiration {
+#       days = 365
+#     }
+#   }
+# }
+
+# CloudWatch Log Group for Worker with infinite retention
+resource "aws_cloudwatch_log_group" "worker" {
+  name              = "/aws/costpilot-demo/worker"
+  retention_in_days = 0 # REGRESSION: Infinite retention (was 30 days)
+
+  tags = {
+    Name        = "costpilot-demo-worker-logs"
+    Environment = "pr-change"
+  }
+}
+
+# REGRESSION: ALB Access Logging to expensive bucket
+# Enabling access logs without lifecycle policy can get expensive
+resource "aws_s3_bucket" "alb_logs" {
+  bucket = "${var.project_name}-alb-logs-${data.aws_caller_identity.current.account_id}"
+
+  tags = {
+    Name        = "costpilot-demo-alb-logs"
+    Environment = "pr-change"
+    Purpose     = "alb-access-logging"
+  }
+}
+
+# Enable ALB access logging (additional cost)
+resource "aws_lb" "main_with_logging" {
+  name               = "costpilot-demo-alb-logged"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb.id]
+  subnets            = [aws_subnet.public_a.id, aws_subnet.public_b.id]
+
+  enable_deletion_protection = false
+
+  access_logs {
+    bucket  = aws_s3_bucket.alb_logs.id
+    enabled = true
+  }
+
+  tags = {
+    Name = "costpilot-demo-alb"
+  }
+}
+
+# REGRESSION: CloudWatch Metric Stream enabled
+# Metric streams can be very expensive (streaming all metrics to destinations)
+# Cost: ~$0.003 per metric update + destination costs (Firehose, S3, etc.)
+# With hundreds of metrics, this can easily reach $50-500/month
+resource "aws_cloudwatch_metric_stream" "all_metrics" {
+  name          = "costpilot-demo-metric-stream"
+  role_arn      = aws_iam_role.metric_stream.arn
+  firehose_arn  = aws_kinesis_firehose_delivery_stream.metrics.arn
+  output_format = "json"
+
+  # Streaming ALL metrics (expensive)
+  # Better practice: use include_filter for specific namespaces only
+
+  tags = {
+    Name        = "costpilot-demo-metrics"
+    Environment = "pr-change"
+  }
+}
+
+# Kinesis Firehose for metric stream destination
+resource "aws_kinesis_firehose_delivery_stream" "metrics" {
+  name        = "costpilot-demo-metrics-firehose"
+  destination = "extended_s3"
+
+  extended_s3_configuration {
+    role_arn   = aws_iam_role.firehose.arn
+    bucket_arn = aws_s3_bucket.metrics.arn
+    prefix     = "metrics/"
+
+    buffering_size     = 5
+    buffering_interval = 300
+  }
+
+  tags = {
+    Name        = "costpilot-demo-metrics-stream"
+    Environment = "pr-change"
+  }
+}
+
+# S3 bucket for metric stream data
+resource "aws_s3_bucket" "metrics" {
+  bucket = "${var.project_name}-metrics-${data.aws_caller_identity.current.account_id}"
+
+  tags = {
+    Name        = "costpilot-demo-metrics"
+    Environment = "pr-change"
+    Purpose     = "metric-streaming"
+  }
+}
+
+# IAM role for metric stream
+resource "aws_iam_role" "metric_stream" {
+  name = "costpilot-demo-metric-stream-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "streams.metrics.cloudwatch.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name        = "costpilot-demo-metric-stream-role"
+    Environment = "pr-change"
+  }
+}
+
+resource "aws_iam_role_policy" "metric_stream" {
+  name = "metric-stream-policy"
+  role = aws_iam_role.metric_stream.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "firehose:PutRecord",
+          "firehose:PutRecordBatch"
+        ]
+        Resource = aws_kinesis_firehose_delivery_stream.metrics.arn
+      }
+    ]
+  })
+}
+
+# IAM role for Firehose
+resource "aws_iam_role" "firehose" {
+  name = "costpilot-demo-firehose-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "firehose.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name        = "costpilot-demo-firehose-role"
+    Environment = "pr-change"
+  }
+}
+
+resource "aws_iam_role_policy" "firehose" {
+  name = "firehose-policy"
+  role = aws_iam_role.firehose.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:PutObjectAcl"
+        ]
+        Resource = "${aws_s3_bucket.metrics.arn}/*"
+      }
+    ]
+  })
+}

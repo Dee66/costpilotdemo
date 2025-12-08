@@ -1,6 +1,11 @@
 # CostPilot Demo - Noop Change Infrastructure
 # Cosmetic changes only - no cost impact
 # Used to demonstrate low false-positive rate
+#
+# ⚠️  WARNING: DO NOT RUN 'terraform apply' ⚠️
+# This is a DEMONSTRATION REPOSITORY for documentation only.
+# Running terraform apply will create real AWS resources and incur costs.
+# See: infrastructure/terraform/SAFEGUARDS.md
 
 terraform {
   required_version = ">=1.6"

@@ -1,3 +1,83 @@
 {
-  "demo": "detect_v1"
+  "format_version": "1.0",
+  "scenario_version": "v1",
+  "timestamp": "2025-12-06T16:47:00Z",
+  "detection_results": {
+    "summary": {
+      "total_resources_analyzed": 17,
+      "cost_impacting_changes": 4,
+      "high_severity": 2,
+      "medium_severity": 2,
+      "low_severity": 0
+    },
+    "findings": [
+      {
+        "finding_id": "detect-001",
+        "resource_address": "aws_launch_template.main",
+        "resource_type": "aws_launch_template",
+        "classification": "compute",
+        "change_type": "update",
+        "attribute_changed": "instance_type",
+        "before_value": "t3.micro",
+        "after_value": "t3.xlarge",
+        "severity": "high",
+        "rule_ids": ["ec2-instance-type-change", "compute-cost-regression"],
+        "cost_impact_likelihood": "certain",
+        "rationale": "Instance type upgrade from t3.micro (2 vCPU, 1GB RAM) to t3.xlarge (4 vCPU, 16GB RAM) represents 16x cost increase per instance"
+      },
+      {
+        "finding_id": "detect-002",
+        "resource_address": "aws_launch_template.main",
+        "resource_type": "aws_launch_template",
+        "classification": "storage",
+        "change_type": "update",
+        "attribute_changed": "block_device_mappings[0].ebs.volume_size",
+        "before_value": 20,
+        "after_value": 200,
+        "severity": "medium",
+        "rule_ids": ["ebs-volume-size-increase", "storage-cost-regression"],
+        "cost_impact_likelihood": "certain",
+        "rationale": "EBS volume size increased 10x from 20GB to 200GB per instance"
+      },
+      {
+        "finding_id": "detect-003",
+        "resource_address": "aws_cloudwatch_log_group.application",
+        "resource_type": "aws_cloudwatch_log_group",
+        "classification": "observability",
+        "change_type": "update",
+        "attribute_changed": "retention_in_days",
+        "before_value": 30,
+        "after_value": 0,
+        "severity": "high",
+        "rule_ids": ["cloudwatch-retention-disabled", "log-cost-regression"],
+        "cost_impact_likelihood": "high",
+        "rationale": "Log retention changed from 30 days to infinite (0 = never expire), causing unbounded log storage costs"
+      },
+      {
+        "finding_id": "detect-004",
+        "resource_address": "aws_s3_bucket.main",
+        "resource_type": "aws_s3_bucket",
+        "classification": "storage",
+        "change_type": "missing_lifecycle",
+        "attribute_changed": "lifecycle_configuration",
+        "before_value": "enabled",
+        "after_value": "disabled",
+        "severity": "medium",
+        "rule_ids": ["s3-lifecycle-disabled", "storage-optimization-removed"],
+        "cost_impact_likelihood": "probable",
+        "rationale": "S3 lifecycle policy removed - objects will no longer transition to cheaper storage classes or expire, leading to accumulating storage costs"
+      }
+    ],
+    "resource_classification": {
+      "compute": ["aws_launch_template.main", "aws_autoscaling_group.main"],
+      "storage": ["aws_s3_bucket.main", "aws_launch_template.main.ebs"],
+      "networking": ["aws_lb.main", "aws_vpc.main", "aws_subnet.public_a", "aws_subnet.public_b"],
+      "observability": ["aws_cloudwatch_log_group.application"]
+    },
+    "metadata": {
+      "analysis_duration_ms": 143,
+      "plan_hash": "sha256:a4f7c2b9d8e3f1a0",
+      "detector_version": "1.0.0"
+    }
+  }
 }

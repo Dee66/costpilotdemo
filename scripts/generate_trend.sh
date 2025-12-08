@@ -10,7 +10,7 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 echo "Generating trend data..."
 
 # Generate trend history JSON (fixed seed for determinism)
-cat > "$REPO_ROOT/snapshots/trend_history.json" << 'EOF'
+cat > "$REPO_ROOT/snapshots/trend_history_v1.json" << 'EOF'
 {
   "scenario_version": "v1",
   "trends": [

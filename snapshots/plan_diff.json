@@ -1,3 +1,39 @@
 {
-  "snapshot": "plan_diff"
+  "format_version": "1.0",
+  "plan_comparison": {
+    "baseline_resources": 18,
+    "pr_change_resources": 17,
+    "changes_detected": [
+      {
+        "resource": "aws_cloudwatch_log_group.application",
+        "changes": [
+          {
+            "attribute": "log_retention_days",
+            "before": 30,
+            "after": 0,
+            "cost_impact": "medium"
+          }
+        ]
+      },
+      {
+        "resource": "aws_launch_template.main",
+        "changes": [
+          {
+            "attribute": "instance_type",
+            "before": "t3.micro",
+            "after": "t3.xlarge",
+            "cost_impact": "high"
+          }
+        ]
+      }
+    ]
+  },
+  "lineage": {
+    "source_plan": "infrastructure/terraform/pr-change/",
+    "scenario": "pr-change",
+    "plan_time": "2025-12-06T16:47:00Z",
+    "seed": "demo-v1-stable",
+    "hash_before": "9595472c1c532722",
+    "hash_after": "bc11c2928519b611"
+  }
 }

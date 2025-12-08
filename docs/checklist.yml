@@ -2,9 +2,9 @@ id: costpilot.demo.checklist.v1
 version: "1.0.0"
 source_spec: "costpilot-demo-spec.yml"
 
-# ===========================================================
+
 # 1. REPOSITORY INITIALIZATION
-# ===========================================================
+
 repo_setup:
   - create_repo_structure
   - initialize_git
@@ -27,9 +27,9 @@ required_files:
   - create_reset_demo_sh
   - create_costpilot_ci_yml
 
-# ===========================================================
+
 # 2. TERRAFORM ENVIRONMENTS
-# ===========================================================
+
 terraform_baseline_stack:
   - write_main_tf_baseline
   - write_variables_tf_baseline
@@ -59,9 +59,9 @@ terraform_requirements_validation:
   - enforce_minimum_version_1_6
   - enforce_plan_schema_version_2
 
-# ===========================================================
+
 # 3. SNAPSHOT GENERATION
-# ===========================================================
+
 snapshots_generation:
   - generate_plan_before_json
   - generate_plan_after_json
@@ -82,9 +82,9 @@ snapshot_invariants:
   - enforce_stable_whitespace
   - enforce_stable_ordering_rules
 
-# ===========================================================
+
 # 4. TRUST TRIANGLE VERIFICATION
-# ===========================================================
+
 trust_triangle_validation:
   detect_output_must_show:
     - resource_classification
@@ -106,9 +106,9 @@ validation_tasks:
   - verify_predict_output_contains_required_fields
   - verify_explain_output_contains_required_fields
 
-# ===========================================================
+
 # 5. PATCH PREVIEW IMPLEMENTATION
-# ===========================================================
+
 patch_preview:
   snippet_scope:
     - implement_snippet_generation_ec2_only
@@ -124,9 +124,9 @@ patch_preview:
 patch_scope_limit_rationale:
   - document_reason_for_scope_limit_in_README
 
-# ===========================================================
+
 # 6. MAPPING ENGINE DEMO
-# ===========================================================
+
 mapping_demo:
   - ensure_cross_service_dependencies_exist
   - run_costpilot_map_mermaid
@@ -138,9 +138,9 @@ mapping_validation:
   - ensure_no_cycles
   - ensure_deterministic_node_ordering
 
-# ===========================================================
+
 # 7. TREND ENGINE DEMO
-# ===========================================================
+
 trend_demo:
   variations:
     - generate_flat_trend
@@ -156,9 +156,9 @@ trend_tasks:
   - create_trend_svg_snapshot
   - validate_trend_is_deterministic
 
-# ===========================================================
+
 # 8. RESET SCRIPT IMPLEMENTATION
-# ===========================================================
+
 reset_demo_script:
   path: tools/reset_demo.sh
   must_implement:
@@ -172,9 +172,9 @@ reset_demo_script:
 permissions:
   - chmod_plus_x_reset_demo_sh
 
-# ===========================================================
+
 # 9. CI PIPELINE IMPLEMENTATION
-# ===========================================================
+
 ci_pipeline:
   path: .github/workflows/costpilot-ci.yml
   tasks:
@@ -196,9 +196,9 @@ ci_guardrails:
     - README.md
     - costpilot.yml
 
-# ===========================================================
+
 # 10. ARTIFACT GENERATION PIPELINE
-# ===========================================================
+
 artifacts_pipeline:
   - generate_output_detect_json
   - generate_output_predict_json
@@ -213,9 +213,9 @@ artifact_constraints:
   - store_all_artifacts_in_costpilot_artifacts
   - ensure_no_overwrite_drift_over_time
 
-# ===========================================================
+
 # 11. README IMPLEMENTATION
-# ===========================================================
+
 readme_tasks:
   - write_hero_copy
   - add_statement_of_purpose
@@ -232,9 +232,9 @@ readme_validation:
   - confirm_asset_paths_correct
   - confirm_no_enterprise_features_mentioned
 
-# ===========================================================
+
 # 12. VERSIONING & CHECKSUM
-# ===========================================================
+
 scenario_versioning:
   - embed_scenario_version_in_snapshots
   - embed_scenario_version_in_README
@@ -245,9 +245,9 @@ canonical_hash_generation:
   - verify_snapshots_match_hash
   - verify_explain_output_matches_hash
 
-# ===========================================================
+
 # 13. FINAL REVIEW & QA
-# ===========================================================
+
 qa_tasks:
   - run_reset_demo_script_fresh
   - re-run_costpilot_scan_all_modes

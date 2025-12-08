@@ -1,0 +1,134 @@
+{
+  "version": "1.0.0",
+  "description": "Baseline definitions for CostPilot policy enforcement and governance",
+  "last_updated": "2025-12-06",
+  "baselines": [
+    {
+      "id": "default-ec2-baseline",
+      "name": "Default EC2 Instance Type Baseline",
+      "description": "Enforces t3.micro as the standard instance type for cost efficiency",
+      "resource_type": "aws_instance",
+      "baseline_value": {
+        "instance_type": "t3.micro",
+        "monthly_cost": 7.50,
+        "vcpu": 2,
+        "memory_gb": 1
+      },
+      "policy_ref": "policies/default_ec2_type.yml",
+      "enforcement": "advisory",
+      "applies_to": [
+        "main",
+        "feature/*"
+      ]
+    },
+    {
+      "id": "s3-lifecycle-baseline",
+      "name": "S3 Lifecycle Policy Baseline",
+      "description": "Ensures S3 buckets have lifecycle policies enabled for cost optimization",
+      "resource_type": "aws_s3_bucket_lifecycle_configuration",
+      "baseline_value": {
+        "lifecycle_enabled": true,
+        "default_retention_days": 30,
+        "transition_to_glacier": 90
+      },
+      "enforcement": "advisory",
+      "cost_impact": {
+        "without_lifecycle": "Unbounded storage growth",
+        "with_lifecycle": "Predictable 30-day cost ceiling"
+      }
+    },
+    {
+      "id": "cloudwatch-logs-baseline",
+      "name": "CloudWatch Logs Retention Baseline",
+      "description": "Ensures CloudWatch log groups have reasonable retention periods",
+      "resource_type": "aws_cloudwatch_log_group",
+      "baseline_value": {
+        "retention_in_days": 30,
+        "cost_per_gb": 0.50
+      },
+      "enforcement": "advisory",
+      "alternatives": {
+        "compliance": 90,
+        "audit": 365,
+        "infinite": 0
+      }
+    },
+    {
+      "id": "ebs-volume-baseline",
+      "name": "EBS Volume Size Baseline",
+      "description": "Defines standard EBS volume sizes for different use cases",
+      "resource_type": "aws_ebs_volume",
+      "baseline_value": {
+        "default_size_gb": 20,
+        "cost_per_gb_month": 0.10
+      },
+      "enforcement": "advisory",
+      "use_cases": {
+        "development": 20,
+        "staging": 50,
+        "production": 100
+      }
+    },
+    {
+      "id": "alb-baseline",
+      "name": "Application Load Balancer Baseline",
+      "description": "Standard ALB configuration for cost-efficient traffic distribution",
+      "resource_type": "aws_lb",
+      "baseline_value": {
+        "load_balancer_type": "application",
+        "monthly_base_cost": 16.20,
+        "cost_per_lcu_hour": 0.008
+      },
+      "enforcement": "informational",
+      "note": "ALB costs are primarily usage-based (LCU hours)"
+    }
+  ],
+  "baseline_stack": {
+    "name": "CostPilot Demo Baseline Stack",
+    "description": "Reference architecture representing cost-efficient infrastructure",
+    "monthly_cost_estimate": 57.20,
+    "components": [
+      {
+        "name": "ec2_autoscaling_group",
+        "instance_type": "t3.micro",
+        "min_size": 3,
+        "max_size": 10,
+        "monthly_cost": 22.50
+      },
+      {
+        "name": "application_load_balancer",
+        "type": "application",
+        "monthly_cost": 16.20
+      },
+      {
+        "name": "s3_bucket_with_lifecycle",
+        "storage_gb": 100,
+        "lifecycle_days": 30,
+        "monthly_cost": 2.30
+      },
+      {
+        "name": "cloudwatch_logs",
+        "retention_days": 30,
+        "log_volume_gb": 10,
+        "monthly_cost": 5.00
+      },
+      {
+        "name": "ebs_volumes",
+        "size_gb": 20,
+        "count": 1,
+        "monthly_cost": 2.00
+      }
+    ]
+  },
+  "validation": {
+    "last_validated": "2025-12-06",
+    "validated_against": "infrastructure/terraform/baseline/",
+    "hash": "baseline-stack-v1",
+    "status": "stable"
+  },
+  "metadata": {
+    "demo_purpose": true,
+    "spec_version": "2.0.0",
+    "scenario_version": "v1"
+  }
+}

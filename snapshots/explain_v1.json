@@ -1,3 +1,271 @@
 {
-  "snapshot": "explain_v1"
+  "format_version": "1.0",
+  "scenario_version": "v1",
+  "timestamp": "2025-12-06T16:47:00Z",
+  "explanation_results": {
+    "summary": {
+      "total_findings": 4,
+      "critical_findings": 0,
+      "high_severity_findings": 2,
+      "medium_severity_findings": 2,
+      "estimated_monthly_impact": 335.46,
+      "primary_regression_type": "compute_upgrade"
+    },
+    "explanations": [
+      {
+        "finding_id": "detect-001",
+        "resource_address": "aws_launch_template.main",
+        "title": "EC2 Instance Type Upgraded: t3.micro \u2192 t3.xlarge",
+        "root_cause": {
+          "type": "resource_configuration_change",
+          "attribute": "instance_type",
+          "change_location": "infrastructure/terraform/pr-change/main.tf:126",
+          "introduced_by": "PR #42",
+          "root_cause_explanation": "Instance type was changed from t3.micro to t3.xlarge, likely to accommodate increased memory requirements. However, this represents a 16x increase in instance size.",
+          "policy_context": {
+            "policy_violated": true,
+            "policy_name": "default-ec2-type",
+            "policy_file": "policies/default_ec2_type.yml",
+            "violation_reason": "Deviates from mandated t3.micro instance type without documented justification",
+            "policy_category": "cost-optimization"
+          },
+          "baseline_context": {
+            "baseline_value": "t3.micro",
+            "baseline_cost": "$7.59/month",
+            "exceeds_baseline": true,
+            "baseline_source": ".costpilot/baselines.json"
+          }
+        },
+        "regression_type": "compute_upgrade",
+        "severity_score": {
+          "value": 8.5,
+          "scale": "0-10",
+          "provenance": "Based on: (1) Cost impact magnitude (16x increase), (2) Certainty of impact (100%), (3) Resource criticality (compute tier)",
+          "breakdown": {
+            "cost_magnitude": 4.0,
+            "impact_certainty": 4.0,
+            "resource_criticality": 0.5
+          }
+        },
+        "heuristic_provenance": {
+          "primary_heuristic": "ec2-pricing-on-demand-t3-family",
+          "supporting_heuristics": [
+            "ec2-instance-type-comparison",
+            "autoscaling-cost-multiplication"
+          ],
+          "pricing_data_source": "AWS public pricing API",
+          "confidence": "high",
+          "limitations": [
+            "Does not account for Reserved Instances or Savings Plans",
+            "Assumes constant utilization (no burstable credit analysis)"
+          ]
+        },
+        "delta_justification": {
+          "baseline_cost": "$7.59/month (2\u00d7 t3.micro @ $0.0104/hr)",
+          "predicted_cost": "$121.44/month (2\u00d7 t3.xlarge @ $0.1664/hr)",
+          "delta": "$113.85/month",
+          "calculation": "Delta = (2 instances) \u00d7 (730 hours/month) \u00d7 ($0.1664 - $0.0104) = $227.70/month for full ASG capacity",
+          "notes": "Prediction uses min_size=2. At max_size=4, cost would be $455.40/month"
+        },
+        "recommendation": {
+          "action": "rightsizing",
+          "priority": "high",
+          "suggestions": [
+            "Evaluate if t3.xlarge is necessary - t3.large (4 vCPU, 8GB RAM) may be sufficient",
+            "Consider t3.medium (2 vCPU, 4GB RAM) if workload allows",
+            "Analyze CloudWatch metrics to determine actual memory/CPU requirements",
+            "Consider Reserved Instances if this sizing is required long-term"
+          ],
+          "autofix_available": true
+        },
+        "impact_explanation": "This change will increase compute costs by approximately $1,366/year. For a demo/baseline environment, t3.xlarge is likely oversized unless load testing or specific performance requirements justify it. NOTE: This change violates the 'default-ec2-type' policy which mandates t3.micro for cost efficiency. Policy compliance requires explicit justification for instance type upgrades."
+      },
+      {
+        "finding_id": "detect-002",
+        "resource_address": "aws_launch_template.main",
+        "title": "EBS Volume Size Increased: 20GB \u2192 200GB",
+        "root_cause": {
+          "type": "resource_configuration_change",
+          "attribute": "block_device_mappings[0].ebs.volume_size",
+          "change_location": "infrastructure/terraform/pr-change/main.tf:138",
+          "introduced_by": "PR #42",
+          "root_cause_explanation": "EBS root volume size increased 10x from 20GB to 200GB per instance"
+        },
+        "regression_type": "storage_overprovisioning",
+        "severity_score": {
+          "value": 6.0,
+          "scale": "0-10",
+          "provenance": "Moderate severity due to: (1) 10x size increase, (2) Multiplied by instance count, (3) Storage costs compound over time",
+          "breakdown": {
+            "cost_magnitude": 3.0,
+            "impact_certainty": 3.0,
+            "resource_criticality": 0.0
+          }
+        },
+        "heuristic_provenance": {
+          "primary_heuristic": "ebs-pricing-gp3-storage",
+          "supporting_heuristics": [
+            "ebs-volume-rightsizing"
+          ],
+          "pricing_data_source": "AWS EBS pricing",
+          "confidence": "high",
+          "limitations": [
+            "Does not include IOPS or throughput charges"
+          ]
+        },
+        "delta_justification": {
+          "baseline_cost": "$2.40/month (2\u00d7 20GB @ $0.08/GB-month)",
+          "predicted_cost": "$24.00/month (2\u00d7 200GB @ $0.08/GB-month)",
+          "delta": "$21.60/month",
+          "calculation": "Delta = 2 instances \u00d7 (200GB - 20GB) \u00d7 $0.08/GB-month = $28.80/month",
+          "notes": "Cost scales linearly with instance count in autoscaling group"
+        },
+        "recommendation": {
+          "action": "rightsizing",
+          "priority": "medium",
+          "suggestions": [
+            "Analyze actual disk usage to determine required capacity",
+            "20GB may be sufficient for stateless web application",
+            "Consider 50GB as middle ground if 20GB is too small",
+            "Evaluate if application data should be on EBS or moved to S3"
+          ],
+          "autofix_available": true
+        },
+        "impact_explanation": "This adds $259/year in storage costs. Unless the application requires significant local storage, this is likely overprovisioned."
+      },
+      {
+        "finding_id": "detect-003",
+        "resource_address": "aws_cloudwatch_log_group.application",
+        "title": "CloudWatch Log Retention Set to Infinite",
+        "root_cause": {
+          "type": "configuration_regression",
+          "attribute": "retention_in_days",
+          "change_location": "infrastructure/terraform/pr-change/main.tf:245",
+          "introduced_by": "PR #42",
+          "root_cause_explanation": "Log retention changed from 30 days to 0 (infinite), causing logs to accumulate indefinitely"
+        },
+        "regression_type": "retention_policy_regression",
+        "severity_score": {
+          "value": 8.0,
+          "scale": "0-10",
+          "provenance": "High severity because: (1) Unbounded cost growth, (2) Storage compounds monthly, (3) No natural cleanup mechanism",
+          "breakdown": {
+            "cost_magnitude": 3.5,
+            "impact_certainty": 4.0,
+            "resource_criticality": 0.5
+          }
+        },
+        "heuristic_provenance": {
+          "primary_heuristic": "cloudwatch-logs-storage-pricing",
+          "supporting_heuristics": [
+            "log-retention-best-practices",
+            "unbounded-growth-detection"
+          ],
+          "pricing_data_source": "AWS CloudWatch pricing",
+          "confidence": "medium",
+          "limitations": [
+            "Actual cost depends on log volume (estimated at 100GB/month)",
+            "Ingestion rate may vary significantly based on traffic",
+            "Storage compounds over time in unpredictable way"
+          ]
+        },
+        "delta_justification": {
+          "baseline_cost": "$5.00/month (30-day retention, ~100GB/month)",
+          "predicted_cost": "$150.00/month average (unbounded growth)",
+          "delta": "$145.00/month",
+          "calculation": "With infinite retention, storage grows linearly. Month 1: $53, Month 6: $88, Month 12: $123. Average over year: ~$150/month",
+          "notes": "Cost continues to grow indefinitely unless logs are manually deleted"
+        },
+        "recommendation": {
+          "action": "policy_correction",
+          "priority": "high",
+          "suggestions": [
+            "Restore 30-day retention for most logs",
+            "Consider 7-day retention for debug logs",
+            "Use 90-day retention for audit/compliance logs",
+            "Archive old logs to S3 Glacier if long-term retention needed"
+          ],
+          "autofix_available": false,
+          "autofix_explanation": "Retention policy changes affect compliance and audit requirements, requiring manual review"
+        },
+        "impact_explanation": "Infinite log retention will cost approximately $1,740/year in the first year, and continue growing. This is almost certainly unintentional and should be reverted."
+      },
+      {
+        "finding_id": "detect-004",
+        "resource_address": "aws_s3_bucket.main",
+        "title": "S3 Lifecycle Policy Removed",
+        "root_cause": {
+          "type": "optimization_removal",
+          "attribute": "lifecycle_configuration",
+          "change_location": "infrastructure/terraform/pr-change/main.tf (lifecycle rule absent)",
+          "introduced_by": "PR #42",
+          "root_cause_explanation": "S3 bucket lifecycle configuration was removed, preventing automatic transition to cheaper storage classes"
+        },
+        "regression_type": "optimization_disabled",
+        "severity_score": {
+          "value": 5.5,
+          "scale": "0-10",
+          "provenance": "Medium severity: (1) Gradual cost increase over time, (2) Optimization best practice violated, (3) Impact depends on bucket growth rate",
+          "breakdown": {
+            "cost_magnitude": 2.5,
+            "impact_certainty": 2.0,
+            "resource_criticality": 1.0
+          }
+        },
+        "heuristic_provenance": {
+          "primary_heuristic": "s3-standard-storage-pricing",
+          "supporting_heuristics": [
+            "s3-lifecycle-optimization",
+            "storage-class-comparison"
+          ],
+          "pricing_data_source": "AWS S3 pricing",
+          "confidence": "medium",
+          "limitations": [
+            "Impact depends on object age distribution",
+            "Access patterns determine optimal lifecycle policy",
+            "Savings vary based on data growth rate"
+          ]
+        },
+        "delta_justification": {
+          "baseline_cost": "$5.00/month (with lifecycle transitions)",
+          "predicted_cost": "$25.00/month (all data in S3 Standard)",
+          "delta": "$20.00/month",
+          "calculation": "Lifecycle saves ~70% on objects >90 days old by moving to Glacier. Without it, ~$20/month additional cost as old data accumulates",
+          "notes": "Impact grows over time as more data ages past transition thresholds"
+        },
+        "recommendation": {
+          "action": "restore_optimization",
+          "priority": "medium",
+          "suggestions": [
+            "Restore lifecycle policy to transition objects >90 days to Glacier",
+            "Add expiration rule for temporary objects if applicable",
+            "Consider Intelligent-Tiering for unpredictable access patterns",
+            "Review bucket contents to determine optimal lifecycle rules"
+          ],
+          "autofix_available": true
+        },
+        "impact_explanation": "Removing lifecycle optimization adds approximately $240/year in storage costs. This compounds over time as more objects age without transitioning to cheaper tiers."
+      }
+    ],
+    "summary_explanation": {
+      "primary_driver": "The primary cost driver is the EC2 instance type upgrade (t3.micro \u2192 t3.xlarge), which alone accounts for 34% of the total monthly increase. Combined with infinite log retention (43% of increase), these two changes represent 77% of the total regression.",
+      "risk_assessment": "HIGH - The CloudWatch infinite retention poses unbounded cost growth risk. EC2 and EBS changes are one-time increases but substantial. S3 lifecycle removal has compounding impact over time.",
+      "recommended_action": "Immediate action required on CloudWatch retention. EC2/EBS sizing should be reviewed based on actual requirements. S3 lifecycle should be restored to maintain cost optimization.",
+      "compliance_notes": "Infinite log retention may violate data retention policies. Review with compliance team before applying changes."
+    },
+    "metadata": {
+      "explanation_duration_ms": 189,
+      "explainer_version": "1.0.0",
+      "total_explained_delta": "$335.46/month",
+      "confidence": "high"
+    }
+  },
+  "lineage": {
+    "source_plan": "infrastructure/terraform/pr-change/",
+    "scenario": "pr-change",
+    "plan_time": "2025-12-06T16:47:00Z",
+    "seed": "demo-v1-stable",
+    "hash_before": "371643bbb8294780",
+    "hash_after": "3d0e705cb729fd98"
+  }
 }

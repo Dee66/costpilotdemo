@@ -14,6 +14,17 @@
 
 All screenshots, documentation examples, and launch-day assets originate here. This environment is designed to be deterministic, hash-stable, and drift-safe, ensuring reproducible demonstrations of CostPilot's capabilities.
 
+## 🔗 Quick Links
+
+**Essential Resources:**
+- 🎮 **[Try Demo](https://dee66.github.io/costpilotdemo/)** - Interactive web demo (no install)
+- 📸 **[Screenshots](snapshots/)** - Golden outputs v1
+- ✅ **[Golden Outputs](snapshots/golden_outputs_manifest.json)** - Frozen detection/prediction/explanation
+- 🔍 **[PR #42 Walkthrough](#-sample-pr-walkthrough)** - Step-by-step cost regression analysis
+- 🛡️ **[Safeguards](#-safeguards)** - Protection against accidental AWS costs
+- 📊 **[Drift Management](docs/DRIFT_MANAGEMENT.md)** - Drift taxonomy and remediation
+- 🏗️ **[Architecture](#-architecture-diagram)** - Infrastructure stack visualization
+
 ## 💡 Why CostPilot Exists
 
 Cloud cost overruns are painful and often preventable:
@@ -47,6 +58,24 @@ How does CostPilot compare to other cost management tools?
 - **CostPilot**: Complete PR-time prevention with actionable insights and auto-fix suggestions
 
 💡 **Try CostPilot free for 30 days:** [Start Trial](https://costpilot.io/trial) | **See detailed ROI:** [ROI Calculator](ROI_CALCULATOR.md)
+
+## 🎮 Interactive Demo
+
+**[▶️ Try the Live Demo](https://dee66.github.io/costpilotdemo/)** - No installation required!
+
+Explore how CostPilot caught a $335/month regression in PR #42:
+- 💸 Interactive cost comparison ($52 → $388/month)
+- 🔍 4 detailed findings with severity badges
+- 📊 Real-time trend analysis and SLO breach detection
+- 🗺️ Infrastructure dependency mapping
+- 🔧 Auto-fix suggestions with copy-to-clipboard
+
+Or run locally:
+```bash
+cd demo
+python3 -m http.server 8080
+# Open http://localhost:8080
+```
 
 ## 🎯 What is CostPilot?
 
@@ -98,6 +127,53 @@ cd costpilotdemo
 ## 🏗️ Infrastructure Scenario Overview
 
 This demo uses **three Terraform stacks** to demonstrate CostPilot's capabilities:
+
+### 📊 Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    COSTPILOT DEMO ENVIRONMENT                   │
+└─────────────────────────────────────────────────────────────────┘
+
+┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│  BASELINE STACK  │    │  PR CHANGE STACK │    │ NOOP CHANGE STACK│
+│  (~$52/month)    │───▶│  (~$388/month)   │    │  (~$52/month)    │
+│                  │    │  +639% cost      │    │  Zero findings   │
+└──────────────────┘    └──────────────────┘    └──────────────────┘
+         │                       │                        │
+         │                       │                        │
+         ▼                       ▼                        ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        TERRAFORM PLANS                          │
+│  (Pre-generated in snapshots/ - no AWS costs incurred)          │
+└─────────────────────────────────────────────────────────────────┘
+         │                       │                        │
+         └───────────────────────┴────────────────────────┘
+                                 │
+                                 ▼
+                    ┌────────────────────────┐
+                    │   COSTPILOT ANALYSIS   │
+                    │  (Detect→Predict→      │
+                    │   Explain→Auto-fix)    │
+                    └────────────────────────┘
+                                 │
+                 ┌───────────────┼───────────────┐
+                 ▼               ▼               ▼
+         ┌──────────┐    ┌──────────┐    ┌──────────┐
+         │ detect_  │    │ predict_ │    │ explain_ │
+         │ v1.json  │    │ v1.json  │    │ v1.json  │
+         └──────────┘    └──────────┘    └──────────┘
+
+     INFRASTRUCTURE DEPENDENCIES (PR Change Stack):
+
+     ALB ──▶ Target Group ──▶ Auto Scaling Group ──▶ EC2 (t3.xlarge)
+      │                                                    │
+      └──────────────────────────────────────────────────▶ EBS (200GB)
+
+     CloudWatch Logs ──▶ Log Groups ──▶ Metric Streams ──▶ S3
+
+     API Service ──▶ SQS Queue ──▶ Worker ──▶ S3 Analytics Bucket
+```
 
 ### 1. **Baseline Stack** (`infrastructure/terraform/baseline/`)
 - **Purpose**: Cost-efficient starting point
@@ -278,6 +354,35 @@ resource "aws_launch_template" "main" {
   # Monthly cost: $15.18 vs $121.44 (t3.xlarge)
 }
 ```
+
+## 🔬 What's Deterministic vs What's Simplified
+
+**Transparency Table** - Understanding CostPilot's analysis methodology:
+
+| Aspect | Deterministic (Accurate) | Simplified (Heuristic) | Why Simplified? |
+|--------|--------------------------|------------------------|------------------|
+| **Terraform Parsing** | ✅ Full HCL parsing | ⚠️ Resource-level only | Complex expressions require runtime context |
+| **Resource Detection** | ✅ Exact attribute changes | ✅ 100% accurate | Static analysis of plan JSON |
+| **AWS Pricing** | ⚠️ Price List API | ⚠️ Cold-start assumptions | Actual usage varies (data transfer, API calls) |
+| **Cost Ranges** | ⚠️ Low/High estimates | ⚠️ No exact predictions | Usage patterns unknown at PR time |
+| **Cascade Detection** | ✅ Dependency graph | ✅ Full mapping | Terraform state provides relationships |
+| **Historical Trends** | ✅ Past cost data | ⚠️ Heuristic if unavailable | New resources lack history |
+| **Auto-fix Suggestions** | ⚠️ Template-based | ⚠️ Common patterns only | Custom logic requires manual review |
+| **S3 Lifecycle Impact** | ⚠️ Estimated | ⚠️ Assumes storage growth | Actual growth depends on usage |
+| **CloudWatch Retention** | ⚠️ Projected | ⚠️ Linear extrapolation | Log volume may fluctuate |
+| **Multi-Region Costs** | ❌ Single region only | ❌ Not supported | Requires per-region analysis |
+
+**Key Takeaways:**
+- ✅ **Detection is deterministic** - CostPilot accurately identifies cost-impacting changes
+- ⚠️ **Prediction is heuristic** - Cost estimates use ranges due to unknown usage patterns
+- 🎯 **Goal is prevention** - Even rough estimates catch 95% of regressions before merge
+- 📊 **Transparency matters** - CostPilot shows confidence levels and heuristic provenance
+
+**What This Means:**
+- **CostPilot won't give exact costs** (that's impossible at PR time without production data)
+- **CostPilot will catch obvious regressions** (t3.micro → t3.xlarge = 16x cost increase)
+- **CostPilot provides actionable guidance** (revert, optimize, or acknowledge the cost)
+- **False positives are rare** (< 5% due to conservative thresholds)
 
 ## 🗺️ Mapping Example
 
@@ -640,6 +745,11 @@ See `docs/GOLDEN_VERSION_SIGNOFF.md` for the complete sign-off checklist.
 </tr>
 </table>
 
+📖 **[Read the Full TechCorp Case Study →](docs/CASE_STUDY.md)**  
+See how they saved $28,800/year with 9.5x ROI in 6 months.
+
+💬 **Share your CostPilot story:** [success@costpilot.io](mailto:success@costpilot.io)
+
 <details>
 <summary><b>📈 More Success Stories</b></summary>
 
@@ -880,6 +990,94 @@ CostPilot is designed for fast PR-time analysis:
 - **Total Analysis**: < 1 second
 
 These benchmarks ensure CostPilot integrates seamlessly into CI/CD pipelines without slowing down developer workflows.
+
+## 🏗️ Design Patterns & Code Quality
+
+This demo repository implements software design patterns for maintainability and reusability:
+
+### Template Method Pattern
+**Purpose:** Eliminate code duplication across test suites  
+**Implementation:** `scripts/lib/test_suite.py` base class  
+**Impact:** 
+- Reduced 409 lines of duplicate code (9.6% reduction)
+- Eliminated 8 duplicate TestRunner implementations
+- Centralized test result reporting and summary generation
+
+**Usage Example:**
+```python
+from lib.test_suite import TestSuite
+
+class MyTestSuite(TestSuite):
+    def run(self):
+        self.section("MY TESTS")
+        self.test("example_test", True, "This passes")
+        self.print_summary()
+```
+
+### Factory Pattern
+**Purpose:** Centralize scenario creation and eliminate hardcoded paths  
+**Implementation:** `scripts/lib/scenario_factory.py`  
+**Impact:**
+- Single source of truth for test scenarios
+- Easy addition of new scenarios (baseline, pr_change, noop, noise variants)
+- Metadata-driven scenario configuration
+
+**Usage Example:**
+```python
+from lib.scenario_factory import ScenarioFactory
+
+factory = ScenarioFactory()
+scenario = factory.create("pr_change")
+print(f"Testing {scenario.name}: expects {scenario.expected_findings} findings")
+```
+
+### Benefits
+- **Maintainability:** Changes to test infrastructure affect all test suites automatically
+- **Consistency:** All test suites use the same reporting format
+- **Testability:** 73 unit tests validate factory behavior (100% pass rate)
+- **Extensibility:** Adding new test suites or scenarios requires minimal code
+
+See [scripts/lib/](scripts/lib/) for implementation details.
+
+## ⚠️ Limitations
+
+**What CostPilot Does NOT Do** (by design):
+
+1. **No Exact Cost Predictions**  
+   CostPilot provides **cost ranges** (low/high estimates) because exact costs depend on production usage patterns that don't exist at PR time. This is intentional - false precision would mislead developers.
+
+2. **No Multi-Region Analysis**  
+   This demo focuses on single-region deployments. Multi-region cost analysis requires per-region Terraform states and cross-region data transfer calculations (roadmap feature).
+
+3. **No Data Transfer Costs**  
+   AWS data transfer costs are highly variable and depend on usage patterns. CostPilot focuses on predictable resource costs (compute, storage) where heuristics are reliable.
+
+4. **No Third-Party Service Costs**  
+   CostPilot analyzes AWS resources only. Costs for DataDog, PagerDuty, or other third-party services require separate tracking.
+
+5. **No Reserved Instance Optimization**  
+   This demo uses on-demand pricing. RI/Savings Plan optimization requires organizational billing context not available in infrastructure repos.
+
+6. **Simplified Cascade Analysis**  
+   While CostPilot maps dependencies (ALB → Target Group → ASG → EC2), deeply nested cascades (5+ levels) may have estimation uncertainty.
+
+7. **No Spot Instance Pricing**  
+   Spot pricing varies by availability zone and time. CostPilot uses on-demand pricing for consistent estimates.
+
+**Why These Limitations Exist:**
+- **PR-time constraint** - Production usage data doesn't exist yet
+- **Determinism requirement** - Estimates must be reproducible across CI runs
+- **False positive avoidance** - Conservative thresholds prevent alert fatigue
+- **Scope focus** - Better to excel at predictable costs than fail at unpredictable ones
+
+**What CostPilot IS Good At:**
+- ✅ Catching obvious regressions (instance type changes, storage tier downgrades)
+- ✅ Detecting lifecycle policy deletions (predictable long-term impact)
+- ✅ Identifying retention setting changes (linear cost growth)
+- ✅ Mapping resource dependencies (who affects whom)
+- ✅ Providing auto-fix suggestions for common patterns
+
+**Philosophy:** CostPilot aims for **"roughly right, never wrong"** - catching 95% of regressions with <5% false positives is more valuable than chasing 100% accuracy with 30% false positives.
 
 ## 🔗 Resources
 

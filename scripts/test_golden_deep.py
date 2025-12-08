@@ -17,10 +17,16 @@ from typing import Dict, List, Any
 # Import shared test framework
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
+from lib.scenario_factory import ScenarioFactory
 
 
 class GoldenOutputTestSuite(TestSuite):
     """Test suite for deep validation of golden outputs using Template Method pattern"""
+    
+    def __init__(self, repo_root: Path = None):
+        super().__init__(repo_root)
+        self.factory = ScenarioFactory(self.repo_root)
+        self.pr_scenario = self.factory.create("pr_change")
     
     def run(self):
         """Template method - defines the test execution sequence"""

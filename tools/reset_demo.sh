@@ -321,16 +321,91 @@ EOF
 
 log_success "Hashes validated and stored"
 
-# Step 6: Regenerate mapping
+# Step 6: Validate baseline configuration
+log_info "Step 6: Validating baseline configuration..."
+
+# Check if baselines.json exists
+if [ ! -f "$REPO_ROOT/.costpilot/baselines.json" ]; then
+    log_warning "baselines.json not found, skipping baseline validation"
+else
+    log_info "Verifying baseline structure..."
+    
+    # Validate JSON structure
+    if ! python3 -c "import json; json.load(open('$REPO_ROOT/.costpilot/baselines.json'))" 2>/dev/null; then
+        log_error "baselines.json is not valid JSON"
+        exit 1
+    fi
+    
+    # Extract baseline cost
+    BASELINE_COST=$(python3 -c "import json; data=json.load(open('$REPO_ROOT/.costpilot/baselines.json')); print(data['baseline_stack']['monthly_cost_estimate'])" 2>/dev/null || echo "0")
+    
+    if [ "$BASELINE_COST" = "0" ] || [ -z "$BASELINE_COST" ]; then
+        log_error "Could not extract baseline cost from baselines.json"
+        exit 1
+    fi
+    
+    log_info "Baseline cost: \$$BASELINE_COST/month"
+    
+    # Verify predict output references baseline
+    if [ -f "$SNAPSHOTS_DIR/predict_v1.json" ]; then
+        if grep -q "baseline_comparison" "$SNAPSHOTS_DIR/predict_v1.json"; then
+            log_success "Predict output includes baseline comparison"
+            
+            # Extract predicted cost and compare
+            PREDICTED_COST=$(python3 -c "import json; data=json.load(open('$SNAPSHOTS_DIR/predict_v1.json')); print(data['prediction_results']['summary'].get('baseline_comparison', {}).get('current_predicted_cost', 0))" 2>/dev/null || echo "0")
+            
+            if [ "$PREDICTED_COST" != "0" ] && [ -n "$PREDICTED_COST" ]; then
+                log_info "Predicted cost: \$$PREDICTED_COST/month"
+                
+                # Calculate regression percentage
+                REGRESSION=$(python3 << EOF
+import json
+baseline = float($BASELINE_COST)
+predicted = float($PREDICTED_COST)
+if baseline > 0:
+    pct = ((predicted - baseline) / baseline) * 100
+    print(f"{pct:.1f}")
+else:
+    print("N/A")
+EOF
+)
+                
+                if [ "$REGRESSION" != "N/A" ]; then
+                    log_info "Cost regression: +${REGRESSION}%"
+                    
+                    # Warn if regression is suspiciously low
+                    if (( $(echo "$REGRESSION < 100" | bc -l) )); then
+                        log_warning "Regression seems low - expected 500%+ for demo scenario"
+                    fi
+                fi
+            fi
+        else
+            log_warning "Predict output missing baseline_comparison field"
+        fi
+    fi
+    
+    # Verify trend history includes baseline awareness
+    if [ -f "$REPO_ROOT/snapshots/trend_history_v1.json" ]; then
+        if grep -q '"baseline_cost"' "$REPO_ROOT/snapshots/trend_history_v1.json"; then
+            log_success "Trend history includes baseline awareness"
+        else
+            log_warning "Trend history missing baseline_cost field"
+        fi
+    fi
+    
+    log_success "Baseline validation complete"
+fi
+
+# Step 7: Regenerate mapping
 log_info "Step 6: Regenerating mapping diagram..."
 bash "$REPO_ROOT/scripts/generate_mapping.sh" || log_warning "Mapping generation script needs implementation"
 
-# Step 7: Regenerate trend
-log_info "Step 7: Regenerating trend data..."
+# Step 8: Regenerate trend
+log_info "Step 8: Regenerating trend data..."
 bash "$REPO_ROOT/scripts/generate_trend.sh" || log_warning "Trend generation script needs implementation"
 
-# Step 8: Final verification
-log_info "Step 8: Running final verification..."
+# Step 9: Final verification
+log_info "Step 9: Running final verification..."
 
 # Verify all required files exist
 REQUIRED_FILES=(

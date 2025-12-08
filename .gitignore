@@ -3,9 +3,13 @@
 *.tfstate.*
 *.tfstate.backup
 .terraform/
-.terraform.lock.hcl
+# EXCEPTION: .terraform.lock.hcl is tracked for reproducible provider versions
+# *.tfvars contains sensitive data
 *.tfvars
 !terraform.tfvars.example
+# EXCEPTION: *.tfplan files are binary plans, not tracked
+*.tfplan
+# CRITICAL: State files indicate real resources exist - must never be committed
 
 # Python
 __pycache__/
@@ -43,3 +47,10 @@ costpilot.log
 # Node (if needed)
 node_modules/
 package-lock.json
+
+# Copilot
+docs/rules-architecture.md
+docs/rules-checklist.md
+docs/rules-safety.md
+docs/rules-output.md
+docs/workflow.md

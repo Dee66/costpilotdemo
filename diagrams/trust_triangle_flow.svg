@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1F2937">
+    CostPilot Trust Triangle
+  </text>
+  <text x="400" y="65" text-anchor="middle" font-size="14" fill="#6B7280">
+    Three-Phase Cost Analysis Methodology
+  </text>
+
+  <!-- Detect Phase -->
+  <g id="detect-phase">
+    <rect x="50" y="120" width="200" height="140" rx="10" fill="#DC2626" opacity="0.1" stroke="#DC2626" stroke-width="2"/>
+    <text x="150" y="150" text-anchor="middle" font-size="20" font-weight="bold" fill="#DC2626">
+      1. Detect 🔍
+    </text>
+    <text x="150" y="180" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Resource classification
+    </text>
+    <text x="150" y="200" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Rule IDs &amp; severity
+    </text>
+    <text x="150" y="220" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Regression types
+    </text>
+    <text x="150" y="240" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Policy violations
+    </text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3B82F6" />
+    </marker>
+  </defs>
+  <line x1="250" y1="190" x2="300" y2="190" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Predict Phase -->
+  <g id="predict-phase">
+    <rect x="300" y="120" width="200" height="140" rx="10" fill="#FBBF24" opacity="0.1" stroke="#FBBF24" stroke-width="2"/>
+    <text x="400" y="150" text-anchor="middle" font-size="20" font-weight="bold" fill="#F59E0B">
+      2. Predict 📊
+    </text>
+    <text x="400" y="180" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Cost ranges (low/high)
+    </text>
+    <text x="400" y="200" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Heuristic references
+    </text>
+    <text x="400" y="220" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Baseline comparison
+    </text>
+    <text x="400" y="240" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Cold-start assumptions
+    </text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <line x1="500" y1="190" x2="550" y2="190" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Explain Phase -->
+  <g id="explain-phase">
+    <rect x="550" y="120" width="200" height="140" rx="10" fill="#10B981" opacity="0.1" stroke="#10B981" stroke-width="2"/>
+    <text x="650" y="150" text-anchor="middle" font-size="20" font-weight="bold" fill="#10B981">
+      3. Explain 💡
+    </text>
+    <text x="650" y="180" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Root cause analysis
+    </text>
+    <text x="650" y="200" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Severity justification
+    </text>
+    <text x="650" y="220" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Heuristic provenance
+    </text>
+    <text x="650" y="240" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Delta justification
+    </text>
+  </g>
+
+  <!-- Action Phase -->
+  <g id="action-phase">
+    <rect x="300" y="300" width="200" height="140" rx="10" fill="#8B5CF6" opacity="0.1" stroke="#8B5CF6" stroke-width="2"/>
+    <text x="400" y="330" text-anchor="middle" font-size="20" font-weight="bold" fill="#8B5CF6">
+      4. Action 🔧
+    </text>
+    <text x="400" y="360" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Auto-fix suggestions
+    </text>
+    <text x="400" y="380" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Code snippets
+    </text>
+    <text x="400" y="400" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Patch previews
+    </text>
+    <text x="400" y="420" text-anchor="middle" font-size="13" fill="#1F2937">
+      • Cost impact estimates
+    </text>
+  </g>
+
+  <!-- Arrow to Action -->
+  <line x1="650" y1="260" x2="650" y2="280" stroke="#3B82F6" stroke-width="3"/>
+  <line x1="650" y1="280" x2="500" y2="280" stroke="#3B82F6" stroke-width="3"/>
+  <line x1="500" y1="280" x2="500" y2="300" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <!-- Trust Triangle Label -->
+  <text x="400" y="480" text-anchor="middle" font-size="16" font-weight="bold" fill="#1F2937">
+    🔺 Trust Through Transparency
+  </text>
+  <text x="400" y="505" text-anchor="middle" font-size="13" fill="#6B7280">
+    Each phase builds confidence in CostPilot's analysis
+  </text>
+
+  <!-- Metadata -->
+  <text x="400" y="560" text-anchor="middle" font-size="11" fill="#9CA3AF">
+    CostPilot v1.0.0 | PR #42 Scenario | Generated: 2025-12-06
+  </text>
+</svg>
