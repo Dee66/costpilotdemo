@@ -155,7 +155,7 @@ costpilot --version
 terraform --version
 
 # Navigate to repository root
-cd /home/dee/workspace/AI/GuardSuite/CostPilotDemo
+cd /home/dee/workspace/AI/CostPilotDemo
 ```
 
 ### Task 2.1: Test whitespace_only.tf

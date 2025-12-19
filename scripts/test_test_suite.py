@@ -18,6 +18,10 @@ from lib.test_reporter import TestReporter
 class ConcreteTestSuite(TestSuite):
     """Concrete implementation for testing"""
     
+    @property
+    def tags(self):
+        return ["framework", "test-suite", "validation"]
+    
     def __init__(self, repo_root=None):
         super().__init__(repo_root)
         self.run_called = False

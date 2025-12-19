@@ -39,6 +39,10 @@ def read_json(filepath: Path) -> Dict[str, Any]:
 class RegressionsTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["regressions", "edge-cases", "validation"]
+    
     def run(self):
         """Template method - defines the test execution sequence"""
         self.test_ec2_instance_type_regression()

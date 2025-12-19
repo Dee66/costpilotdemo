@@ -18,15 +18,21 @@ from typing import Dict, List, Any
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
 from lib.scenario_factory import ScenarioFactory
+from lib.logger import get_logger
 
 
 class GoldenOutputTestSuite(TestSuite):
     """Test suite for deep validation of golden outputs using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["golden", "outputs", "validation", "deep"]
+    
     def __init__(self, repo_root: Path = None):
         super().__init__(repo_root)
         self.factory = ScenarioFactory(self.repo_root)
         self.pr_scenario = self.factory.create("pr_change")
+        self.logger = get_logger("golden_deep_test")
     
     def run(self):
         """Template method - defines the test execution sequence"""
@@ -57,7 +63,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         findings = detect.get("detection_results", {}).get("findings", [])
     
-        print(f"\n🔍 Per-Finding Field Validation ({len(findings)} findings × 15 fields = {len(findings) * 15} tests)")
+        self.logger.info(f"Per-Finding Field Validation ({len(findings)} findings × 15 fields = {len(findings) * 15} tests)")
     
         for idx, finding in enumerate(findings):
             prefix = f"Finding {idx+1}"
@@ -110,7 +116,7 @@ class GoldenOutputTestSuite(TestSuite):
         findings = detect.get("detection_results", {}).get("findings", [])
         summary = detect.get("detection_results", {}).get("summary", {})
     
-        print("\n⚖️  Severity Distribution Checks")
+        self.logger.info("Severity Distribution Checks")
     
         # Count severities
         high_count = sum(1 for f in findings if f.get("severity") == "high")
@@ -127,7 +133,7 @@ class GoldenOutputTestSuite(TestSuite):
         self.test("Severity: total matches sum", 
                    len(findings) == high_count + medium_count + low_count)
     
-        print("\n🎯 Severity-Impact Correlation")
+        self.logger.info("Severity-Impact Correlation")
     
         for finding in findings:
             severity = finding.get("severity")
@@ -139,7 +145,7 @@ class GoldenOutputTestSuite(TestSuite):
                            f"Got: {likelihood}")
                 break
     
-        print("\n📋 Valid Severity Values")
+        self.logger.info("Valid Severity Values")
     
         valid_severities = {"high", "medium", "low", "critical"}
         for finding in findings:
@@ -166,7 +172,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         findings = detect.get("detection_results", {}).get("findings", [])
     
-        print("\n🚨 Policy Violation Detection")
+        self.logger.info("Policy Violation Detection")
     
         # Check for policy violations
         policy_violations = [f for f in findings if f.get("policy_violation_detected") == True]
@@ -178,7 +184,7 @@ class GoldenOutputTestSuite(TestSuite):
                    any(any("policy:" in rule for rule in f.get("rule_ids", []))
                        for f in policy_violations))
     
-        print("\n📜 Rule ID Format Validation")
+        self.logger.info("Rule ID Format Validation")
     
         for finding in findings:
             rule_ids = finding.get("rule_ids", [])
@@ -189,7 +195,7 @@ class GoldenOutputTestSuite(TestSuite):
                 self.test(f"Rule ID is string: {rule}", isinstance(rule, str))
                 self.test(f"Rule ID not empty: {rule}", len(rule) > 0)
     
-        print("\n🔗 Cross-Reference Validation")
+        self.logger.info("Cross-Reference Validation")
     
         # Check that policy violations have rationale
         for violation in policy_violations[:3]:  # Test first 3
@@ -217,7 +223,7 @@ class GoldenOutputTestSuite(TestSuite):
         resource_classification = detect.get("detection_results", {}).get("resource_classification", {})
         findings = detect.get("detection_results", {}).get("findings", [])
     
-        print("\n🏷️  Classification Categories")
+        self.logger.info("Classification Categories")
     
         valid_categories = {"compute", "storage", "networking", "observability", "database", "security"}
     
@@ -228,7 +234,7 @@ class GoldenOutputTestSuite(TestSuite):
             self.test(f"Category '{category}' not empty", len(resources) > 0)
             self.test(f"Category '{category}' is valid", category in valid_categories)
     
-        print("\n🔍 Classification Consistency")
+        self.logger.info("Classification Consistency")
     
         # Check that findings reference classified resources
         classified_resources = set()
@@ -262,7 +268,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         trends = trend.get("trends", [])
     
-        print(f"\n📊 Per-Trend Validation ({len(trends)} trends)")
+        self.logger.info(f"Per-Trend Validation ({len(trends)} trends)")
     
         for idx, trend_data in enumerate(trends):
             name = trend_data.get("name", f"trend_{idx}")
@@ -337,7 +343,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         trends = trend.get("trends", [])
     
-        print("\n💰 Cost Delta Calculations")
+        self.logger.info("Cost Delta Calculations")
     
         for trend_data in trends:
             name = trend_data.get("name", "unknown")
@@ -360,7 +366,7 @@ class GoldenOutputTestSuite(TestSuite):
                                    abs(delta - expected_delta) < 0.01,
                                    f"Expected {expected_delta}, got {delta}")
     
-        print("\n📈 SLO Threshold Logic")
+        self.logger.info("SLO Threshold Logic")
     
         for trend_data in trends:
             name = trend_data.get("name", "unknown")
@@ -399,7 +405,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         trends = trend.get("trends", [])
     
-        print("\n🚨 Breach Detection Logic")
+        self.logger.info("Breach Detection Logic")
     
         breach_trends = [t for t in trends if any(p.get("breach") for p in t.get("data_points", []))]
     
@@ -441,7 +447,7 @@ class GoldenOutputTestSuite(TestSuite):
     
         trends = trend.get("trends", [])
     
-        print("\n📏 Baseline Accuracy")
+        self.logger.info("Baseline Accuracy")
     
         for trend_data in trends:
             name = trend_data.get("name", "unknown")
@@ -477,7 +483,7 @@ class GoldenOutputTestSuite(TestSuite):
                 self.skip("cross-snapshot consistency", "Insufficient snapshots")
             return
     
-        print("\n🔗 Metadata Consistency")
+        self.logger.info("Metadata Consistency")
     
         # Check scenario_version consistency
         if "detect_v1.json" in snapshots and "predict_v1.json" in snapshots:
@@ -494,7 +500,7 @@ class GoldenOutputTestSuite(TestSuite):
                 self.test(f"{name}: timestamp is ISO 8601", 
                            bool(re.search(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}', ts)))
     
-        print("\n🔢 Count Consistency")
+        self.logger.info("Count Consistency")
     
         # Check findings count consistency
         if "detect_v1.json" in snapshots:
@@ -518,7 +524,7 @@ class GoldenOutputTestSuite(TestSuite):
             self.test("explain count matches detect findings", 
                        explain_count >= detect_findings or explain_count > 0)
     
-        print("\n📋 Lineage References")
+        self.logger.info("Lineage References")
     
         # Check lineage references
         if "detect_v1.json" in snapshots:
@@ -536,7 +542,7 @@ class GoldenOutputTestSuite(TestSuite):
                 self.test("detect: hash_before is 16 chars", len(str(hash_before)) == 16)
                 self.test("detect: hash_after is 16 chars", len(str(hash_after)) == 16)
     
-        print("\n🎯 Resource Reference Consistency")
+        self.logger.info("Resource Reference Consistency")
     
         # Check that resources mentioned in findings exist in classification
         if "detect_v1.json" in snapshots:

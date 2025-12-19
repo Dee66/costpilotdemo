@@ -19,6 +19,12 @@ class TestSuite(ABC):
         self.results: List[TestResult] = []
         self.reporter = TestReporter()
     
+    @property
+    @abstractmethod
+    def tags(self) -> List[str]:
+        """Return list of tags for this test suite - must be implemented by subclasses"""
+        pass
+    
     @abstractmethod
     def run(self):
         """Run all tests in this suite - must be implemented by subclasses"""

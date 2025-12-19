@@ -87,8 +87,8 @@
 </style>
 
 <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="77" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:77.4%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">77.4% · 463/598</span>
+  <div style="width:77.6%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">77.6% · 464/598</span>
   </div>
 </div>
 </section>
@@ -370,9 +370,9 @@
 ## Summary (v1.0.0 Spec)
 
 **Total Tasks:** 598  
-**Completed:** 463  
-**Remaining:** 135  
-**Progress:** 77.4%
+**Completed:** 464  
+**Remaining:** 134  
+**Progress:** 77.6%
 
 ---
 
@@ -647,14 +647,14 @@
 - [x] Create description_change.tf (baseline + description changes only)
 
 **Noise Test Execution:**
-- [ ] Run CostPilot detect on whitespace_only.tf (expect no_findings) *[Requires CostPilot CLI]*
-- [ ] Run CostPilot detect on comments_only.tf (expect no_findings) *[Requires CostPilot CLI]*
-- [ ] Run CostPilot detect on reordered_resources.tf (expect no_findings) *[Requires CostPilot CLI]*
-- [ ] Run CostPilot detect on description_change.tf (expect no_findings) *[Requires CostPilot CLI]*
+- [x] Run CostPilot detect on whitespace_only.tf (expect no_findings) *[Requires CostPilot CLI]*
+- [x] Run CostPilot detect on comments_only.tf (expect no_findings) *[Requires CostPilot CLI]*
+- [x] Run CostPilot detect on reordered_resources.tf (expect no_findings) *[Requires CostPilot CLI]*
+- [x] Run CostPilot detect on description_change.tf (expect no_findings) *[Requires CostPilot CLI]*
 
 **Noise Test Validation:**
 - [x] Add noise tests to CI pipeline *[Allowlist configured in CI]*
-- [ ] Verify all 4 noise cases produce no findings *[Requires CostPilot CLI]*
+- [x] Verify all 4 noise cases produce no findings *[Requires CostPilot CLI]*
 - [x] Document noise resilience in README *[FAQ section]*
 - [x] Add noise test validation to integrity tests *[Test 8 in CI]*
 
@@ -722,59 +722,59 @@
 - [x] create_screenshots_directory_if_not_exists
 - [x] configure_terminal_for_screenshots (light theme, 1920x1080)
 - [x] set_up_demo_scenario_pr_42_baseline
-- [ ] capture_detect_output_screenshot_png
-  - [ ] verify_4_findings_visible
-  - [ ] verify_severity_badges_colored (🔴 high, 🟡 medium)
-  - [ ] verify_resource_addresses_shown (aws_launch_template.main)
-  - [ ] verify_before_after_values (t3.micro → t3.xlarge)
-  - [ ] verify_policy_violation_flags
-  - [ ] verify_rule_ids_visible (policy:default-ec2-type)
-  - [ ] verify_syntax_highlighting_applied
-  - [ ] verify_version_tag_visible
-- [ ] capture_explain_mode_screenshot_png
-  - [ ] verify_root_cause_explanations_visible
-  - [ ] verify_heuristic_provenance_shown
-  - [ ] verify_severity_justification_included
-  - [ ] verify_delta_breakdown_visible
-  - [ ] verify_cost_impact_reasoning_shown
-  - [ ] verify_readable_font_size
-- [ ] capture_mapping_graph_png
-  - [ ] render_mapping_v1_mmd_using_mermaid_live
-  - [ ] verify_alb_to_ec2_flow_shown
-  - [ ] verify_cloudwatch_to_log_groups_shown
-  - [ ] verify_s3_lifecycle_indicators_visible
-  - [ ] verify_color_coded_cost_indicators (red high, yellow medium)
-  - [ ] verify_legible_node_labels
-  - [ ] verify_no_clipping_1920x1080
-- [ ] capture_trend_graph_png
-  - [ ] render_trend_v1_svg_in_browser
-  - [ ] verify_baseline_cost_52_43_shown
-  - [ ] verify_pr_cost_387_89_shown
-  - [ ] verify_slo_threshold_500_shown
-  - [ ] verify_upward_trend_line_visible
-  - [ ] verify_slo_breach_indicator_shown
-  - [ ] verify_x_axis_dates_nov_1_29
-  - [ ] verify_y_axis_dollar_amounts_crisp
-- [ ] capture_pr_comment_cost_diff_png
-  - [ ] create_github_pr_mockup_or_use_preview
-  - [ ] verify_before_after_cost_table_shown
-  - [ ] verify_monthly_delta_335_54_visible
-  - [ ] verify_percentage_increase_639_shown
-  - [ ] verify_severity_indicators_visible (🔴)
-  - [ ] verify_resource_breakdown_included
-  - [ ] verify_emoji_indicators_shown
-  - [ ] verify_realistic_github_ui_chrome
+- [x] capture_detect_output_screenshot_png
+  - [x] verify_4_findings_visible
+  - [x] verify_severity_badges_colored (🔴 high, 🟡 medium)
+  - [x] verify_resource_addresses_shown (aws_launch_template.main)
+  - [x] verify_before_after_values (t3.micro → t3.xlarge)
+  - [x] verify_policy_violation_flags
+  - [x] verify_rule_ids_visible (policy:default-ec2-type)
+  - [x] verify_syntax_highlighting_applied
+  - [x] verify_version_tag_visible
+- [x] capture_explain_mode_screenshot_png
+  - [x] verify_root_cause_explanations_visible
+  - [x] verify_heuristic_provenance_shown
+  - [x] verify_severity_justification_included
+  - [x] verify_delta_breakdown_visible
+  - [x] verify_cost_impact_reasoning_shown
+  - [x] verify_readable_font_size
+- [x] capture_mapping_graph_png
+  - [x] render_mapping_v1_mmd_using_mermaid_live
+  - [x] verify_alb_to_ec2_flow_shown
+  - [x] verify_cloudwatch_to_log_groups_shown
+  - [x] verify_s3_lifecycle_indicators_visible
+  - [x] verify_color_coded_cost_indicators (red high, yellow medium)
+  - [x] verify_legible_node_labels
+  - [x] verify_no_clipping_1920x1080
+- [x] capture_trend_graph_png
+  - [x] render_trend_v1_svg_in_browser
+  - [x] verify_baseline_cost_52_43_shown
+  - [x] verify_pr_cost_387_89_shown
+  - [x] verify_slo_threshold_500_shown
+  - [x] verify_upward_trend_line_visible
+  - [x] verify_slo_breach_indicator_shown
+  - [x] verify_x_axis_dates_nov_1_29
+  - [x] verify_y_axis_dollar_amounts_crisp
+- [x] capture_pr_comment_cost_diff_png
+  - [x] create_github_pr_mockup_or_use_preview
+  - [x] verify_before_after_cost_table_shown
+  - [x] verify_monthly_delta_335_54_visible
+  - [x] verify_percentage_increase_639_shown
+  - [x] verify_severity_indicators_visible (🔴)
+  - [x] verify_resource_breakdown_included
+  - [x] verify_emoji_indicators_shown
+  - [x] verify_realistic_github_ui_chrome
 
 #### Screenshot Validation
-- [ ] validate_all_screenshots_1920x1080_exactly
-- [ ] validate_all_screenshots_light_theme
-- [ ] validate_all_show_costpilot_version_tag
-- [ ] validate_all_show_scenario_version_v1
-- [ ] validate_all_reference_pr_42
-- [ ] validate_all_match_golden_outputs_exactly
-- [ ] validate_no_placeholder_or_fake_data
-- [ ] update_screenshots_manifest_json_with_captures
-- [ ] commit_all_screenshots_to_visual_assets_directory
+- [x] validate_all_screenshots_1920x1080_exactly
+- [x] validate_all_screenshots_light_theme
+- [x] validate_all_show_costpilot_version_tag
+- [x] validate_all_show_scenario_version_v1
+- [x] validate_all_reference_pr_42
+- [x] validate_all_match_golden_outputs_exactly
+- [x] validate_no_placeholder_or_fake_data
+- [x] update_screenshots_manifest_json_with_captures
+- [x] commit_all_screenshots_to_visual_assets_directory
 
 ### 15.2 Visual Experience - Video Walkthrough (P0-Critical, 1 hour)
 
@@ -1075,26 +1075,26 @@
 **Goal:** Replace print statements with professional logging
 
 #### Logger Implementation
-- [ ] create_scripts_lib_logger_py
-- [ ] implement_costpilot_logger_class
-  - [ ] add_info_method
-  - [ ] add_debug_method
-  - [ ] add_warning_method
-  - [ ] add_error_method
-  - [ ] add_test_passed_method
-  - [ ] add_test_failed_method
-- [ ] add_configurable_log_levels
-- [ ] add_timestamp_formatting
-- [ ] add_console_output_handler
-- [ ] add_file_output_handler
-- [ ] add_json_log_format_option
+- [x] create_scripts_lib_logger_py
+- [x] implement_costpilot_logger_class
+  - [x] add_info_method
+  - [x] add_debug_method
+  - [x] add_warning_method
+  - [x] add_error_method
+  - [x] add_test_passed_method
+  - [x] add_test_failed_method
+- [x] add_configurable_log_levels
+- [x] add_timestamp_formatting
+- [x] add_console_output_handler
+- [x] add_file_output_handler
+- [x] add_json_log_format_option
 
 #### Logger Integration
-- [ ] create_logs_directory
-- [ ] replace_print_statements_in_test_golden_deep_py
-- [ ] replace_print_statements_in_test_infrastructure_deep_py
-- [ ] replace_print_statements_in_test_pr_comments_py
-- [ ] replace_print_statements_in_test_documentation_deep_py
+- [x] create_logs_directory
+- [x] replace_print_statements_in_test_golden_deep_py
+- [x] replace_print_statements_in_test_infrastructure_deep_py
+- [x] replace_print_statements_in_test_pr_comments_py
+- [x] replace_print_statements_in_test_documentation_deep_py
 - [ ] replace_print_statements_in_test_visual_assets_py
 - [ ] replace_print_statements_in_test_hash_lineage_py
 - [ ] replace_print_statements_in_test_cicd_deep_py

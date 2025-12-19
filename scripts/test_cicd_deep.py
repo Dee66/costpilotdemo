@@ -31,6 +31,10 @@ def load_workflow(filepath: Path) -> Dict[str, Any]:
 class CicdDeepTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["ci", "cd", "github-actions", "workflows", "validation", "deep"]
+    
     def run(self):
         """Template method - defines the test execution sequence"""
         self.test_workflow_structure()

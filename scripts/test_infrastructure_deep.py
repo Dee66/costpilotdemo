@@ -17,6 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
 from lib.scenario_factory import ScenarioFactory
+from lib.logger import get_logger
 from typing import Dict, List, Any, Set
 
 
@@ -44,10 +45,15 @@ def extract_resources(content: str) -> List[Dict[str, str]]:
 class InfrastructureDeepTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["infrastructure", "terraform", "validation", "deep"]
+    
     def __init__(self, repo_root: Path = None):
         super().__init__(repo_root)
         self.factory = ScenarioFactory(self.repo_root)
         self.pr_scenario = self.factory.create("pr_change")
+        self.logger = get_logger("infrastructure_deep_test")
     
     def run(self):
         """Template method - defines the test execution sequence"""
@@ -74,7 +80,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         baseline_content = read_tf_file(baseline_file)
         pr_content = read_tf_file(pr_file) if pr_file.exists() else ""
     
-        print("\n🔧 Baseline Stack Resource Attributes")
+        self.logger.info("Baseline Stack Resource Attributes")
     
         # VPC attributes
         self.test("baseline: VPC has cidr_block", 'cidr_block' in baseline_content)
@@ -124,7 +130,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("baseline: ALB has security_groups", 'security_groups' in baseline_content)
     
         if pr_content:
-            print("\n⚠️  PR Stack Resource Attributes (Cost Regressions)")
+            self.logger.info("PR Stack Resource Attributes (Cost Regressions)")
         
             # PR changes - cost increases
             self.test("PR: instance_type changed to t3.xlarge", 
@@ -139,7 +145,7 @@ class InfrastructureDeepTestSuite(TestSuite):
             has_lifecycle = 'lifecycle_configuration' in pr_content
             self.test("PR: S3 lifecycle policy removed", not has_lifecycle)
     
-        print("\n🔐 Security Attributes")
+        self.logger.info("Security Attributes")
     
         # Security group validation
         self.test("baseline: ALB security group exists", 'aws_security_group" "alb"' in baseline_content)
@@ -150,7 +156,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         # Metadata options
         self.test("baseline: IMDSv2 required", 'http_tokens                 = "required"' in baseline_content)
     
-        print("\n🏷️  Tagging Standards")
+        self.logger.info("Tagging Standards")
     
         # Tag validation
         self.test("baseline: resources have Name tags", 'Name = ' in baseline_content)
@@ -159,7 +165,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("baseline: Project tag exists", 'Project' in baseline_content)
         self.test("baseline: ManagedBy tag exists", 'ManagedBy' in baseline_content)
     
-        print("\n📦 Data Sources")
+        self.logger.info("Data Sources")
     
         # Data sources
         self.test("baseline: uses data source for AMI", 'data.aws_ami' in baseline_content)
@@ -181,7 +187,7 @@ class InfrastructureDeepTestSuite(TestSuite):
     
         content = read_tf_file(baseline_file)
     
-        print("\n🔗 VPC Dependencies")
+        self.logger.info("VPC Dependencies")
     
         # VPC → Subnet dependencies
         self.test("Subnet references VPC", 'vpc_id      = aws_vpc.main.id' in content or
@@ -191,7 +197,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("Security group references VPC", 'vpc_id      = aws_vpc.main.id' in content or
                    'vpc_id = aws_vpc.main.id' in content)
     
-        print("\n🔗 Network Dependencies")
+        self.logger.info("Network Dependencies")
     
         # Route table associations
         self.test("Route table association references subnet", 
@@ -201,7 +207,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("Route references internet gateway", 
                    'gateway_id = aws_internet_gateway' in content)
     
-        print("\n🔗 Compute Dependencies")
+        self.logger.info("Compute Dependencies")
     
         # Launch template → Security group
         self.test("Launch template references security group", 
@@ -213,7 +219,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("ASG references launch template", 'launch_template {' in content)
         self.test("ASG launch template has id", 'id      = aws_launch_template.main.id' in content)
     
-        print("\n🔗 Load Balancer Dependencies")
+        self.logger.info("Load Balancer Dependencies")
     
         # ALB dependencies
         self.test("ALB references security group", 
@@ -231,7 +237,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("Listener references target group", 
                    'target_group_arn = aws_lb_target_group.main.arn' in content)
     
-        print("\n🔗 S3 Dependencies")
+        self.logger.info("S3 Dependencies")
     
         # S3 bucket dependencies
         self.test("S3 versioning references bucket", 
@@ -239,13 +245,13 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("S3 lifecycle references bucket", 
                    'bucket = aws_s3_bucket.main.id' in content)
     
-        print("\n🔗 Security Group Dependencies")
+        self.logger.info("Security Group Dependencies")
     
         # Security group ingress rules
         self.test("EC2 SG ingress references ALB SG", 
                    'security_groups = [aws_security_group.alb.id]' in content)
     
-        print("\n📊 Dependency Count Validation")
+        self.logger.info("Dependency Count Validation")
     
         # Count resource references
         vpc_refs = content.count('aws_vpc.main')
@@ -278,7 +284,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         outputs_file = infra_dir / "outputs.tf"
         main_file = infra_dir / "main.tf"
     
-        print("\n📥 Variables File")
+        self.logger.info("Variables File")
     
         if variables_file.exists():
             var_content = read_tf_file(variables_file)
@@ -300,7 +306,7 @@ class InfrastructureDeepTestSuite(TestSuite):
             for _ in range(8):
                 self.skip("variables validation", "variables.tf not found")
     
-        print("\n📤 Outputs File")
+        self.logger.info("Outputs File")
     
         if outputs_file.exists():
             out_content = read_tf_file(outputs_file)
@@ -325,7 +331,7 @@ class InfrastructureDeepTestSuite(TestSuite):
             for _ in range(8):
                 self.skip("outputs validation", "outputs.tf not found")
     
-        print("\n🔗 Variable-Output Integration")
+        self.logger.info("Variable-Output Integration")
     
         if variables_file.exists() and outputs_file.exists():
             var_content = read_tf_file(variables_file)
@@ -345,7 +351,7 @@ class InfrastructureDeepTestSuite(TestSuite):
             for _ in range(3):
                 self.skip("variable-output integration", "Files not found")
     
-        print("\n✅ Variable Validation Rules")
+        self.logger.info("Variable Validation Rules")
     
         if variables_file.exists():
             var_content = read_tf_file(variables_file)
@@ -377,7 +383,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         
             content = read_tf_file(main_file)
         
-            print(f"\n⚙️  {stack.upper()} Provider Configuration")
+            self.logger.info(f"{stack.upper()} Provider Configuration")
         
             # Terraform block
             self.test(f"{stack}: has terraform block", 'terraform {' in content)
@@ -403,7 +409,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         baseline_content = read_tf_file(baseline_file)
         pr_content = read_tf_file(pr_file) if pr_file.exists() else ""
     
-        print("\n💰 Baseline Cost Optimization Policies")
+        self.logger.info("Baseline Cost Optimization Policies")
     
         # Instance type policy
         self.test("Policy: baseline uses cost-efficient instance (t3.micro)", 
@@ -421,7 +427,7 @@ class InfrastructureDeepTestSuite(TestSuite):
         self.test("Policy: baseline has S3 lifecycle policy", 
                    'lifecycle_configuration' in baseline_content)
     
-        print("\n⚠️  PR Cost Regression Detection")
+        self.logger.info("PR Cost Regression Detection")
     
         if pr_content:
             # Detect policy violations
@@ -439,14 +445,14 @@ class InfrastructureDeepTestSuite(TestSuite):
             for _ in range(4):
                 self.skip("PR regression detection", "PR file not found")
     
-        print("\n🔒 Mandatory Security Policies")
+        self.logger.info("Mandatory Security Policies")
     
         # Security best practices
         self.test("Policy: EBS encryption enabled", 'encrypted             = true' in baseline_content)
         self.test("Policy: IMDSv2 required", 'http_tokens                 = "required"' in baseline_content)
         self.test("Policy: S3 versioning enabled", 'Enabled' in baseline_content)
     
-        print("\n📊 Resource Limits")
+        self.logger.info("Resource Limits")
     
         # Resource count limits
         self.test("Policy: ASG max_size ≤ 10", 

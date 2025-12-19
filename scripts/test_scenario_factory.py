@@ -16,6 +16,10 @@ from lib.scenario_factory import ScenarioFactory, create_scenario, Scenario
 class ScenarioFactoryTestSuite(TestSuite):
     """Test suite for ScenarioFactory"""
     
+    @property
+    def tags(self):
+        return ["factory", "scenarios", "validation"]
+    
     def run(self):
         """Template method - defines the test execution sequence"""
         self.test_factory_initialization()

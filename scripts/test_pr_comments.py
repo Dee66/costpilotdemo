@@ -17,6 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
 from lib.scenario_factory import ScenarioFactory
+from lib.logger import get_logger
 from typing import Dict, List, Any
 
 
@@ -31,10 +32,15 @@ def read_comment(filepath: Path) -> str:
 class PrCommentsTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["pr", "comments", "github", "validation"]
+    
     def __init__(self, repo_root: Path = None):
         super().__init__(repo_root)
         self.factory = ScenarioFactory(self.repo_root)
         self.pr_scenario = self.factory.create("pr_change")
+        self.logger = get_logger("pr_comments_test")
     
     def run(self):
         """Template method - defines the test execution sequence"""
@@ -64,7 +70,7 @@ class PrCommentsTestSuite(TestSuite):
         
             content = read_comment(filepath)
         
-            print(f"\n📝 {comment_type.upper()} Comment Structure")
+            self.logger.info(f"{comment_type.upper()} Comment Structure")
         
             # Basic markdown elements
             self.test(f"{comment_type}: has headers", '#' in content)
@@ -90,7 +96,7 @@ class PrCommentsTestSuite(TestSuite):
     
         content = read_comment(predict_file)
     
-        print("\n💵 Cost Table Structure")
+        self.logger.info("Cost Table Structure")
     
         # Table presence
         self.test("predict: has markdown tables", '|' in content)
@@ -104,7 +110,7 @@ class PrCommentsTestSuite(TestSuite):
         self.test("predict: has predicted cost", 'Predicted Cost' in content or 'Predicted' in content)
         self.test("predict: has delta values", 'Delta' in content or 'delta' in content)
     
-        print("\n📊 Cost Metrics")
+        self.logger.info("Cost Metrics")
     
         # Numeric values
         dollar_amounts = re.findall(r'\$\d+\.?\d*', content)
@@ -116,7 +122,7 @@ class PrCommentsTestSuite(TestSuite):
         self.test("predict: has percentage changes", len(percentage_matches) > 0,
                    f"Found {len(percentage_matches)} percentages")
     
-        print("\n📈 Table Formatting Quality")
+        self.logger.info("Table Formatting Quality")
     
         # Table alignment
         self.test("predict: tables have proper separators", '|---' in content or '|--' in content)
@@ -127,7 +133,7 @@ class PrCommentsTestSuite(TestSuite):
         self.test("predict: mentions monthly costs", 'month' in content.lower())
         self.test("predict: mentions annual costs", 'annual' in content.lower() or 'year' in content.lower())
     
-        print("\n💡 Cost Context")
+        self.logger.info("Cost Context")
     
         # Context and assumptions
         self.test("predict: has assumptions section", 'Assumptions' in content or 'assumptions' in content)
@@ -154,7 +160,7 @@ class PrCommentsTestSuite(TestSuite):
     
         content = read_comment(detect_file)
     
-        print("\n🔍 Detection Summary")
+        self.logger.info("Detection Summary")
     
         # Summary section
         self.test("detect: has summary section", 'Summary' in content or 'SUMMARY' in content)
@@ -165,7 +171,7 @@ class PrCommentsTestSuite(TestSuite):
                    'High Severity' in content or 'HIGH' in content)
         self.test("detect: uses severity colors", '🔴' in content or '🟡' in content or '🔵' in content)
     
-        print("\n📋 Individual Findings")
+        self.logger.info("Individual Findings")
     
         # Finding structure
         finding_headers = re.findall(r'Finding \d+:', content)
@@ -181,7 +187,7 @@ class PrCommentsTestSuite(TestSuite):
         self.test("detect: findings have impact description", 'Impact' in content)
         self.test("detect: findings have rationale", 'Rationale' in content)
     
-        print("\n🏷️  Finding Metadata")
+        self.logger.info("Finding Metadata")
     
         # Rule IDs
         self.test("detect: findings have rule IDs", 'Rule ID' in content or 'rule_id' in content)
@@ -192,7 +198,7 @@ class PrCommentsTestSuite(TestSuite):
         self.test("detect: mentions resource types", 
                    any(term in content for term in ['Resource', 'resource_type', 'aws_']))
     
-        print("\n🔗 Finding Context")
+        self.logger.info("Finding Context")
     
         # Cross-references
         self.test("detect: has cross-service dependencies section",
@@ -219,7 +225,7 @@ class PrCommentsTestSuite(TestSuite):
         autofix_file = pr_dir / "comment_autofix.txt"
         explain_file = pr_dir / "comment_explain.txt"
     
-        print("\n🔧 Auto-Fix Suggestions")
+        self.logger.info("Auto-Fix Suggestions")
     
         if autofix_file.exists():
             content = read_comment(autofix_file)
@@ -243,7 +249,7 @@ class PrCommentsTestSuite(TestSuite):
             for _ in range(10):
                 self.skip("autofix validation", "File not found")
     
-        print("\n💡 Root Cause Explanations")
+        self.logger.info("Root Cause Explanations")
     
         if explain_file.exists():
             content = read_comment(explain_file)
@@ -285,12 +291,12 @@ class PrCommentsTestSuite(TestSuite):
             "autofix": pr_dir / "comment_autofix.txt"
         }
     
-        print("\n📦 All Comments Present")
+        self.logger.info("All Comments Present")
     
         for comment_type, filepath in comments.items():
             self.test(f"{comment_type} comment exists", filepath.exists())
     
-        print("\n📏 Comment Length Validation")
+        self.logger.info("Comment Length Validation")
     
         for comment_type, filepath in comments.items():
             if filepath.exists():
@@ -303,7 +309,7 @@ class PrCommentsTestSuite(TestSuite):
             else:
                 self.skip(f"{comment_type} length", "File not found")
     
-        print("\n🔗 Cross-Comment Consistency")
+        self.logger.info("Cross-Comment Consistency")
     
         all_content = {}
         for comment_type, filepath in comments.items():
@@ -331,7 +337,7 @@ class PrCommentsTestSuite(TestSuite):
                 self.test("Finding counts match between detect/explain",
                            detect_findings > 0 and explain_findings > 0)
     
-        print("\n✅ Quality Indicators")
+        self.logger.info("Quality Indicators")
     
         for comment_type, filepath in comments.items():
             if filepath.exists():

@@ -343,6 +343,9 @@ Examples:
   # Run specific suite
   python3 scripts/run_tests.py --suite test_golden_deep
   
+  # Run suites with specific tag
+  python3 scripts/run_tests.py --tag validation
+  
   # Run with verbose output
   python3 scripts/run_tests.py --verbose
   
@@ -360,6 +363,11 @@ Examples:
     parser.add_argument(
         "--suite",
         help="Run specific test suite (e.g., test_golden_deep)"
+    )
+    
+    parser.add_argument(
+        "--tag",
+        help="Run test suites with specific tag (e.g., golden, infrastructure, validation)"
     )
     
     parser.add_argument(
@@ -432,6 +440,33 @@ Examples:
         if not test_files:
             print(f"Error: Test suite '{args.suite}' not found")
             return 1
+    
+    # Filter by tag if specified
+    if args.tag:
+        filtered_files = []
+        for test_file in test_files:
+            try:
+                module = load_suite_module(test_file)
+                # Get the test suite class (assuming it's the only class in the module)
+                suite_class = None
+                for attr_name in dir(module):
+                    attr = getattr(module, attr_name)
+                    if (isinstance(attr, type) and 
+                        issubclass(attr, TestSuite) and 
+                        attr != TestSuite):
+                        suite_class = attr
+                        break
+                
+                if suite_class and hasattr(suite_class, 'tags'):
+                    if args.tag in suite_class.tags:
+                        filtered_files.append(test_file)
+            except Exception as e:
+                print(f"Warning: Could not load {test_file.stem} for tag filtering: {e}")
+        
+        if not filtered_files:
+            print(f"Error: No test suites found with tag '{args.tag}'")
+            return 1
+        test_files = filtered_files
     
     if args.format == "terminal":
         print(f"Running {len(test_files)} test suite(s)...\n")

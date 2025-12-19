@@ -17,6 +17,7 @@ from pathlib import Path
 # Import shared test framework
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
+from lib.logger import get_logger
 from typing import Dict, List, Any
 
 
@@ -30,6 +31,14 @@ def read_file(filepath: Path) -> str:
 
 class VisualAssetsTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
+    
+    @property
+    def tags(self) -> List[str]:
+        return ["visual", "assets", "diagrams", "screenshots", "validation"]
+    
+    def __init__(self, repo_root: Path = None):
+        super().__init__(repo_root)
+        self.logger = get_logger("visual_assets_test")
     
     def run(self):
         """Template method - defines the test execution sequence"""
@@ -49,7 +58,7 @@ class VisualAssetsTestSuite(TestSuite):
         # Find all Mermaid files
         mermaid_files = list(repo_root.glob("**/*.mmd"))
     
-        print(f"\n📊 Found {len(mermaid_files)} Mermaid files")
+        self.logger.info(f"Found {len(mermaid_files)} Mermaid files")
     
         self.test("Has Mermaid diagram files", len(mermaid_files) > 0,
                    f"Found {len(mermaid_files)} files")
@@ -58,7 +67,7 @@ class VisualAssetsTestSuite(TestSuite):
             content = read_file(mmd_file)
             filename = mmd_file.name
         
-            print(f"\n🔍 {filename} Validation")
+            self.logger.info(f"{filename} Validation")
         
             # Check diagram type
             has_graph = content.strip().startswith('graph ')
@@ -98,7 +107,7 @@ class VisualAssetsTestSuite(TestSuite):
         # Find all SVG files
         svg_files = list(repo_root.glob("**/*.svg"))
     
-        print(f"\n🎨 Found {len(svg_files)} SVG files")
+        self.logger.info(f"Found {len(svg_files)} SVG files")
     
         self.test("Has SVG files", len(svg_files) > 0,
                    f"Found {len(svg_files)} files")
@@ -107,7 +116,7 @@ class VisualAssetsTestSuite(TestSuite):
             content = read_file(svg_file)
             filename = svg_file.name
         
-            print(f"\n🖼️  {filename} Structure")
+            self.logger.info(f"{filename} Structure")
         
             # Check for SVG root element
             self.test(f"{filename}: has SVG root element", 
@@ -159,7 +168,7 @@ class VisualAssetsTestSuite(TestSuite):
         snapshots_dir = self.repo_root / "snapshots"
         docs_diagrams = self.repo_root / "docs" / "diagrams"
     
-        print("\n📈 Required Diagrams")
+        self.logger.info("Required Diagrams")
     
         # Check for essential diagrams
         required_diagrams = {
@@ -176,7 +185,7 @@ class VisualAssetsTestSuite(TestSuite):
                 content = read_file(filepath)
                 self.test(f"{diagram_name}: not empty", len(content) > 100)
     
-        print("\n🔗 Diagram Content Validation")
+        self.logger.info("Diagram Content Validation")
     
         # Validate mapping diagram content
         mapping_file = snapshots_dir / "mapping_v1.mmd"

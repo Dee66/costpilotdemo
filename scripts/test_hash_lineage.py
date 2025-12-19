@@ -49,6 +49,10 @@ def is_valid_hex_hash(hash_str: str, expected_length: int = None) -> bool:
 class HashLineageTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["hash", "lineage", "integrity", "validation"]
+    
     def run(self):
         """Template method - defines the test execution sequence"""
         self.test_hash_manifest_structure()

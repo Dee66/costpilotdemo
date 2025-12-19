@@ -17,6 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
 from lib.scenario_factory import ScenarioFactory
+from lib.logger import get_logger
 from typing import Dict, List, Any, Set
 
 
@@ -50,10 +51,15 @@ def extract_links(content: str) -> List[str]:
 class DocumentationDeepTestSuite(TestSuite):
     """Test suite using Template Method pattern"""
     
+    @property
+    def tags(self) -> List[str]:
+        return ["documentation", "markdown", "links", "validation", "deep"]
+    
     def __init__(self, repo_root: Path = None):
         super().__init__(repo_root)
         self.factory = ScenarioFactory(self.repo_root)
         self.pr_scenario = self.factory.create("pr_change")
+        self.logger = get_logger("documentation_deep_test")
     
     def run(self):
         """Template method - defines the test execution sequence"""
@@ -88,7 +94,7 @@ class DocumentationDeepTestSuite(TestSuite):
             content = read_doc(filepath)
             code_blocks = extract_code_blocks(content)
         
-            print(f"\n📝 {doc_name} Code Examples")
+            self.logger.info(f"{doc_name} Code Examples")
         
             # Code block presence
             self.test(f"{doc_name}: has code blocks", len(code_blocks) > 0,
@@ -125,7 +131,7 @@ class DocumentationDeepTestSuite(TestSuite):
     
         doc_files = list((docs_dir).glob("*.md")) + [readme]
     
-        print("\n🔗 Internal Links")
+        self.logger.info("Internal Links")
     
         for filepath in doc_files[:5]:  # Test first 5 docs
             if not filepath.exists():
@@ -153,7 +159,7 @@ class DocumentationDeepTestSuite(TestSuite):
                     self.test(f"{doc_name}: file link '{link}' exists",
                                target_path.exists() or '../' in link)
     
-        print("\n🌐 External Links")
+        self.logger.info("External Links")
     
         for filepath in doc_files[:3]:  # Test first 3 docs
             if not filepath.exists():
@@ -188,7 +194,7 @@ class DocumentationDeepTestSuite(TestSuite):
     
         content = read_doc(readme)
     
-        print("\n📑 README TOC")
+        self.logger.info("README TOC")
     
         # Check for TOC section
         has_toc = bool(re.search(r'##\s+Table of Contents|##\s+Contents', content, re.IGNORECASE))
@@ -248,7 +254,7 @@ class DocumentationDeepTestSuite(TestSuite):
             if filepath.exists():
                 all_docs[filepath.name] = read_doc(filepath)
     
-        print("\n📖 Standard Terminology")
+        self.logger.info("Standard Terminology")
     
         # Key terms that should be consistent
         expected_terms = {
@@ -269,7 +275,7 @@ class DocumentationDeepTestSuite(TestSuite):
                        len(found_in_docs) >= 2,
                        f"Found in {len(found_in_docs)} docs")
     
-        print("\n🔤 Naming Conventions")
+        self.logger.info("Naming Conventions")
     
         # Check for consistent resource naming
         if 'README.md' in all_docs:
@@ -282,7 +288,7 @@ class DocumentationDeepTestSuite(TestSuite):
             self.test("README: mentions t3.xlarge regression",
                        't3.xlarge' in readme_content)
     
-        print("\n🎯 Scenario Consistency")
+        self.logger.info("Scenario Consistency")
     
         # Check scenario version consistency
         scenario_versions = {}
@@ -327,7 +333,7 @@ class DocumentationDeepTestSuite(TestSuite):
             code_blocks = extract_code_blocks(content)
             bash_blocks = [b for b in code_blocks if b['language'] in ['bash', 'sh', 'shell']]
         
-            print(f"\n💻 {doc_name} Command Validation")
+            self.logger.info(f"{doc_name} Command Validation")
         
             self.test(f"{doc_name}: has bash commands", len(bash_blocks) > 0,
                        f"Found {len(bash_blocks)} bash blocks")
@@ -367,7 +373,7 @@ class DocumentationDeepTestSuite(TestSuite):
         docs_dir = self.repo_root / "docs"
         readme = self.repo_root / "README.md"
     
-        print("\n📁 Required Documentation Files")
+        self.logger.info("Required Documentation Files")
     
         required_docs = [
             "README.md",
@@ -389,7 +395,7 @@ class DocumentationDeepTestSuite(TestSuite):
                 self.test(f"{doc}: not empty", len(content) > 100)
                 self.test(f"{doc}: has title", content.startswith('#') or '# ' in content[:200])
     
-        print("\n📊 Documentation Completeness")
+        self.logger.info("Documentation Completeness")
     
         if readme.exists():
             readme_content = read_doc(readme)
@@ -407,7 +413,7 @@ class DocumentationDeepTestSuite(TestSuite):
                 has_section = primary in readme_content or secondary in readme_content
                 self.test(f"README: has {primary} section", has_section)
     
-        print("\n🔍 Documentation Quality Indicators")
+        self.logger.info("Documentation Quality Indicators")
     
         for filepath in [readme, docs_dir / "DRIFT_MANAGEMENT.md"][:2]:
             if not filepath.exists():
@@ -436,7 +442,7 @@ class DocumentationDeepTestSuite(TestSuite):
     
         content = read_doc(readme)
     
-        print("\n🏷️  Badges and Status Indicators")
+        self.logger.info("Badges and Status Indicators")
     
         # Check for badges
         badges = re.findall(r'!\[([^\]]+)\]\(([^\)]+)\)', content)
@@ -451,7 +457,7 @@ class DocumentationDeepTestSuite(TestSuite):
         has_version = bool(re.search(r'v\d+\.\d+\.\d+', content))
         self.test("README: has version number", has_version)
     
-        print("\n📝 Warnings and Notices")
+        self.logger.info("Warnings and Notices")
     
         # Check for important warnings
         self.test("README: has cost warning",
@@ -462,7 +468,7 @@ class DocumentationDeepTestSuite(TestSuite):
         self.test("README: identifies as demo",
                    'demo' in content.lower() or 'demonstration' in content.lower())
     
-        print("\n🎯 Purpose Statement")
+        self.logger.info("Purpose Statement")
     
         # Check for clear purpose
         first_500 = content[:500]
@@ -474,7 +480,7 @@ class DocumentationDeepTestSuite(TestSuite):
         self.test("README: identifies scenario",
                    'scenario' in content.lower() and 'v1' in content)
     
-        print("\n📦 Project Information")
+        self.logger.info("Project Information")
     
         # Check for repository info
         self.test("README: mentions repository",
