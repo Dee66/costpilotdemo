@@ -2,13 +2,96 @@
 
 **Version:** 3.0.0  
 **Source Spec:** product.yml v2.0.0 → v3.0.0 (Section 25)  
-**Last Updated:** 2025-12-08
+**Last Updated:** 2025-12-19
 
-<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
-  <div style="width:85.9%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
-    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">85.9% · 463/539</span>
+<style>
+.progress-container {
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+  height: 25px;
+  background: linear-gradient(90deg, #4CAF50 0%, #45a049 50%, #4CAF50 100%);
+  background-size: 200% 100%;
+  width: 23%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+  font-size: 14px;
+  animation: shimmer 3s ease-in-out infinite;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  50% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.milestone-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.milestone {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.milestone.completed {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.milestone.active {
+  background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+</style>
+
+<div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="77" style="width:94%; background:#e6eef0; border-radius:8px; padding:6px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);">
+  <div style="width:77.4%; background:linear-gradient(90deg,#84cc16,#22c55e,#10b981); color:#fff; padding:10px 12px; text-align:right; border-radius:6px; font-weight:700; transition:width 0.5s ease;">
+    <span style="display:inline-block; background:rgba(0,0,0,0.12); padding:4px 8px; border-radius:999px; font-size:0.95em;">77.4% · 463/598</span>
   </div>
 </div>
+</section>
 
 **v1 Milestone:** 152/152 (100%) ✅ | **v2 Enhancements:** 156/166 (94%) 🚀 | **v3 Sales:** 0/281 (0%) 📋
 
@@ -286,10 +369,10 @@
 
 ## Summary (v1.0.0 Spec)
 
-**Total Tasks:** 539  
+**Total Tasks:** 598  
 **Completed:** 463  
-**Remaining:** 76  
-**Progress:** 85.9%
+**Remaining:** 135  
+**Progress:** 77.4%
 
 ---
 
@@ -1357,4 +1440,173 @@
 
 ---
 
-*This checklist tracks implementation of the CostPilot Demo specification across v1.0.0 (complete), v2.0.0 (94% complete), and v3.0.0 (planned sales enablement). v3.0.0 focuses on transforming the demo into a high-converting sales tool.*
+---
+
+## 16. Demo Authority, Auditability & Drift Sentinels (v3.1.0 — NEW)
+
+**Source:** costpilot.demo supplemental spec  
+**Purpose:** Make the demo self-verifying, hostile-proof, and spec-locked  
+**Priority:** P0-Critical (Demo credibility & governance)
+
+---
+
+### 16.1 Demo Self-Audit & Independent Verification (P0-Critical)
+
+**Goal:** Allow a hostile reviewer to verify *every* demo claim without trusting prose, screenshots, or marketing.
+
+#### Hash Manifest
+- [ ] create_hash_manifest_json
+  - [ ] include_snapshots_directory_hashes
+  - [ ] include_costpilot_demo_directory_hashes
+  - [ ] include_costpilot_artifacts_directory_hashes
+  - [ ] include_version_and_scenario_metadata
+- [ ] validate_hash_manifest_deterministic_across_runs
+- [ ] validate_hash_manifest_deterministic_across_os
+
+#### Independent Verification Guide
+- [ ] create_docs_VERIFY_DEMO_md
+  - [ ] document_required_binary_version
+  - [ ] document_exact_commands_to_reproduce_outputs
+  - [ ] document_expected_exit_codes
+  - [ ] document_expected_hashes
+- [ ] verify_verification_guide_can_be_followed_on_clean_machine
+- [ ] add_verification_guide_link_to_README
+
+#### Artifact Traceability
+- [ ] create_artifact_traceability_map_json
+  - [ ] map_pr_diff_to_detect_findings
+  - [ ] map_detect_findings_to_predict_costs
+  - [ ] map_predict_costs_to_explain_output
+  - [ ] map_explain_output_to_ci_block_or_silence
+- [ ] validate_traceability_map_is_complete
+- [ ] validate_traceability_map_hash_stable
+
+---
+
+### 16.2 Noop Silence Hardening (P0-Critical)
+
+**Goal:** Elevate silence to a first-class, provable outcome.
+
+- [ ] assert_noop_emits_zero_warnings
+- [ ] assert_noop_emits_zero_advisories
+- [ ] assert_noop_emits_only_noop_no_findings_json
+- [ ] assert_noop_exit_code_consistent_across_runs
+- [ ] assert_noop_exit_code_consistent_across_os
+- [ ] compute_noop_silence_hash
+- [ ] lock_noop_silence_hash_in_canonical_noop_json
+- [ ] add_noop_silence_hash_check_to_ci
+
+---
+
+### 16.3 Hostile Reviewer Walkthrough Assets (P0-Critical)
+
+**Goal:** Explicitly disprove common skepticism with concrete artifacts.
+
+#### Walkthrough Document
+- [ ] create_docs_HOSTILE_REVIEWER_WALKTHROUGH_md
+  - [ ] objection_static_analysis_section
+  - [ ] objection_scriptable_section
+  - [ ] objection_noise_section
+  - [ ] objection_optimization_section
+
+#### Evidence Binding
+- [ ] link_static_analysis_objection_to_mapping_artifacts
+- [ ] link_scriptable_objection_to_explain_provenance
+- [ ] link_noise_objection_to_noop_silence_hash
+- [ ] link_optimization_objection_to_misuse_rejection_scenarios
+- [ ] verify_every_objection_has_concrete_artifacts
+
+#### README Integration
+- [ ] link_hostile_reviewer_walkthrough_from_readme
+- [ ] ensure_tone_is_defensive_not_marketing
+- [ ] verify_no_claim_without_artifact_reference
+
+---
+
+### 16.4 Blocking Semantics Proof (P0-Critical)
+
+**Goal:** Bind demo behavior to CostPilot’s blocking decision table.
+
+#### Mode Matrix Validation
+- [ ] run_incident_pr_in_warn_mode
+  - [ ] assert_ci_passes
+  - [ ] assert_advisory_only_output
+- [ ] run_incident_pr_in_block_mode
+  - [ ] assert_ci_fails
+  - [ ] assert_blocking_exit_code
+- [ ] run_noop_pr_in_warn_mode
+  - [ ] assert_ci_passes
+  - [ ] assert_no_output
+- [ ] run_noop_pr_in_block_mode
+  - [ ] assert_ci_passes
+  - [ ] assert_no_output
+
+#### Precedence Validation
+- [ ] assert_cost_magnitude_alone_does_not_block
+- [ ] assert_blocking_requires_incident_classification
+- [ ] assert_safety_precedence_over_governance
+- [ ] document_blocking_semantics_matrix
+
+#### Artifact Capture
+- [ ] capture_ci_logs_for_all_modes
+- [ ] store_exit_code_matrix_json
+- [ ] hash_and_lock_blocking_semantics_artifacts
+
+---
+
+### 16.5 Demo ↔ Product Spec Drift Sentinel (P0-Critical)
+
+**Goal:** Make demo drift release-blocking by construction.
+
+#### Spec Binding
+- [ ] embed_product_spec_version_in_demo_metadata
+- [ ] embed_product_spec_hash_in_demo_metadata
+- [ ] assert_demo_spec_version_matches_binary_spec
+- [ ] assert_demo_spec_hash_matches_binary_spec
+
+#### Drift Detection
+- [ ] implement_demo_vs_spec_invariant_checks
+- [ ] fail_ci_on_spec_incompatibility
+- [ ] emit_structured_SPEC_DRIFT_error
+
+#### Marketing Source-of-Truth Enforcement
+- [ ] document_demo_first_rule_in_README
+- [ ] assert_all_marketing_assets_derived_from_demo
+- [ ] add_manual_review_gate_for_external_assets
+
+---
+
+### 16.6 Authority & Refusal Proofs (P0-Critical)
+
+**Goal:** Prove CostPilot knows when *not* to act.
+
+- [ ] assert_refusal_on_baseline_without_pr_diff
+- [ ] assert_refusal_on_billing_like_inputs
+- [ ] assert_refusal_emits_structured_error_only
+- [ ] assert_refusal_never_emits_cost_output
+- [ ] capture_and_lock_refusal_artifacts
+- [ ] add_refusal_tests_to_ci
+
+---
+
+### 16.7 CI Integration for New Authority Checks (P0-Critical)
+
+- [ ] add_demo_self_audit_job_to_ci
+- [ ] add_noop_silence_hash_check_to_ci
+- [ ] add_blocking_semantics_matrix_check_to_ci
+- [ ] add_demo_spec_drift_check_to_ci
+- [ ] ensure_all_new_checks_are_release_blocking
+- [ ] document_ci_failure_modes_and_remediation
+
+---
+
+## Summary — New Work Added
+
+**New Section:** 16  
+**New Tasks Added:** ~95  
+**All Tasks:** Additive, P0-critical, demo-only  
+**No Product Behavior Changes Introduced**
+
+---
+
+*This section upgrades the CostPilot demo from “convincing” to “hostile-proof,” ensuring it can survive executive scrutiny, skeptical engineers, and long-term product evolution without becoming a liability.*
