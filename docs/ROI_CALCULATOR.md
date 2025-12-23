@@ -1,8 +1,10 @@
-# 💰 CostPilot ROI Calculator
+# 💰 CostPilot ROI Calculator (Demo Scenario)
 
 ## TL;DR
 **This demo caught a $335/month regression. If deployed for 6 months, that's $2,010 wasted.**  
 **CostPilot would have prevented it for $594 → Net savings: $1,416 (2.4x ROI)**
+
+**Note:** This calculator demonstrates potential ROI based on the infrastructure regression shown in the demo (PR 42). Actual results will vary based on your specific infrastructure, policies, and usage patterns.
 
 ---
 
@@ -41,10 +43,10 @@ Regressions prevented:           1.9/month (95% of 2)
 Monthly savings:                 $950
 Annual savings:                  $11,400
 
-CostPilot cost (annual):         $1,188 ($99/month)
-Net annual savings:              $10,212
-ROI multiple:                    9.6x
-Payback period:                  1.2 months
+CostPilot cost (annual):         $348 ($29 per 30 days)
+Net annual savings:              $11,052
+ROI multiple:                    32.8x
+Payback period:                  0.4 months
 ```
 
 ---
@@ -75,7 +77,7 @@ Payback period:                  1.2 months
 
 | Item | Cost |
 |------|------|
-| **CostPilot (6 months)** | $594 ($99/month) |
+| **CostPilot (6 months)** | $174 ($29 per 30 days) |
 | **Setup time** | ~5 minutes (free) |
 | **Maintenance** | ~0 minutes/month (automated) |
 
@@ -169,12 +171,12 @@ CostPilot also prevents:
 |----------|------|----------------|---------------|----------|
 | **Manual PR reviews** | $50-100/PR (30 min engineer time) | ~20% | Weeks | High false negatives |
 | **Post-deployment monitoring** | $0 but damage done | ~50% | Months | Too late |
-| **CostPilot** | $99/month flat rate | ~95% | Real-time | <5% false positives |
+| **CostPilot** | $29 per 30 days flat rate | ~95% | Real-time | <5% false positives |
 
 **For 40 PRs/month:**
 - Manual reviews: $2,000-$4,000/month
-- CostPilot: $99/month
-- **Savings on review time alone:** $1,900-$3,900/month
+- CostPilot: $29 per 30 days
+- **Savings on review time alone:** $1,971-$3,971/month
 
 ---
 

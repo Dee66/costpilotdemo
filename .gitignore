@@ -35,6 +35,7 @@ Thumbs.db
 # Logs
 *.log
 costpilot.log
+.env
 
 # Temporary files
 *.tmp
@@ -54,3 +55,33 @@ docs/rules-checklist.md
 docs/rules-safety.md
 docs/rules-output.md
 docs/workflow.md
+# CostPilot
+.costpilot/snapshots/
+.costpilot/cache/
+tfplan.json
+tfplan.binary
+cost-report.md
+
+# Marketing repo - hide internal development files
+logs/
+tmp.txt
+costpilot
+*.pyc
+__pycache__/
+# Hide internal scripts not needed for marketing
+scripts/test_*.py
+scripts/test_*.sh
+scripts/validate_*.py
+scripts/verify_*.py
+scripts/migrate_*.py
+scripts/compute_*.py
+scripts/add_*.py
+scripts/generate_*.py
+scripts/lib/
+tools/
+# Hide large intermediate video files
+video_assets/final/terminal_frames/
+video_assets/final/DemoTerminal*.mp4
+video_assets/final/DemoTerminal*.gif
+# Keep final marketing video
+# video_assets/launch-video/costpilot_launch.mp4

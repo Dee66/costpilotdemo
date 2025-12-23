@@ -1,6 +1,7 @@
 {
   "format_version": "1.0",
   "scenario_version": "v1",
+  "version": "1.0",
   "timestamp": "2025-12-06T16:47:00Z",
   "detection_results": {
     "summary": {
@@ -114,6 +115,7 @@
       "detector_version": "1.0.0"
     }
   },
+  "policy_violation_detected": true,
   "lineage": {
     "source_plan": "infrastructure/terraform/pr-change/",
     "scenario": "pr-change",

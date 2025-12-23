@@ -2,6 +2,7 @@
   "format_version": "1.0",
   "scenario_version": "v1",
   "timestamp": "2025-12-06T16:47:00Z",
+  "version": "1.0",
   "explanation_results": {
     "summary": {
       "total_findings": 4,
@@ -11,7 +12,7 @@
       "estimated_monthly_impact": 335.46,
       "primary_regression_type": "compute_upgrade"
     },
-    "explanations": [
+    "root_causes": [
       {
         "finding_id": "detect-001",
         "resource_address": "aws_launch_template.main",
@@ -248,11 +249,18 @@
       }
     ],
     "summary_explanation": {
-      "primary_driver": "The primary cost driver is the EC2 instance type upgrade (t3.micro \u2192 t3.xlarge), which alone accounts for 34% of the total monthly increase. Combined with infinite log retention (43% of increase), these two changes represent 77% of the total regression.",
+      "primary_driver": "The primary cost driver is the EC2 instance type upgrade (t3.micro → t3.xlarge), which alone accounts for 34% of the total monthly increase. Combined with infinite log retention (43% of increase), these two changes represent 77% of the total regression.",
       "risk_assessment": "HIGH - The CloudWatch infinite retention poses unbounded cost growth risk. EC2 and EBS changes are one-time increases but substantial. S3 lifecycle removal has compounding impact over time.",
       "recommended_action": "Immediate action required on CloudWatch retention. EC2/EBS sizing should be reviewed based on actual requirements. S3 lifecycle should be restored to maintain cost optimization.",
       "compliance_notes": "Infinite log retention may violate data retention policies. Review with compliance team before applying changes."
     },
+    "root_causes": [
+      {
+        "type": "resource_configuration_change",
+        "description": "Instance type changed from t3.micro to t3.xlarge",
+        "impact": "16x cost increase"
+      }
+    ],
     "metadata": {
       "explanation_duration_ms": 189,
       "explainer_version": "1.0.0",

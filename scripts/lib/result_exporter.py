@@ -1,3 +1,23 @@
+# Copyright (c) 2025 CostPilot Demo Team
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 """
 Result Exporter - Multi-format test result output
 Abstract base class and concrete exporters for JSON, HTML, Markdown, JUnit XML
@@ -98,6 +118,7 @@ class HTMLExporter(ResultExporter):
             self._generate_styles(),
             "</head>",
             "<body>",
+            f"<script>window.chartData = {json.dumps(self._generate_chart_data(results))};</script>",
             "<div class='container'>",
             "<h1>🧪 CostPilot Test Results</h1>",
             self._generate_summary_section(summary),
@@ -241,6 +262,17 @@ h1 {
 .expand-icon.expanded {
     transform: rotate(180deg);
 }
+.chart-container {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.chart-container h3 {
+    margin-top: 0;
+    color: #333;
+}
 </style>
 """
     
@@ -268,6 +300,10 @@ h1 {
         <div class='label'>Pass Rate</div>
         <div class='value'>{pass_rate:.1f}%</div>
     </div>
+</div>
+<div class='chart-container'>
+    <h3>📈 Test Suite Performance</h3>
+    <canvas id="timeSeriesChart" width="400" height="200"></canvas>
 </div>
 <p style='color: #666; font-size: 0.9em;'>Generated: {summary['timestamp']}</p>
 """
@@ -317,9 +353,20 @@ h1 {
         error = result.get("error", "Unknown error")
         return f"<div style='background: #ffebee; padding: 10px; border-radius: 4px; margin-top: 10px;'><strong>Error:</strong> {error}</div>"
     
+    def _generate_chart_data(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Generate data for time series chart"""
+        return [
+            {
+                "label": result.get("name", f"Suite {i+1}"),
+                "passRate": result.get("pass_rate", 0) * 100
+            }
+            for i, result in enumerate(results)
+        ]
+    
     def _generate_scripts(self) -> str:
-        """Generate JavaScript for interactivity"""
+        """Generate JavaScript for interactivity and charts"""
         return """
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 function toggleDetails(index) {
     const details = document.getElementById('details-' + index);
@@ -327,6 +374,41 @@ function toggleDetails(index) {
     details.classList.toggle('expanded');
     icon.classList.toggle('expanded');
 }
+
+// Initialize time series chart
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('timeSeriesChart').getContext('2d');
+    const chartData = window.chartData || [];
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartData.map(d => d.label),
+            datasets: [{
+                label: 'Pass Rate (%)',
+                data: chartData.map(d => d.passRate),
+                borderColor: '#4caf50',
+                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Test Suite Pass Rates'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+});
 </script>
 """
 

@@ -1,4 +1,24 @@
 #!/bin/bash
+# Copyright (c) 2025 CostPilot Demo Team
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 # CostPilot Demo Reset Script
 # This script restores the demo environment to its baseline state
 
@@ -111,181 +131,21 @@ EOF
 
 log_success "Terraform plans regenerated"
 
-# Step 3: Regenerate CostPilot outputs (mock for now)
-log_info "Step 3: Regenerating CostPilot outputs..."
+# Step 3: Regenerate CostPilot outputs using snapshot builder
+log_info "Step 3: Regenerating CostPilot outputs using snapshot builder..."
 
-# detect_v1.json
-cat > "$SNAPSHOTS_DIR/detect_v1.json" << 'EOF'
-{
-  "scenario_version": "v1",
-  "detected_changes": [
-    {
-      "resource_type": "aws_launch_template",
-      "resource_name": "main",
-      "classification": "compute",
-      "change_type": "modify",
-      "attribute": "instance_type",
-      "before_value": "t3.micro",
-      "after_value": "t3.xlarge",
-      "rule_id": "EC2_INSTANCE_TYPE_CHANGE",
-      "severity": "high",
-      "severity_score": 9.0
-    },
-    {
-      "resource_type": "aws_s3_bucket_lifecycle_configuration",
-      "resource_name": "main",
-      "classification": "storage",
-      "change_type": "delete",
-      "rule_id": "S3_LIFECYCLE_DISABLED",
-      "severity": "high",
-      "severity_score": 8.5
-    },
-    {
-      "resource_type": "aws_cloudwatch_log_group",
-      "resource_name": "application",
-      "classification": "monitoring",
-      "change_type": "modify",
-      "attribute": "retention_in_days",
-      "before_value": 30,
-      "after_value": 0,
-      "rule_id": "CLOUDWATCH_RETENTION_INFINITE",
-      "severity": "medium",
-      "severity_score": 6.0
-    },
-    {
-      "resource_type": "aws_launch_template",
-      "resource_name": "main",
-      "classification": "storage",
-      "change_type": "modify",
-      "attribute": "block_device_mappings.ebs.volume_size",
-      "before_value": 20,
-      "after_value": 200,
-      "rule_id": "EBS_VOLUME_SIZE_INCREASE",
-      "severity": "medium",
-      "severity_score": 5.5
-    }
-  ],
-  "summary": {
-    "total_changes": 4,
-    "high_severity": 2,
-    "medium_severity": 2,
-    "low_severity": 0
-  }
-}
-EOF
+cd "$REPO_ROOT"
+python3 -c "
+from scripts.lib.snapshot_builder import SnapshotBuilder
+builder = SnapshotBuilder()
+bundle = builder.build()
+builder.normalize().write_to(Path('snapshots'))
+"
 
-# predict_v1.json
-cat > "$SNAPSHOTS_DIR/predict_v1.json" << 'EOF'
-{
-  "scenario_version": "v1",
-  "cost_prediction": {
-    "monthly_delta": {
-      "low": 450.00,
-      "high": 720.00,
-      "currency": "USD"
-    },
-    "annual_delta": {
-      "low": 5400.00,
-      "high": 8640.00,
-      "currency": "USD"
-    },
-    "confidence": "high",
-    "heuristics": [
-      {
-        "resource": "EC2 Instances (t3.xlarge)",
-        "heuristic_source": "AWS Price List API",
-        "monthly_cost_low": 480.00,
-        "monthly_cost_high": 576.00,
-        "assumptions": "2-4 instances, 100% uptime, us-east-1"
-      },
-      {
-        "resource": "EBS Volumes (200GB gp3)",
-        "heuristic_source": "AWS Price List API",
-        "monthly_cost_low": 32.00,
-        "monthly_cost_high": 64.00,
-        "assumptions": "2-4 volumes, gp3 pricing"
-      },
-      {
-        "resource": "S3 Storage (lifecycle disabled)",
-        "heuristic_source": "Historical Usage Pattern",
-        "monthly_cost_low": 50.00,
-        "monthly_cost_high": 150.00,
-        "assumptions": "1TB growth per month, no cleanup"
-      },
-      {
-        "resource": "CloudWatch Logs (infinite retention)",
-        "heuristic_source": "Historical Usage Pattern",
-        "monthly_cost_low": 30.00,
-        "monthly_cost_high": 80.00,
-        "assumptions": "10GB/day ingestion, no expiration"
-      }
-    ]
-  }
-}
-EOF
+log_success "CostPilot outputs regenerated using snapshot builder"
 
-# explain_v1.json
-cat > "$SNAPSHOTS_DIR/explain_v1.json" << 'EOF'
-{
-  "scenario_version": "v1",
-  "explanation": {
-    "root_cause": "EC2 instance type upgraded from t3.micro to t3.xlarge",
-    "regression_type": "obvious",
-    "severity_score": 9.0,
-    "impact_analysis": {
-      "primary_driver": {
-        "resource": "aws_launch_template.main",
-        "change": "instance_type: t3.micro → t3.xlarge",
-        "cost_multiplier": 16.0,
-        "reasoning": "t3.xlarge has 16x more vCPUs and 16x more memory than t3.micro",
-        "monthly_impact": "$480-$576"
-      },
-      "secondary_factors": [
-        {
-          "resource": "aws_s3_bucket_lifecycle_configuration.main",
-          "change": "lifecycle configuration deleted",
-          "reasoning": "Without lifecycle policies, old objects accumulate indefinitely",
-          "monthly_impact": "$50-$150"
-        },
-        {
-          "resource": "aws_cloudwatch_log_group.application",
-          "change": "retention_in_days: 30 → 0 (infinite)",
-          "reasoning": "Infinite retention prevents automatic log deletion",
-          "monthly_impact": "$30-$80"
-        },
-        {
-          "resource": "aws_launch_template.main",
-          "change": "ebs.volume_size: 20GB → 200GB",
-          "reasoning": "10x increase in storage per instance",
-          "monthly_impact": "$32-$64"
-        }
-      ]
-    },
-    "cross_service_dependencies": [
-      {
-        "path": "ALB → Target Group → Auto Scaling Group → EC2 Instances",
-        "impact": "Instance type change affects entire auto-scaling fleet",
-        "cost_propagation": "high"
-      }
-    ],
-    "heuristic_provenance": {
-      "pricing_source": "AWS Price List API",
-      "usage_assumptions": "Based on typical web application patterns",
-      "confidence_level": "high",
-      "last_updated": "2025-12-06"
-    },
-    "delta_justification": {
-      "total_regression": "$592-$870/month",
-      "breakdown": {
-        "compute": "$480-$576",
-        "storage_s3": "$50-$150",
-        "storage_ebs": "$32-$64",
-        "monitoring": "$30-$80"
-      }
-    }
-  }
-}
-EOF
+
+
 
 log_success "CostPilot outputs regenerated"
 
@@ -446,4 +306,3 @@ echo "  4. Commit changes if hashes are stable"
 echo ""
 
 exit 0
-

@@ -140,5 +140,48 @@ All screenshots must use deterministic color schemes:
 
 ---
 
+## Terminal Image Generator
+
+This directory includes tools for generating professional terminal screenshots for promotional materials.
+
+### Files
+
+- `terminal_commands.txt` - Sample terminal commands showing CostPilot usage
+- `terminal_commands.png` - Generated terminal screenshot image (1920x1080)
+- `TERMINAL_CONFIG.md` - Configuration guide for manual terminal screenshots
+
+### Generate Terminal Image
+
+```bash
+# From repository root
+python3 scripts/generate_terminal_image.py visual_assets/terminal_commands.txt visual_assets/terminal_commands.png
+```
+
+### Custom Terminal Image
+
+1. Create a text file with your terminal commands
+2. Run the generator script:
+
+```bash
+python3 scripts/generate_terminal_image.py path/to/your/commands.txt path/to/output.png
+```
+
+### Terminal Commands Content
+
+The `terminal_commands.txt` file contains typical AWS Terraform workflow commands integrated with CostPilot:
+
+1. **terraform init** - Initialize Terraform
+2. **terraform plan** - Create execution plan  
+3. **costpilot scan** - Analyze costs in the plan
+4. **costpilot diff** - Compare against baseline
+5. **costpilot explain** - Get detailed cost breakdown
+6. **costpilot predict** - Predict future costs
+7. **terraform apply** - Apply changes
+8. **costpilot trend** - Monitor cost trends
+9. **costpilot autofix** - Generate optimization suggestions
+10. **costpilot audit** - Audit cost changes
+
+---
+
 **Last Updated**: 2025-12-06  
 **Version**: 1.0.0

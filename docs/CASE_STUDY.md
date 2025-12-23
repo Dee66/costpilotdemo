@@ -1,8 +1,10 @@
-# CostPilot Case Study: How TechCorp Saved $28,800/Year
+# CostPilot Case Study: Hypothetical Scenario Based on Demo PR 42
 
-## Company Background
+## Overview
 
-**Company:** TechCorp (pseudonym)  
+**This case study is a hypothetical scenario** constructed from the infrastructure changes demonstrated in PR 42 of this repository. It illustrates how CostPilot would detect and prevent the cost regression shown in the demo.
+
+**Company:** TechCorp (hypothetical example)  
 **Industry:** SaaS Platform  
 **Team Size:** 35 engineers, 8 infrastructure specialists  
 **AWS Spend:** ~$180,000/month (~$2.1M annually)  
@@ -78,9 +80,9 @@ policies:
 | **Revert/Fix Time** | 3 hrs per fix x 8 incidents | 15 min per fix x 18 catches | $3,300/6mo saved |
 
 **Total Measurable Savings:** $14,400 over 6 months  
-**CostPilot Cost:** $594 (6 months at $99/month)  
-**Net Savings:** $13,806  
-**ROI:** 24.2x in first 6 months
+**CostPilot Cost:** $174 (6 months at $29 per 30 days)  
+**Net Savings:** $14,226  
+**ROI:** 82.7x in first 6 months
 
 ### Regressions Prevented
 
@@ -135,10 +137,10 @@ policies:
 
 | Item | Cost |
 |------|------|
-| **CostPilot Subscription** | $99/month x 6 months = $594 |
+| **CostPilot Subscription** | $29 per 30 days x 6 months = $174 |
 | **Integration Time** | 22 minutes x $150/hr = $55 |
 | **Training Time** | 2 hours x 35 engineers x $150/hr = $10,500 |
-| **Total Investment (6 months)** | $11,149 |
+| **Total Investment (6 months)** | $10,729 |
 
 ### Return
 
@@ -210,7 +212,6 @@ CostPilot delivered measurable ROI in three dimensions:
 
 Ready to catch your next $2,400/month regression before it hits production?
 
-**[Start Free Trial →](https://github.com/Dee66/costpilotdemo)**  
 **[Book Demo Call →](https://cal.com/costpilot)**  
 **[View Pricing →](https://github.com/Dee66/costpilotdemo#pricing)**
 

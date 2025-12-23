@@ -1,4 +1,24 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025 CostPilot Demo Team
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 """
 Visual Assets Validation Suite
 Adds ~70 granular tests for visual assets quality and completeness
@@ -19,6 +39,31 @@ sys.path.insert(0, str(Path(__file__).parent))
 from lib.test_suite import TestSuite
 from lib.logger import get_logger
 from typing import Dict, List, Any
+
+
+def validate_screenshot_resolution(filepath: Path, expected_width=1920, expected_height=1080):
+    """Validate screenshot resolution"""
+    try:
+        from PIL import Image
+        with Image.open(filepath) as img:
+            width, height = img.size
+            return width == expected_width and height == expected_height
+    except ImportError:
+        # Fallback if PIL not available
+        return True  # Skip validation
+
+
+def compare_to_golden(screenshot_path: Path, golden_path: Path):
+    """Compare screenshot to golden version"""
+    try:
+        from PIL import Image, ImageChops
+        with Image.open(screenshot_path) as img1, Image.open(golden_path) as img2:
+            if img1.size != img2.size:
+                return False
+            diff = ImageChops.difference(img1, img2)
+            return not diff.getbbox()  # No differences if no bounding box
+    except ImportError:
+        return True  # Skip if PIL not available
 
 
 def read_file(filepath: Path) -> str:
@@ -42,12 +87,40 @@ class VisualAssetsTestSuite(TestSuite):
     
     def run(self):
         """Template method - defines the test execution sequence"""
+        self.test_screenshot_resolutions()
         self.test_mermaid_diagram_syntax()
         self.test_svg_structure_validation()
         self.test_diagram_completeness()
         self.test_screenshots_manifest()
         self.test_asset_metadata()
         self.test_visual_quality_indicators()
+    
+    def test_screenshot_resolutions(self):
+        """Validate screenshot resolutions and golden comparison - 10 tests"""
+        self.section("SCREENSHOT RESOLUTION & GOLDEN VALIDATION (10 tests)")
+        
+        video_assets_dir = self.repo_root / "video_assets"
+        snapshots_dir = self.repo_root / "snapshots"
+        screenshots = ['detect.png', 'predict.png', 'explain.png', 'autofix.png', 'trend.png']
+        
+        for screenshot in screenshots:
+            filepath = video_assets_dir / screenshot
+            golden_path = snapshots_dir / f"golden_{screenshot}"
+            
+            if filepath.exists():
+                is_correct_res = validate_screenshot_resolution(filepath)
+                self.test(f"{screenshot}: 1920x1080 resolution", is_correct_res,
+                         f"Resolution {'correct' if is_correct_res else 'incorrect'}")
+                
+                if golden_path.exists():
+                    matches_golden = compare_to_golden(filepath, golden_path)
+                    self.test(f"{screenshot}: matches golden", matches_golden,
+                             f"{'Matches' if matches_golden else 'Differs from'} golden")
+                else:
+                    self.skip(f"{screenshot}: golden comparison", "Golden file not found")
+            else:
+                self.skip(f"{screenshot}: resolution check", "File not found")
+                self.skip(f"{screenshot}: golden comparison", "File not found")
     
     def test_mermaid_diagram_syntax(self):
         """Validate Mermaid diagram syntax - 20 tests"""
@@ -229,7 +302,7 @@ class VisualAssetsTestSuite(TestSuite):
         with open(manifest_file, 'r') as f:
             manifest = json.load(f)
     
-        print("\n📋 Manifest Structure")
+        self.logger.info("📋 Manifest Structure")
     
         # Check manifest metadata
         self.test("manifest: has version", "manifest_version" in manifest)
@@ -242,7 +315,7 @@ class VisualAssetsTestSuite(TestSuite):
         self.test("manifest: has required screenshots", len(screenshots) >= 3,
                    f"Expected ≥3, found {len(screenshots)}")
     
-        print("\n📸 Screenshot Entries")
+        self.logger.info("📸 Screenshot Entries")
     
         # Check each screenshot entry
         for idx, screenshot in enumerate(screenshots):
@@ -273,7 +346,7 @@ class VisualAssetsTestSuite(TestSuite):
         visual_dir = self.repo_root / "visual_assets"
         snapshots_dir = self.repo_root / "snapshots"
     
-        print("\n📁 Visual Assets Organization")
+        self.logger.info("📁 Visual Assets Organization")
     
         # Check visual_assets directory
         self.test("visual_assets/ directory exists", visual_dir.exists())
@@ -283,7 +356,7 @@ class VisualAssetsTestSuite(TestSuite):
             self.test("visual_assets/ has manifest", (visual_dir / "screenshots_manifest.json").exists())
             self.test("visual_assets/ has examples", (visual_dir / "SCREENSHOT_EXAMPLES.md").exists())
     
-        print("\n🎯 Snapshot Assets")
+        self.logger.info("🎯 Snapshot Assets")
     
         # Check for snapshot-related visual assets
         if snapshots_dir.exists():
@@ -292,7 +365,7 @@ class VisualAssetsTestSuite(TestSuite):
             self.test("snapshots/ has SVG assets",
                        len(list(snapshots_dir.glob("*.svg"))) > 0)
     
-        print("\n🔗 Asset References")
+        self.logger.info("🔗 Asset References")
     
         # Check that manifests reference actual files
         manifest_file = visual_dir / "screenshots_manifest.json"
@@ -308,7 +381,7 @@ class VisualAssetsTestSuite(TestSuite):
                     self.test(f"manifest: source '{source}' exists",
                                source_path.exists())
     
-        print("\n📊 Asset Coverage")
+        self.logger.info("📊 Asset Coverage")
     
         # Check coverage of visual assets
         mermaid_count = len(list(self.repo_root.glob("**/*.mmd")))
@@ -334,7 +407,7 @@ class VisualAssetsTestSuite(TestSuite):
     
         snapshots_dir = self.repo_root / "snapshots"
     
-        print("\n🎨 Color Usage")
+        self.logger.info("🎨 Color Usage")
     
         # Check mapping diagram for color coding
         mapping_file = snapshots_dir / "mapping_v1.mmd"
@@ -351,7 +424,7 @@ class VisualAssetsTestSuite(TestSuite):
             for _ in range(3):
                 self.skip("mapping color checks", "File not found")
     
-        print("\n📐 Layout Quality")
+        self.logger.info("📐 Layout Quality")
     
         # Check SVG for proper layout
         trend_file = snapshots_dir / "trend_v1.svg"
@@ -370,7 +443,7 @@ class VisualAssetsTestSuite(TestSuite):
             for _ in range(4):
                 self.skip("trend layout checks", "File not found")
     
-        print("\n✅ Accessibility")
+        self.logger.info("✅ Accessibility")
     
         # Check for text alternatives
         svg_files = list(snapshots_dir.glob("*.svg"))

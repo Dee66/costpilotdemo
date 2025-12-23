@@ -2,11 +2,34 @@
   "format_version": "1.0",
   "scenario_version": "v1",
   "timestamp": "2025-12-06T16:47:00Z",
+  "version": "1.0",
+  "metadata": {
+    "analysis_duration_ms": 156,
+    "prediction_version": "1.0.0"
+  },
+  "heuristics_used": [
+    {
+      "name": "ec2-pricing-on-demand-t3-family",
+      "confidence": "high"
+    },
+    {
+      "name": "ebs-pricing-gp3",
+      "confidence": "high"
+    },
+    {
+      "name": "cloudwatch-pricing-standard",
+      "confidence": "medium"
+    }
+  ],
   "prediction_results": {
     "summary": {
       "baseline_monthly_cost": 52.43,
       "predicted_monthly_cost": 387.89,
-      "monthly_delta": 335.46,
+      "monthly_cost_delta": {
+        "low": 300.0,
+        "high": 370.0,
+        "baseline": 52.43
+      },
       "percentage_increase": 639.82,
       "baseline_annual_cost": 629.16,
       "predicted_annual_cost": 4654.68,

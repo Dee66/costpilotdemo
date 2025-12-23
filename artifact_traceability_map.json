@@ -1,0 +1,67 @@
+{
+  "version": "3.0.0",
+  "scenario": "pr_regression_demo",
+  "traceability": {
+    "pr_diff": {
+      "source": "infrastructure/terraform/pr_change/main.tf",
+      "changes": [
+        "EC2 instance upgrade: t3.micro → t3.xlarge",
+        "EBS volume increase: 20GB → 200GB",
+        "S3 lifecycle disabled",
+        "CloudWatch retention: 30d → ∞"
+      ]
+    },
+    "detect_findings": {
+      "source": "snapshots/detect_v1.json",
+      "findings": [
+        {
+          "id": "ec2_instance_size",
+          "severity": "high",
+          "cost_impact": "+$56.85/mo",
+          "trace": "pr_diff.changes[0]"
+        },
+        {
+          "id": "ebs_volume_size",
+          "severity": "medium",
+          "cost_impact": "+$12/mo",
+          "trace": "pr_diff.changes[1]"
+        },
+        {
+          "id": "s3_lifecycle_disabled",
+          "severity": "high",
+          "cost_impact": "+$20/mo",
+          "trace": "pr_diff.changes[2]"
+        },
+        {
+          "id": "cloudwatch_retention",
+          "severity": "medium",
+          "cost_impact": "+$145/mo",
+          "trace": "pr_diff.changes[3]"
+        }
+      ]
+    },
+    "predict_costs": {
+      "source": "snapshots/predict_v1.json",
+      "baseline_cost": "$52.43/mo",
+      "predicted_cost": "$387.89/mo",
+      "delta": "+$335.46 (+640%)",
+      "trace": "detect_findings.findings[*]"
+    },
+    "explain_output": {
+      "source": "snapshots/explain_v1.json",
+      "root_causes": [
+        "Instance size upgrade violates policy",
+        "Storage expansion unnecessary",
+        "Monitoring over-provisioned",
+        "Lifecycle rules disabled"
+      ],
+      "trace": "detect_findings.findings[*]"
+    },
+    "ci_block_or_silence": {
+      "mode": "block",
+      "exit_code": 1,
+      "reason": "Cost regression detected",
+      "trace": "detect_findings.findings[*]"
+    }
+  }
+}

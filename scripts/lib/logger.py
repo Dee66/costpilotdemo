@@ -1,4 +1,24 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025 CostPilot Demo Team
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 """
 CostPilot Logger - Structured Logging for Test Framework
 Professional logging with configurable levels and multiple output formats
@@ -144,6 +164,10 @@ _default_logger = None
 def get_logger(name: str = "costpilot", level: str = "INFO", log_file: Optional[Path] = None) -> CostPilotLogger:
     """Get or create a CostPilot logger instance"""
     global _default_logger
+    if log_file is None:
+        # Generate log file name: suite_name_timestamp.log
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        log_file = Path(f"logs/{name}_{timestamp}.log")
     if _default_logger is None or _default_logger.name != name:
         _default_logger = CostPilotLogger(name, level, log_file)
     return _default_logger

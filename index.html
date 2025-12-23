@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CostPilot Interactive Demo - See Cost Regressions Caught in Real-Time</title>
     <meta name="description" content="Interactive demonstration of CostPilot catching a $335/month AWS cost regression before deployment">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
@@ -33,6 +34,7 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         .hero {
@@ -384,6 +386,459 @@
             height: auto !important;
         }
     </style>
+
+    <style>
+        /* ROI Calculator Styles */
+        .roi-calculator-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .roi-calculator {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .roi-calculator h2 {
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .roi-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slider-hint {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-items: center;
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slider-group label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 220px;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .slider-container input[type="range"] {
+            writing-mode: vertical-lr;
+            direction: rtl;
+            width: 80px;
+            height: 220px;
+            -webkit-appearance: none;
+            background: transparent;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom track background */
+        .slider-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 180px;
+            background: linear-gradient(to bottom, #e5e7eb 0%, #d1d5db 100%);
+            border-radius: 6px;
+            z-index: 1;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress fill */
+        .slider-container::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: var(--progress-height, 0px);
+            background: linear-gradient(to top, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 6px;
+            z-index: 1;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Tick marks */
+        .slider-container .tick-marks {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            height: 180px;
+            width: 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slider-container .tick-marks::before,
+        .slider-container .tick-marks::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 180px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 16px,
+                rgba(0, 0, 0, 0.1) 16px,
+                rgba(0, 0, 0, 0.1) 18px
+            );
+        }
+
+        .slider-container .tick-marks::before {
+            left: -4px;
+        }
+
+        .slider-container .tick-marks::after {
+            right: -4px;
+        }
+
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        .slider-container input[type="range"]::-webkit-slider-track {
+            background: transparent;
+            width: 12px;
+            height: 180px;
+            border-radius: 6px;
+            border: none;
+            margin: 20px 0;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 3;
+            animation: sliderPulse 2s ease-in-out infinite;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.9);
+            cursor: grab;
+            animation: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            animation: none;
+        }
+
+        /* Firefox */
+        .slider-container input[type="range"]::-moz-range-track {
+            background: transparent;
+            width: 12px;
+            height: 180px;
+            border-radius: 6px;
+            border: none;
+            margin: 20px 0;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 3;
+            animation: sliderPulse 2s ease-in-out infinite;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.9);
+            cursor: grab;
+            animation: none;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            animation: none;
+        }
+
+        .slider-value {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-height: 1.5rem;
+        }
+
+        .roi-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .roi-calculator {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .roi-calculator h2 {
+                font-size: 1.5rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .slider-container {
+                height: 180px;
+                width: 60px;
+            }
+
+            .slider-container input[type="range"] {
+                width: 180px;
+                height: 60px;
+            }
+
+            .slider-container::before {
+                width: 10px;
+                height: 140px;
+                top: 15px;
+            }
+
+            .slider-container::after {
+                width: 10px;
+                bottom: 15px;
+            }
+
+            .slider-container input[type="range"]::-webkit-slider-track {
+                width: 10px;
+                height: 140px;
+                margin: 15px 0;
+            }
+
+            .slider-container input[type="range"]::-webkit-slider-thumb {
+                width: 28px;
+                height: 28px;
+            }
+
+            .slider-container input[type="range"]::-moz-range-track {
+                width: 10px;
+                height: 140px;
+                margin: 15px 0;
+            }
+
+            .slider-container input[type="range"]::-moz-range-thumb {
+                width: 28px;
+                height: 28px;
+            }
+
+            .roi-results {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes sliderPulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 0 4px rgba(16, 185, 129, 0.1);
+            }
+            50% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 0 6px rgba(16, 185, 129, 0.2);
+            }
+        }
+
+        /* Terminal Demo Styles */
+        .terminal-demo {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 4rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .terminal-demo h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-demo p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-window {
+            background: #000;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 1200px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #00ff00;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-title {
+            font-size: 0.875rem;
+            color: #ccc;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red { background: #ff5f57; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #28ca42; }
+
+        .terminal-body {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .prompt {
+            color: #00ff00;
+            display: inline;
+        }
+
+        .command {
+            color: #fff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin-top: 1rem;
+            white-space: pre-line;
+        }
+
+        .run-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: background 0.3s;
+        }
+
+        .run-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -416,23 +871,108 @@
         </div>
     </div>
 
+    <!-- Terminal Demo Section -->
+    <div class="terminal-demo">
+        <div class="container">
+            <h2>🚀 Try CostPilot in Action</h2>
+            <p>See how easy it is to catch cost regressions before deployment</p>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-title">Terminal - costpilot scan</span>
+                    <div class="terminal-controls">
+                        <div class="control red"></div>
+                        <div class="control yellow"></div>
+                        <div class="control green"></div>
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div class="prompt">$ </div><span class="command typing">costpilot scan main.tf</span>
+                    <div class="output" id="demoOutput">
+                        <!-- Output will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <button class="run-btn" onclick="runDemo()">Run Demo</button>
+        </div>
+    </div>
+
+    <!-- ROI Calculator Section -->
+    <div class="roi-calculator-section" id="roi-calculator">
+        <div class="container">
+            <div class="roi-calculator">
+                <h2>💰 Calculate Your CostPilot ROI</h2>
+                <p class="roi-subtitle">See how much CostPilot could save your organization with real-time cost regression detection</p>
+                <p class="slider-hint">👆 Drag the sliders below to adjust your inputs and see instant ROI calculations</p>
+                
+                <div class="calculator-grid">
+                    <div class="slider-group">
+                        <label for="monthlySpend">Monthly AWS Spend</label>
+                        <div class="slider-value" id="monthlySpendValue">$0</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="monthlySpend" min="0" max="25000" value="0" step="1000" orient="vertical">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="wastePercent">Estimated Waste %</label>
+                        <div class="slider-value" id="wastePercentValue">15%</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1" orient="vertical">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="detectionRate">CostPilot Detection Rate</label>
+                        <div class="slider-value" id="detectionRateValue">95%</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1" orient="vertical">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="roi-results">
+                    <div class="result-card">
+                        <div class="result-label">Annual Savings</div>
+                        <div class="result-value" id="annualSavings">$57,000</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Net Benefit (after $348/year cost)</div>
+                        <div class="result-value" id="netBenefit">$55,812</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">ROI</div>
+                        <div class="result-value" id="roiValue">4,600%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-value">4</div>
-                <div class="stat-label">Cost-Impacting Findings</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">2</div>
-                <div class="stat-label">High Severity Issues</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">&lt; 5 min</div>
-                <div class="stat-label">Detection Time</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Prevented Before Deploy</div>
+        <div class="section">
+            <h2>📊 Key Metrics</h2>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Cost-Impacting Findings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">High Severity Issues</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">&lt; 5 min</div>
+                    <div class="stat-label">Detection Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Prevented Before Deploy</div>
+                </div>
             </div>
         </div>
 
@@ -558,8 +1098,8 @@ retention_in_days = 30
                 <a href="https://github.com/Dee66/costpilotdemo" class="btn btn-primary" target="_blank">
                     📦 Clone This Demo
                 </a>
-                <a href="https://costpilot.io/trial" class="btn btn-secondary" target="_blank">
-                    🎯 Start Free Trial
+                <a href="#roi-calculator" class="btn btn-secondary">
+                    💰 Calculate Your ROI
                 </a>
             </div>
         </div>
@@ -572,7 +1112,7 @@ retention_in_days = 30
                 const data = await response.json();
                 const container = document.getElementById('findingsContainer');
                 
-                if (!data.detection_results || !data.detection_results.findings) {
+                if (!data.detection_results?.findings || data.detection_results.findings.length === 0) {
                     container.innerHTML = '<p style="color: var(--text-muted);">No findings data available</p>';
                     return;
                 }
@@ -754,7 +1294,136 @@ retention_in_days = 30
             loadFindings();
             animateCounter('beforeCost', 0, 52, 1500);
             animateCounter('afterCost', 52, 388, 2000);
+            
+            // Initialize ROI Calculator
+            initializeROICalculator();
         });
+
+        function initializeROICalculator() {
+            const monthlySpendSlider = document.getElementById('monthlySpend');
+            const wastePercentSlider = document.getElementById('wastePercent');
+            const detectionRateSlider = document.getElementById('detectionRate');
+            
+            const monthlySpendValue = document.getElementById('monthlySpendValue');
+            const wastePercentValue = document.getElementById('wastePercentValue');
+            const detectionRateValue = document.getElementById('detectionRateValue');
+            
+            const annualSavings = document.getElementById('annualSavings');
+            const netBenefit = document.getElementById('netBenefit');
+            const roiValue = document.getElementById('roiValue');
+            
+            // Function to format currency
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(amount);
+            }
+            
+            // Function to calculate ROI
+            function calculateROI() {
+                const spend = parseFloat(monthlySpendSlider.value);
+                const waste = parseFloat(wastePercentSlider.value) / 100;
+                const detection = parseFloat(detectionRateSlider.value) / 100;
+                
+                const annualWaste = spend * 12 * waste;
+                const savings = annualWaste * detection;
+                const costpilotCost = 29 * 12; // $29 per 30 days annual cost
+                const netSavings = savings - costpilotCost;
+                
+                // Handle edge case where there's no potential waste to catch
+                let roi;
+                if (annualWaste === 0) {
+                    roi = 0; // No waste = no value provided, but not a loss
+                } else {
+                    roi = costpilotCost > 0 ? (netSavings / costpilotCost) * 100 : 0;
+                }
+                
+                // Update display values
+                monthlySpendValue.textContent = formatCurrency(spend);
+                wastePercentValue.textContent = wastePercentSlider.value + '%';
+                detectionRateValue.textContent = detectionRateSlider.value + '%';
+                
+                annualSavings.textContent = formatCurrency(savings);
+                netBenefit.textContent = formatCurrency(netSavings);
+                roiValue.textContent = annualWaste === 0 ? 'N/A' : Math.round(roi) + '%';
+                
+                // Update progress fills
+                updateSliderProgress(monthlySpendSlider, 'monthlySpend');
+                updateSliderProgress(wastePercentSlider, 'wastePercent');
+                updateSliderProgress(detectionRateSlider, 'detectionRate');
+            }
+            
+            // Function to update slider progress fill
+            function updateSliderProgress(slider, sliderId) {
+                const container = slider.parentElement;
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+                const value = parseFloat(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                const fillHeight = (percentage / 100) * 180; // 180px is track height
+                
+                // Update the ::after pseudo-element height
+                container.style.setProperty('--progress-height', fillHeight + 'px');
+                container.style.setProperty('--progress-percentage', percentage + '%');
+            }
+            
+            // Add event listeners for real-time updates
+            monthlySpendSlider.addEventListener('input', calculateROI);
+            wastePercentSlider.addEventListener('input', calculateROI);
+            detectionRateSlider.addEventListener('input', calculateROI);
+            
+            // Initial calculation
+            calculateROI();
+        }
+
+        function runDemo() {
+            const output = document.getElementById('demoOutput');
+            const command = document.querySelector('.command');
+            command.classList.remove('typing');
+            output.textContent = '';
+            
+            const plainText = `Scanning Terraform file: main.tf
+
+🔍 Analyzing infrastructure changes...
+✅ Found 1 cost regression
+
+Finding #1: High Severity
+Resource: aws_instance.web_server
+Issue: Instance type upgraded from t3.medium to t3.xlarge
+Impact: +$150/month (+300% cost increase)
+Recommendation: Consider t3.large for better cost-efficiency
+
+Total potential savings: $150/month`;
+            
+            const coloredText = `Scanning Terraform file: main.tf
+
+🔍 Analyzing infrastructure changes...
+<span style="color: #10b981;">✅ Found 1 cost regression</span>
+
+Finding #1: <span style="color: #ef4444;">High Severity</span>
+Resource: aws_instance.web_server
+Issue: Instance type upgraded from t3.medium to t3.xlarge
+Impact: <span style="color: #ef4444;">+$150/month (+300% cost increase)</span>
+Recommendation: Consider t3.large for better cost-efficiency
+
+Total potential savings: <span style="color: #10b981;">$150/month</span>`;
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < plainText.length) {
+                    output.textContent += plainText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 40);
+                } else {
+                    // Apply colors after typing completes
+                    output.innerHTML = coloredText;
+                }
+            };
+            typeWriter();
+        }
     </script>
 </body>
 </html>
