@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CostPilot Interactive Demo - See Cost Regressions Caught in Real-Time</title>
+    <meta name="description" content="Interactive demonstration of CostPilot catching a $335/month AWS cost regression before deployment">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg: #f9fafb;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cost-delta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cost-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+
+        .cost-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cost-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .cost-arrow {
+            font-size: 3rem;
+            opacity: 0.8;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: var(--danger);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .findings-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .finding-card {
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .finding-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+
+        .finding-card.high {
+            border-left: 4px solid var(--danger);
+        }
+
+        .finding-card.medium {
+            border-left: 4px solid var(--warning);
+        }
+
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .finding-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text);
+        }
+
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-badge.high {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .severity-badge.medium {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .finding-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .finding-detail strong {
+            color: var(--text);
+        }
+
+        .change-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            margin: 0.5rem 0;
+        }
+
+        .change-before {
+            color: var(--primary);
+        }
+
+        .change-after {
+            color: var(--danger);
+        }
+
+        .finding-details-expanded {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+
+        .finding-card.expanded .finding-details-expanded {
+            display: block;
+        }
+
+        .rationale {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .policy-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--info);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--text);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .trend-chart {
+            width: 100%;
+            height: 300px;
+            background: var(--bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .trend-chart.zoomed {
+            height: 600px;
+        }
+
+        .trend-chart img {
+            transition: transform 0.3s ease;
+        }
+
+        .trend-chart.zoomed img {
+            transform: scale(1.5);
+        }
+
+        .trend-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            white-space: nowrap;
+        }
+
+        .expand-hint {
+            color: var(--primary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+    </style>
+    
+    <style>
+        #mappingChart {
+            height: auto !important;
+            min-height: 300px !important;
+            overflow: visible !important;
+            text-align: center !important;
+            padding: 1rem !important;
+            background: var(--bg) !important;
+            border-radius: 8px !important;
+        }
+        
+        #mappingChart svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+
+    <style>
+        /* ROI Calculator Styles */
+        .roi-calculator-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .roi-calculator {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .roi-calculator h2 {
+            text-align: center;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .roi-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slider-hint {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-items: center;
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slider-group label {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 220px;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .slider-container input[type="range"] {
+            writing-mode: vertical-lr;
+            direction: rtl;
+            width: 80px;
+            height: 220px;
+            -webkit-appearance: none;
+            background: transparent;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom track background */
+        .slider-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 180px;
+            background: linear-gradient(to bottom, #e5e7eb 0%, #d1d5db 100%);
+            border-radius: 6px;
+            z-index: 1;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress fill */
+        .slider-container::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: var(--progress-height, 0px);
+            background: linear-gradient(to top, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 6px;
+            z-index: 1;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Tick marks */
+        .slider-container .tick-marks {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            height: 180px;
+            width: 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slider-container .tick-marks::before,
+        .slider-container .tick-marks::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 180px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 16px,
+                rgba(0, 0, 0, 0.1) 16px,
+                rgba(0, 0, 0, 0.1) 18px
+            );
+        }
+
+        .slider-container .tick-marks::before {
+            left: -4px;
+        }
+
+        .slider-container .tick-marks::after {
+            right: -4px;
+        }
+
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        .slider-container input[type="range"]::-webkit-slider-track {
+            background: transparent;
+            width: 12px;
+            height: 180px;
+            border-radius: 6px;
+            border: none;
+            margin: 20px 0;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 3;
+            animation: sliderPulse 2s ease-in-out infinite;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.9);
+            cursor: grab;
+            animation: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            animation: none;
+        }
+
+        /* Firefox */
+        .slider-container input[type="range"]::-moz-range-track {
+            background: transparent;
+            width: 12px;
+            height: 180px;
+            border-radius: 6px;
+            border: none;
+            margin: 20px 0;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: 3;
+            animation: sliderPulse 2s ease-in-out infinite;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.9);
+            cursor: grab;
+            animation: none;
+        }
+
+        .slider-container input[type="range"]::-moz-range-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            animation: none;
+        }
+
+        .slider-value {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            min-height: 1.5rem;
+        }
+
+        .roi-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .roi-calculator {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .roi-calculator h2 {
+                font-size: 1.5rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .slider-container {
+                height: 180px;
+                width: 60px;
+            }
+
+            .slider-container input[type="range"] {
+                width: 180px;
+                height: 60px;
+            }
+
+            .slider-container::before {
+                width: 10px;
+                height: 140px;
+                top: 15px;
+            }
+
+            .slider-container::after {
+                width: 10px;
+                bottom: 15px;
+            }
+
+            .slider-container input[type="range"]::-webkit-slider-track {
+                width: 10px;
+                height: 140px;
+                margin: 15px 0;
+            }
+
+            .slider-container input[type="range"]::-webkit-slider-thumb {
+                width: 28px;
+                height: 28px;
+            }
+
+            .slider-container input[type="range"]::-moz-range-track {
+                width: 10px;
+                height: 140px;
+                margin: 15px 0;
+            }
+
+            .slider-container input[type="range"]::-moz-range-thumb {
+                width: 28px;
+                height: 28px;
+            }
+
+            .roi-results {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes sliderPulse {
+            0%, 100% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 0 4px rgba(16, 185, 129, 0.1);
+            }
+            50% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 0 6px rgba(16, 185, 129, 0.2);
+            }
+        }
+
+        /* Terminal Demo Styles */
+        .terminal-demo {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 4rem 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .terminal-demo h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-demo p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-window {
+            background: #000;
+            border-radius: 8px;
+            margin: 0 auto;
+            max-width: 1200px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #00ff00;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            display: block;
+        }
+
+        .terminal-header {
+            background: #333;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-title {
+            font-size: 0.875rem;
+            color: #ccc;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red { background: #ff5f57; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #28ca42; }
+
+        .terminal-body {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .prompt {
+            color: #00ff00;
+            display: inline;
+        }
+
+        .command {
+            color: #fff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin-top: 1rem;
+            white-space: pre-line;
+        }
+
+        .run-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: background 0.3s;
+        }
+
+        .run-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    
+    <div class="hero">
+        <h1>💸 CostPilot Caught This Before Deployment</h1>
+        <p>Watch how one innocent infrastructure change could have cost <strong>$2,010 over 6 months</strong></p>
+        
+        <div class="cost-delta">
+            <div class="cost-box">
+                <div class="cost-label">Before (Baseline)</div>
+                <div class="cost-value" id="beforeCost">$52</div>
+                <div class="cost-label">per month</div>
+            </div>
+            
+            <div class="cost-arrow">→</div>
+            
+            <div class="cost-box">
+                <div class="cost-label">After (PR #42)</div>
+                <div class="cost-value" id="afterCost">$388</div>
+                <div class="cost-label">per month</div>
+            </div>
+        </div>
+        
+        <div class="savings-badge">
+            🚨 +$335.46/month (+639%)
+        </div>
+    </div>
+
+    <!-- Terminal Demo Section -->
+    <div class="terminal-demo">
+        <div class="container">
+            <h2>🚀 Try CostPilot in Action</h2>
+            <p>See how easy it is to catch cost regressions before deployment</p>
+            
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-title">Terminal - costpilot scan</span>
+                    <div class="terminal-controls">
+                        <div class="control red"></div>
+                        <div class="control yellow"></div>
+                        <div class="control green"></div>
+                    </div>
+                </div>
+                <div class="terminal-body">
+                    <div class="prompt">$ </div><span class="command typing">costpilot scan main.tf</span>
+                    <div class="output" id="demoOutput">
+                        <!-- Output will appear here -->
+                    </div>
+                </div>
+            </div>
+            
+            <button class="run-btn" onclick="runDemo()">Run Demo</button>
+        </div>
+    </div>
+
+    <!-- ROI Calculator Section -->
+    <div class="roi-calculator-section" id="roi-calculator">
+        <div class="container">
+            <div class="roi-calculator">
+                <h2>💰 Calculate Your CostPilot ROI</h2>
+                <p class="roi-subtitle">See how much CostPilot could save your organization with real-time cost regression detection</p>
+                <p class="slider-hint">👆 Drag the sliders below to adjust your inputs and see instant ROI calculations</p>
+                
+                <div class="calculator-grid">
+                    <div class="slider-group">
+                        <label for="monthlySpend">Monthly AWS Spend</label>
+                        <div class="slider-value" id="monthlySpendValue">$0</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="monthlySpend" min="0" max="25000" value="0" step="1000" orient="vertical">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="wastePercent">Estimated Waste %</label>
+                        <div class="slider-value" id="wastePercentValue">15%</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1" orient="vertical">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-group">
+                        <label for="detectionRate">CostPilot Detection Rate</label>
+                        <div class="slider-value" id="detectionRateValue">95%</div>
+                        <div class="slider-container">
+                            <div class="tick-marks"></div>
+                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1" orient="vertical">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="roi-results">
+                    <div class="result-card">
+                        <div class="result-label">Annual Savings</div>
+                        <div class="result-value" id="annualSavings">$57,000</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">Net Benefit (after $348/year cost)</div>
+                        <div class="result-value" id="netBenefit">$55,812</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-label">ROI</div>
+                        <div class="result-value" id="roiValue">4,600%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>📊 Key Metrics</h2>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Cost-Impacting Findings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">High Severity Issues</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">&lt; 5 min</div>
+                    <div class="stat-label">Detection Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Prevented Before Deploy</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Detected Cost Regressions</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                Click any finding to see detailed analysis and auto-fix suggestions
+            </p>
+            
+            <div class="findings-grid" id="findingsContainer">
+                <div class="loading">Loading findings...</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Infrastructure Impact Map</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                See how changes cascade through your infrastructure
+            </p>
+            <div class="trend-chart" id="mappingChart">
+                <div class="mermaid" style="background: white; padding: 1rem; border-radius: 8px;">
+graph TD
+    ALB[Application Load Balancer]
+    TG[Target Group]
+    ASG[Auto Scaling Group]
+    EC2[EC2 Instances - t3.xlarge]
+    EBS[EBS Volumes - 200GB]
+    S3[S3 Bucket - No Lifecycle]
+    CW[CloudWatch Logs - Infinite]
+    
+    ALB --> TG
+    TG --> ASG
+    ASG --> EC2
+    EC2 --> EBS
+    EC2 --> CW
+    ASG --> S3
+    
+    style EC2 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style EBS fill:#ffd93d,stroke:#f59f00,color:#000
+    style S3 fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    style CW fill:#ffd93d,stroke:#f59f00,color:#000
+    
+    classDef highCost fill:#ff6b6b,stroke:#c92a2a,color:#fff
+    classDef mediumCost fill:#ffd93d,stroke:#f59f00,color:#000
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Cost Trend Analysis</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                This change would breach your SLO threshold of $500/month
+            </p>
+            <div class="trend-chart" id="trendChart" onclick="this.classList.toggle('zoomed')">
+                <div class="trend-tooltip" id="trendTooltip"></div>
+                <img src="./visual_assets/trend_v1.svg" alt="Cost Trend Chart" style="width: 100%; height: 100%; object-fit: contain;" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                     onmousemove="showTrendTooltip(event)" onmouseout="hideTrendTooltip()">
+                <div style="display: none; text-align: center; padding: 3rem; color: var(--text-muted);">
+                    Trend chart will be displayed here once visual assets are captured
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Auto-Fix Suggestions</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                CostPilot provides exact HCL patches to revert cost regressions
+            </p>
+            
+            <div style="background: var(--surface); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="margin: 0;">Recommended Fixes</h3>
+                    <button class="btn btn-primary" onclick="copyPatchToClipboard()" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+                        📋 Copy Patch
+                    </button>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div>
+                        <h4 style="color: var(--danger); margin-bottom: 0.5rem;">❌ Current (Expensive)</h4>
+                        <pre style="background: #fee; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.875rem; margin: 0;"><code>instance_type = "t3.xlarge"
+volume_size = 200
+retention_in_days = 0
+# lifecycle missing</code></pre>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 0.5rem;">✅ Suggested (Optimized)</h4>
+                        <pre style="background: #efe; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.875rem; margin: 0;"><code>instance_type = "t3.large"
+volume_size = 50
+retention_in_days = 30
+# lifecycle: enabled</code></pre>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg); padding: 1rem; border-radius: 6px;">
+                    <strong>💰 Savings Calculator</strong>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.75rem; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$335</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Monthly Savings</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$2,010</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">6-Month Savings</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">$4,020</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Annual Savings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>🚀 Try CostPilot on Your Infrastructure</h2>
+            <p style="opacity: 0.9; margin-bottom: 2rem;">
+                This demo is fully open source. Clone it, explore the code, and see exactly how CostPilot works.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="https://github.com/Dee66/costpilotdemo" class="btn btn-primary" target="_blank">
+                    📦 Clone This Demo
+                </a>
+                <a href="#roi-calculator" class="btn btn-secondary">
+                    💰 Calculate Your ROI
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadFindings() {
+            try {
+                const response = await fetch('./snapshots/detect_v1.json');
+                const data = await response.json();
+                const container = document.getElementById('findingsContainer');
+                
+                if (!data.detection_results?.findings || data.detection_results.findings.length === 0) {
+                    container.innerHTML = '<p style="color: var(--text-muted);">No findings data available</p>';
+                    return;
+                }
+
+                const findings = data.detection_results.findings;
+                container.innerHTML = '';
+
+                findings.forEach((finding, index) => {
+                    const card = createFindingCard(finding, index);
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Error loading findings:', error);
+                document.getElementById('findingsContainer').innerHTML = 
+                    '<p style="color: var(--danger);">Failed to load findings. Make sure detect_v1.json is available.</p>';
+            }
+        }
+
+        function createFindingCard(finding, index) {
+            const card = document.createElement('div');
+            card.className = `finding-card ${finding.severity}`;
+            
+            const severityEmoji = finding.severity === 'high' ? '🔴' : '🟡';
+            const policyViolation = finding.policy_violation_detected ? '⚠️ Policy Violation' : '';
+            
+            card.innerHTML = `
+                <div class="finding-header">
+                    <div class="finding-title">
+                        ${severityEmoji} ${finding.resource_address}
+                    </div>
+                    <span class="severity-badge ${finding.severity}">${finding.severity}</span>
+                </div>
+                
+                <div class="finding-detail">
+                    <strong>Type:</strong> ${finding.resource_type} (${finding.classification})
+                </div>
+                
+                <div class="finding-detail">
+                    <strong>Change:</strong> ${finding.attribute_changed}
+                </div>
+                
+                <div class="change-indicator">
+                    <span class="change-before">${formatValue(finding.before_value)}</span>
+                    <span>→</span>
+                    <span class="change-after">${formatValue(finding.after_value)}</span>
+                </div>
+                
+                ${policyViolation ? `<div style="color: var(--warning); font-weight: 600; margin-top: 0.5rem;">${policyViolation}</div>` : ''}
+                
+                <div class="expand-hint">▼ Click to see full analysis</div>
+                
+                <div class="finding-details-expanded">
+                    <div class="rationale">
+                        <strong>Analysis:</strong><br>
+                        ${finding.rationale}
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong style="display: block; margin-bottom: 0.5rem;">Triggered Rules:</strong>
+                        ${finding.rule_ids.map(rule => `<span class="policy-tag">${rule}</span>`).join('')}
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong>Cost Impact Likelihood:</strong> 
+                        <span style="color: var(--danger); font-weight: 600; text-transform: uppercase;">${finding.cost_impact_likelihood}</span>
+                    </div>
+                    
+                    <div style="margin-top: 1rem;">
+                        <strong>Regression Type:</strong> ${finding.regression_type}
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                card.classList.toggle('expanded');
+            });
+            
+            return card;
+        }
+
+        function formatValue(value) {
+            if (typeof value === 'number') {
+                return value;
+            }
+            if (typeof value === 'string') {
+                return `"${value}"`;
+            }
+            return JSON.stringify(value);
+        }
+
+        function showTrendTooltip(event) {
+            const tooltip = document.getElementById('trendTooltip');
+            const chart = document.getElementById('trendChart');
+            const rect = chart.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            const percentX = x / rect.width;
+            const baseCost = 52.43;
+            const targetCost = 387.89;
+            const estimatedCost = baseCost + (targetCost - baseCost) * percentX;
+            
+            tooltip.textContent = `Estimated: $${estimatedCost.toFixed(2)}/month`;
+            tooltip.style.left = `${x + 10}px`;
+            tooltip.style.top = `${y - 30}px`;
+            tooltip.style.display = 'block';
+        }
+
+        function hideTrendTooltip() {
+            const tooltip = document.getElementById('trendTooltip');
+            tooltip.style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const mappingNodes = document.querySelectorAll('#mappingChart .node');
+                mappingNodes.forEach(node => {
+                    node.style.cursor = 'pointer';
+                    node.addEventListener('click', function() {
+                        const label = this.textContent;
+                        alert(`Resource: ${label}\nClick for detailed analysis (feature coming soon)`);
+                    });
+                });
+            }, 1000);
+        });
+
+        async function copyPatchToClipboard() {
+            try {
+                const patch = `--- a/infrastructure/terraform/pr-change/main.tf
++++ b/infrastructure/terraform/pr-change/main.tf
+@@ -123,7 +123,7 @@
+ resource "aws_launch_template" "main" {
+   name_prefix   = "costpilot-demo-"
+   image_id      = data.aws_ami.amazon_linux_2.id
+-  instance_type = "t3.xlarge"
++  instance_type = "t3.large"
+ 
+@@ -135,7 +135,7 @@
+   block_device_mappings {
+     device_name = "/dev/xvda"
+     ebs {
+-      volume_size           = 200
++      volume_size           = 50
+       volume_type           = "gp3"
+       
+@@ -242,7 +242,7 @@
+ resource "aws_cloudwatch_log_group" "application" {
+   name              = "/aws/costpilot-demo/application"
+-  retention_in_days = 0
++  retention_in_days = 30`;
+                
+                await navigator.clipboard.writeText(patch);
+                alert('✅ Patch copied to clipboard!');
+            } catch (err) {
+                alert('Failed to copy patch. Please select and copy manually.');
+            }
+        }
+
+        function animateCounter(elementId, start, end, duration) {
+            const element = document.getElementById(elementId);
+            const startTime = Date.now();
+            
+            function update() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (end - start) * progress);
+                element.textContent = `$${current}`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            update();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFindings();
+            animateCounter('beforeCost', 0, 52, 1500);
+            animateCounter('afterCost', 52, 388, 2000);
+            
+            // Initialize ROI Calculator
+            initializeROICalculator();
+        });
+
+        function initializeROICalculator() {
+            const monthlySpendSlider = document.getElementById('monthlySpend');
+            const wastePercentSlider = document.getElementById('wastePercent');
+            const detectionRateSlider = document.getElementById('detectionRate');
+            
+            const monthlySpendValue = document.getElementById('monthlySpendValue');
+            const wastePercentValue = document.getElementById('wastePercentValue');
+            const detectionRateValue = document.getElementById('detectionRateValue');
+            
+            const annualSavings = document.getElementById('annualSavings');
+            const netBenefit = document.getElementById('netBenefit');
+            const roiValue = document.getElementById('roiValue');
+            
+            // Function to format currency
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(amount);
+            }
+            
+            // Function to calculate ROI
+            function calculateROI() {
+                const spend = parseFloat(monthlySpendSlider.value);
+                const waste = parseFloat(wastePercentSlider.value) / 100;
+                const detection = parseFloat(detectionRateSlider.value) / 100;
+                
+                const annualWaste = spend * 12 * waste;
+                const savings = annualWaste * detection;
+                const costpilotCost = 29 * 12; // $29 per 30 days annual cost
+                const netSavings = savings - costpilotCost;
+                
+                // Handle edge case where there's no potential waste to catch
+                let roi;
+                if (annualWaste === 0) {
+                    roi = 0; // No waste = no value provided, but not a loss
+                } else {
+                    roi = costpilotCost > 0 ? (netSavings / costpilotCost) * 100 : 0;
+                }
+                
+                // Update display values
+                monthlySpendValue.textContent = formatCurrency(spend);
+                wastePercentValue.textContent = wastePercentSlider.value + '%';
+                detectionRateValue.textContent = detectionRateSlider.value + '%';
+                
+                annualSavings.textContent = formatCurrency(savings);
+                netBenefit.textContent = formatCurrency(netSavings);
+                roiValue.textContent = annualWaste === 0 ? 'N/A' : Math.round(roi) + '%';
+                
+                // Update progress fills
+                updateSliderProgress(monthlySpendSlider, 'monthlySpend');
+                updateSliderProgress(wastePercentSlider, 'wastePercent');
+                updateSliderProgress(detectionRateSlider, 'detectionRate');
+            }
+            
+            // Function to update slider progress fill
+            function updateSliderProgress(slider, sliderId) {
+                const container = slider.parentElement;
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+                const value = parseFloat(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                const fillHeight = (percentage / 100) * 180; // 180px is track height
+                
+                // Update the ::after pseudo-element height
+                container.style.setProperty('--progress-height', fillHeight + 'px');
+                container.style.setProperty('--progress-percentage', percentage + '%');
+            }
+            
+            // Add event listeners for real-time updates
+            monthlySpendSlider.addEventListener('input', calculateROI);
+            wastePercentSlider.addEventListener('input', calculateROI);
+            detectionRateSlider.addEventListener('input', calculateROI);
+            
+            // Initial calculation
+            calculateROI();
+        }
+
+        function runDemo() {
+            const output = document.getElementById('demoOutput');
+            const command = document.querySelector('.command');
+            command.classList.remove('typing');
+            output.textContent = '';
+            
+            const plainText = `Scanning Terraform file: main.tf
+
+🔍 Analyzing infrastructure changes...
+✅ Found 1 cost regression
+
+Finding #1: High Severity
+Resource: aws_instance.web_server
+Issue: Instance type upgraded from t3.medium to t3.xlarge
+Impact: +$150/month (+300% cost increase)
+Recommendation: Consider t3.large for better cost-efficiency
+
+Total potential savings: $150/month`;
+            
+            const coloredText = `Scanning Terraform file: main.tf
+
+🔍 Analyzing infrastructure changes...
+<span style="color: #10b981;">✅ Found 1 cost regression</span>
+
+Finding #1: <span style="color: #ef4444;">High Severity</span>
+Resource: aws_instance.web_server
+Issue: Instance type upgraded from t3.medium to t3.xlarge
+Impact: <span style="color: #ef4444;">+$150/month (+300% cost increase)</span>
+Recommendation: Consider t3.large for better cost-efficiency
+
+Total potential savings: <span style="color: #10b981;">$150/month</span>`;
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < plainText.length) {
+                    output.textContent += plainText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 40);
+                } else {
+                    // Apply colors after typing completes
+                    output.innerHTML = coloredText;
+                }
+            };
+            typeWriter();
+        }
+    </script>
+</body>
+</html>
