@@ -145,6 +145,48 @@ The startup script will:
 
 ---
 
+## 🚀 Getting Started
+
+Follow these steps to set up and run the demo:
+
+### Prerequisites
+
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Terraform](https://www.terraform.io/) (v1.3 or higher)
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-org/CostPilotDemo.git
+   cd CostPilotDemo/marketing_demo
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running the Demo
+
+1. Start the demo server:
+   ```bash
+   npm start
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+### Cleaning Up
+
+To remove any temporary files or reset the demo:
+```bash
+npm run clean
+```
+
+---
+
 ## �️ CostPilot CLI Demo
 
 This repository includes a demonstration CLI binary that showcases CostPilot's command-line interface and output formats.

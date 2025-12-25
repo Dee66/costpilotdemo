@@ -2,5 +2,9 @@
   "dependencies": {
     "puppeteer": "^19.0.0",
     "puppeteer-screen-recorder": "^3.0.6"
+  },
+  "scripts": {
+    "start": "echo 'Starting demo server...' && npx http-server . -p 3000",
+    "clean": "echo 'Cleaning up demo files...' && rm -rf .cache dist"
   }
 }
