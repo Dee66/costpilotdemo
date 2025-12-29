@@ -466,16 +466,16 @@
         }
 
         .slider-container input[type="range"] {
-            writing-mode: vertical-lr;
-            direction: rtl;
+            -webkit-appearance: none;
+            appearance: none;
             width: 80px;
             height: 220px;
-            -webkit-appearance: none;
             background: transparent;
             cursor: pointer;
             margin: 0;
             position: relative;
             z-index: 2;
+            writing-mode: bt-lr;
         }
 
         /* Custom track background */
@@ -551,7 +551,7 @@
             height: 180px;
             border-radius: 6px;
             border: none;
-            margin: 20px 0;
+            margin: 20px 34px;
         }
 
         .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -589,7 +589,7 @@
             height: 180px;
             border-radius: 6px;
             border: none;
-            margin: 20px 0;
+            margin: 20px 34px;
         }
 
         .slider-container input[type="range"]::-moz-range-thumb {
@@ -678,8 +678,9 @@
             }
 
             .slider-container input[type="range"] {
-                width: 180px;
-                height: 60px;
+                width: 60px;
+                height: 140px;
+                writing-mode: bt-lr;
             }
 
             .slider-container::before {
@@ -696,7 +697,7 @@
             .slider-container input[type="range"]::-webkit-slider-track {
                 width: 10px;
                 height: 140px;
-                margin: 15px 0;
+                margin: 0 25px;
             }
 
             .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -707,7 +708,7 @@
             .slider-container input[type="range"]::-moz-range-track {
                 width: 10px;
                 height: 140px;
-                margin: 15px 0;
+                margin: 0 25px;
             }
 
             .slider-container input[type="range"]::-moz-range-thumb {
@@ -842,7 +843,6 @@
     </style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({ startOnLoad: true, theme: 'default' });
     </script>
@@ -894,8 +894,6 @@
                     </div>
                 </div>
             </div>
-            
-            <button class="run-btn" onclick="runDemo()">Run Demo</button>
         </div>
     </div>
 
@@ -913,7 +911,7 @@
                         <div class="slider-value" id="monthlySpendValue">$2,500</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="monthlySpend" min="0" max="20000" value="2500" step="250" orient="vertical">
+                            <input type="range" id="monthlySpend" min="0" max="20000" value="2500" step="250">
                         </div>
                     </div>
                     
@@ -922,7 +920,7 @@
                         <div class="slider-value" id="wastePercentValue">15%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1" orient="vertical">
+                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1">
                         </div>
                     </div>
                     
@@ -931,7 +929,7 @@
                         <div class="slider-value" id="detectionRateValue">95%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1" orient="vertical">
+                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1">
                         </div>
                     </div>
                 </div>
@@ -1378,7 +1376,18 @@ retention_in_days = 30
             
             // Initial calculation
             calculateROI();
-        }
+        
+        // Autoplay terminal demo when in viewport
+        const terminalDemo = document.querySelector('.terminal-demo');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runDemo();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        observer.observe(terminalDemo);
 
         function runDemo() {
             const output = document.getElementById('demoOutput');
@@ -1386,41 +1395,36 @@ retention_in_days = 30
             command.classList.remove('typing');
             output.textContent = '';
             
-            const plainText = `Scanning Terraform file: main.tf
-
-🔍 Analyzing infrastructure changes...
-✅ Found 1 cost regression
-
-Finding #1: High Severity
-Resource: aws_instance.web_server
-Issue: Instance type upgraded from t3.medium to t3.xlarge
-Impact: +$150/month (+300% cost increase)
-Recommendation: Consider t3.large for better cost-efficiency
-
-Total potential savings: $150/month`;
+            // Define segments with text and optional color
+            const segments = [
+                { text: "Scanning Terraform file: main.tf\n\n", color: null },
+                { text: "🔍 Analyzing infrastructure changes...\n", color: null },
+                { text: "✅ Found 1 cost regression", color: "#10b981" },  // Green for success
+                { text: "\n\nFinding #1: ", color: null },
+                { text: "High Severity", color: "#ef4444" },  // Red for severity
+                { text: "\nResource: aws_instance.web_server\nIssue: Instance type upgraded from t3.medium to t3.xlarge\nImpact: ", color: null },
+                { text: "+$150/month (+300% cost increase)", color: "#ef4444" },  // Red for cost increase
+                { text: "\nRecommendation: Consider t3.large for better cost-efficiency\n\nTotal potential savings: ", color: null },
+                { text: "$150/month", color: "#10b981" }  // Green for savings
+            ];
             
-            const coloredText = `Scanning Terraform file: main.tf
-
-🔍 Analyzing infrastructure changes...
-<span style="color: #10b981;">✅ Found 1 cost regression</span>
-
-Finding #1: <span style="color: #ef4444;">High Severity</span>
-Resource: aws_instance.web_server
-Issue: Instance type upgraded from t3.medium to t3.xlarge
-Impact: <span style="color: #ef4444;">+$150/month (+300% cost increase)</span>
-Recommendation: Consider t3.large for better cost-efficiency
-
-Total potential savings: <span style="color: #10b981;">$150/month</span>`;
+            let segmentIndex = 0;
+            let charIndex = 0;
+            let currentHTML = '';
             
-            let i = 0;
             const typeWriter = () => {
-                if (i < plainText.length) {
-                    output.textContent += plainText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 40);
-                } else {
-                    // Apply colors after typing completes
-                    output.innerHTML = coloredText;
+                if (segmentIndex < segments.length) {
+                    const segment = segments[segmentIndex];
+                    if (charIndex < segment.text.length) {
+                        currentHTML += segment.color ? `<span style="color: ${segment.color};">${segment.text.charAt(charIndex)}</span>` : segment.text.charAt(charIndex);
+                        output.innerHTML = currentHTML;
+                        charIndex++;
+                        setTimeout(typeWriter, 40);
+                    } else {
+                        segmentIndex++;
+                        charIndex = 0;
+                        setTimeout(typeWriter, 40);  // Brief pause between segments
+                    }
                 }
             };
             typeWriter();
