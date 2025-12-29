@@ -466,16 +466,17 @@
         }
 
         .slider-container input[type="range"] {
-            writing-mode: vertical-lr;
-            direction: rtl;
-            width: 80px;
-            height: 220px;
             -webkit-appearance: none;
+            appearance: none;
+            width: 220px;
+            height: 80px;
             background: transparent;
             cursor: pointer;
             margin: 0;
             position: relative;
             z-index: 2;
+            transform: rotate(-90deg);
+            transform-origin: center;
         }
 
         /* Custom track background */
@@ -547,11 +548,11 @@
         /* Webkit browsers (Chrome, Safari, Edge) */
         .slider-container input[type="range"]::-webkit-slider-track {
             background: transparent;
-            width: 12px;
-            height: 180px;
+            width: 180px;
+            height: 12px;
             border-radius: 6px;
             border: none;
-            margin: 20px 0;
+            margin: 0 20px;
         }
 
         .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -585,11 +586,11 @@
         /* Firefox */
         .slider-container input[type="range"]::-moz-range-track {
             background: transparent;
-            width: 12px;
-            height: 180px;
+            width: 180px;
+            height: 12px;
             border-radius: 6px;
             border: none;
-            margin: 20px 0;
+            margin: 0 20px;
         }
 
         .slider-container input[type="range"]::-moz-range-thumb {
@@ -678,25 +679,31 @@
             }
 
             .slider-container input[type="range"] {
-                width: 180px;
+                width: 140px;
                 height: 60px;
+                transform: rotate(-90deg);
             }
 
             .slider-container::before {
-                width: 10px;
-                height: 140px;
-                top: 15px;
+                width: 140px;
+                height: 10px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
             .slider-container::after {
                 width: 10px;
-                bottom: 15px;
+                height: var(--progress-height, 0px);
+                bottom: 50%;
+                left: 50%;
+                transform: translate(-50%, 50%);
             }
 
             .slider-container input[type="range"]::-webkit-slider-track {
-                width: 10px;
-                height: 140px;
-                margin: 15px 0;
+                width: 140px;
+                height: 10px;
+                margin: 0 15px;
             }
 
             .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -705,9 +712,9 @@
             }
 
             .slider-container input[type="range"]::-moz-range-track {
-                width: 10px;
-                height: 140px;
-                margin: 15px 0;
+                width: 140px;
+                height: 10px;
+                margin: 0 15px;
             }
 
             .slider-container input[type="range"]::-moz-range-thumb {
@@ -910,7 +917,7 @@
                         <div class="slider-value" id="monthlySpendValue">$2,500</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="monthlySpend" min="0" max="20000" value="2500" step="250" orient="vertical">
+                            <input type="range" id="monthlySpend" min="0" max="20000" value="2500" step="250">
                         </div>
                     </div>
                     
@@ -919,7 +926,7 @@
                         <div class="slider-value" id="wastePercentValue">15%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1" orient="vertical">
+                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1">
                         </div>
                     </div>
                     
@@ -928,7 +935,7 @@
                         <div class="slider-value" id="detectionRateValue">95%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1" orient="vertical">
+                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1">
                         </div>
                     </div>
                 </div>
