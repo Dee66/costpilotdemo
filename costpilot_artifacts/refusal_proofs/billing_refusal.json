@@ -1,6 +1,0 @@
-{
-  "command": "costpilot scan /home/dee/workspace/AI/GuardSuite/CostPilotDemo/temp_billing.csv",
-  "returncode": 4,
-  "stdout": "",
-  "stderr": "Error: [PARSE_001] Failed to parse Terraform plan JSON: expected value at line 1 column 1\n  Hint: Ensure the input is a valid Terraform plan JSON file generated with 'terraform show -json plan.out'\n"
-}
