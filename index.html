@@ -8,6 +8,7 @@
     <meta name="description" content="Interactive demonstration of CostPilot catching a $335/month AWS cost regression before deployment">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
     <style>
@@ -465,7 +466,10 @@
             margin: 1rem 0;
         }
 
-        .slider-container input[type="range"] {
+        .slider-container .slider {
+            height: 180px;
+            width: 100%;
+        }
             -webkit-appearance: none;
             appearance: none;
             width: 220px;
@@ -937,7 +941,7 @@
                         <div class="slider-value" id="monthlySpendValue">$2,500</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="monthlySpend" min="0" max="20000" value="2500" step="250">
+                            <div id="monthlySpend" class="slider"></div>
                         </div>
                     </div>
                     
@@ -946,7 +950,7 @@
                         <div class="slider-value" id="wastePercentValue">15%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="wastePercent" min="5" max="50" value="15" step="1">
+                            <div id="wastePercent" class="slider"></div>
                         </div>
                     </div>
                     
@@ -955,7 +959,7 @@
                         <div class="slider-value" id="detectionRateValue">95%</div>
                         <div class="slider-container">
                             <div class="tick-marks"></div>
-                            <input type="range" id="detectionRate" min="80" max="99" value="95" step="1">
+                            <div id="detectionRate" class="slider"></div>
                         </div>
                     </div>
                 </div>
@@ -1347,11 +1351,16 @@ retention_in_days = 30
                 }).format(amount);
             }
             
+            // Function to update value displays
+            function updateValueDisplay(id, value) {
+                document.getElementById(id).textContent = value;
+            }
+            
             // Function to calculate ROI
             function calculateROI() {
-                const spend = parseFloat(monthlySpendSlider.value);
-                const waste = parseFloat(wastePercentSlider.value) / 100;
-                const detection = parseFloat(detectionRateSlider.value) / 100;
+                const spend = parseFloat(monthlySpendSlider.noUiSlider.get());
+                const waste = parseFloat(wastePercentSlider.noUiSlider.get()) / 100;
+                const detection = parseFloat(detectionRateSlider.noUiSlider.get()) / 100;
                 
                 const annualWaste = spend * 12 * waste;
                 const savings = annualWaste * detection;
@@ -1481,15 +1490,42 @@ retention_in_days = 30
                 slider.addEventListener('input', updateHandlePosition);
             }
 
-            // Create custom handles for all sliders
-            createVerticalSlider(monthlySpendSlider);
-            createVerticalSlider(wastePercentSlider);
-            createVerticalSlider(detectionRateSlider);
+            // Create noUiSlider for all sliders
+            noUiSlider.create(monthlySpendSlider, {
+                start: 2500,
+                range: { min: 0, max: 20000 },
+                step: 250,
+                orientation: 'vertical',
+                direction: 'rtl'  // Reverse direction for vertical
+            });
+            noUiSlider.create(wastePercentSlider, {
+                start: 15,
+                range: { min: 5, max: 50 },
+                step: 1,
+                orientation: 'vertical',
+                direction: 'rtl'
+            });
+            noUiSlider.create(detectionRateSlider, {
+                start: 95,
+                range: { min: 80, max: 99 },
+                step: 1,
+                orientation: 'vertical',
+                direction: 'rtl'
+            });
 
             // Add event listeners for real-time updates
-            monthlySpendSlider.addEventListener('input', calculateROI);
-            wastePercentSlider.addEventListener('input', calculateROI);
-            detectionRateSlider.addEventListener('input', calculateROI);
+            monthlySpendSlider.noUiSlider.on('update', function(values, handle) {
+                updateValueDisplay('monthlySpendValue', '$' + formatCurrency(parseFloat(values[0])));
+                calculateROI();
+            });
+            wastePercentSlider.noUiSlider.on('update', function(values, handle) {
+                updateValueDisplay('wastePercentValue', values[0] + '%');
+                calculateROI();
+            });
+            detectionRateSlider.noUiSlider.on('update', function(values, handle) {
+                updateValueDisplay('detectionRateValue', values[0] + '%');
+                calculateROI();
+            });
             
             // Initial calculation
             calculateROI();
@@ -1548,5 +1584,6 @@ retention_in_days = 30
             typeWriter();
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
 </body>
 </html>
