@@ -465,6 +465,7 @@
             margin: 1rem 0;
         }
 
+        .slider-container input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
             width: 220px;
@@ -472,12 +473,13 @@
             background: transparent;
             cursor: pointer;
             margin: 0;
-            position: relative;
+            position: absolute;
+            left: -9999px;
             z-index: 2;
             transform: rotate(-90deg);
             transform-origin: center;
-            /* Hide the default slider and use custom interaction */
-            opacity: 0;
+        }
+
         }
 
         /* Custom vertical slider handle */
