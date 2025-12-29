@@ -10,19 +10,65 @@ CostPilot is a GitHub-native, zero-permission FinOps engine that analyzes Terraf
 
 Perfect for teams wanting cost control in CI without the IAM hassle.
 
-## Try the Demo
+## Quick Start
 
-**Live Demo**: [https://dee66.github.io/costpilotdemo/](https://dee66.github.io/costpilotdemo/)
+Get started with CostPilot in minutes:
 
-Explore detection, prediction, autofix, and more on sample Terraform plans.
+```bash
+# Install CostPilot CLI
+curl -fsSL https://costpilot.dev/install | bash
 
-### Run Locally
-1. Clone: `git clone https://github.com/Dee66/costpilotdemo.git`
-2. Install: `npm install`
-3. Start: `npm start`
-4. Open: [http://localhost:3000](http://localhost:3000)
+# Initialize in your Terraform repo
+costpilot init
 
-Requires Node.js.
+# Scan a plan for cost issues
+costpilot scan plan.json
+
+# Get cost predictions
+costpilot predict plan.json
+
+# Explain resource costs
+costpilot explain aws_instance.example
+```
+
+## Repository Structure
+
+```
+├── infrastructure/terraform/     # Demo Terraform stacks
+│   ├── baseline/                # Original cost-optimized config
+│   ├── pr-change/               # Cost regression example
+│   └── noop-change/             # No-op change example
+├── snapshots/                   # Golden output files
+├── scripts/                     # Test and utility scripts
+├── docs/                        # Documentation
+└── costpilot                    # CLI binary (demo version)
+```
+
+## Safety Notes
+
+⚠️ **This is a demo repository** - the CostPilot CLI here is a mock implementation for testing purposes only.
+
+For production use:
+- Download the real CLI from [costpilot.dev](https://costpilot.dev)
+- Never commit real AWS credentials or state files
+- Run analysis in CI/CD pipelines, not locally with production credentials
+
+## Documentation
+
+- [Drift Management Guide](docs/DRIFT_MANAGEMENT.md)
+- [Golden Version Signoff](docs/GOLDEN_VERSION_SIGNOFF.md)
+- [Marketing Review Process](docs/MARKETING_REVIEW.md)
+- [Implementation Checklist](docs/checklist.md)
+
+## Reproducibility
+
+All analysis is deterministic and reproducible:
+- Same input plan → same output every time
+- No external API calls or network dependencies
+- Versioned snapshots ensure consistent testing
+- PR #42 introduced the baseline terraform configuration
+
+The baseline and pr-change stacks demonstrate typical cost regression scenarios.
 
 ## Key Features
 
