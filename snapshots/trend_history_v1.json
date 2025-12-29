@@ -1,0 +1,122 @@
+{
+  "scenario_version": "v1",
+  "version": "1.0",
+  "generated_at": "2025-12-06T16:47:00Z",
+  "metadata": {},
+  "trends": [
+    {
+      "name": "flat_trend",
+      "description": "Stable costs, expected behavior",
+      "data_points": [
+        {
+          "date": "2025-11-01",
+          "cost": 50.0
+        },
+        {
+          "date": "2025-11-08",
+          "cost": 51.2
+        },
+        {
+          "date": "2025-11-15",
+          "cost": 49.8
+        },
+        {
+          "date": "2025-11-22",
+          "cost": 50.5
+        },
+        {
+          "date": "2025-11-29",
+          "cost": 50.1
+        }
+      ]
+    },
+    {
+      "name": "upward_trend",
+      "description": "Gradual increase, requires attention",
+      "data_points": [
+        {
+          "date": "2025-11-01",
+          "cost": 50.0
+        },
+        {
+          "date": "2025-11-08",
+          "cost": 120.0
+        },
+        {
+          "date": "2025-11-15",
+          "cost": 245.0
+        },
+        {
+          "date": "2025-11-22",
+          "cost": 450.0
+        },
+        {
+          "date": "2025-11-29",
+          "cost": 720.0
+        }
+      ]
+    },
+    {
+      "name": "slo_breach_trend",
+      "description": "Budget threshold exceeded - baseline-aware monitoring",
+      "baseline_cost": 52.43,
+      "baseline_timestamp": "2025-12-06T16:47:00Z",
+      "slo_threshold": 500.0,
+      "data_points": [
+        {
+          "date": "2025-11-01",
+          "cost": 50.0,
+          "slo": 500.0,
+          "delta_from_baseline": -2.43,
+          "status": "normal"
+        },
+        {
+          "date": "2025-11-08",
+          "cost": 120.0,
+          "slo": 500.0,
+          "delta_from_baseline": 67.57,
+          "status": "elevated"
+        },
+        {
+          "date": "2025-11-15",
+          "cost": 245.0,
+          "slo": 500.0,
+          "delta_from_baseline": 192.57,
+          "status": "high"
+        },
+        {
+          "date": "2025-11-22",
+          "cost": 450.0,
+          "slo": 500.0,
+          "delta_from_baseline": 397.57,
+          "status": "critical"
+        },
+        {
+          "date": "2025-11-29",
+          "cost": 720.0,
+          "slo": 500.0,
+          "delta_from_baseline": 667.57,
+          "breach": true,
+          "status": "slo_breach",
+          "baseline_exceeded_by": "1273%"
+        }
+      ],
+      "baseline_aware": true,
+      "breach_analysis": {
+        "breach_detected": true,
+        "breach_date": "2025-11-29",
+        "breach_amount": 220.0,
+        "baseline_comparison": "Cost increased 1273% from baseline ($52.43) before breaching SLO",
+        "root_cause_linked_to": "detect-001"
+      }
+    }
+  ],
+  "lineage": {
+    "source_plan": "infrastructure/terraform/pr-change/",
+    "scenario": "pr-change",
+    "plan_time": "2025-12-06T16:47:00Z",
+    "seed": "demo-v1-stable",
+    "hash_before": "4d33bf9dbeede832",
+    "hash_after": "f36f51a9c6067aea"
+  }
+}
