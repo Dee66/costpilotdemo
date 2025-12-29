@@ -1,0 +1,598 @@
+metadata:
+  product_id: "costpilotdemo"
+  product_name: "CostPilot Demo Repository"
+  spec_version: "1.0"
+  spec_state: "approved"
+  version: "1.0.2"
+  version_strategy: "semver:demo"
+  owner: "CostPilot Demo Team"
+  created_at: "2025-12-05"
+  launch_tier: "demo"
+  source_path: "demo/costpilotdemo/"
+
+zero_cost_policy:
+  allowed_modes:
+    - safe
+    - simulate
+    - demo
+  default_mode: "demo"
+  invariants:
+    - "No command or code path may incur real cloud cost."
+    - "No IAM permissions are ever required to run the demo."
+    - "terraform apply is strictly forbidden in all demo scenarios."
+    - "No SDK calls to AWS/GCP/Azure are performed at runtime."
+    - "All demonstrations use mock data and deterministic outputs."
+    - "No outbound network traffic is allowed during demo execution."
+    - "Any step that could create or modify real infrastructure must be blocked."
+  forbidden_actions:
+    - terraform_apply
+    - terraform_plan_execute
+    - cloud_resource_create
+    - cloud_resource_modify
+    - cloud_resource_delete
+    - chargeable_api_call
+    - real_deployment
+    - network_call_external
+    - invoke_lambda
+    - create_vm
+    - allocate_gpu
+    - real_cost_incurrence
+  simulation_rules:
+    terraform:
+      simulate_plan: true
+      allow_apply: false
+      mock_outputs: true
+    cloud_sdks:
+      simulate: true
+      forbid_real_calls: true
+      mock_responses: true
+    network:
+      outbound_enabled: false
+      mock_external_services: true
+    deployment:
+      dry_run_only: true
+      mock_infrastructure: true
+
+overview:
+  description:
+    short: "Interactive demonstration repository for CostPilot FinOps engine."
+    long: >
+      CostPilotDemo is a comprehensive demonstration repository that showcases
+      CostPilot's zero-IAM FinOps capabilities through interactive web demos,
+      animated terminal recordings, deterministic testing frameworks, and
+      mock CLI implementations. It provides a safe, reproducible environment
+      for understanding how CostPilot detects cost regressions, predicts AWS spend,
+      and generates autofix recommendations without requiring real infrastructure
+      or credentials.
+  problem_statement: >
+    Demonstrating FinOps tools effectively requires showing real cost impacts
+    without incurring actual costs, while maintaining educational value and
+    technical accuracy for enterprise evaluation.
+  value_proposition: >
+    Experience CostPilot's capabilities through interactive demos that catch
+    $335/month cost regressions, animated terminal workflows, and comprehensive
+    testing scenarios - all without touching real AWS resources or requiring
+    any setup beyond cloning the repository.
+  target_customers:
+    enterprise: true
+    startups: true
+    individual_devs: true
+    educators: true
+  primary_use_cases:
+    items:
+      - id: "demo-01"
+        title: "Interactive web demonstration of cost regression detection"
+        description: "Experience real-time cost analysis through the browser-based demo."
+      - id: "demo-02"
+        title: "Video production and marketing asset generation"
+        description: "Generate professional demo videos with animated terminal sequences."
+      - id: "demo-03"
+        title: "Deterministic testing and validation framework"
+        description: "Test CostPilot logic against golden outputs and snapshots."
+      - id: "demo-04"
+        title: "Mock CLI implementation for feature demonstration"
+        description: "Show CLI workflows without requiring the full CostPilot binary."
+      - id: "demo-05"
+        title: "Infrastructure testing scenarios and edge cases"
+        description: "Explore various Terraform configurations and cost regression patterns."
+
+market:
+  tam: "Developer teams evaluating FinOps tools and cost governance solutions."
+  demand_drivers:
+    - "Need for safe, zero-cost demonstrations of FinOps capabilities."
+    - "Enterprise evaluation requirements for infrastructure cost tools."
+    - "Educational resources for FinOps concepts and Terraform cost analysis."
+  competition:
+    - name: "Static documentation and screenshots"
+      differentiation: "CostPilotDemo provides interactive, animated demonstrations."
+    - name: "Paid sandbox environments"
+      differentiation: "CostPilotDemo is free, local, and requires no account setup."
+  competitive_advantage:
+    - "Zero cost and zero setup by design."
+    - "Interactive web and terminal demonstrations."
+    - "Comprehensive testing framework with golden outputs."
+    - "Professional video assets for marketing and evaluation."
+  risk_profile:
+    technical_risk: "Low — demonstration repository with mock implementations."
+    market_risk: "Low — serves as marketing and evaluation tool."
+    legal_risk: "Low — no customer data, uses mock scenarios only."
+
+product_marketing:
+  hero_metric: "Demonstrate catching $335/month AWS cost regressions in under 60 seconds."
+  shareable_artifact: "Interactive web demo and professional video assets."
+  differentiators:
+    - "Zero setup — clone and run locally."
+    - "Real cost scenarios with mock infrastructure."
+    - "Interactive terminal animations and web demos."
+    - "Comprehensive testing framework."
+  keywords:
+    - "FinOps demo"
+    - "Terraform cost analysis"
+    - "AWS cost governance"
+    - "infrastructure demo"
+    - "cost regression detection"
+
+platform:
+  runtime: "local_multi"
+  orchestrator: "local_cli_and_web"
+  deployable_unit: "git_repository"
+  cost_mode: "demo"
+  core_components:
+    web_demo:
+      language: "html_css_js"
+      framework: "vanilla"
+      responsibilities:
+        - "Provide interactive cost regression demonstration."
+        - "Show before/after analysis with real cost impacts."
+    terminal_demo:
+      language: "html_css_js"
+      framework: "vanilla"
+      responsibilities:
+        - "Animate terminal workflows with progressive typing."
+        - "Demonstrate CLI usage with color-coded outputs."
+    video_production:
+      language: "javascript"
+      framework: "puppeteer"
+      responsibilities:
+        - "Capture animated sequences for marketing videos."
+        - "Generate professional demo assets."
+    mock_cli:
+      language: "python"
+      framework: "native_cli"
+      responsibilities:
+        - "Provide CLI interface for testing and demonstration."
+        - "Return deterministic outputs from snapshot files."
+    test_framework:
+      language: "python"
+      framework: "unittest"
+      responsibilities:
+        - "Validate demo outputs against golden snapshots."
+        - "Ensure deterministic behavior across environments."
+    infrastructure_scenarios:
+      language: "hcl"
+      framework: "terraform"
+      responsibilities:
+        - "Provide realistic Terraform configurations for testing."
+        - "Demonstrate various cost regression patterns."
+  architecture_invariants:
+    - "All demonstrations must use mock data and deterministic outputs."
+    - "No real AWS resources are ever created or modified."
+    - "All costs shown are simulated based on real pricing data."
+    - "Repository must remain runnable without external dependencies."
+  capabilities:
+    interactive_demo: true
+    video_production: true
+    mock_cli: true
+    deterministic_testing: true
+    offline_mode: true
+    zero_setup: true
+
+semantics:
+  evaluator:
+    deterministic: true
+    stable_schema: true
+    safe_defaults: true
+  demo_simulation:
+    realistic_costs: true
+    educational_focus: true
+    interactive_elements: true
+  governance:
+    demo_only: true
+    safety_first: true
+
+validation_rules:
+  config:
+    - id: "vr-demo-01"
+      rule: "All configuration files must validate against demo schemas."
+    - id: "vr-demo-02"
+      rule: "Snapshot files must include version metadata and hash validation."
+  outputs:
+    - id: "vr-demo-03"
+      rule: "Demo outputs must match golden snapshots exactly."
+    - id: "vr-demo-04"
+      rule: "All timestamps must be UTC ISO-8601."
+    - id: "vr-demo-05"
+      rule: "Cost figures must be realistic and sourced from public pricing."
+  safety:
+    - id: "vr-demo-06"
+      rule: "No code path may execute terraform apply or real cloud operations."
+    - id: "vr-demo-07"
+      rule: "All external links must be safe and not require authentication."
+
+features:
+  must_have:
+    auto_gen: false
+    automation_level: "full"
+    items:
+      - id: "demo-f-01"
+        title: "Interactive web demonstration"
+        description: "Browser-based demo showing cost regression detection."
+      - id: "demo-f-02"
+        title: "Animated terminal demo"
+        description: "Progressive typing animation with color-coded cost analysis."
+      - id: "demo-f-03"
+        title: "Video asset generation"
+        description: "Professional demo videos with synchronized audio."
+      - id: "demo-f-04"
+        title: "Mock CLI implementation"
+        description: "Python CLI that demonstrates CostPilot command interface."
+      - id: "demo-f-05"
+        title: "Golden snapshot testing"
+        description: "Comprehensive test suite with deterministic outputs."
+      - id: "demo-f-06"
+        title: "Infrastructure test scenarios"
+        description: "Realistic Terraform configurations for cost analysis demos."
+      - id: "demo-f-07"
+        title: "PR comment templates"
+        description: "Pre-formatted GitHub PR comments for demo scenarios."
+  should_have:
+    auto_gen: false
+    items:
+      - id: "demo-f-08"
+        title: "Multiple demo scenarios"
+        description: "Various cost regression patterns and infrastructure types."
+      - id: "demo-f-09"
+        title: "Performance benchmarking"
+        description: "Demo execution timing and resource usage metrics."
+  future:
+    auto_gen: false
+    items:
+      - id: "demo-f-10"
+        title: "Multi-cloud support"
+        description: "Demonstrate analysis for AWS, GCP, and Azure scenarios."
+      - id: "demo-f-11"
+        title: "Advanced visualization"
+        description: "Interactive cost trend charts and dependency graphs."
+
+data_contracts:
+  input_schema: "Mock Terraform plans, golden snapshots, and configuration files."
+  output_schema: "Deterministic JSON outputs, HTML demos, and video assets."
+  internal_state_schema: "Test snapshots, configuration files, and demo artifacts."
+
+api:
+  base_path: ""          # Local demo; no HTTP API.
+  endpoints: []          # No API endpoints in demo repository.
+  error_contract:
+    format: "text"
+    fields:
+      - message
+      - context
+
+state_machine:
+  states:
+    - "INIT"
+    - "LOADED"
+    - "DEMO_READY"
+    - "INTERACTIVE"
+    - "TESTING"
+    - "VIDEO_GENERATION"
+    - "COMPLETE"
+  transitions:
+    - id: "demo-sm-01"
+      from: "INIT"
+      to: "LOADED"
+      reason: "Repository cloned and dependencies installed."
+    - id: "demo-sm-02"
+      from: "LOADED"
+      to: "DEMO_READY"
+      reason: "Web server started and demos accessible."
+    - id: "demo-sm-03"
+      from: "DEMO_READY"
+      to: "INTERACTIVE"
+      reason: "User interacting with web or terminal demos."
+    - id: "demo-sm-04"
+      from: "LOADED"
+      to: "TESTING"
+      reason: "Test suite execution started."
+    - id: "demo-sm-05"
+      from: "LOADED"
+      to: "VIDEO_GENERATION"
+      reason: "Video production pipeline initiated."
+    - id: "demo-sm-06"
+      from: "INTERACTIVE"
+      to: "COMPLETE"
+      reason: "Demo experience completed."
+    - id: "demo-sm-07"
+      from: "TESTING"
+      to: "COMPLETE"
+      reason: "All tests passed."
+    - id: "demo-sm-08"
+      from: "VIDEO_GENERATION"
+      to: "COMPLETE"
+      reason: "Video assets generated successfully."
+  events: []
+  diagram_id: "demo-lifecycle"
+
+security:
+  authentication: "none"
+  authorization: "local_only"
+  secrets_policy: "no_secrets_allowed"
+  secrets_backend: "none"
+  path_whitelist:
+    - "."
+    - "video_assets/"
+    - "snapshots/"
+  size_limits:
+    max_demo_file_mb: 100   # Video assets and large snapshots
+  invariants:
+    - "No authentication or secrets are ever required."
+    - "All demos run locally without external connections."
+    - "Repository contains no real credentials or sensitive data."
+
+patching_policy:
+  atomic: false  # Demo repository doesn't modify production code
+  temp_dir: ".tmp"
+  backup_dir: ".backup"
+  validations:
+    - "syntax"
+    - "demo_functionality"
+  rollback_guarantees:
+    - "Demo modifications are easily reverted via git."
+
+testing:
+  unit_tests: true
+  integration_tests: true
+  e2e_tests: true
+  validation_tags:
+    - "demo"
+    - "snapshot"
+    - "deterministic"
+    - "safety"
+  required_test_scenarios:
+    - id: "demo-t-01"
+      title: "Web demo functionality across browsers"
+      steps:
+        - "Load demo in Chrome, Firefox, Safari."
+        - "Verify interactive elements and cost calculations."
+    - id: "demo-t-02"
+      title: "Terminal animation timing and synchronization"
+      steps:
+        - "Run terminal demo and verify 9.5s duration."
+        - "Check color coding and progressive text display."
+    - id: "demo-t-03"
+      title: "Video generation pipeline"
+      steps:
+        - "Execute video production and verify output quality."
+        - "Confirm audio/video synchronization."
+    - id: "demo-t-04"
+      title: "Mock CLI determinism"
+      steps:
+        - "Run CLI commands multiple times."
+        - "Verify identical outputs and exit codes."
+    - id: "demo-t-05"
+      title: "Safety validation"
+      steps:
+        - "Attempt to run terraform apply."
+        - "Verify all safety mechanisms prevent execution."
+
+ci_cd:
+  workflow_file: ".github/workflows/costpilot-ci.yml"
+  steps:
+    - "validate_demo"
+    - "test_web_demo"
+    - "test_terminal_demo"
+    - "test_video_generation"
+    - "test_mock_cli"
+    - "validate_snapshots"
+    - "safety_checks"
+    - "performance_tests"
+  invariants:
+    - "All demos must function without external dependencies."
+    - "Safety checks must pass before any merge."
+    - "Snapshot validation must ensure deterministic outputs."
+
+observability:
+  logs:
+    enabled: true
+    retention_days: 7
+  metrics:
+    enabled: true
+    endpoint: "local_metrics.json"
+    required_metrics:
+      - "demo_load_time"
+      - "test_pass_rate"
+      - "video_generation_time"
+      - "safety_violation_count"
+  tracing:
+    enabled: false
+  events:
+    emit_demo_events: true
+    event_prefix: "costpilotdemo"
+
+deployment_profiles:
+  local:
+    base_image: "git_clone"
+    secrets_backend: "none"
+    cost_safe: true
+    setup_steps:
+      - "Clone repository"
+      - "Install Node.js dependencies"
+      - "Start local web server"
+  container:
+    base_image: "node:18-alpine"
+    secrets_backend: "none"
+    cost_safe: true
+    setup_steps:
+      - "Copy repository files"
+      - "Install dependencies"
+      - "Expose web server port"
+
+pricing:
+  tiers:
+    - name: "free"
+      price: 0
+      limits:
+        - "Full access to all demo features."
+        - "No restrictions or watermarks."
+
+acquisition:
+  channels:
+    primary:
+      - "github_repository"
+      - "costpilot_website"
+      - "technical_documentation"
+    secondary:
+      - "community_mentions"
+      - "demo_showcase"
+
+acceptance_criteria:
+  - id: "demo-ac-01"
+    description: "Web demo loads in under 3 seconds and shows accurate cost analysis."
+  - id: "demo-ac-02"
+    description: "Terminal animation completes in exactly 9.5 seconds with proper colors."
+  - id: "demo-ac-03"
+    description: "Video generation produces professional-quality assets."
+  - id: "demo-ac-04"
+    description: "Mock CLI returns deterministic outputs matching snapshots."
+  - id: "demo-ac-05"
+    description: "All safety mechanisms prevent real AWS resource creation."
+
+release_plan:
+  mvp_days: 7
+  full_launch_days: 14
+  expected_time_to_value: 1
+
+support_load:
+  per_100_users:
+    tickets_per_month: 1
+    notes: "Minimal support needed; repository is self-contained and well-documented."
+
+changelog:
+  - version: "1.0.0"
+    notes: "Initial demo repository with web demo, terminal animation, and mock CLI."
+  - version: "1.0.1"
+    notes: "Added video production pipeline and comprehensive test framework."
+  - version: "1.0.2"
+    notes: "Enhanced terminal animation timing and added safety validations."
+
+x_capabilities:
+  web_demo:
+    description: "Interactive browser-based demonstration of CostPilot capabilities."
+    features:
+      - "Real-time cost regression detection"
+      - "Before/after cost comparison"
+      - "Interactive element highlighting"
+    outputs:
+      - "Visual cost analysis"
+      - "Educational explanations"
+      - "Demo completion metrics"
+  terminal_demo:
+    description: "Animated terminal interface showing CLI workflow."
+    features:
+      - "Progressive text typing"
+      - "Color-coded cost indicators"
+      - "Synchronized timing"
+    outputs:
+      - "Terminal animation video"
+      - "Demo workflow recording"
+  video_production:
+    description: "Professional video asset generation for marketing."
+    features:
+      - "Puppeteer-based capture"
+      - "FFmpeg video assembly"
+      - "Audio synchronization"
+    outputs:
+      - "Launch video (MP4)"
+      - "Demo GIFs"
+      - "Thumbnail images"
+  mock_cli:
+    description: "Python implementation demonstrating CostPilot CLI interface."
+    commands:
+      - "scan"
+      - "predict"
+      - "explain"
+      - "autofix"
+    outputs:
+      - "Deterministic JSON responses"
+      - "Formatted text output"
+      - "Exit code signaling"
+  testing_framework:
+    description: "Comprehensive validation of demo components."
+    test_types:
+      - "Snapshot validation"
+      - "Deterministic output checking"
+      - "Safety mechanism testing"
+      - "Performance benchmarking"
+    outputs:
+      - "Test reports"
+      - "Validation logs"
+      - "Performance metrics"
+  infrastructure_scenarios:
+    description: "Realistic Terraform configurations for demonstration."
+    scenarios:
+      - "Cost regression baseline"
+      - "Expensive configuration change"
+      - "No-op change demonstration"
+      - "Edge case configurations"
+    outputs:
+      - "Terraform plan files"
+      - "Cost analysis inputs"
+      - "Demo configuration examples"
+
+x_cli_contract:
+  verbs:
+    - "scan"
+    - "predict"
+    - "explain"
+    - "autofix"
+  flags:
+    - "--format json"
+    - "--verbose"
+    - "--help"
+  commands:
+    scan:
+      description: "Demonstrate cost regression scanning."
+    predict:
+      description: "Show cost prediction capabilities."
+    explain:
+      description: "Display explanation output."
+    autofix:
+      description: "Generate fix recommendations."
+  exit_codes:
+    SUCCESS: 0
+    ERROR: 1
+  invariants:
+    - "CLI outputs must match snapshot files."
+    - "All operations are deterministic."
+
+x_roadmap:
+  v1_0_0:
+    version: "1.0.0"
+    goals:
+      - "Complete web and terminal demonstrations."
+      - "Mock CLI with all major commands."
+      - "Basic video production pipeline."
+      - "Golden snapshot testing framework."
+  v1_1_0:
+    version: "1.1.0"
+    goals:
+      - "Enhanced video assets and marketing materials."
+      - "Additional demo scenarios and edge cases."
+      - "Performance optimizations and benchmarking."
+  v2_0_0:
+    version: "2.0.0"
+    goals:
+      - "Multi-cloud demonstration support."
+      - "Advanced visualization features."
+      - "Containerized deployment options."</content>
+<parameter name="filePath">/home/dee/workspace/AI/GuardSuite/CostPilotDemo/docs/product.yml

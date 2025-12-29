@@ -55,6 +55,7 @@ For production use:
 
 ## Documentation
 
+- [Product Specification](docs/product.yml)
 - [Drift Management Guide](docs/DRIFT_MANAGEMENT.md)
 - [Golden Version Signoff](docs/GOLDEN_VERSION_SIGNOFF.md)
 - [Marketing Review Process](docs/MARKETING_REVIEW.md)
