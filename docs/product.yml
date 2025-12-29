@@ -594,5 +594,4 @@ x_roadmap:
     goals:
       - "Multi-cloud demonstration support."
       - "Advanced visualization features."
-      - "Containerized deployment options."</content>
-<parameter name="filePath">/home/dee/workspace/AI/GuardSuite/CostPilotDemo/docs/product.yml
+      - "Containerized deployment options."
