@@ -468,14 +468,44 @@
         .slider-container input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
-            width: 80px;
-            height: 220px;
+            width: 220px;
+            height: 80px;
             background: transparent;
             cursor: pointer;
             margin: 0;
             position: relative;
             z-index: 2;
-            writing-mode: bt-lr;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            /* Hide the default slider and use custom interaction */
+            opacity: 0;
+        }
+
+        /* Custom vertical slider handle */
+        .slider-container .slider-handle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+            border: 2px solid white;
+            transition: all 0.15s ease;
+            z-index: 3;
+            top: 20px; /* Start at top of track */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-container .slider-handle:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .slider-container .slider-handle:active {
+            transform: translateX(-50%) scale(1.05);
+            cursor: grabbing;
         }
 
         /* Custom track background */
@@ -556,17 +586,10 @@
 
         .slider-container input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 32px;
-            height: 32px;
-            background: white;
-            border: 4px solid var(--primary);
-            border-radius: 50%;
-            cursor: grab;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
-            transition: all 0.2s ease;
-            position: relative;
-            z-index: 3;
-            animation: sliderPulse 2s ease-in-out infinite;
+            width: 24px;
+            height: 24px;
+            background: transparent; /* Hide default thumb */
+            cursor: pointer;
         }
 
         .slider-container input[type="range"]::-webkit-slider-thumb:hover {
@@ -593,13 +616,11 @@
         }
 
         .slider-container input[type="range"]::-moz-range-thumb {
-            width: 32px;
-            height: 32px;
-            background: white;
-            border: 4px solid var(--primary);
-            border-radius: 50%;
-            cursor: grab;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.8);
+            width: 24px;
+            height: 24px;
+            background: transparent; /* Hide default thumb */
+            cursor: pointer;
+        }
             transition: all 0.2s ease;
             position: relative;
             z-index: 3;
@@ -678,9 +699,9 @@
             }
 
             .slider-container input[type="range"] {
-                width: 60px;
-                height: 140px;
-                writing-mode: bt-lr;
+                width: 140px;
+                height: 60px;
+                transform: rotate(-90deg);
             }
 
             .slider-container::before {
@@ -692,6 +713,11 @@
             .slider-container::after {
                 width: 10px;
                 bottom: 15px;
+            }
+
+            .slider-container .slider-handle {
+                width: 20px;
+                height: 20px;
             }
 
             .slider-container input[type="range"]::-webkit-slider-track {
@@ -1369,6 +1395,97 @@ retention_in_days = 30
                 container.style.setProperty('--progress-percentage', percentage + '%');
             }
             
+            // Create custom vertical slider handles
+            function createVerticalSlider(slider) {
+                const container = slider.parentElement;
+                const handle = document.createElement('div');
+                handle.className = 'slider-handle';
+                container.appendChild(handle);
+
+                let isDragging = false;
+                let startY = 0;
+                let startValue = 0;
+
+                function updateHandlePosition() {
+                    const min = parseFloat(slider.min);
+                    const max = parseFloat(slider.max);
+                    const value = parseFloat(slider.value);
+                    const percentage = ((value - min) / (max - min)) * 100;
+                    const position = 20 + (180 - (percentage / 100) * 180); // 180px track height, inverted for vertical
+                    handle.style.top = position + 'px';
+                }
+
+                function handleMouseDown(e) {
+                    isDragging = true;
+                    startY = e.clientY;
+                    startValue = parseFloat(slider.value);
+                    handle.style.cursor = 'grabbing';
+                    e.preventDefault();
+                }
+
+                function handleMouseMove(e) {
+                    if (!isDragging) return;
+
+                    const deltaY = startY - e.clientY; // Inverted for vertical slider
+                    const trackHeight = 180; // pixels
+                    const valueRange = parseFloat(slider.max) - parseFloat(slider.min);
+                    const deltaValue = (deltaY / trackHeight) * valueRange;
+
+                    let newValue = startValue + deltaValue;
+                    newValue = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), newValue));
+
+                    slider.value = newValue;
+                    updateHandlePosition();
+
+                    // Trigger input event for calculation
+                    const inputEvent = new Event('input', { bubbles: true });
+                    slider.dispatchEvent(inputEvent);
+                }
+
+                function handleMouseUp() {
+                    if (isDragging) {
+                        isDragging = false;
+                        handle.style.cursor = 'pointer';
+                    }
+                }
+
+                // Touch events for mobile
+                function handleTouchStart(e) {
+                    const touch = e.touches[0];
+                    handleMouseDown({ clientY: touch.clientY, preventDefault: () => {} });
+                }
+
+                function handleTouchMove(e) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    handleMouseMove({ clientY: touch.clientY });
+                }
+
+                function handleTouchEnd() {
+                    handleMouseUp();
+                }
+
+                // Add event listeners
+                handle.addEventListener('mousedown', handleMouseDown);
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+
+                handle.addEventListener('touchstart', handleTouchStart);
+                document.addEventListener('touchmove', handleTouchMove);
+                document.addEventListener('touchend', handleTouchEnd);
+
+                // Initial position
+                updateHandlePosition();
+
+                // Update position when slider value changes programmatically
+                slider.addEventListener('input', updateHandlePosition);
+            }
+
+            // Create custom handles for all sliders
+            createVerticalSlider(monthlySpendSlider);
+            createVerticalSlider(wastePercentSlider);
+            createVerticalSlider(detectionRateSlider);
+
             // Add event listeners for real-time updates
             monthlySpendSlider.addEventListener('input', calculateROI);
             wastePercentSlider.addEventListener('input', calculateROI);
