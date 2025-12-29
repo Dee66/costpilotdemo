@@ -468,15 +468,14 @@
         .slider-container input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
-            width: 220px;
-            height: 80px;
+            width: 80px;
+            height: 220px;
             background: transparent;
             cursor: pointer;
             margin: 0;
             position: relative;
             z-index: 2;
-            transform: rotate(-90deg);
-            transform-origin: center;
+            writing-mode: bt-lr;
         }
 
         /* Custom track background */
@@ -548,11 +547,11 @@
         /* Webkit browsers (Chrome, Safari, Edge) */
         .slider-container input[type="range"]::-webkit-slider-track {
             background: transparent;
-            width: 180px;
-            height: 12px;
+            width: 12px;
+            height: 180px;
             border-radius: 6px;
             border: none;
-            margin: 0 20px;
+            margin: 20px 34px;
         }
 
         .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -586,11 +585,11 @@
         /* Firefox */
         .slider-container input[type="range"]::-moz-range-track {
             background: transparent;
-            width: 180px;
-            height: 12px;
+            width: 12px;
+            height: 180px;
             border-radius: 6px;
             border: none;
-            margin: 0 20px;
+            margin: 20px 34px;
         }
 
         .slider-container input[type="range"]::-moz-range-thumb {
@@ -679,31 +678,26 @@
             }
 
             .slider-container input[type="range"] {
-                width: 140px;
-                height: 60px;
-                transform: rotate(-90deg);
+                width: 60px;
+                height: 140px;
+                writing-mode: bt-lr;
             }
 
             .slider-container::before {
-                width: 140px;
-                height: 10px;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                width: 10px;
+                height: 140px;
+                top: 15px;
             }
 
             .slider-container::after {
                 width: 10px;
-                height: var(--progress-height, 0px);
-                bottom: 50%;
-                left: 50%;
-                transform: translate(-50%, 50%);
+                bottom: 15px;
             }
 
             .slider-container input[type="range"]::-webkit-slider-track {
-                width: 140px;
-                height: 10px;
-                margin: 0 15px;
+                width: 10px;
+                height: 140px;
+                margin: 0 25px;
             }
 
             .slider-container input[type="range"]::-webkit-slider-thumb {
@@ -712,9 +706,9 @@
             }
 
             .slider-container input[type="range"]::-moz-range-track {
-                width: 140px;
-                height: 10px;
-                margin: 0 15px;
+                width: 10px;
+                height: 140px;
+                margin: 0 25px;
             }
 
             .slider-container input[type="range"]::-moz-range-thumb {
