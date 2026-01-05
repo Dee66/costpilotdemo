@@ -12,24 +12,11 @@ Perfect for teams wanting cost control in CI without the IAM hassle.
 
 ## Quick Start
 
-Get started with CostPilot in minutes:
+- [Live Demo](https://dee66.github.io/costpilotdemo/) - Interactive CostPilot demonstration
+- Purchase on Lemon Squeezy or Gumroad
+- [GitHub Repository](https://github.com/dee66/costpilotdemo)
 
-```bash
-# Install CostPilot CLI
-curl -fsSL https://costpilot.dev/install | bash
-
-# Initialize in your Terraform repo
-costpilot init
-
-# Scan a plan for cost issues
-costpilot scan plan.json
-
-# Get cost predictions
-costpilot predict plan.json
-
-# Explain resource costs
-costpilot explain aws_instance.example
-```
+For detailed usage instructions, see the documentation links below.
 
 ## Repository Structure
 
