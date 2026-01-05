@@ -12,24 +12,12 @@ Perfect for teams wanting cost control in CI without the IAM hassle.
 
 ## Quick Start
 
-Get started with CostPilot in minutes:
+Get started with CostPilot by purchasing from our official sales platforms:
 
-```bash
-# Install CostPilot CLI
-curl -fsSL https://costpilot.dev/install | bash
+- [Lemon Squeezy](https://lemonsqueezy.com/costpilot)
+- [Gumroad](https://gumroad.com/costpilot)
 
-# Initialize in your Terraform repo
-costpilot init
-
-# Scan a plan for cost issues
-costpilot scan plan.json
-
-# Get cost predictions
-costpilot predict plan.json
-
-# Explain resource costs
-costpilot explain aws_instance.example
-```
+For detailed usage instructions, see the documentation links below.
 
 ## Repository Structure
 
@@ -47,19 +35,6 @@ costpilot explain aws_instance.example
 ## Safety Notes
 
 ⚠️ **This is a demo repository** - the CostPilot CLI here is a mock implementation for testing purposes only.
-
-For production use:
-- Download the real CLI from [costpilot.dev](https://costpilot.dev)
-- Never commit real AWS credentials or state files
-- Run analysis in CI/CD pipelines, not locally with production credentials
-
-## Documentation
-
-- [Product Specification](https://github.com/Dee66/costpilotdemo/blob/main/docs/product.yml)
-- [Drift Management Guide](https://github.com/Dee66/costpilotdemo/blob/main/docs/DRIFT_MANAGEMENT.md)
-- [Golden Version Signoff](https://github.com/Dee66/costpilotdemo/blob/main/docs/GOLDEN_VERSION_SIGNOFF.md)
-- [Marketing Review Process](https://github.com/Dee66/costpilotdemo/blob/main/docs/MARKETING_REVIEW.md)
-- [Implementation Checklist](https://github.com/Dee66/costpilotdemo/blob/main/docs/checklist.md)
 
 ## Reproducibility
 
@@ -80,11 +55,6 @@ The baseline and pr-change stacks demonstrate typical cost regression scenarios.
 - **Enforce Policies/SLOs**: Block expensive changes in CI.
 
 All analysis is safe, offline, and reproducible.
-
-## Learn More
-
-- Full product spec: [docs/product.yml](https://github.com/Dee66/costpilotdemo/blob/main/docs/product.yml) (in main repo)
-- CostPilot site: [Coming soon]
 
 Star this repo if it helps prevent bill shocks! Questions? Open an issue.
 
