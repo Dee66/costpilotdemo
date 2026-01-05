@@ -1012,7 +1012,24 @@
             </p>
             
             <div class="findings-grid" id="findingsContainer">
-                <div class="loading">Loading findings...</div>
+                <div class="finding-card high">
+                    <div class="finding-header">
+                        <div class="finding-title">🔴 aws_launch_template.main</div>
+                        <span class="severity-badge high">high</span>
+                    </div>
+                    <div class="finding-detail"><strong>Type:</strong> aws_launch_template (compute)</div>
+                    <div class="finding-detail"><strong>Change:</strong> instance_type from t3.micro to t3.xlarge</div>
+                    <div class="finding-detail"><strong>Impact:</strong> 16x cost increase</div>
+                </div>
+                <div class="finding-card medium">
+                    <div class="finding-header">
+                        <div class="finding-title">🟡 aws_ebs_volume.data</div>
+                        <span class="severity-badge medium">medium</span>
+                    </div>
+                    <div class="finding-detail"><strong>Type:</strong> aws_ebs_volume (storage)</div>
+                    <div class="finding-detail"><strong>Change:</strong> size from 20GB to 200GB</div>
+                    <div class="finding-detail"><strong>Impact:</strong> 10x cost increase</div>
+                </div>
             </div>
         </div>
 
@@ -1157,7 +1174,7 @@ retention_in_days = 30
                 const max = parseFloat(slider.max);
                 const value = parseFloat(slider.value);
                 const percentage = ((value - min) / (max - min)) * 100;
-                const trackHeight = 80; // Container height for desktop
+                const trackHeight = 180; // Container height for desktop
                 const handleHeight = 24;
                 const position = (1 - percentage / 100) * (trackHeight - handleHeight);
                 handle.style.top = position + 'px';
@@ -1175,7 +1192,7 @@ retention_in_days = 30
                 if (!isDragging) return;
 
                 const deltaY = startY - e.clientY; // Inverted for vertical slider
-                const trackHeight = 80; // pixels
+                const trackHeight = 180; // pixels
                 const valueRange = parseFloat(slider.max) - parseFloat(slider.min);
                 const deltaValue = (deltaY / trackHeight) * valueRange;
 
@@ -1481,7 +1498,7 @@ retention_in_days = 30
                     const max = parseFloat(slider.max);
                     const value = parseFloat(slider.value);
                     const percentage = ((value - min) / (max - min)) * 100;
-                    const trackHeight = 80; // Container height for desktop
+                    const trackHeight = 180; // Container height for desktop
                     const handleHeight = 24;
                     const position = (1 - percentage / 100) * (trackHeight - handleHeight);
                     handle.style.top = position + 'px';
@@ -1499,7 +1516,7 @@ retention_in_days = 30
                     if (!isDragging) return;
 
                     const deltaY = startY - e.clientY; // Inverted for vertical slider
-                    const trackHeight = 80; // pixels
+                    const trackHeight = 180; // pixels
                     const valueRange = parseFloat(slider.max) - parseFloat(slider.min);
                     const deltaValue = (deltaY / trackHeight) * valueRange;
 
