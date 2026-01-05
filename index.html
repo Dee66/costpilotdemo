@@ -1530,6 +1530,7 @@ retention_in_days = 30
             }
             // Add event listeners for real-time updates
             function createVerticalSlider(slider) {
+                console.log('Creating vertical slider for', slider.id);
                 const container = slider.parentElement;
                 const handle = document.createElement('div');
                 handle.className = 'slider-handle';
@@ -1545,7 +1546,7 @@ retention_in_days = 30
                     const value = parseFloat(slider.value);
                     const percentage = ((value - min) / (max - min)) * 100;
                     const trackHeight = 180; // Container height for desktop
-                    const handleHeight = 24;
+                    const handleHeight = 32;
                     const position = (1 - percentage / 100) * (trackHeight - handleHeight);
                     handle.style.top = position + 'px';
                 }
@@ -1684,6 +1685,7 @@ retention_in_days = 30
         // Add click handlers for finding cards
         document.querySelectorAll('.finding-card').forEach(card => {
             card.addEventListener('click', () => {
+                console.log('Toggling expansion for finding card');
                 card.classList.toggle('expanded');
             });
         });
