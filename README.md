@@ -12,10 +12,7 @@ Perfect for teams wanting cost control in CI without the IAM hassle.
 
 ## Quick Start
 
-Get started with CostPilot by purchasing from our official sales platforms:
-
-- [Lemon Squeezy](https://lemonsqueezy.com/costpilot)
-- [Gumroad](https://gumroad.com/costpilot)
+Get started with CostPilot by purchasing from our official sales platforms: Lemon Squeezy and Gumroad.
 
 For detailed usage instructions, see the documentation links below.
 
