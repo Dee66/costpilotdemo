@@ -55,11 +55,11 @@ For production use:
 
 ## Documentation
 
-- [Product Specification](docs/product.yml)
-- [Drift Management Guide](docs/DRIFT_MANAGEMENT.md)
-- [Golden Version Signoff](docs/GOLDEN_VERSION_SIGNOFF.md)
-- [Marketing Review Process](docs/MARKETING_REVIEW.md)
-- [Implementation Checklist](docs/checklist.md)
+- [Product Specification](https://github.com/Dee66/costpilotdemo/blob/main/docs/product.yml)
+- [Drift Management Guide](https://github.com/Dee66/costpilotdemo/blob/main/docs/DRIFT_MANAGEMENT.md)
+- [Golden Version Signoff](https://github.com/Dee66/costpilotdemo/blob/main/docs/GOLDEN_VERSION_SIGNOFF.md)
+- [Marketing Review Process](https://github.com/Dee66/costpilotdemo/blob/main/docs/MARKETING_REVIEW.md)
+- [Implementation Checklist](https://github.com/Dee66/costpilotdemo/blob/main/docs/checklist.md)
 
 ## Reproducibility
 
@@ -83,7 +83,7 @@ All analysis is safe, offline, and reproducible.
 
 ## Learn More
 
-- Full product spec: [docs/product.yml](docs/product.yml) (in main repo)
+- Full product spec: [docs/product.yml](https://github.com/Dee66/costpilotdemo/blob/main/docs/product.yml) (in main repo)
 - CostPilot site: [Coming soon]
 
 Star this repo if it helps prevent bill shocks! Questions? Open an issue.
