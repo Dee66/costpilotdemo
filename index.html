@@ -491,8 +491,10 @@
             -webkit-appearance: none;
             width: 24px;
             height: 24px;
-            background: transparent; /* Hide default thumb */
+            background: var(--primary);
+            border-radius: 50%;
             cursor: pointer;
+            border: 2px solid var(--primary-dark);
         }
 
         .slider-container input[type="range"]::-webkit-slider-thumb:hover {
@@ -521,8 +523,10 @@
         .slider-container input[type="range"]::-moz-range-thumb {
             width: 24px;
             height: 24px;
-            background: transparent; /* Hide default thumb */
+            background: var(--primary);
+            border-radius: 50%;
             cursor: pointer;
+            border: 2px solid var(--primary-dark);
         }
             transition: all 0.2s ease;
             position: relative;
