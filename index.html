@@ -9,6 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     
     <style>
         * {
@@ -480,14 +481,12 @@
             transform-origin: center;
         }
 
-        }
-
         /* Custom vertical slider handle */
         .slider-container .slider-handle {
             position: absolute;
             width: 30px;
             height: 30px;
-            background: red;
+            background: var(--primary);
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(255, 0, 0, 0.5);
@@ -871,7 +870,14 @@
 </head>
 <body>
     <script>
-        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        } else {
+            console.error('Mermaid library not loaded');
+            document.querySelectorAll('.mermaid').forEach(el => {
+                el.innerHTML = '<p style="color: red;">Graph rendering unavailable.</p>';
+            });
+        }
     </script>
     
     <div class="hero">
@@ -1316,7 +1322,7 @@ retention_in_days = 30
             update();
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             loadFindings();
             animateCounter('beforeCost', 0, 52, 1500);
             animateCounter('afterCost', 52, 388, 2000);
@@ -1326,9 +1332,15 @@ retention_in_days = 30
         });
 
         function initializeROICalculator() {
+            console.log('Initializing ROI Calculator sliders');
             const monthlySpendSlider = document.getElementById('monthlySpend');
             const wastePercentSlider = document.getElementById('wastePercent');
             const detectionRateSlider = document.getElementById('detectionRate');
+            
+            if (!monthlySpendSlider || !wastePercentSlider || !detectionRateSlider) {
+                console.error('Slider elements not found');
+                return;
+            }
             
             const monthlySpendValue = document.getElementById('monthlySpendValue');
             const wastePercentValue = document.getElementById('wastePercentValue');
@@ -1399,9 +1411,14 @@ retention_in_days = 30
             // Create custom vertical slider handles
             function createVerticalSlider(slider) {
                 const container = slider.parentElement;
+                if (!container) {
+                    console.error('Container not found for slider:', slider.id);
+                    return;
+                }
                 const handle = document.createElement('div');
                 handle.className = 'slider-handle';
                 container.appendChild(handle);
+                console.log('Created handle for slider:', slider.id);
 
                 let isDragging = false;
                 let startY = 0;
