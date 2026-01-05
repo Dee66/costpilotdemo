@@ -469,110 +469,12 @@
         .slider-container input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
-            width: 220px;
-            height: 80px;
-            background: transparent;
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
             cursor: pointer;
-            margin: 0;
-            position: relative;
-            z-index: 2;
-            transform: rotate(-90deg);
-            transform-origin: center;
-            /* Hide the default slider and use custom interaction */
-            opacity: 0;
-        }
-
-        /* Custom vertical slider handle */
-        .slider-container .slider-handle {
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
-            border: 2px solid red; /* Debug border */
-            transition: all 0.15s ease;
-            z-index: 3;
-            top: 20px; /* Start at top of track */
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .slider-container .slider-handle:hover {
-            transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-
-        .slider-container .slider-handle:active {
-            transform: translateX(-50%) scale(1.05);
-            cursor: grabbing;
-        }
-
-        /* Custom track background */
-        .slider-container::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 180px;
-            background: linear-gradient(to bottom, #e5e7eb 0%, #d1d5db 100%);
-            border-radius: 6px;
-            z-index: 1;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Progress fill */
-        .slider-container::after {
-            content: '';
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: var(--progress-height, 0px);
-            background: linear-gradient(to top, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 6px;
-            z-index: 1;
-            transition: height 0.1s ease;
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Tick marks */
-        .slider-container .tick-marks {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 20px;
-            height: 180px;
-            width: 20px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .slider-container .tick-marks::before,
-        .slider-container .tick-marks::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 180px;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent 0px,
-                transparent 16px,
-                rgba(0, 0, 0, 0.1) 16px,
-                rgba(0, 0, 0, 0.1) 18px
-            );
-        }
-
-        .slider-container .tick-marks::before {
-            left: -4px;
-        }
-
-        .slider-container .tick-marks::after {
-            right: -4px;
+            opacity: 1;
         }
 
         /* Webkit browsers (Chrome, Safari, Edge) */
@@ -1133,29 +1035,44 @@ retention_in_days = 30
 
     <script>
         async function loadFindings() {
-            try {
-                const response = await fetch('./snapshots/detect_v1.json');
-                const data = await response.json();
-                const container = document.getElementById('findingsContainer');
-                
-                if (!data.detection_results?.findings || data.detection_results.findings.length === 0) {
-                    container.innerHTML = '<p style="color: var(--text-muted);">No findings data available</p>';
-                    return;
-                }
-
-                const findings = data.detection_results.findings;
-                container.innerHTML = '';
-
-                findings.forEach((finding, index) => {
-                    const card = createFindingCard(finding, index);
-                    container.appendChild(card);
-                });
-
-            } catch (error) {
-                console.error('Error loading findings:', error);
-                document.getElementById('findingsContainer').innerHTML = 
-                    '<p style="color: var(--danger);">Failed to load findings. Make sure detect_v1.json is available.</p>';
-            }
+            const container = document.getElementById('findingsContainer');
+            // Hardcode test findings for now
+            container.innerHTML = `
+                <div class="finding-card high">
+                    <div class="finding-header">
+                        <div class="finding-title">
+                            🔴 aws_launch_template.main
+                        </div>
+                        <span class="severity-badge high">high</span>
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Type:</strong> aws_launch_template (compute)
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Change:</strong> instance_type from t3.micro to t3.xlarge
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Impact:</strong> 16x cost increase
+                    </div>
+                </div>
+                <div class="finding-card medium">
+                    <div class="finding-header">
+                        <div class="finding-title">
+                            🟡 aws_ebs_volume.data
+                        </div>
+                        <span class="severity-badge medium">medium</span>
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Type:</strong> aws_ebs_volume (storage)
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Change:</strong> size from 20GB to 200GB
+                    </div>
+                    <div class="finding-detail">
+                        <strong>Impact:</strong> 10x cost increase
+                    </div>
+                </div>
+            `;
         }
 
         function createFindingCard(finding, index) {
@@ -1395,8 +1312,7 @@ retention_in_days = 30
                 container.style.setProperty('--progress-height', fillHeight + 'px');
                 container.style.setProperty('--progress-percentage', percentage + '%');
             }
-            
-            // Create custom vertical slider handles
+            // Add event listeners for real-time updates
             function createVerticalSlider(slider) {
                 const container = slider.parentElement;
                 const handle = document.createElement('div');
@@ -1483,11 +1399,6 @@ retention_in_days = 30
                 // Update position when slider value changes programmatically
                 slider.addEventListener('input', updateHandlePosition);
             }
-
-            // Create custom handles for all sliders
-            createVerticalSlider(monthlySpendSlider);
-            createVerticalSlider(wastePercentSlider);
-            createVerticalSlider(detectionRateSlider);
 
             // Add event listeners for real-time updates
             monthlySpendSlider.addEventListener('input', calculateROI);
