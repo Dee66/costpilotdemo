@@ -1412,7 +1412,9 @@ retention_in_days = 30
                     const max = parseFloat(slider.max);
                     const value = parseFloat(slider.value);
                     const percentage = ((value - min) / (max - min)) * 100;
-                    const position = 20 + (180 - (percentage / 100) * 180); // 180px track height, inverted for vertical
+                    const trackHeight = 80; // Container height for desktop
+                    const handleHeight = 24;
+                    const position = (1 - percentage / 100) * (trackHeight - handleHeight);
                     handle.style.top = position + 'px';
                 }
 
@@ -1428,7 +1430,7 @@ retention_in_days = 30
                     if (!isDragging) return;
 
                     const deltaY = startY - e.clientY; // Inverted for vertical slider
-                    const trackHeight = 180; // pixels
+                    const trackHeight = 80; // pixels
                     const valueRange = parseFloat(slider.max) - parseFloat(slider.min);
                     const deltaValue = (deltaY / trackHeight) * valueRange;
 
