@@ -9,7 +9,6 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     
     <style>
         * {
@@ -474,25 +473,26 @@
             background: transparent;
             cursor: pointer;
             margin: 0;
-            position: absolute;
-            left: -9999px;
+            position: relative;
             z-index: 2;
             transform: rotate(-90deg);
             transform-origin: center;
+            /* Hide the default slider and use custom interaction */
+            opacity: 0;
         }
 
         /* Custom vertical slider handle */
         .slider-container .slider-handle {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             background: var(--primary);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(255, 0, 0, 0.5);
-            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+            border: 2px solid white;
             transition: all 0.15s ease;
-            z-index: 10;
+            z-index: 3;
             top: 20px; /* Start at top of track */
             left: 50%;
             transform: translateX(-50%);
@@ -870,14 +870,7 @@
 </head>
 <body>
     <script>
-        if (typeof mermaid !== 'undefined') {
-            mermaid.initialize({ startOnLoad: true, theme: 'default' });
-        } else {
-            console.error('Mermaid library not loaded');
-            document.querySelectorAll('.mermaid').forEach(el => {
-                el.innerHTML = '<p style="color: red;">Graph rendering unavailable.</p>';
-            });
-        }
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
     </script>
     
     <div class="hero">
@@ -1322,7 +1315,7 @@ retention_in_days = 30
             update();
         }
 
-        window.addEventListener('load', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             loadFindings();
             animateCounter('beforeCost', 0, 52, 1500);
             animateCounter('afterCost', 52, 388, 2000);
@@ -1332,15 +1325,9 @@ retention_in_days = 30
         });
 
         function initializeROICalculator() {
-            console.log('Initializing ROI Calculator sliders');
             const monthlySpendSlider = document.getElementById('monthlySpend');
             const wastePercentSlider = document.getElementById('wastePercent');
             const detectionRateSlider = document.getElementById('detectionRate');
-            
-            if (!monthlySpendSlider || !wastePercentSlider || !detectionRateSlider) {
-                console.error('Slider elements not found');
-                return;
-            }
             
             const monthlySpendValue = document.getElementById('monthlySpendValue');
             const wastePercentValue = document.getElementById('wastePercentValue');
@@ -1411,14 +1398,9 @@ retention_in_days = 30
             // Create custom vertical slider handles
             function createVerticalSlider(slider) {
                 const container = slider.parentElement;
-                if (!container) {
-                    console.error('Container not found for slider:', slider.id);
-                    return;
-                }
                 const handle = document.createElement('div');
                 handle.className = 'slider-handle';
                 container.appendChild(handle);
-                console.log('Created handle for slider:', slider.id);
 
                 let isDragging = false;
                 let startY = 0;
@@ -1511,7 +1493,6 @@ retention_in_days = 30
             
             // Initial calculation
             calculateROI();
-        }
         
         // Autoplay terminal demo when in viewport
         const terminalDemo = document.querySelector('.terminal-demo');
