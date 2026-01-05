@@ -469,15 +469,112 @@
         .slider-container input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
-            width: 100%;
-            height: 6px;
-            background: #e5e7eb;
-            border-radius: 3px;
+            width: 220px;
+            height: 80px;
+            background: transparent;
             cursor: pointer;
-            opacity: 1;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            /* Hide the default slider and use custom interaction */
+            opacity: 0;
         }
 
-        /* Webkit browsers (Chrome, Safari, Edge) */
+        /* Custom vertical slider handle */
+        .slider-container .slider-handle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+            border: 2px solid var(--primary-dark);
+            transition: all 0.15s ease;
+            z-index: 3;
+            top: 20px; /* Start at top of track */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-container .slider-handle:hover {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .slider-container .slider-handle:active {
+            transform: translateX(-50%) scale(1.05);
+            cursor: grabbing;
+        }
+
+        /* Custom track background */
+        .slider-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 180px;
+            background: linear-gradient(to bottom, #e5e7eb 0%, #d1d5db 100%);
+            border-radius: 6px;
+            z-index: 1;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Progress fill */
+        .slider-container::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: var(--progress-height, 0px);
+            background: linear-gradient(to top, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 6px;
+            z-index: 1;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Tick marks */
+        .slider-container .tick-marks {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            height: 180px;
+            width: 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .slider-container .tick-marks::before,
+        .slider-container .tick-marks::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 180px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 16px,
+                rgba(0, 0, 0, 0.1) 16px,
+                rgba(0, 0, 0, 0.1) 18px
+            );
+        }
+
+        .slider-container .tick-marks::before {
+            left: -4px;
+        }
+
+        .slider-container .tick-marks::after {
+            right: -4px;
+        }
+
         .slider-container input[type="range"]::-webkit-slider-track {
             background: transparent;
             width: 12px;
@@ -1041,42 +1138,94 @@ retention_in_days = 30
         async function loadFindings() {
             const container = document.getElementById('findingsContainer');
             // Hardcode test findings for now
-            container.innerHTML = `
-                <div class="finding-card high">
-                    <div class="finding-header">
-                        <div class="finding-title">
-                            🔴 aws_launch_template.main
-                        </div>
-                        <span class="severity-badge high">high</span>
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Type:</strong> aws_launch_template (compute)
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Change:</strong> instance_type from t3.micro to t3.xlarge
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Impact:</strong> 16x cost increase
-                    </div>
-                </div>
-                <div class="finding-card medium">
-                    <div class="finding-header">
-                        <div class="finding-title">
-                            🟡 aws_ebs_volume.data
-                        </div>
-                        <span class="severity-badge medium">medium</span>
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Type:</strong> aws_ebs_volume (storage)
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Change:</strong> size from 20GB to 200GB
-                    </div>
-                    <div class="finding-detail">
-                        <strong>Impact:</strong> 10x cost increase
-                    </div>
-                </div>
-            `;
+            container.innerHTML = '<div class="finding-card high"><div class="finding-header"><div class="finding-title">🔴 aws_launch_template.main</div><span class="severity-badge high">high</span></div><div class="finding-detail"><strong>Type:</strong> aws_launch_template (compute)</div><div class="finding-detail"><strong>Change:</strong> instance_type from t3.micro to t3.xlarge</div><div class="finding-detail"><strong>Impact:</strong> 16x cost increase</div></div><div class="finding-card medium"><div class="finding-header"><div class="finding-title">🟡 aws_ebs_volume.data</div><span class="severity-badge medium">medium</span></div><div class="finding-detail"><strong>Type:</strong> aws_ebs_volume (storage)</div><div class="finding-detail"><strong>Change:</strong> size from 20GB to 200GB</div><div class="finding-detail"><strong>Impact:</strong> 10x cost increase</div></div>';
+        }
+
+        // Create custom vertical slider handles
+        function createVerticalSlider(slider) {
+            const container = slider.parentElement;
+            const handle = document.createElement('div');
+            handle.className = 'slider-handle';
+            container.appendChild(handle);
+
+            let isDragging = false;
+            let startY = 0;
+            let startValue = 0;
+
+            function updateHandlePosition() {
+                const min = parseFloat(slider.min);
+                const max = parseFloat(slider.max);
+                const value = parseFloat(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                const trackHeight = 80; // Container height for desktop
+                const handleHeight = 24;
+                const position = (1 - percentage / 100) * (trackHeight - handleHeight);
+                handle.style.top = position + 'px';
+            }
+
+            function handleMouseDown(e) {
+                isDragging = true;
+                startY = e.clientY;
+                startValue = parseFloat(slider.value);
+                handle.style.cursor = 'grabbing';
+                e.preventDefault();
+            }
+
+            function handleMouseMove(e) {
+                if (!isDragging) return;
+
+                const deltaY = startY - e.clientY; // Inverted for vertical slider
+                const trackHeight = 80; // pixels
+                const valueRange = parseFloat(slider.max) - parseFloat(slider.min);
+                const deltaValue = (deltaY / trackHeight) * valueRange;
+
+                let newValue = startValue + deltaValue;
+                newValue = Math.max(parseFloat(slider.min), Math.min(parseFloat(slider.max), newValue));
+
+                slider.value = newValue;
+                updateHandlePosition();
+
+                // Trigger input event for calculation
+                const inputEvent = new Event('input', { bubbles: true });
+                slider.dispatchEvent(inputEvent);
+            }
+
+            function handleMouseUp() {
+                if (isDragging) {
+                    isDragging = false;
+                    handle.style.cursor = 'pointer';
+                }
+            }
+
+            // Touch events for mobile
+            function handleTouchStart(e) {
+                const touch = e.touches[0];
+                handleMouseDown({ clientY: touch.clientY, preventDefault: () => {} });
+            }
+
+            function handleTouchMove(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                handleMouseMove({ clientY: touch.clientY });
+            }
+
+            function handleTouchEnd() {
+                handleMouseUp();
+            }
+
+            // Event listeners
+            handle.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+            handle.addEventListener('touchstart', handleTouchStart);
+            document.addEventListener('touchmove', handleTouchMove);
+            document.addEventListener('touchend', handleTouchEnd);
+
+            // Initial position
+            updateHandlePosition();
+
+            // Update position when slider value changes programmatically
+            slider.addEventListener('input', updateHandlePosition);
         }
 
         function createFindingCard(finding, index) {
@@ -1405,6 +1554,10 @@ retention_in_days = 30
             }
 
             // Add event listeners for real-time updates
+            createVerticalSlider(monthlySpendSlider);
+            createVerticalSlider(wastePercentSlider);
+            createVerticalSlider(detectionRateSlider);
+
             monthlySpendSlider.addEventListener('input', calculateROI);
             wastePercentSlider.addEventListener('input', calculateROI);
             detectionRateSlider.addEventListener('input', calculateROI);
