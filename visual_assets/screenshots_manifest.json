@@ -5,11 +5,13 @@
   "screenshots": [
     {
       "filename": "detect_output_screenshot.png",
-      "status": "pending_capture",
-      "resolution": "1920x1080",
+      "status": "captured",
+      "actual_filename": "Findings.png",
+      "resolution": "1138x1236",
       "theme": "light",
       "source_snapshot": "snapshots/detect_v1.json",
       "pr_context": "PR #42",
+      "capture_timestamp": "2025-12-08T10:20:00Z",
       "must_show": [
         "Resource classifications",
         "Rule IDs and severity scores",
@@ -24,11 +26,13 @@
     },
     {
       "filename": "explain_mode_screenshot.png",
-      "status": "pending_capture",
-      "resolution": "1920x1080",
+      "status": "captured",
+      "actual_filenames": ["FindingOne.png", "FindingTwo.png", "FindingThree.png", "FindingFour.png"],
+      "resolution": "1072x536-1072x592",
       "theme": "light",
       "source_snapshot": "snapshots/explain_v1.json",
       "pr_context": "PR #42",
+      "capture_timestamp": "2025-12-08T10:20:00Z",
       "must_show": [
         "Root cause explanation",
         "Heuristic provenance",
@@ -43,11 +47,13 @@
     },
     {
       "filename": "mapping_graph.png",
-      "status": "pending_capture",
-      "resolution": "1920x1080",
+      "status": "captured",
+      "actual_filename": "InfrastructureImpact.png",
+      "resolution": "1136x586",
       "theme": "light",
       "source_snapshot": "snapshots/mapping_v1.mmd",
       "pr_context": "PR #42",
+      "capture_timestamp": "2025-12-08T10:20:00Z",
       "must_show": [
         "ALB to Target Group to ASG to EC2 flow",
         "CloudWatch to Log Groups to Metric Streams",
@@ -61,11 +67,13 @@
     },
     {
       "filename": "trend_graph.png",
-      "status": "pending_capture",
-      "resolution": "1920x1080",
+      "status": "captured",
+      "actual_filename": "CostTrendAnalysis.png",
+      "resolution": "1136x491",
       "theme": "light",
       "source_snapshot": "snapshots/trend_history_v1.json",
       "pr_context": "PR #42",
+      "capture_timestamp": "2025-12-08T10:20:00Z",
       "must_show": [
         "Baseline cost ($52.43)",
         "PR change cost ($387.89)",
@@ -81,11 +89,13 @@
     },
     {
       "filename": "pr_comment_cost_diff.png",
-      "status": "pending_capture",
-      "resolution": "1920x1080",
+      "status": "captured",
+      "actual_filename": "MonthlyDelta.png",
+      "resolution": "1136x129",
       "theme": "light",
       "source_snapshot": "snapshots/predict_v1.json",
       "pr_context": "PR #42",
+      "capture_timestamp": "2025-12-08T10:20:00Z",
       "must_show": [
         "Before/after costs",
         "Dollar delta",
