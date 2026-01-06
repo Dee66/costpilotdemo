@@ -10,26 +10,13 @@ CostPilot is a GitHub-native, zero-permission FinOps engine that analyzes Terraf
 
 Perfect for teams wanting cost control in CI without the IAM hassle.
 
+**Live Demo**: [https://dee66.github.io/costpilotdemo/](https://dee66.github.io/costpilotdemo/)
+
 ## Quick Start
 
-- [Live Demo](https://dee66.github.io/costpilotdemo/) - Interactive CostPilot demonstration
-- Purchase on Lemon Squeezy or Gumroad
-- [GitHub Repository](https://github.com/dee66/costpilotdemo)
+Get started with CostPilot by purchasing from our official sales platforms: Lemon Squeezy and Gumroad.
 
 For detailed usage instructions, see the documentation links below.
-
-## Repository Structure
-
-```
-├── infrastructure/terraform/     # Demo Terraform stacks
-│   ├── baseline/                # Original cost-optimized config
-│   ├── pr-change/               # Cost regression example
-│   └── noop-change/             # No-op change example
-├── snapshots/                   # Golden output files
-├── scripts/                     # Test and utility scripts
-├── docs/                        # Documentation
-└── costpilot                    # CLI binary (demo version)
-```
 
 ## Safety Notes
 
@@ -67,11 +54,6 @@ The baseline and pr-change stacks demonstrate typical cost regression scenarios.
 - **Enforce Policies/SLOs**: Block expensive changes in CI.
 
 All analysis is safe, offline, and reproducible.
-
-## Learn More
-
-- Full product spec: [docs/product.yml](docs/product.yml) (in main repo)
-- CostPilot site: [Coming soon]
 
 Star this repo if it helps prevent bill shocks! Questions? Open an issue.
 
