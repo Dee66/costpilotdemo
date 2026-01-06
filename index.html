@@ -1112,6 +1112,13 @@ graph TD
             </div>
         </div>
 
+        <script>
+            // Force render Mermaid diagrams
+            document.addEventListener('DOMContentLoaded', function() {
+                mermaid.init(undefined, '.mermaid');
+            });
+        </script>
+
         <div class="section">
             <h2>📊 Cost Trend Analysis</h2>
             <p style="color: var(--text-muted); margin-bottom: 1rem;">
