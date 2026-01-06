@@ -1683,6 +1683,7 @@ retention_in_days = 30
         }
 
         // Add click handlers for finding cards
+        console.log('Adding click handlers to finding cards');
         document.querySelectorAll('.finding-card').forEach(card => {
             card.addEventListener('click', () => {
                 console.log('Toggling expansion for finding card');
