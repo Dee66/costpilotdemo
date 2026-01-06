@@ -1,0 +1,11 @@
+# Internal and sensitive files - not for public repo
+.costpilot/
+costpilot.yml
+docs/
+infrastructure/
+pr_comment_assets/
+record_screen.sh
+record_terminal_click.js
+snapshots/
+video_assets/
+terminal_demo.html
