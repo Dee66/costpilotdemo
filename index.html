@@ -624,7 +624,6 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid var(--primary-dark);
-        }
             transition: all 0.2s ease;
             position: relative;
             z-index: 3;
@@ -1221,8 +1220,8 @@ retention_in_days = 30
                 const value = parseFloat(slider.value);
                 const percentage = ((value - min) / (max - min)) * 100;
                 const trackHeight = 180; // Container height for desktop
-                const handleHeight = 24;
-                const position = (1 - percentage / 100) * (trackHeight - handleHeight);
+                const handleHeight = 32;
+                const position = 20 + (1 - percentage / 100) * (trackHeight - handleHeight);
                 handle.style.top = position + 'px';
             }
 
@@ -1547,7 +1546,7 @@ retention_in_days = 30
                     const percentage = ((value - min) / (max - min)) * 100;
                     const trackHeight = 180; // Container height for desktop
                     const handleHeight = 32;
-                    const position = (1 - percentage / 100) * (trackHeight - handleHeight);
+                    const position = 20 + (1 - percentage / 100) * (trackHeight - handleHeight);
                     handle.style.top = position + 'px';
                 }
 
