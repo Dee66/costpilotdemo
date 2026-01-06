@@ -22,19 +22,6 @@ For detailed usage instructions, see the documentation links below.
 
 ⚠️ **This is a demo repository** - the CostPilot CLI here is a mock implementation for testing purposes only.
 
-For production use:
-- Download the real CLI from [costpilot.dev](https://costpilot.dev)
-- Never commit real AWS credentials or state files
-- Run analysis in CI/CD pipelines, not locally with production credentials
-
-## Documentation
-
-- [Product Specification](docs/product.yml)
-- [Drift Management Guide](docs/DRIFT_MANAGEMENT.md)
-- [Golden Version Signoff](docs/GOLDEN_VERSION_SIGNOFF.md)
-- [Marketing Review Process](docs/MARKETING_REVIEW.md)
-- [Implementation Checklist](docs/checklist.md)
-
 ## Reproducibility
 
 All analysis is deterministic and reproducible:

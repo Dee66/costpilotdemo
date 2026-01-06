@@ -1,0 +1,374 @@
+🤖 **CostPilot Auto-Fix Suggestions — PR #42**
+
+**Branch**: `feature/upgrade-instances` → `main`  
+**Purpose**: Provide copy-pastable code fixes to reduce cost
+
+---
+
+## 🔧 Quick Wins (Apply These First)
+
+These fixes address high-severity findings and restore cost efficiency:
+
+---
+
+### ✅ Fix 1: Revert EC2 Instance Type to t3.micro
+
+**Finding**: `detect-001` (HIGH)  
+**Impact**: Saves **$227.96/month**  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+```hcl
+resource "aws_launch_template" "main" {
+  name_prefix   = "costpilot-demo-"
+  image_id      = data.aws_ami.amazon_linux_2.id
+- instance_type = "t3.xlarge"  # ❌ Expensive: $0.1664/hr × 2 instances = $243/mo
++ instance_type = "t3.micro"   # ✅ Cost-efficient: $0.0104/hr × 2 instances = $15/mo
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+-     volume_size = 200  # ❌ Oversized
++     volume_size = 20   # ✅ Right-sized for demo
+      volume_type = "gp3"
+    }
+  }
+
+  # ... rest of configuration
+}
+```
+
+**Why this works**:
+- t3.micro provides 2 vCPU and 1GB RAM (sufficient for demo workload)
+- Complies with `default-ec2-type` policy
+- Reduces per-instance cost by 94%
+
+**Testing**:
+```bash
+cd infrastructure/terraform/pr-change
+terraform plan
+# Verify: Plan shows instance_type = "t3.micro"
+```
+
+---
+
+### ✅ Fix 2: Restore S3 Lifecycle Configuration
+
+**Finding**: `detect-003` (HIGH)  
+**Impact**: Prevents **$82/month** by Month 12  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+**Add this resource back**:
+```hcl
+resource "aws_s3_bucket_lifecycle_configuration" "main" {
+  bucket = aws_s3_bucket.main.id
+
+  rule {
+    id     = "expire_old_objects"
+    status = "Enabled"
+
+    expiration {
+      days = 90  # Auto-delete objects after 90 days
+    }
+  }
+
+  rule {
+    id     = "transition_to_glacier"
+    status = "Enabled"
+
+    transition {
+      days          = 30
+      storage_class = "GLACIER"  # Move to cheaper storage after 30 days
+    }
+
+    expiration {
+      days = 180  # Final deletion after 180 days
+    }
+  }
+}
+```
+
+**Why this works**:
+- Objects expire automatically → prevents unbounded growth
+- Two-tier lifecycle: Hot data (0-30 days), Cold archive (30-180 days)
+- Reduces storage costs by 60% vs infinite retention
+
+**Alternative (Simple)**:
+```hcl
+resource "aws_s3_bucket_lifecycle_configuration" "main" {
+  bucket = aws_s3_bucket.main.id
+
+  rule {
+    id     = "expire_old_objects"
+    status = "Enabled"
+
+    expiration {
+      days = 90  # Simple: Just delete after 90 days
+    }
+  }
+}
+```
+
+---
+
+### ✅ Fix 3: Set CloudWatch Log Retention
+
+**Finding**: `detect-004` (MEDIUM)  
+**Impact**: Prevents **$90/month** by Month 12  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+```hcl
+resource "aws_cloudwatch_log_group" "main" {
+  name = "/aws/costpilot-demo/app"
+- retention_in_days = 0  # ❌ Infinite retention → unbounded cost growth
++ retention_in_days = 90 # ✅ 90 days balances debugging needs and cost
+
+  tags = {
+    Environment = "demo"
+    CostCenter  = "engineering"
+  }
+}
+```
+
+**Why this works**:
+- 90 days provides ample time for debugging and audits
+- Logs auto-expire → predictable, stable costs
+- CloudWatch charges $0.50/GB/month → capping retention controls costs
+
+**Alternative Retention Periods**:
+- **30 days**: Most cost-efficient ($7.50/mo)
+- **90 days**: Balanced ($22.50/mo)
+- **180 days**: Long-term debugging ($45/mo)
+- **365 days**: Compliance/audit ($90/mo)
+
+---
+
+## 🎯 Advanced Optimization (Optional)
+
+These fixes go beyond the PR changes for additional savings:
+
+---
+
+### 💡 Optimization 1: Right-Size EBS Volume
+
+**Finding**: `detect-002` (MEDIUM)  
+**Impact**: Additional **$15/month** savings  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+```hcl
+resource "aws_launch_template" "main" {
+  # ... other config
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+-     volume_size = 200  # ❌ 200GB × 2 instances = $40/mo
++     volume_size = 50   # ✅ 50GB × 2 instances = $10/mo (saves $30/mo)
+      volume_type = "gp3"
+    }
+  }
+}
+```
+
+**Why 50GB**:
+- Demo workload needs ~10-15GB
+- 50GB provides 3x headroom for growth
+- Saves $30/month vs 200GB
+
+**Testing Volume Size**:
+```bash
+# SSH to instance (if running)
+df -h /dev/xvda1
+# Check actual usage vs capacity
+```
+
+---
+
+### 💡 Optimization 2: Use gp3 with Optimized IOPS
+
+**Impact**: Additional **$5/month** savings  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+```hcl
+resource "aws_launch_template" "main" {
+  # ... other config
+
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+      volume_size = 50
+-     volume_type = "gp3"  # Default IOPS: 3,000
++     volume_type = "gp3"
++     iops        = 3000   # Explicit (no cost change)
++     throughput  = 125    # Default: 125 MB/s (no cost change)
+    }
+  }
+}
+```
+
+**Why gp3**:
+- 20% cheaper than gp2
+- Configurable IOPS and throughput
+- Better performance per dollar
+
+---
+
+### 💡 Optimization 3: Add Auto-Scaling Schedule
+
+**Impact**: **$80/month** savings (if applicable)  
+**File**: `infrastructure/terraform/pr-change/main.tf`
+
+```hcl
+resource "aws_autoscaling_schedule" "scale_down_nights" {
+  scheduled_action_name  = "scale-down-nights"
+  min_size               = 0
+  max_size               = 0
+  desired_capacity       = 0
+  recurrence             = "0 22 * * *"  # 10 PM daily
+  autoscaling_group_name = aws_autoscaling_group.main.name
+}
+
+resource "aws_autoscaling_schedule" "scale_up_mornings" {
+  scheduled_action_name  = "scale-up-mornings"
+  min_size               = 2
+  max_size               = 4
+  desired_capacity       = 2
+  recurrence             = "0 6 * * *"  # 6 AM daily
+  autoscaling_group_name = aws_autoscaling_group.main.name
+}
+```
+
+**Why this works**:
+- Scales down to 0 instances during off-hours (10 PM - 6 AM)
+- Saves ~8 hours/day × 30 days = 240 hours/month
+- **Savings**: 240 hrs × $0.1664/hr × 2 instances = **$79.87/month**
+
+**Note**: Only use if application can tolerate downtime
+
+---
+
+## 📊 Combined Fix Impact
+
+### If You Apply All Quick Wins:
+
+| Fix | Monthly Savings |
+|-----|-----------------|
+| Revert to t3.micro | -$227.96 |
+| Restore S3 lifecycle | -$82.80 (by Month 12) |
+| Set log retention to 90 days | -$90.00 (by Month 12) |
+| **Total Quick Win Savings** | **-$400.76/month** |
+
+**Result**: **~$70/month** (under original baseline)
+
+### If You Apply All Optimizations:
+
+| Fix | Monthly Savings |
+|-----|-----------------|
+| All quick wins above | -$400.76 |
+| Right-size EBS to 50GB | -$30.00 |
+| Auto-scaling schedule | -$79.87 |
+| **Total with Optimizations** | **-$510.63/month** |
+
+**Result**: **~$50/month** (maximum cost efficiency)
+
+---
+
+## 🚀 How to Apply Fixes
+
+### Option 1: Cherry-Pick Fixes (Recommended)
+
+```bash
+# 1. Create a new branch for cost fixes
+git checkout -b fix/reduce-cost-regressions
+
+# 2. Edit the Terraform file
+vi infrastructure/terraform/pr-change/main.tf
+
+# 3. Apply fixes (copy-paste from above)
+# Fix 1: Change t3.xlarge → t3.micro
+# Fix 2: Add S3 lifecycle resource
+# Fix 3: Set retention_in_days = 90
+
+# 4. Validate Terraform
+cd infrastructure/terraform/pr-change
+terraform init
+terraform validate
+terraform plan  # Review changes
+
+# 5. Commit and push
+git add main.tf
+git commit -m "fix: Apply CostPilot auto-fix suggestions
+
+- Revert EC2 instance type to t3.micro (saves $228/mo)
+- Restore S3 lifecycle configuration (prevents $82/mo growth)
+- Set CloudWatch log retention to 90 days (prevents $90/mo growth)
+
+Fixes: PR #42 cost regressions
+CostPilot Analysis: comment_predict.txt"
+
+git push origin fix/reduce-cost-regressions
+```
+
+### Option 2: Apply All Fixes Automatically
+
+```bash
+# Use CostPilot's auto-apply feature (if available)
+costpilot autofix --plan pr-change/tfplan.json --apply-all
+
+# Or download pre-built fix
+curl -O https://costpilot.io/fixes/pr-42-autofix.patch
+git apply pr-42-autofix.patch
+```
+
+---
+
+## ✅ Validation Checklist
+
+After applying fixes, verify:
+
+- [ ] Terraform plan shows expected changes
+- [ ] Instance type is `t3.micro`
+- [ ] S3 lifecycle resource exists with 90-day expiration
+- [ ] CloudWatch log retention set to 90 days
+- [ ] EBS volume size right-sized (20-50GB)
+- [ ] No Terraform validation errors
+- [ ] Policy compliance: No violations remaining
+
+### Run CostPilot Again
+
+```bash
+# Regenerate cost prediction after fixes
+costpilot predict --plan tfplan.json
+
+# Expected result: Monthly cost ~$70 (vs $388 before fixes)
+```
+
+---
+
+## 🎓 Cost Optimization Best Practices
+
+**Before upsizing resources**:
+1. Profile actual usage (CPU, RAM, disk)
+2. Consider vertical vs horizontal scaling
+3. Evaluate Spot instances for non-critical workloads
+4. Use Reserved Instances for predictable workloads
+
+**For storage costs**:
+1. Always set lifecycle policies (S3, CloudWatch)
+2. Right-size volumes based on actual usage + 2x headroom
+3. Consider cheaper storage classes (S3 Glacier, Intelligent-Tiering)
+4. Enable compression for logs
+
+**For compute costs**:
+1. Use smallest instance type that meets SLAs
+2. Implement auto-scaling schedules for non-production
+3. Monitor actual utilization (aim for 70-80%)
+4. Consider Graviton instances (20% cheaper, same performance)
+
+---
+
+⚙️ **CostPilot v1.0.0** | Auto-fix suggestions generated in 200ms  
+🔍 [View Detection Details](#) | 📊 [View Cost Predictions](#) | 💡 [View Explanations](#)
+
+---
+
+**Questions?** See `docs/DRIFT_MANAGEMENT.md` for more on cost regression prevention.
