@@ -1,0 +1,69 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.api-gateway_service",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "t3.small",
+        "ami": "ami-11223344",
+        "tags": {
+          "Name": "api-gateway-service-952",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "api-gateway",
+          "Team": "backend"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "api-gateway_service",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_elasticache_cluster.api-gateway_cache",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "cluster_id": "api-gateway-cache-952",
+        "engine": "redis",
+        "node_type": "cache.t3.micro",
+        "num_cache_nodes": 1,
+        "tags": {
+          "Name": "api-gateway-cache-952",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "api-gateway"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_elasticache_cluster",
+    "name": "api-gateway_cache",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_sqs_queue.api-gateway_queue",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "name": "api-gateway-queue-952",
+        "delay_seconds": 0,
+        "max_message_size": 262144,
+        "tags": {
+          "Name": "api-gateway-queue-952",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "api-gateway"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_sqs_queue",
+    "name": "api-gateway_queue",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

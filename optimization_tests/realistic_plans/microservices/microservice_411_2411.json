@@ -1,0 +1,69 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.notification_service",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "t3.micro",
+        "ami": "ami-11223344",
+        "tags": {
+          "Name": "notification-service-411",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "notification",
+          "Team": "backend"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "notification_service",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_elasticache_cluster.notification_cache",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "cluster_id": "notification-cache-411",
+        "engine": "redis",
+        "node_type": "cache.t3.small",
+        "num_cache_nodes": 1,
+        "tags": {
+          "Name": "notification-cache-411",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "notification"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_elasticache_cluster",
+    "name": "notification_cache",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_sqs_queue.notification_queue",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "name": "notification-queue-411",
+        "delay_seconds": 0,
+        "max_message_size": 262144,
+        "tags": {
+          "Name": "notification-queue-411",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "notification"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_sqs_queue",
+    "name": "notification_queue",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

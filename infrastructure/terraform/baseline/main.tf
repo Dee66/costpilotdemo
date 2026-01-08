@@ -18,6 +18,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+variable "aws_region" {
+  description = "AWS region for the baseline infrastructure"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "project_name" {
+  description = "Project name for resource naming"
+  type        = string
+  default     = "costpilot"
+}
+
 # CostPilot Demo - Baseline Infrastructure
 # This represents a cost-efficient baseline for comparison
 #

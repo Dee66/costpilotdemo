@@ -1,0 +1,46 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.legacy_app",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "c4.large",
+        "ami": "ami-99001122",
+        "tags": {
+          "Name": "legacy-app-986",
+          "Environment": "production",
+          "Application": "legacy-system",
+          "Migration": "in-progress",
+          "Team": "migration"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "legacy_app",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_ebs_volume.legacy_storage",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "size": 5000,
+        "type": "gp2",
+        "availability_zone": "us-east-1a",
+        "tags": {
+          "Name": "legacy-storage-986",
+          "Environment": "production",
+          "Application": "legacy-system"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_ebs_volume",
+    "name": "legacy_storage",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

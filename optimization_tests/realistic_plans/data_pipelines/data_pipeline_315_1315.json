@@ -1,0 +1,66 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.data_processor",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "c5.xlarge",
+        "ami": "ami-87654321",
+        "tags": {
+          "Name": "data-processor-315",
+          "Environment": "production",
+          "Application": "data-pipeline",
+          "Team": "data"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "data_processor",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_lambda_function.data_transformer",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "function_name": "data-transformer-315",
+        "runtime": "python3.9",
+        "handler": "lambda_function.lambda_handler",
+        "memory_size": 1024,
+        "timeout": 30,
+        "architectures": ["x86_64"],
+        "tags": {
+          "Name": "data-transformer-315",
+          "Environment": "production",
+          "Application": "data-pipeline"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_lambda_function",
+    "name": "data_transformer",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_s3_bucket.data_lake",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "bucket": "data-lake-bucket-315",
+        "tags": {
+          "Name": "data-lake-315",
+          "Environment": "production",
+          "DataClass": "processed-data"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_s3_bucket",
+    "name": "data_lake",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

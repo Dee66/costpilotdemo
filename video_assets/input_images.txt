@@ -30,3 +30,4 @@ duration 6.0
 
 file 'video_assets/final/ROIDemo.mp4'
 duration 6.0
+duration 6.0

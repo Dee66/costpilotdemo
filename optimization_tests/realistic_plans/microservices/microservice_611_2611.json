@@ -1,0 +1,69 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.auth_service",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "m5.large",
+        "ami": "ami-11223344",
+        "tags": {
+          "Name": "auth-service-611",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "auth",
+          "Team": "backend"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "auth_service",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_elasticache_cluster.auth_cache",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "cluster_id": "auth-cache-611",
+        "engine": "redis",
+        "node_type": "cache.m5.large",
+        "num_cache_nodes": 1,
+        "tags": {
+          "Name": "auth-cache-611",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "auth"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_elasticache_cluster",
+    "name": "auth_cache",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_sqs_queue.auth_queue",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "name": "auth-queue-611",
+        "delay_seconds": 0,
+        "max_message_size": 262144,
+        "tags": {
+          "Name": "auth-queue-611",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "auth"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_sqs_queue",
+    "name": "auth_queue",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

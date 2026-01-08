@@ -1,0 +1,22 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.test",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Name": "test with invalid utf8: �"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "test"
+    }
+  ]
+}

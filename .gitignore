@@ -1,0 +1,21 @@
+# Binary files
+costpilot
+
+# Internal and sensitive files
+.costpilot/
+costpilot.yml
+docs/
+infrastructure/
+pr_comment_assets/
+record_screen.sh
+record_terminal_click.js
+snapshots/
+video_assets/
+terminal_demo.html
+# CostPilot
+.costpilot/snapshots/
+.costpilot/cache/
+tfplan.json
+tfplan.binary
+cost-report.md
+node_modules

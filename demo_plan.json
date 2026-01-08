@@ -1,0 +1,194 @@
+{
+    "format_version": "1.1",
+    "terraform_version": "1.5.0",
+    "planned_values": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_instance.web_server",
+                    "mode": "managed",
+                    "type": "aws_instance",
+                    "name": "web_server",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 1,
+                    "values": {
+                        "ami": "ami-0c55b159cbfafe1d0",
+                        "instance_type": "t2.micro",
+                        "tags": {
+                            "Name": "WebServer"
+                        }
+                    }
+                },
+                {
+                    "address": "aws_s3_bucket.data_bucket",
+                    "mode": "managed",
+                    "type": "aws_s3_bucket",
+                    "name": "data_bucket",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 0,
+                    "values": {
+                        "bucket": "my-demo-data-bucket",
+                        "acl": "public-read"
+                    }
+                },
+                {
+                    "address": "aws_db_instance.database",
+                    "mode": "managed",
+                    "type": "aws_db_instance",
+                    "name": "database",
+                    "provider_name": "registry.terraform.io/hashicorp/aws",
+                    "schema_version": 0,
+                    "values": {
+                        "engine": "mysql",
+                        "instance_class": "db.t2.micro",
+                        "storage_encrypted": false
+                    }
+                }
+            ]
+        }
+    },
+    "resource_changes": [
+        {
+            "address": "aws_instance.web_server",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "ami": "ami-0c55b159cbfafe1d0",
+                    "instance_type": "t2.micro",
+                    "tags": {
+                        "Name": "WebServer"
+                    }
+                }
+            }
+        },
+        {
+            "address": "aws_s3_bucket.data_bucket",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "bucket": "my-demo-data-bucket",
+                    "acl": "public-read"
+                }
+            }
+        },
+        {
+            "address": "aws_db_instance.database",
+            "change": {
+                "actions": [
+                    "create"
+                ],
+                "before": null,
+                "after": {
+                    "engine": "mysql",
+                    "instance_class": "db.t2.micro",
+                    "storage_encrypted": false
+                }
+            }
+        }
+    ],
+    "configuration": {
+        "root_module": {
+            "resources": [
+                {
+                    "address": "aws_instance.web_server",
+                    "mode": "managed",
+                    "type": "aws_instance",
+                    "name": "web_server",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "ami": {
+                            "constant_value": "ami-0c55b159cbfafe1d0"
+                        },
+                        "instance_type": {
+                            "constant_value": "t2.micro"
+                        },
+                        "tags": {
+                            "constant_value": {
+                                "Name": "WebServer"
+                            }
+                        }
+                    },
+                    "schema_version": 1
+                },
+                {
+                    "address": "aws_s3_bucket.data_bucket",
+                    "mode": "managed",
+                    "type": "aws_s3_bucket",
+                    "name": "data_bucket",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "bucket": {
+                            "constant_value": "my-demo-data-bucket"
+                        },
+                        "acl": {
+                            "constant_value": "public-read"
+                        }
+                    },
+                    "schema_version": 0
+                },
+                {
+                    "address": "aws_db_instance.database",
+                    "mode": "managed",
+                    "type": "aws_db_instance",
+                    "name": "database",
+                    "provider_config_key": "aws",
+                    "expressions": {
+                        "engine": {
+                            "constant_value": "mysql"
+                        },
+                        "instance_class": {
+                            "constant_value": "db.t2.micro"
+                        },
+                        "storage_encrypted": {
+                            "constant_value": false
+                        }
+                    },
+                    "schema_version": 0
+                }
+            ]
+        }
+    },
+    "findings": [
+        {
+            "severity": "high",
+            "description": "S3 bucket 'data_bucket' is configured with public-read ACL, exposing sensitive data to unauthorized access.",
+            "resource": "aws_s3_bucket.data_bucket",
+            "line": 15,
+            "recommendation": "Change ACL to 'private' and use bucket policies for controlled access."
+        },
+        {
+            "severity": "medium",
+            "description": "EC2 instance 'web_server' lacks encryption for root block device, risking data exposure if compromised.",
+            "resource": "aws_instance.web_server",
+            "line": 5,
+            "recommendation": "Enable encryption by setting 'encrypted = true' on the root block device."
+        },
+        {
+            "severity": "medium",
+            "description": "RDS instance 'database' has storage encryption disabled, leaving data at rest vulnerable.",
+            "resource": "aws_db_instance.database",
+            "line": 25,
+            "recommendation": "Enable storage encryption with 'storage_encrypted = true'."
+        },
+        {
+            "severity": "low",
+            "description": "EC2 instance 'web_server' is missing environment tags (e.g., 'Environment'), hindering resource management.",
+            "resource": "aws_instance.web_server",
+            "line": 5,
+            "recommendation": "Add standard tags like 'Environment' and 'Owner'."
+        },
+        {
+            "severity": "low",
+            "description": "Unused variable 'unused_var' defined but not referenced in the configuration.",
+            "resource": "variable.unused_var",
+            "line": 1,
+            "recommendation": "Remove unused variables to clean up the codebase."
+        }
+    ]
+}

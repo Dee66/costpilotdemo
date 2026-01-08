@@ -36,6 +36,18 @@ terraform {
   }
 }
 
+variable "aws_region" {
+  description = "AWS region for the pr-change infrastructure"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "project_name" {
+  description = "Project name for resource naming"
+  type        = string
+  default     = "costpilot"
+}
+
 provider "aws" {
   region = var.aws_region
 

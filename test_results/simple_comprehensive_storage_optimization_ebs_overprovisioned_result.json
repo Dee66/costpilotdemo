@@ -1,0 +1,9 @@
+{
+  "test_id": "ebs_overprovisioned",
+  "category": "storage_optimization",
+  "timestamp": "20260106_175755",
+  "exit_code": 0,
+  "optimization_expected": "reduce EBS IOPS and throughput",
+  "optimization_detected": false,
+  "costpilot_output": "⚠️  Invalid license file: Missing required field: email🔍 CostPilot Scan━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📊 Detection   Found 1 resource changes💰 Cost Prediction   Estimated monthly cost: $0.00   (1 resources analyzed)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📈 Summary   Resources changed: 1   Monthly cost: $0.00"
+}

@@ -1,0 +1,25 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.rightsizing_270",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "after": {
+          "instance_type": "m5.4xlarge",
+          "ami": "ami-12345678",
+          "tags": {
+            "Name": "rightsizing_270",
+            "Environment": "test"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "rightsizing_270"
+    }
+  ]
+}

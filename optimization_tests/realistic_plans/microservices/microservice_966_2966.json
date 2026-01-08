@@ -1,0 +1,69 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.payment_service",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "t3.micro",
+        "ami": "ami-11223344",
+        "tags": {
+          "Name": "payment-service-966",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "payment",
+          "Team": "backend"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "payment_service",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_elasticache_cluster.payment_cache",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "cluster_id": "payment-cache-966",
+        "engine": "redis",
+        "node_type": "cache.t3.micro",
+        "num_cache_nodes": 1,
+        "tags": {
+          "Name": "payment-cache-966",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "payment"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_elasticache_cluster",
+    "name": "payment_cache",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_sqs_queue.payment_queue",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "name": "payment-queue-966",
+        "delay_seconds": 0,
+        "max_message_size": 262144,
+        "tags": {
+          "Name": "payment-queue-966",
+          "Environment": "production",
+          "Application": "microservices",
+          "Service": "payment"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_sqs_queue",
+    "name": "payment_queue",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

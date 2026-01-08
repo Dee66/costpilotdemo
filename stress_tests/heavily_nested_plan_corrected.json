@@ -1,0 +1,2419 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.level_0",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "0",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_0"
+    },
+    {
+      "address": "aws_instance.level_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "1",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_1"
+    },
+    {
+      "address": "aws_instance.level_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "2",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_2"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "2",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_2"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "1",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_1"
+    },
+    {
+      "address": "aws_instance.level_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "2",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_2"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "2",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_2"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "3",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_3"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "4",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_4"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "5",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_5"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    },
+    {
+      "address": "aws_instance.level_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "tags": {
+            "Depth": "6",
+            "Type": "intermediate"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "level_6"
+    }
+  ]
+}

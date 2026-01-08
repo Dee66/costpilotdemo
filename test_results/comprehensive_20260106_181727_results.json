@@ -1,0 +1,2809 @@
+{
+  "run_id": "comprehensive_20260106_181727",
+  "timestamp": "2026-01-06T18:17:27+02:00",
+  "total_tests": 536,
+  "costpilot_version": "costpilot 1.0.0 (Free)",
+  "results": {
+    "summary": {
+      "tests_run": 536,
+      "optimizations_detected": 0,
+      "detection_rate": 0,
+      "total_cost_savings": 0.0
+    },
+    "by_category": {
+      "api": {
+        "tests_run": 15
+      },
+      "architecture_patterns": {
+        "tests_run": 90
+      },
+      "caching": {
+        "tests_run": 20
+      },
+      "cdn": {
+        "tests_run": 15
+      },
+      "instance_rightsizing": {
+        "tests_run": 171
+      },
+      "network_optimization": {
+        "tests_run": 55
+      },
+      "security_overhead": {
+        "tests_run": 39
+      },
+      "serverless": {
+        "tests_run": 40
+      },
+      "storage_optimization": {
+        "tests_run": 91
+      }
+    },
+    "by_subcategory": {
+      "api/api_gateway": {
+        "tests_run": 15
+      },
+      "architecture_patterns/auto_scaling": {
+        "tests_run": 20
+      },
+      "architecture_patterns/development_envs": {
+        "tests_run": 13
+      },
+      "architecture_patterns/microservices": {
+        "tests_run": 28
+      },
+      "architecture_patterns/monolithic": {
+        "tests_run": 14
+      },
+      "architecture_patterns/staging_envs": {
+        "tests_run": 15
+      },
+      "caching/elasticache": {
+        "tests_run": 20
+      },
+      "cdn/cloudfront": {
+        "tests_run": 15
+      },
+      "instance_rightsizing/background_jobs": {
+        "tests_run": 15
+      },
+      "instance_rightsizing/bastion_hosts": {
+        "tests_run": 30
+      },
+      "instance_rightsizing/databases": {
+        "tests_run": 25
+      },
+      "instance_rightsizing/development": {
+        "tests_run": 15
+      },
+      "instance_rightsizing/regional": {
+        "tests_run": 25
+      },
+      "instance_rightsizing/reserved_instances": {
+        "tests_run": 15
+      },
+      "instance_rightsizing/spot_instances": {
+        "tests_run": 15
+      },
+      "instance_rightsizing/web_servers": {
+        "tests_run": 31
+      },
+      "network_optimization/load_balancers": {
+        "tests_run": 10
+      },
+      "network_optimization/nat_gateways": {
+        "tests_run": 30
+      },
+      "network_optimization/vpc_endpoints": {
+        "tests_run": 15
+      },
+      "security_overhead/iam_roles": {
+        "tests_run": 10
+      },
+      "security_overhead/security_groups": {
+        "tests_run": 15
+      },
+      "security_overhead/waf": {
+        "tests_run": 14
+      },
+      "serverless/lambda": {
+        "tests_run": 40
+      },
+      "storage_optimization/ebs_volumes": {
+        "tests_run": 41
+      },
+      "storage_optimization/efs": {
+        "tests_run": 5
+      },
+      "storage_optimization/rds_instances": {
+        "tests_run": 40
+      },
+      "storage_optimization/s3_buckets": {
+        "tests_run": 5
+      }
+    },
+    "failures": [
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_11"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_14"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_2"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_5"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_8"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_12"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_15"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_3"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_6"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_9"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_10"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_13"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_1"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_4"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_2xlarge_2_6_20"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_large_2_6_5"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_large_3_9_13"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_xlarge_1_4_6"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_xlarge_1_6_14"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_2xlarge_1_3_19"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_large_1_2_3"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_large_1_5_11"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_xlarge_2_8_12"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_xlarge_3_8_4"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_large_2_10_15"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_large_2_7_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_xlarge_1_3_8"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_xlarge_1_4_16"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_large_2_5_2"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_large_4_12_17"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_medium_1_3_1"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_medium_3_10_10"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_small_5_15_9"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_xlarge_2_8_18"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "10_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "1_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "2_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "2_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "3_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "3_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "4_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "5_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "5_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "6_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "7_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "8_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "9_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "10_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "10_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "12_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "15_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "20_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "25_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "2_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "2_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "30_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "35_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "3_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "3_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "40_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "45_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "4_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "4_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "50_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "5_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "5_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "60_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "6_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "6_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "75_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "7_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "7_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "8_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "8_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "9_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_2xlarge_2"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_2xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_4xlarge_5"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_9xlarge_8"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_2xlarge_4"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_2xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_4xlarge_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_8xlarge_10"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_xlarge_1"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_2xlarge_6"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_4xlarge_9"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_xlarge_3"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "10_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "1_staging_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "1_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "2_staging_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "2_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "3_staging_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "3_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "4_staging_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "4_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "5_staging_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "5_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "6_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "7_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "8_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "staging_envs",
+        "test": "9_staging_instances_m5_xlarge"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_c5_large_1nodes_8"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_c5_large_2nodes_17"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_c5_xlarge_1nodes_9"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_c5_xlarge_2nodes_18"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_m5_2xlarge_1nodes_19"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_m5_large_1nodes_4"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_m5_large_2nodes_13"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_m5_xlarge_1nodes_5"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_m5_xlarge_2nodes_14"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_r5_2xlarge_1nodes_20"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_r5_large_1nodes_6"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_r5_large_2nodes_15"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_r5_xlarge_1nodes_7"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_r5_xlarge_2nodes_16"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_medium_1nodes_3"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_medium_2nodes_12"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_micro_1nodes_1"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_micro_2nodes_10"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_small_1nodes_2"
+      },
+      {
+        "category": "caching",
+        "subcategory": "elasticache",
+        "test": "elasticache_cache_t3_small_2nodes_11"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_100_10"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_100_13"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_100_1"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_100_4"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_100_7"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_200_11"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_200_14"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_200_2"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_200_5"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_200_8"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_All_12"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_All_15"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_All_3"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_All_6"
+      },
+      {
+        "category": "cdn",
+        "subcategory": "cloudfront",
+        "test": "cloudfront_PriceClass_All_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_c5_2xlarge_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_c5_4xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_c5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_c5_xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_m5_2xlarge_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_m5_4xlarge_14"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_m5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_m5_xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_r5_2xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_r5_large_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_r5_xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_t3_large_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_t3_medium_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_t3_small_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "background_jobs",
+        "test": "job_t3_xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_c5_2xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_c5_4xlarge_17"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_c5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_c5_xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_compute_c5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_gpu_p3_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_heavy_m5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_i3_2xlarge_19"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_i3_large_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_i3_xlarge_14"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_2xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_4xlarge_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_8xlarge_16"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_large_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_xlarge_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_memory_r5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_p3_2xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_p3_8xlarge_20"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_p3_large_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_r5_2xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_r5_4xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_r5_8xlarge_18"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_r5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_storage_i3_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_t3_medium_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "bastion_hosts",
+        "test": "bastion_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_12xlarge_18"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_2xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_4xlarge_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_9xlarge_14"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_large_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_c5_xlarge_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_compute_c5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_db_r5_large_20"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_heavy_m5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_large_t3_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_m5_12xlarge_17"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_m5_2xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_m5_4xlarge_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_m5_8xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_m5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_massive_m5_4xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_memory_r5_4xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_r5_12xlarge_19"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_r5_4xlarge_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_r5_8xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_r5_large_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_t3_2xlarge_16"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_t3_large_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_t3_medium_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "databases",
+        "test": "db_t3_xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_c5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_c5_xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_2xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_4xlarge_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_large_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_xlarge_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_r5_2xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_r5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_t3_large_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_t3_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "development",
+        "test": "dev_t3_xlarge_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-northeast-1_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-northeast-1_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-northeast-1_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-northeast-1_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-northeast-1_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-southeast-1_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-southeast-1_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-southeast-1_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-southeast-1_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "ap-southeast-1_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "eu-west-1_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "eu-west-1_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "eu-west-1_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "eu-west-1_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "eu-west-1_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-east-1_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-east-1_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-east-1_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-east-1_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-east-1_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-west-2_c5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-west-2_m5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-west-2_m5_xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-west-2_r5_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "regional",
+        "test": "us-west-2_t3_medium"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_c5_2xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_c5_4xlarge_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_c5_9xlarge_14"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_c5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_c5_xlarge_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_m5_2xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_m5_4xlarge_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_m5_8xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_m5_large_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_m5_xlarge_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_r5_2xlarge_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_r5_4xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_r5_8xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_r5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "reserved_instances",
+        "test": "reserved_r5_xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_c5_2xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_c5_4xlarge_14"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_c5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_c5_xlarge_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_m5_2xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_m5_4xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_m5_large_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_m5_xlarge_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_r5_2xlarge_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_r5_4xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_r5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_r5_xlarge_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_t3_large_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_t3_medium_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "spot_instances",
+        "test": "spot_t3_xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c4_large_24"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c5_2xlarge_12"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c5_4xlarge_16"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c5_9xlarge_20"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c5_large_3"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_c5_xlarge_8"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_compute_c5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_heavy_m5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_i3_large_26"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_large_t3_large"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m4_large_23"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_12xlarge_19"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_2xlarge_7"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_4xlarge_11"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_8xlarge_15"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_large_2"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_m5_xlarge_5"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_massive_m5_4xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_memory_r5_2xlarge"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r4_large_25"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r5_12xlarge_21"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r5_2xlarge_9"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r5_4xlarge_13"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r5_8xlarge_17"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_r5_large_6"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t2_medium_22"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t3_2xlarge_18"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t3_large_10"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t3_medium_1"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t3_small_4"
+      },
+      {
+        "category": "instance_rightsizing",
+        "subcategory": "web_servers",
+        "test": "web_t3_xlarge_14"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "app_lb_dev_application_3"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "app_lb_prod_application_1"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "app_lb_staging_application_2"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "classic_lb_dev_classic_9"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "classic_lb_prod_classic_7"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "classic_lb_staging_classic_8"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "gateway_lb_prod_gateway_10"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "network_lb_dev_network_6"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "network_lb_prod_network_4"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "load_balancers",
+        "test": "network_lb_staging_network_5"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_backup_5"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_backup_gateway"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_central_10"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_dev_3"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_dev_gateway"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_east_6"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_failover_15"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_1_16"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_1"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_2_17"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_2"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_3_18"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_3"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_4_19"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_4"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_5_20"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_gateway_5"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_main_11"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_north_8"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_primary_13"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_prod_1"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_prod_gateway"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_replica_14"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_secondary_12"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_south_9"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_staging_2"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_staging_gateway"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_test_4"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_test_gateway"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "nat_gateways",
+        "test": "nat_west_7"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "cloudformation_endpoint_10"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "dynamodb_endpoint_2"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "dynamodb_endpoint"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "ec2_endpoint_3"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "ec2_endpoint"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "kms_endpoint_8"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "lambda_endpoint_5"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "lambda_endpoint"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "rds_endpoint_4"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "rds_endpoint"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "s3_endpoint_1"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "s3_endpoint"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "secretsmanager_endpoint_9"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "sns_endpoint_6"
+      },
+      {
+        "category": "network_optimization",
+        "subcategory": "vpc_endpoints",
+        "test": "sqs_endpoint_7"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_admin_1"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_billing_5"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_database_8"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_developer_3"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_monitoring_10"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_network_7"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_poweruser_2"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_readonly_4"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_security_6"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "iam_roles",
+        "test": "iam_storage_9"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_100_rules_6"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_100_rules"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_10_rules_2"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_10_rules"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_150_rules_7"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_200_rules_8"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_200_rules"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_250_rules_9"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_25_rules_3"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_25_rules"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_300_rules_10"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_50_rules_4"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_50_rules"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_5_rules_1"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "security_groups",
+        "test": "sg_75_rules_5"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "extreme_waf_100000_limit_5"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "huge_waf_75000_limit_9"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "large_waf_5000_limit_2"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "large_waf_5000_limit"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "massive_waf_50000_limit_1"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "massive_waf_50000_limit"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "medium_waf_500_limit_3"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "medium_waf_500_limit"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "small_waf_150_limit_10"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "small_waf_50_limit_4"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "small_waf_50_limit"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "tiny_waf_25_limit_8"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "xlarge_waf_1000_limit_7"
+      },
+      {
+        "category": "security_overhead",
+        "subcategory": "waf",
+        "test": "xlarge_waf_25000_limit_6"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_dotnet6_300s_20"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_dotnet6_900s_40"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_go1_x_300s_24"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_go1_x_900s_34"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_java11_300s_14"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_nodejs18_x_300s_10"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_python3_9_300s_4"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_1024mb_ruby2_7_300s_28"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_dotnet6_30s_17"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_go1_x_30s_21"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_java11_30s_11"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_nodejs18_x_30s_7"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_nodejs18_x_900s_37"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_python3_9_30s_1"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_python3_9_900s_31"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_128mb_ruby2_7_30s_25"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_2048mb_java11_600s_15"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_2048mb_python3_9_30s_29"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_2048mb_python3_9_600s_5"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_2048mb_ruby2_7_900s_35"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_dotnet6_60s_18"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_go1_x_60s_22"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_java11_60s_12"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_java11_900s_32"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_nodejs18_x_60s_8"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_python3_9_60s_2"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_python3_9_900s_38"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_256mb_ruby2_7_60s_26"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_3008mb_java11_900s_16"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_3008mb_nodejs18_x_60s_30"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_3008mb_python3_9_900s_36"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_3008mb_python3_9_900s_6"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_dotnet6_120s_19"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_dotnet6_900s_33"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_go1_x_120s_23"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_java11_120s_13"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_java11_900s_39"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_nodejs18_x_120s_9"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_python3_9_120s_3"
+      },
+      {
+        "category": "serverless",
+        "subcategory": "lambda",
+        "test": "lambda_512mb_ruby2_7_120s_27"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_10000gb_gp2_6"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_1000gb_gp2_1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_1000gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_1000gb_io1_9"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_100gb_gp2_4"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_100gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_11000gb_io1_24"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_12000gb_gp2_17"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_125gb_gp2_23"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_13000gb_gp2_27"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_13500gb_io1_29"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_1500gb_io1_13"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_175gb_gp2_28"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_2000gb_gp2_3"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_2000gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_2000gb_sc1_11"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_2500gb_io1_8"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_250gb_gp2_18"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_3000gb_gp2_12"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_3500gb_st1_20"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_4000gb_st1_15"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_4500gb_sc1_21"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_5000gb_gp2_5"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_5000gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_5000gb_st1_10"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_500gb_gp2_2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_500gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_50gb_gp2_7"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_5500gb_st1_25"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_6000gb_sc1_16"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_6500gb_sc1_26"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_7500gb_io1_19"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_7500gb_st1_30"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_8000gb_gp2_14"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "ebs_9000gb_gp2_22"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "io1_large_1000gb_io1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "io1_medium_2500gb_io1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "massive_ebs_10000gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "sc1_medium_2000gb_sc1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "st1_large_5000gb_st1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "ebs_volumes",
+        "test": "tiny_ebs_50gb_gp2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "efs",
+        "test": "efs_10000gb_5"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "efs",
+        "test": "efs_1000gb_2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "efs",
+        "test": "efs_100gb_1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "efs",
+        "test": "efs_5000gb_3"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "efs",
+        "test": "efs_50gb_4"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "compute_large_storage_db_c5_large_2000gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "large_small_storage_db_t3_large_50gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "medium_tiny_storage_db_t3_medium_100gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "memory_huge_storage_db_r5_2xlarge_10000gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_c4_large_2500gb_19"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_c5_2xlarge_10000gb_24"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_c5_4xlarge_14000gb_28"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_c5_large_2000gb_10"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_c5_xlarge_6000gb_15"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m4_large_3000gb_17"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_12xlarge_22000gb_30"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_2xlarge_8000gb_12"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_4xlarge_12000gb_21"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_8xlarge_18000gb_26"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_large_2000gb_3"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_large_2000gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_m5_xlarge_5000gb_7"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r4_large_5000gb_18"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_12xlarge_25000gb_27"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_2xlarge_10000gb_8"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_4xlarge_15000gb_13"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_8xlarge_20000gb_22"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_large_100gb_5"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_r5_large_100gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t2_medium_800gb_16"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_2xlarge_400gb_14"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_2xlarge_600gb_29"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_large_50gb_6"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_large_800gb_23"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_medium_100gb_9"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_micro_1000gb_1"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_micro_1000gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_micro_200gb_4"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_micro_200gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_small_150gb_20"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_small_500gb_2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_small_500gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_xlarge_1500gb_25"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "rds_db_t3_xlarge_3000gb_11"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "rds_instances",
+        "test": "xlarge_massive_storage_db_m5_xlarge_5000gb"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "s3_buckets",
+        "test": "s3_encryption_3"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "s3_buckets",
+        "test": "s3_lifecycle_2"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "s3_buckets",
+        "test": "s3_logging_4"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "s3_buckets",
+        "test": "s3_replication_5"
+      },
+      {
+        "category": "storage_optimization",
+        "subcategory": "s3_buckets",
+        "test": "s3_versioning_1"
+      }
+    ],
+    "successes": []
+  }
+}

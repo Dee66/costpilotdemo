@@ -1,0 +1,26 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_ecs_task_definition.oversized_591",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "after": {
+          "family": "oversized_591-task",
+          "cpu": "2048",
+          "memory": "16384",
+          "requires_compatibilities": [
+            "FARGATE"
+          ],
+          "container_definitions": "[{\"name\": \"app\", \"image\": \"nginx\", \"cpu\": 256, \"memory\": 512}]"
+        }
+      },
+      "mode": "managed",
+      "type": "aws_ecs_task_definition",
+      "name": "oversized_591"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.dev_app_server",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "c5.2xlarge",
+        "ami": "ami-55667788",
+        "tags": {
+          "Name": "dev-app-server-91",
+          "Environment": "staging",
+          "Application": "dev-app",
+          "Team": "development"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "dev_app_server",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_db_instance.dev_database",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_class": "db.m5.large",
+        "engine": "postgres",
+        "allocated_storage": 100,
+        "tags": {
+          "Name": "dev-database-91",
+          "Environment": "staging",
+          "Application": "dev-app"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_db_instance",
+    "name": "dev_database",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

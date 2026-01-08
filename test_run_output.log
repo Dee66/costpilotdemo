@@ -1,0 +1,1043 @@
+🚀 COMPREHENSIVE CostPilot TEST SUITE - FULL EXECUTION
+📅 Tue 06 Jan 2026 19:16:38 SAST
+🧪 Total Tests: 1012
+📁 Results: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_results.json
+📊 Analysis: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_analysis.md
+💡 Improvements: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_improvements.md
+
+[0;34m🔍 Checking CostPilot binary...[0m
+[0;32m✅ CostPilot ready: costpilot 1.0.0 (Free)[0m
+[0;34m🧪 STARTING COMPREHENSIVE TEST EXECUTION...[0m
+
+🧪 api/api_gateway/api_gw_EDGE_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_EDGE_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_EDGE_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_EDGE_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_EDGE_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_PRIVATE_12 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_PRIVATE_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_PRIVATE_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_PRIVATE_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_PRIVATE_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_REGIONAL_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_REGIONAL_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_REGIONAL_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_REGIONAL_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 api/api_gateway/api_gw_REGIONAL_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 architecture_patterns/auto_scaling/asg_c5_2xlarge_2_6_20 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_c5_large_2_6_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_c5_large_3_9_13 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_c5_xlarge_1_4_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_c5_xlarge_1_6_14 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_m5_2xlarge_1_3_19 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_m5_large_1_2_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_m5_large_1_5_11 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_m5_xlarge_2_8_12 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_m5_xlarge_3_8_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_r5_large_2_10_15 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_r5_large_2_7_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_r5_xlarge_1_3_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_r5_xlarge_1_4_16 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_large_2_5_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_large_4_12_17 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_medium_1_3_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_medium_3_10_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_small_5_15_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/auto_scaling/asg_t3_xlarge_2_8_18 ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/10_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/1_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/2_dev_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/2_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/3_dev_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/3_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/4_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/5_dev_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/5_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/6_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/7_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/8_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/development_envs/9_dev_instances_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/microservices/10_microservices_micro ... [0;32m✅ DETECTED (1 optimizations, $1500/mo)[0m
+🧪 architecture_patterns/microservices/10_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $1500/mo)[0m
+🧪 architecture_patterns/microservices/12_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $1800/mo)[0m
+🧪 architecture_patterns/microservices/15_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $2250/mo)[0m
+🧪 architecture_patterns/microservices/20_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $3000/mo)[0m
+🧪 architecture_patterns/microservices/25_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $3750/mo)[0m
+🧪 architecture_patterns/microservices/2_microservices_micro ... [0;32m✅ DETECTED (1 optimizations, $300/mo)[0m
+🧪 architecture_patterns/microservices/2_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $300/mo)[0m
+🧪 architecture_patterns/microservices/30_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $4500/mo)[0m
+🧪 architecture_patterns/microservices/35_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $5250/mo)[0m
+🧪 architecture_patterns/microservices/3_microservices ... [0;32m✅ DETECTED (1 optimizations, $450/mo)[0m
+🧪 architecture_patterns/microservices/3_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $450/mo)[0m
+🧪 architecture_patterns/microservices/40_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $6000/mo)[0m
+🧪 architecture_patterns/microservices/45_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $6750/mo)[0m
+🧪 architecture_patterns/microservices/4_microservices_micro ... [0;32m✅ DETECTED (1 optimizations, $600/mo)[0m
+🧪 architecture_patterns/microservices/4_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $600/mo)[0m
+🧪 architecture_patterns/microservices/50_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $7500/mo)[0m
+🧪 architecture_patterns/microservices/5_microservices ... [0;32m✅ DETECTED (1 optimizations, $750/mo)[0m
+🧪 architecture_patterns/microservices/5_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $750/mo)[0m
+🧪 architecture_patterns/microservices/60_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $9000/mo)[0m
+🧪 architecture_patterns/microservices/6_microservices_micro ... [0;32m✅ DETECTED (1 optimizations, $900/mo)[0m
+🧪 architecture_patterns/microservices/6_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $900/mo)[0m
+🧪 architecture_patterns/microservices/75_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $11250/mo)[0m
+🧪 architecture_patterns/microservices/7_microservices ... [0;32m✅ DETECTED (1 optimizations, $1050/mo)[0m
+🧪 architecture_patterns/microservices/7_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $1050/mo)[0m
+🧪 architecture_patterns/microservices/8_microservices_micro ... [0;32m✅ DETECTED (1 optimizations, $1200/mo)[0m
+🧪 architecture_patterns/microservices/8_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $1200/mo)[0m
+🧪 architecture_patterns/microservices/9_microservices_t3_micro ... [0;32m✅ DETECTED (1 optimizations, $1350/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_c5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_c5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_c5_4xlarge_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_c5_9xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_2xlarge_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_4xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_8xlarge_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_r5_2xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_r5_4xlarge_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_r5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/monolithic/monolithic_r5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 architecture_patterns/staging_envs/10_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/1_staging_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/1_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/2_staging_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/2_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/3_staging_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/3_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/4_staging_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/4_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/5_staging_instances ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/5_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/6_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/7_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/8_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 architecture_patterns/staging_envs/9_staging_instances_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_c5_large_1nodes_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_c5_large_2nodes_17 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_c5_xlarge_1nodes_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_c5_xlarge_2nodes_18 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_m5_2xlarge_1nodes_19 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_1nodes_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_25 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_26 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_27 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_28 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_29 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_2nodes_13 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_30 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_large_31 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_xlarge_1nodes_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_m5_xlarge_2nodes_14 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_r5_2xlarge_1nodes_20 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_1nodes_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_2nodes_15 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_32 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_33 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_34 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_35 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_36 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_37 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_38 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_large_39 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_xlarge_1nodes_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_r5_xlarge_2nodes_16 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_16 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_17 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_18 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_1nodes_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_20 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_21 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_22 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_23 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_medium_2nodes_12 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_0 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_1nodes_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_2nodes_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_micro_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_12 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_1nodes_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_2nodes_11 ... [1;33m❌ NOT DETECTED[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 caching/elasticache/elasticache_cache_t3_small_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_100_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_100_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_100_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_100_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_100_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_200_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_200_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_200_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_200_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_200_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_All_12 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_All_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_All_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_All_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 cdn/cloudfront/cloudfront_PriceClass_All_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_c5_2xlarge_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_c5_4xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_c5_xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_m5_2xlarge_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_m5_4xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_m5_xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_r5_2xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_r5_large_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_r5_xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_t3_large_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_t3_small_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/background_jobs/job_t3_xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_c5_2xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_c5_4xlarge_17 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_c5_xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_compute_c5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_gpu_p3_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_heavy_m5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_i3_2xlarge_19 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_i3_large_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_i3_xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_2xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_4xlarge_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_8xlarge_16 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_xlarge_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_memory_r5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_p3_2xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_p3_8xlarge_20 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_p3_large_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_r5_2xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_r5_4xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_r5_8xlarge_18 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_storage_i3_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_t3_medium_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/bastion_hosts/bastion_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_12xlarge_18 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_2xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_4xlarge_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_9xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_c5_xlarge_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_compute_c5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_db_r5_large_20 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_heavy_m5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_large_t3_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_m5_12xlarge_17 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_m5_2xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_m5_4xlarge_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_m5_8xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_massive_m5_4xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_memory_r5_4xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_r5_12xlarge_19 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_r5_4xlarge_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_r5_8xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_r5_large_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_t3_2xlarge_16 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_t3_large_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_t3_medium_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/databases/db_t3_xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/development/dev_c5_large_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_c5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_c5_xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/development/dev_m5_2xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/development/dev_m5_4xlarge_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/development/dev_m5_large_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_m5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_m5_xlarge_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_m5_xlarge ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_r5_2xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/development/dev_r5_large_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_r5_large ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_t3_large_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_t3_large ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/development/dev_t3_xlarge_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 instance_rightsizing/regional/ap-northeast-1_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-northeast-1_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-northeast-1_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-northeast-1_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-northeast-1_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-southeast-1_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-southeast-1_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-southeast-1_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-southeast-1_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ap-southeast-1_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/eu-west-1_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/eu-west-1_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/eu-west-1_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/eu-west-1_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/eu-west-1_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-east-1_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-east-1_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-east-1_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-east-1_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-east-1_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_9xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_c5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_4xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_m5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_2xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_r5_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_medium_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_micro_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_small_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/ec2_t3_xlarge_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-west-2_c5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-west-2_m5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-west-2_m5_xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-west-2_r5_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/regional/us-west-2_t3_medium ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_c5_2xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_c5_4xlarge_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_c5_9xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_c5_xlarge_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_m5_2xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_m5_4xlarge_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_m5_8xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_m5_xlarge_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_r5_2xlarge_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_r5_4xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_r5_8xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/reserved_instances/reserved_r5_xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_c5_2xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_c5_4xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_c5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_c5_xlarge_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_m5_2xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_m5_4xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_m5_large_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_m5_xlarge_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_r5_2xlarge_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_r5_4xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_r5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_r5_xlarge_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_t3_large_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_t3_medium_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/spot_instances/spot_t3_xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c4_large_24 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c5_2xlarge_12 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c5_4xlarge_16 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c5_9xlarge_20 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c5_large_3 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_c5_xlarge_8 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_compute_c5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_heavy_m5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_i3_large_26 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_large_t3_large ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m4_large_23 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_12xlarge_19 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_2xlarge_7 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_4xlarge_11 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_8xlarge_15 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_large_2 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_m5_xlarge_5 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_massive_m5_4xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_memory_r5_2xlarge ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r4_large_25 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r5_12xlarge_21 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r5_2xlarge_9 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r5_4xlarge_13 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r5_8xlarge_17 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_r5_large_6 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t2_medium_22 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t3_2xlarge_18 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t3_large_10 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t3_medium_1 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t3_small_4 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 instance_rightsizing/web_servers/web_t3_xlarge_14 ... [0;32m✅ DETECTED (1 optimizations, $150/mo)[0m
+🧪 network_optimization/load_balancers/app_lb_dev_application_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/app_lb_prod_application_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/app_lb_staging_application_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/classic_lb_dev_classic_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/classic_lb_prod_classic_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/classic_lb_staging_classic_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/gateway_lb_prod_gateway_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/network_lb_dev_network_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/network_lb_prod_network_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/load_balancers/network_lb_staging_network_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/nat_gateways/nat_backup_5 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_backup_gateway ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_central_10 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_dev_3 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_dev_gateway ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_east_6 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_failover_15 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_1_16 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_1 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_2_17 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_2 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_3_18 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_3 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_4_19 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_4 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_5_20 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_gateway_5 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_main_11 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_north_8 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_primary_13 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_12 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_16 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_17 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_18 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_20 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_21 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_22 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_23 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_25 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_private_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 network_optimization/nat_gateways/nat_prod_1 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_prod_gateway ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_10 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_11 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_12 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_13 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_14 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_15 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_16 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_17 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_18 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_19 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_1 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_20 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_21 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_22 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_23 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_24 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_25 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_2 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_3 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_4 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_5 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_6 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_7 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_8 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_public_9 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_replica_14 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_secondary_12 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_south_9 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_staging_2 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_staging_gateway ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_test_4 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_test_gateway ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/nat_gateways/nat_west_7 ... [0;32m✅ DETECTED (1 optimizations, $32/mo)[0m
+🧪 network_optimization/vpc_endpoints/cloudformation_endpoint_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/dynamodb_endpoint_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/dynamodb_endpoint ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/ec2_endpoint_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/ec2_endpoint ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/kms_endpoint_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/lambda_endpoint_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/lambda_endpoint ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/rds_endpoint_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/rds_endpoint ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/s3_endpoint_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/s3_endpoint ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/secretsmanager_endpoint_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/sns_endpoint_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 network_optimization/vpc_endpoints/sqs_endpoint_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_admin_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_billing_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_database_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_developer_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_monitoring_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_network_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_poweruser_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_readonly_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_security_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/iam_roles/iam_storage_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_100_rules_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_100_rules ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_10_rules_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_10_rules ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_150_rules_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_200_rules_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_200_rules ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_250_rules_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_25_rules_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_25_rules ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_300_rules_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_50_rules_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_50_rules ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_5_rules_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_75_rules_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/security_groups/sg_rules_0 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_12 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_16 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_17 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_18 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_20 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_21 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_22 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_23 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_25 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_26 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_27 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_28 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_29 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_30 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_31 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_32 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_33 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_34 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_35 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_36 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_37 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_38 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_39 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_40 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_41 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_42 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_43 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_44 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_45 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_46 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_47 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_48 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_49 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_50 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_51 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_52 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_53 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_54 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_55 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_56 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_57 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_58 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_59 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_7 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/security_groups/sg_rules_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 security_overhead/waf/extreme_waf_100000_limit_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/huge_waf_75000_limit_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/large_waf_5000_limit_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/large_waf_5000_limit ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/massive_waf_50000_limit_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/massive_waf_50000_limit ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/medium_waf_500_limit_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/medium_waf_500_limit ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/small_waf_150_limit_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/small_waf_50_limit_4 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/small_waf_50_limit ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/tiny_waf_25_limit_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/xlarge_waf_1000_limit_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 security_overhead/waf/xlarge_waf_25000_limit_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_1024mb_120s_17 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_1024mb_300s_18 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_30s_15 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_1024mb_60s_16 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_1024mb_900s_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_dotnet6_300s_20 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_dotnet6_900s_40 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_go1_x_300s_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_go1_x_900s_34 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_java11_300s_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_nodejs18_x_300s_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_python3_9_300s_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_1024mb_ruby2_7_300s_28 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_128mb_120s_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_300s_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_128mb_30s_0 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_60s_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_900s_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_128mb_dotnet6_30s_17 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_go1_x_30s_21 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_java11_30s_11 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_nodejs18_x_30s_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_nodejs18_x_900s_37 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_128mb_python3_9_30s_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_128mb_python3_9_900s_31 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_128mb_ruby2_7_30s_25 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_2048mb_120s_22 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_2048mb_300s_23 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_2048mb_30s_20 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_2048mb_60s_21 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_2048mb_900s_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_2048mb_java11_600s_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_2048mb_python3_9_30s_29 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_2048mb_python3_9_600s_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_2048mb_ruby2_7_900s_35 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_256mb_120s_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_300s_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_256mb_30s_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_60s_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_900s_9 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_256mb_dotnet6_60s_18 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_go1_x_60s_22 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_java11_60s_12 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_java11_900s_32 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_256mb_nodejs18_x_60s_8 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_python3_9_60s_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_256mb_python3_9_900s_38 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_256mb_ruby2_7_60s_26 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_3008mb_120s_27 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_3008mb_300s_28 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_3008mb_30s_25 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_3008mb_60s_26 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_3008mb_900s_29 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_3008mb_java11_900s_16 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_3008mb_nodejs18_x_60s_30 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_3008mb_python3_9_900s_36 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_3008mb_python3_9_900s_6 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_512mb_120s_12 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_300s_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_512mb_30s_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_60s_11 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_900s_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_512mb_dotnet6_120s_19 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_dotnet6_900s_33 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_512mb_go1_x_120s_23 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_java11_120s_13 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_java11_900s_39 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 serverless/lambda/lambda_512mb_nodejs18_x_120s_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_python3_9_120s_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 serverless/lambda/lambda_512mb_ruby2_7_120s_27 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_10000gb_gp2_6 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_1000gb_gp2_1 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_1000gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_1000gb_io1_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_100gb_gp2_4 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_100gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_11000gb_io1_24 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_12000gb_gp2_17 ... [0;32m✅ DETECTED (1 optimizations, $1200/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_125gb_gp2_23 ... [0;32m✅ DETECTED (1 optimizations, $12/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_13000gb_gp2_27 ... [0;32m✅ DETECTED (1 optimizations, $1300/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_13500gb_io1_29 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_1500gb_io1_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_175gb_gp2_28 ... [0;32m✅ DETECTED (1 optimizations, $17/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_2000gb_gp2_3 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_2000gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_2000gb_sc1_11 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_2500gb_io1_8 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_250gb_gp2_18 ... [0;32m✅ DETECTED (1 optimizations, $25/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_3000gb_gp2_12 ... [0;32m✅ DETECTED (1 optimizations, $300/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_3500gb_st1_20 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_4000gb_st1_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_4500gb_sc1_21 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_5000gb_gp2_5 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_5000gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_5000gb_st1_10 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_500gb_gp2_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_500gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_50gb_gp2_7 ... [0;32m✅ DETECTED (1 optimizations, $5/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_5500gb_st1_25 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_6000gb_sc1_16 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_6500gb_sc1_26 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_7500gb_io1_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_7500gb_st1_30 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_8000gb_gp2_14 ... [0;32m✅ DETECTED (1 optimizations, $800/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_9000gb_gp2_22 ... [0;32m✅ DETECTED (1 optimizations, $900/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_10000gb_20 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_1000gb_8 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_100gb_0 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_2000gb_12 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_5000gb_16 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp2_500gb_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_10000gb_21 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_1000gb_9 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_100gb_1 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_2000gb_13 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_5000gb_17 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_gp3_500gb_5 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_10000gb_22 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_1000gb_10 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_100gb_2 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_2000gb_14 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_5000gb_18 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io1_500gb_6 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_10000gb_23 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_1000gb_11 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_100gb_3 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_2000gb_15 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_5000gb_19 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/ebs_io2_500gb_7 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/io1_large_1000gb_io1 ... [1;33m❌ NOT DETECTED[0m
+🧪 storage_optimization/ebs_volumes/io1_medium_2500gb_io1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/massive_ebs_10000gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/ebs_volumes/sc1_medium_2000gb_sc1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/st1_large_5000gb_st1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/ebs_volumes/tiny_ebs_50gb_gp2 ... [0;32m✅ DETECTED (1 optimizations, $5/mo)[0m
+🧪 storage_optimization/efs/efs_10000gb_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/efs/efs_1000gb_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/efs/efs_100gb_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/efs/efs_5000gb_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/efs/efs_50gb_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/rds_instances/compute_large_storage_db_c5_large_2000gb ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/large_small_storage_db_t3_large_50gb ... [0;32m✅ DETECTED (1 optimizations, $5/mo)[0m
+🧪 storage_optimization/rds_instances/medium_tiny_storage_db_t3_medium_100gb ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/memory_huge_storage_db_r5_2xlarge_10000gb ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_c4_large_2500gb_19 ... [0;32m✅ DETECTED (1 optimizations, $250/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_c5_2xlarge_10000gb_24 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_c5_4xlarge_14000gb_28 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_c5_large_2000gb_10 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_c5_xlarge_6000gb_15 ... [0;32m✅ DETECTED (1 optimizations, $600/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m4_large_3000gb_17 ... [0;32m✅ DETECTED (1 optimizations, $60/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_12xlarge_22000gb_30 ... [0;32m✅ DETECTED (1 optimizations, $2200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_2xlarge_8000gb_12 ... [0;32m✅ DETECTED (1 optimizations, $160/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_4xlarge_12000gb_21 ... [0;32m✅ DETECTED (1 optimizations, $1200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_8xlarge_18000gb_26 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_10000gb_33 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_1000gb_30 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_100gb_28 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_15000gb_34 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_2000gb_31 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_2000gb_3 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_2000gb ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_5000gb_32 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_large_500gb_29 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_10000gb_40 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_1000gb_37 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_100gb_35 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_15000gb_41 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_2000gb_38 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_5000gb_39 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_5000gb_7 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_m5_xlarge_500gb_36 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r4_large_5000gb_18 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_12xlarge_25000gb_27 ... [0;32m✅ DETECTED (1 optimizations, $2500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_2xlarge_10000gb_8 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_4xlarge_15000gb_13 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_8xlarge_20000gb_22 ... [0;32m✅ DETECTED (1 optimizations, $400/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_10000gb_47 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_1000gb_44 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_100gb_42 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_100gb_5 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_100gb ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_15000gb_48 ... [0;32m✅ DETECTED (1 optimizations, $1500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_2000gb_45 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_5000gb_46 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_large_500gb_43 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_10000gb_54 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_1000gb_51 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_100gb_49 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_15000gb_55 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_2000gb_52 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_5000gb_53 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_r5_xlarge_500gb_50 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t2_medium_800gb_16 ... [0;32m✅ DETECTED (1 optimizations, $80/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_2xlarge_400gb_14 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_2xlarge_600gb_29 ... [0;32m✅ DETECTED (1 optimizations, $60/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_10000gb_26 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_1000gb_23 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_100gb_21 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_15000gb_27 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_2000gb_24 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_5000gb_25 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_500gb_22 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_50gb_6 ... [0;32m✅ DETECTED (1 optimizations, $5/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_large_800gb_23 ... [0;32m✅ DETECTED (1 optimizations, $16/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_10000gb_19 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_1000gb_16 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_100gb_14 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_100gb_9 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_15000gb_20 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_2000gb_17 ... [0;32m✅ DETECTED (1 optimizations, $200/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_5000gb_18 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_medium_500gb_15 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_10000gb_5 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_1000gb_1 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_1000gb_2 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_1000gb ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_100gb_0 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_15000gb_6 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_2000gb_3 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_200gb_4 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_200gb ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_5000gb_4 ... [0;32m✅ DETECTED (1 optimizations, $100/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_micro_500gb_1 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_10000gb_12 ... [0;32m✅ DETECTED (1 optimizations, $1000/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_1000gb_9 ... [0;32m✅ DETECTED (1 optimizations, $20/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_100gb_7 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_15000gb_13 ... [0;32m✅ DETECTED (1 optimizations, $0/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_150gb_20 ... [0;32m✅ DETECTED (1 optimizations, $15/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_2000gb_10 ... [0;32m✅ DETECTED (1 optimizations, $40/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_5000gb_11 ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_500gb_2 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_500gb_8 ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_small_500gb ... [0;32m✅ DETECTED (1 optimizations, $10/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_xlarge_1500gb_25 ... [0;32m✅ DETECTED (1 optimizations, $30/mo)[0m
+🧪 storage_optimization/rds_instances/rds_db_t3_xlarge_3000gb_11 ... [0;32m✅ DETECTED (1 optimizations, $300/mo)[0m
+🧪 storage_optimization/rds_instances/xlarge_massive_storage_db_m5_xlarge_5000gb ... [0;32m✅ DETECTED (1 optimizations, $500/mo)[0m
+🧪 storage_optimization/s3_buckets/s3_encryption_3 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/s3_buckets/s3_lifecycle_2 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/s3_buckets/s3_logging_4 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/s3_buckets/s3_replication_5 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+🧪 storage_optimization/s3_buckets/s3_versioning_1 ... [0;32m✅ DETECTED (1 optimizations, $50/mo)[0m
+
+[0;34m📊 CALCULATING FINAL STATISTICS...[0m
+[0;36m🎯 EXECUTION COMPLETE![0m
+📊 Tests Run: 1012
+✅ Optimizations Detected: 831
+📈 Detection Rate: 82.11%
+
+[0;34m🔍 GENERATING ANALYSIS & IMPROVEMENT RECOMMENDATIONS...[0m
+[0;32m✅ ANALYSIS COMPLETE![0m
+[0;34m📊 Results Summary:[0m
+   📁 Raw Results: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_results.json
+   📈 Analysis: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_analysis.md
+   💡 Improvements: /home/dee/workspace/AI/GuardSuite/CostPilotDemo/test_results/comprehensive_20260106_191638_improvements.md
+
+[0;35m🎯 Key Findings:[0m
+   • Detection Rate: 82.11%
+   • Total Potential Savings: $ 181125/month
+   • Most Failed Category: architecture_patterns
+
+[0;36m🚀 Ready for CostPilot improvements! Check the improvement roadmap for prioritized next steps.[0m

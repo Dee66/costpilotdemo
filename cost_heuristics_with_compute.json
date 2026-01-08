@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-06T18:00:00Z",
+  "ec2": {
+    "default_savings_rate": {
+      "hourly": 0.2,
+      "monthly": 0.2
+    },
+    "aws_pricing_api_enabled": false,
+    "heuristics": [
+      {
+        "id": "ec2-instance-rightsizing",
+        "name": "EC2 Instance Rightsizing",
+        "description": "Detect oversized EC2 instances based on instance type patterns",
+        "service": "ec2",
+        "resource_type": "aws_instance",
+        "severity": "medium",
+        "category": "instance_rightsizing",
+        "conditions": [
+          {
+            "field": "instance_type",
+            "operator": "matches",
+            "value": "c5\\.(4xlarge|9xlarge|12xlarge|18xlarge|24xlarge)",
+            "action": "flag",
+            "message": "Large C5 instance detected - consider rightsizing to smaller instance type",
+            "savings_estimate": 0.4
+          }
+        ]
+      }
+    ]
+  },
+  "ebs": {
+    "heuristics": [
+      {
+        "id": "ebs-storage-optimization",
+        "name": "EBS Storage Optimization",
+        "description": "Detect EBS storage optimization opportunities",
+        "service": "ebs",
+        "resource_type": "aws_ebs_volume",
+        "severity": "medium",
+        "category": "storage_optimization",
+        "conditions": [
+          {
+            "field": "type",
+            "operator": "equals",
+            "value": "gp2",
+            "action": "flag",
+            "message": "GP2 volume detected - consider upgrading to GP3 for better performance and cost",
+            "savings_estimate": 0.2
+          }
+        ]
+      }
+    ]
+  },
+  "lambda": {
+    "heuristics": [
+      {
+        "id": "lambda-memory-optimization",
+        "name": "Lambda Memory Optimization",
+        "description": "Detect Lambda functions with potentially oversized memory allocation",
+        "service": "lambda",
+        "resource_type": "aws_lambda_function",
+        "severity": "low",
+        "category": "serverless",
+        "conditions": [
+          {
+            "field": "memory_size",
+            "operator": "greater_than",
+            "value": 512,
+            "action": "flag",
+            "message": "Lambda function with high memory allocation - consider optimizing",
+            "savings_estimate": 0.05
+          }
+        ]
+      }
+    ]
+  },
+  "rds": {
+    "heuristics": [
+      {
+        "id": "rds-storage-optimization",
+        "name": "RDS Storage Optimization",
+        "description": "Detect RDS storage overprovisioning",
+        "service": "rds",
+        "resource_type": "aws_db_instance",
+        "severity": "medium",
+        "category": "storage_optimization",
+        "conditions": [
+          {
+            "field": "allocated_storage",
+            "operator": "greater_than",
+            "value": 5000,
+            "action": "flag",
+            "message": "Large RDS storage allocation detected - consider rightsizing",
+            "savings_estimate": 0.15
+          }
+        ]
+      }
+    ]
+  },
+  "vpc": {
+    "heuristics": [
+      {
+        "id": "nat-gateway-optimization",
+        "name": "NAT Gateway Optimization",
+        "description": "Detect NAT Gateway cost optimization opportunities",
+        "service": "vpc",
+        "resource_type": "aws_nat_gateway",
+        "severity": "medium",
+        "category": "network_optimization",
+        "conditions": [
+          {
+            "field": "connectivity_type",
+            "operator": "equals",
+            "value": "public",
+            "action": "flag",
+            "message": "Public NAT Gateway detected - consider Private NAT Gateway for cost savings",
+            "savings_estimate": 0.45
+          }
+        ]
+      }
+    ]
+  },
+  "compute": {
+    "hourly": 0.2,
+    "monthly": 0.2
+  }
+}

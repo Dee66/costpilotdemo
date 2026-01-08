@@ -1,0 +1,492 @@
+{
+  "run_id": "comprehensive_20260106_181810",
+  "timestamp": "2026-01-06T18:18:10+02:00",
+  "total_tests": 536,
+  "costpilot_version": "costpilot 1.0.0 (Free)",
+  "results": {
+    "summary": {
+      "tests_run": 90,
+      "optimizations_detected": 0,
+      "detection_rate": 0.0,
+      "total_cost_savings": 0.0
+    },
+    "by_category": {
+      "api": {
+        "tests_run": 15
+      },
+      "architecture_patterns": {
+        "tests_run": 75
+      }
+    },
+    "by_subcategory": {
+      "api/api_gateway": {
+        "tests_run": 15
+      },
+      "architecture_patterns/auto_scaling": {
+        "tests_run": 20
+      },
+      "architecture_patterns/development_envs": {
+        "tests_run": 13
+      },
+      "architecture_patterns/microservices": {
+        "tests_run": 28
+      },
+      "architecture_patterns/monolithic": {
+        "tests_run": 14
+      }
+    },
+    "failures": [
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_11"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_14"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_2"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_5"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_8"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_12"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_15"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_3"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_6"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_9"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_10"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_13"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_1"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_4"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_REGIONAL_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_2xlarge_2_6_20"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_large_2_6_5"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_large_3_9_13"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_xlarge_1_4_6"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_c5_xlarge_1_6_14"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_2xlarge_1_3_19"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_large_1_2_3"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_large_1_5_11"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_xlarge_2_8_12"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_m5_xlarge_3_8_4"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_large_2_10_15"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_large_2_7_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_xlarge_1_3_8"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_r5_xlarge_1_4_16"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_large_2_5_2"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_large_4_12_17"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_medium_1_3_1"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_medium_3_10_10"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_small_5_15_9"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "auto_scaling",
+        "test": "asg_t3_xlarge_2_8_18"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "10_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "1_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "2_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "2_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "3_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "3_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "4_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "5_dev_instances"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "5_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "6_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "7_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "8_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "development_envs",
+        "test": "9_dev_instances_m5_large"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "10_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "10_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "12_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "15_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "20_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "25_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "2_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "2_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "30_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "35_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "3_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "3_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "40_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "45_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "4_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "4_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "50_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "5_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "5_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "60_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "6_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "6_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "75_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "7_microservices"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "7_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "8_microservices_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "8_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "microservices",
+        "test": "9_microservices_t3_micro"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_2xlarge_2"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_2xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_4xlarge_5"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_c5_9xlarge_8"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_2xlarge_4"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_2xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_4xlarge_7"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_8xlarge_10"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_xlarge_1"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_m5_xlarge"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_2xlarge_6"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_4xlarge_9"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_xlarge_3"
+      },
+      {
+        "category": "architecture_patterns",
+        "subcategory": "monolithic",
+        "test": "monolithic_r5_xlarge"
+      }
+    ],
+    "successes": []
+  }
+}

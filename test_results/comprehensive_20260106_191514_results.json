@@ -1,0 +1,18 @@
+{
+  "run_id": "comprehensive_20260106_191514",
+  "timestamp": "2026-01-06T19:15:14+02:00",
+  "total_tests": 1012,
+  "costpilot_version": "costpilot 1.0.0 (Free)",
+  "results": {
+    "summary": {
+      "tests_run": 0,
+      "optimizations_detected": 0,
+      "detection_rate": 0.0,
+      "total_cost_savings": 0.0
+    },
+    "by_category": {},
+    "by_subcategory": {},
+    "failures": [],
+    "successes": []
+  }
+}

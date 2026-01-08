@@ -1,0 +1,63 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [{
+    "address": "aws_instance.web_server",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_type": "t3.micro",
+        "ami": "ami-12345678",
+        "tags": {
+          "Name": "web-server-646",
+          "Environment": "staging",
+          "Application": "web-app",
+          "Team": "platform"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_instance",
+    "name": "web_server",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_db_instance.database",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "instance_class": "db.t3.micro",
+        "engine": "mysql",
+        "allocated_storage": 1000,
+        "tags": {
+          "Name": "app-db-646",
+          "Environment": "staging",
+          "Application": "web-app"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_db_instance",
+    "name": "database",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }, {
+    "address": "aws_s3_bucket.static_assets",
+    "change": {
+      "actions": ["create"],
+      "before": null,
+      "after": {
+        "bucket": "web-app-assets-646",
+        "tags": {
+          "Name": "static-assets-646",
+          "Environment": "staging",
+          "Purpose": "static-content"
+        }
+      }
+    },
+    "mode": "managed",
+    "type": "aws_s3_bucket",
+    "name": "static_assets",
+    "provider_name": "registry.terraform.io/hashicorp/aws"
+  }]
+}

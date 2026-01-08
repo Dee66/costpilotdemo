@@ -1,0 +1,8 @@
+{
+  "test_id": "event_driven_vs_always_on",
+  "category": "architecture_patterns",
+  "timestamp": "20260106_174827",
+  "exit_code": 0,
+  "optimization_detected": false,
+  "costpilot_output": "⚠️  Invalid license file: Missing required field: email🔍 CostPilot Scan━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📊 Detection   Found 1 resource changes💰 Cost Prediction   Estimated monthly cost: $150.00   (1 resources analyzed)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📈 Summary   Resources changed: 1   Monthly cost: $150.00"
+}

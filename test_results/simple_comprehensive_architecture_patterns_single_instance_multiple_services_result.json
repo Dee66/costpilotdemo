@@ -1,0 +1,9 @@
+{
+  "test_id": "single_instance_multiple_services",
+  "category": "architecture_patterns",
+  "timestamp": "20260106_175755",
+  "exit_code": 0,
+  "optimization_expected": "split monolithic application into microservices",
+  "optimization_detected": false,
+  "costpilot_output": "⚠️  Invalid license file: Missing required field: email🔍 CostPilot Scan━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📊 Detection   Found 1 resource changes💰 Cost Prediction   Estimated monthly cost: $150.00   (1 resources analyzed)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📈 Summary   Resources changed: 1   Monthly cost: $150.00"
+}

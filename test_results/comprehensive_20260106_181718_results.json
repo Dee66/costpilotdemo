@@ -1,0 +1,72 @@
+{
+  "run_id": "comprehensive_20260106_181718",
+  "timestamp": "2026-01-06T18:17:18+02:00",
+  "total_tests": 536,
+  "costpilot_version": "costpilot 1.0.0 (Free)",
+  "results": {
+    "summary": {
+      "tests_run": 9,
+      "optimizations_detected": 0,
+      "detection_rate": 0.0,
+      "total_cost_savings": 0.0
+    },
+    "by_category": {
+      "api": {
+        "tests_run": 9
+      }
+    },
+    "by_subcategory": {
+      "api/api_gateway": {
+        "tests_run": 9
+      }
+    },
+    "failures": [
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_11"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_14"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_2"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_5"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_EDGE_8"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_12"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_15"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_3"
+      },
+      {
+        "category": "api",
+        "subcategory": "api_gateway",
+        "test": "api_gw_PRIVATE_6"
+      }
+    ],
+    "successes": []
+  }
+}

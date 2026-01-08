@@ -1,0 +1,8 @@
+{
+  "test_id": "s3_versioning_no_lifecycle",
+  "category": "storage_optimization",
+  "timestamp": "20260106_174827",
+  "exit_code": 0,
+  "optimization_detected": false,
+  "costpilot_output": "⚠️  Invalid license file: Missing required field: email🔍 CostPilot Scan━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📊 Detection   Found 1 resource changes💰 Cost Prediction   Estimated monthly cost: $0.00   (1 resources analyzed)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📈 Summary   Resources changed: 1   Monthly cost: $0.00"
+}

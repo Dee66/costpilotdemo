@@ -1,0 +1,222 @@
+{
+  "run_id": "comprehensive_20260106_194003",
+  "timestamp": "2026-01-06T19:40:03+02:00",
+  "total_tests": 2000,
+  "costpilot_version": "costpilot 1.0.0 (Free)",
+  "results": {
+    "summary": {
+      "tests_run": 39,
+      "optimizations_detected": 0,
+      "detection_rate": 0.0,
+      "total_cost_savings": 0.0
+    },
+    "by_category": {
+      "analytics_and_ml": {
+        "tests_run": 39
+      }
+    },
+    "by_subcategory": {
+      "analytics_and_ml/redshift": {
+        "tests_run": 39
+      }
+    },
+    "failures": [
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_11"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_15"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_19"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_23"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_27"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_31"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_35"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_39"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_3"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_43"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_47"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_ap-southeast-1_ra3_4xlarge_7"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_cluster_oversized_1"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_10"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_14"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_18"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_22"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_26"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_2"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_30"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_34"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_38"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_42"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_46"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_50"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_eu-west-1_ra3_xlplus_6"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_12"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_16"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_20"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_24"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_28"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_32"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_36"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_40"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_44"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_48"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_4"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-east-1_dc2_large_8"
+      },
+      {
+        "category": "analytics_and_ml",
+        "subcategory": "redshift",
+        "test": "redshift_us-west-2_ds2_xlarge_13"
+      }
+    ],
+    "successes": []
+  }
+}

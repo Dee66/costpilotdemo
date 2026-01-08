@@ -1,0 +1,9 @@
+{
+  "test_id": "idle_development_instances",
+  "category": "architecture_patterns",
+  "timestamp": "20260106_175755",
+  "exit_code": 0,
+  "optimization_expected": "use smaller instances for development",
+  "optimization_detected": false,
+  "costpilot_output": "⚠️  Invalid license file: Missing required field: email🔍 CostPilot Scan━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📊 Detection   Found 3 resource changes💰 Cost Prediction   Estimated monthly cost: $450.00   (3 resources analyzed)━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━📈 Summary   Resources changed: 3   Monthly cost: $450.00"
+}

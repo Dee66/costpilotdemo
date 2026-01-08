@@ -1,0 +1,36 @@
+{
+  "categories": {
+    "containers": {
+      "description": "ECS Fargate and container optimization",
+      "services": ["ecs", "fargate"],
+      "test_count": 800,
+      "expected_detection_rate": 0.85
+    },
+    "instance_rightsizing": {
+      "description": "EC2 instance type optimization",
+      "services": ["ec2"],
+      "test_count": 1200,
+      "expected_detection_rate": 0.87
+    },
+    "storage_optimization": {
+      "description": "S3, EBS, RDS storage optimization",
+      "services": ["s3", "ebs", "rds"],
+      "test_count": 1370,
+      "expected_detection_rate": 0.95
+    },
+    "serverless": {
+      "description": "Lambda function optimization",
+      "services": ["lambda"],
+      "test_count": 634,
+      "expected_detection_rate": 0.89
+    },
+    "network_optimization": {
+      "description": "NAT Gateway and VPC optimization",
+      "services": ["vpc", "nat"],
+      "test_count": 247,
+      "expected_detection_rate": 0.88
+    }
+  },
+  "total_expected_tests": 5000,
+  "overall_target_detection_rate": 0.90
+}
