@@ -56,3 +56,26 @@ Thumbs.db
 # Logs
 logs/
 *.log
+# Large files and binaries
+*.zip
+*.tar.gz
+*.mp4
+*.mov
+*.avi
+*.mp3
+*.wav
+*.gif
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+*.exe
+*.dmg
+*.iso
+*.deb
+*.rpm
+*.AppImage
