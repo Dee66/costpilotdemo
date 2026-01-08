@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_iam_role.storage-role_9",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "name": "storage-role_9",
+          "assume_role_policy": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"Service\": \"ec2.amazonaws.com\"}, \"Action\": \"sts:AssumeRole\"}]}",
+          "tags": {
+            "Name": "storage-role_9",
+            "Type": "storage",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "storage-role_9",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

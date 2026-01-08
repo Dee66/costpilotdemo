@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.rds_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "identifier": "rds_5-database",
+          "engine": "postgres",
+          "instance_class": "db.r5.large",
+          "allocated_storage": 100,
+          "max_allocated_storage": 0,
+          "storage_type": "gp2",
+          "tags": {
+            "Name": "rds_5-db",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "rds_5",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

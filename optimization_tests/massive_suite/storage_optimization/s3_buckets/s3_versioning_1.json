@@ -1,0 +1,27 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_s3_bucket.versioned-bucket",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "bucket": "versioned-bucket",
+          "tags": {
+            "Name": "versioned-bucket",
+            "Config": "versioning",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "versioned-bucket",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

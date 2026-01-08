@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.db_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.large",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "db_2",
+            "Purpose": "database",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "db_2",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

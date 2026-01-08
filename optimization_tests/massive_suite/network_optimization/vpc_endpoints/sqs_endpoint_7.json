@@ -1,0 +1,29 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_vpc_endpoint.sqs_endpoint_7",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "vpc_id": "vpc-12345",
+          "service_name": "com.amazonaws.us-east-1.sqs",
+          "vpc_endpoint_type": "Gateway",
+          "tags": {
+            "Name": "sqs-endpoint-7",
+            "Purpose": "sqs-access",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "sqs_endpoint_7",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

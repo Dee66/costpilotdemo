@@ -1,0 +1,29 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_vpc_endpoint.ec2_endpoint_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "vpc_id": "vpc-12345",
+          "service_name": "com.amazonaws.us-east-1.ec2",
+          "vpc_endpoint_type": "Gateway",
+          "tags": {
+            "Name": "ec2-endpoint-3",
+            "Purpose": "ec2-access",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "ec2_endpoint_3",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

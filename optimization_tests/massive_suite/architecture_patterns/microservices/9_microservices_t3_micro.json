@@ -1,0 +1,204 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.microservice_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_1",
+            "Purpose": "service-1",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_1",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_2",
+            "Purpose": "service-2",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_2",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_3",
+            "Purpose": "service-3",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_3",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_4",
+            "Purpose": "service-4",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_4",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_5",
+            "Purpose": "service-5",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_5",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_6",
+            "Purpose": "service-6",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_6",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_7",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_7",
+            "Purpose": "service-7",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_7",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_8",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_8",
+            "Purpose": "service-8",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_8",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.microservice_9",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.micro",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "microservice_9",
+            "Purpose": "service-9",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "microservice_9",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

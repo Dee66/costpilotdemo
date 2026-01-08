@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.bastion_10",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "p3.large",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "bastion_10",
+            "Purpose": "ssh-access",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "bastion_10",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

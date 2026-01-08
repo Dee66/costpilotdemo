@@ -1,0 +1,138 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.staging_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_1",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_1",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.staging_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_2",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_2",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.staging_3",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_3",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_3",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.staging_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_4",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_4",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.staging_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_5",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_5",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    },
+    {
+      "address": "aws_instance.staging_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_6",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_6",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

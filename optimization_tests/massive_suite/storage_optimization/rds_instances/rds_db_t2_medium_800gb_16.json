@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.rds_16",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "identifier": "rds_16-database",
+          "engine": "postgres",
+          "instance_class": "db.t2.medium",
+          "allocated_storage": 800,
+          "max_allocated_storage": 0,
+          "storage_type": "gp2",
+          "tags": {
+            "Name": "rds_16-db",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "rds_16",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_lambda_function.lambda_33",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "function_name": "lambda_33",
+          "memory_size": 512,
+          "runtime": "dotnet6",
+          "timeout": 900,
+          "handler": "index.handler",
+          "role": "arn:aws:iam::123456789012:role/lambda-role",
+          "tags": {
+            "Name": "lambda_33",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "lambda_33",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

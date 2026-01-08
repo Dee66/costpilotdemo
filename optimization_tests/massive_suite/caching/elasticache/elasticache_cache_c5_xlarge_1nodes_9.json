@@ -1,0 +1,30 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_elasticache_cluster.elasticache_9",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "cluster_id": "elasticache_9",
+          "engine": "redis",
+          "node_type": "cache.c5.xlarge",
+          "num_cache_nodes": 1,
+          "port": 6379,
+          "tags": {
+            "Name": "elasticache_9",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_elasticache_cluster",
+      "name": "elasticache_9",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

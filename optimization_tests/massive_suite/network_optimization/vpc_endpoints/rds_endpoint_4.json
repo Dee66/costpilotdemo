@@ -1,0 +1,29 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_vpc_endpoint.rds_endpoint_4",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "vpc_id": "vpc-12345",
+          "service_name": "com.amazonaws.us-east-1.rds",
+          "vpc_endpoint_type": "Gateway",
+          "tags": {
+            "Name": "rds-endpoint-4",
+            "Purpose": "rds-access",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "rds_endpoint_4",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

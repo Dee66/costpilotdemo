@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.dev_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "t3.large",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "dev_5",
+            "Purpose": "development",
+            "Environment": "development"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "dev_5",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

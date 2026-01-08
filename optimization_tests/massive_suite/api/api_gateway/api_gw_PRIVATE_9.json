@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_api_gateway_rest_api.api_gw_9",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "name": "api_gw_9",
+          "endpoint_configuration": {
+            "types": [
+              "PRIVATE"
+            ]
+          },
+          "tags": {
+            "Name": "api_gw_9",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_api_gateway_rest_api",
+      "name": "api_gw_9",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

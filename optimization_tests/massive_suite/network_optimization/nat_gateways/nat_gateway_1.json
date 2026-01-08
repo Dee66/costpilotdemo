@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_nat_gateway.nat_gw_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "allocation_id": "eipalloc-12345",
+          "subnet_id": "subnet-12345",
+          "tags": {
+            "Name": "nat_gw_1",
+            "Purpose": "outbound-traffic",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_nat_gateway",
+      "name": "nat_gw_1",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

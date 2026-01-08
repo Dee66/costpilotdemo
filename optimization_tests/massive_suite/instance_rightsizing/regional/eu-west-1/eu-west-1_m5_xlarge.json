@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.regional_eu_west_1_m5_xlarge",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "regional_eu_west_1_m5_xlarge",
+            "Purpose": "regional-workload",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "regional_eu_west_1_m5_xlarge",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.web_5",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "web_5",
+            "Purpose": "web-server",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "web_5",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

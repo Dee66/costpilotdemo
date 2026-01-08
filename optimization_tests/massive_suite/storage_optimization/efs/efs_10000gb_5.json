@@ -1,0 +1,27 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_efs_file_system.massive_efs",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "creation_token": "massive_efs-token",
+          "tags": {
+            "Name": "massive_efs",
+            "Size": "10000",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_efs_file_system",
+      "name": "massive_efs",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

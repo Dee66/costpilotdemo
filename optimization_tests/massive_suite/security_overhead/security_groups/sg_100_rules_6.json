@@ -1,0 +1,29 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_security_group.complex_sg_100_6",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "name": "complex-sg-100-6",
+          "description": "Security group with 100 rules",
+          "vpc_id": "vpc-12345",
+          "tags": {
+            "Name": "complex-sg-100-6",
+            "Rules": "100",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "complex_sg_100_6",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_wafv2_web_acl.large_waf_2",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "name": "large_waf_2",
+          "scope": "REGIONAL",
+          "default_action": {
+            "allow": {}
+          },
+          "rules": [
+            {
+              "name": "rate-limit",
+              "priority": 1,
+              "action": {
+                "block": {}
+              },
+              "statement": {
+                "rate_based_statement": {
+                  "limit": 5000,
+                  "aggregate_key_type": "IP"
+                }
+              },
+              "visibility_config": {
+                "sampled_requests_enabled": true,
+                "cloudwatch_metrics_enabled": true,
+                "metric_name": "rate-limit"
+              }
+            }
+          ],
+          "visibility_config": {
+            "sampled_requests_enabled": true,
+            "cloudwatch_metrics_enabled": true,
+            "metric_name": "large_waf_2"
+          },
+          "tags": {
+            "Name": "large_waf_2",
+            "Purpose": "web-protection",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_wafv2_web_acl",
+      "name": "large_waf_2",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

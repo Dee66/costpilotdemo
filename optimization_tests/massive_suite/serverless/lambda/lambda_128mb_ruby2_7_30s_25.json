@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_lambda_function.lambda_25",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "function_name": "lambda_25",
+          "memory_size": 128,
+          "runtime": "ruby2.7",
+          "timeout": 30,
+          "handler": "index.handler",
+          "role": "arn:aws:iam::123456789012:role/lambda-role",
+          "tags": {
+            "Name": "lambda_25",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_lambda_function",
+      "name": "lambda_25",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

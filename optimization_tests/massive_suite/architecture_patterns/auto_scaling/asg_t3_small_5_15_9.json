@@ -1,0 +1,45 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_autoscaling_group.asg_9",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "name": "asg_9",
+          "min_size": 5,
+          "max_size": 15,
+          "desired_capacity": 5,
+          "launch_template": {
+            "id": "lt-12345",
+            "version": "$Latest"
+          },
+          "vpc_zone_identifier": [
+            "subnet-12345",
+            "subnet-67890"
+          ],
+          "tags": [
+            {
+              "key": "Name",
+              "value": "asg_9",
+              "propagate_at_launch": true
+            },
+            {
+              "key": "InstanceType",
+              "value": "t3.small",
+              "propagate_at_launch": true
+            }
+          ]
+        }
+      },
+      "mode": "managed",
+      "type": "aws_autoscaling_group",
+      "name": "asg_9",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

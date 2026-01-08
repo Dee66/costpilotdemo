@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.staging_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "instance_type": "m5.xlarge",
+          "ami": "ami-03f9680ef0c07a3d1",
+          "tags": {
+            "Name": "staging_1",
+            "Purpose": "staging",
+            "Environment": "staging"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "staging_1",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

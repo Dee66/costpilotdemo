@@ -1,0 +1,29 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_vpc_endpoint.s3_endpoint_1",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "vpc_id": "vpc-12345",
+          "service_name": "com.amazonaws.us-east-1.s3",
+          "vpc_endpoint_type": "Gateway",
+          "tags": {
+            "Name": "s3-endpoint-1",
+            "Purpose": "s3-access",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_vpc_endpoint",
+      "name": "s3_endpoint_1",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

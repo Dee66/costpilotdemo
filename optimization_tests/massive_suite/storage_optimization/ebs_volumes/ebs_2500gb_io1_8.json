@@ -1,0 +1,28 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_ebs_volume.ebs_8",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "size": 2500,
+          "type": "io1",
+          "tags": {
+            "Name": "ebs_8",
+            "Purpose": "application-data",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_ebs_volume",
+      "name": "ebs_8",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

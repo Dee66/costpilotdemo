@@ -1,0 +1,27 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_s3_bucket.encrypted-bucket",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "bucket": "encrypted-bucket",
+          "tags": {
+            "Name": "encrypted-bucket",
+            "Config": "encryption",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "encrypted-bucket",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}

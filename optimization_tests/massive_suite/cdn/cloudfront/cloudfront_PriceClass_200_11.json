@@ -1,0 +1,37 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.6.0",
+  "resource_changes": [
+    {
+      "address": "aws_cloudfront_distribution.cloudfront_11",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "enabled": true,
+          "price_class": "PriceClass_200",
+          "default_cache_behavior": {
+            "target_origin_id": "origin",
+            "viewer_protocol_policy": "allow-all"
+          },
+          "origins": [
+            {
+              "domain_name": "example.com",
+              "origin_id": "origin"
+            }
+          ],
+          "tags": {
+            "Name": "cloudfront_11",
+            "Environment": "production"
+          }
+        }
+      },
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "cloudfront_11",
+      "provider_name": "registry.terraform.io/hashicorp/aws"
+    }
+  ]
+}
