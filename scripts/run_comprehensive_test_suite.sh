@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 TEST_DIR="$PROJECT_DIR/optimization_tests/massive_suite"
 RESULTS_DIR="$PROJECT_DIR/test_results"
-COSTPILOT_BINARY="${COSTPILOT_BINARY:-./costpilot}"  # Allow override via environment
+COSTPILOT_BINARY="${COSTPILOT_BINARY:-./bin/costpilot}"  # Allow override via environment
 
 # Colors for output
 RED='\033[0;31m'

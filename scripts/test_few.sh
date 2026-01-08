@@ -41,7 +41,7 @@ for test_file in "${TEST_FILES[@]}"; do
     echo "Category: $category, Subcategory: $subcategory, Test: $test_name"
     
     # Run CostPilot
-    costpilot_output=$(timeout 30s ./costpilot scan "$test_file" 2>/dev/null)
+    costpilot_output=$(timeout 30s ./bin/costpilot scan "$test_file" 2>/dev/null)
     exit_code=$?
     
     if [ $exit_code -eq 0 ]; then

@@ -7,7 +7,7 @@ echo "📅 $(date)"
 echo ""
 
 # Configuration
-COSTPILOT_CMD="../costpilot"
+COSTPILOT_CMD="../bin/costpilot"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 # Initialize counters

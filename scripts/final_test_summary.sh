@@ -16,7 +16,7 @@ test_specific_file() {
         echo "Testing: $description"
         echo "File: $(basename "$file_path")"
         
-        output=$(./costpilot scan "$file_path" --format json 2>/dev/null)
+        output=$(./bin/costpilot scan "$file_path" --format json 2>/dev/null)
         detections=$(echo "$output" | jq '.detections | length' 2>/dev/null || echo "0")
         
         if [[ "$detections" -gt 0 ]]; then

@@ -2,7 +2,7 @@
 
 # Comprehensive CostPilot Test Suite Runner for Realistic Plans
 
-BINARY="./costpilot"
+BINARY="./bin/costpilot"
 TEST_DIR="optimization_tests/realistic_plans"
 OUTPUT_FILE="comprehensive_test_results_$(date +%Y%m%d_%H%M%S).txt"
 

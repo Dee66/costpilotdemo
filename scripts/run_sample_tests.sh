@@ -19,7 +19,7 @@ test_category() {
         ((TOTAL_TESTS++))
         
         # Run the test
-        output=$(./costpilot scan "$sample_file" --format json 2>/dev/null)
+        output=$(./bin/costpilot scan "$sample_file" --format json 2>/dev/null)
         
         # Check for detections
         detections=$(echo "$output" | jq '.detections | length' 2>/dev/null || echo "0")

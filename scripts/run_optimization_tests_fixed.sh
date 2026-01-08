@@ -6,7 +6,7 @@ set -e
 # Configuration
 TEST_DIR="../optimization_tests"
 RESULTS_DIR="../test_results"
-COSTPILOT_CMD="../costpilot"
+COSTPILOT_CMD="../bin/costpilot"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 REPORT_FILE="${RESULTS_DIR}/optimization_test_report_${TIMESTAMP}.json"
 

@@ -16,7 +16,7 @@ test_file() {
         ((TOTAL_FILES++))
         
         # Run the test
-        output=$(./costpilot scan "$file_path" --format json 2>/dev/null)
+        output=$(./bin/costpilot scan "$file_path" --format json 2>/dev/null)
         
         # Check for detections
         detections=$(echo "$output" | jq '.detections | length' 2>/dev/null || echo "0")

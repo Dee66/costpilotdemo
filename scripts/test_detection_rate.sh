@@ -13,7 +13,7 @@ test_file() {
     local output
 
     # Run costpilot scan and capture output
-    output=$(./costpilot scan "$file_path" 2>/dev/null)
+    output=$(./bin/costpilot scan "$file_path" 2>/dev/null)
 
     # Check if output contains optimization opportunities
     if echo "$output" | grep -q "optimization opportunities detected"; then

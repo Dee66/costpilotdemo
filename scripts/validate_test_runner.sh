@@ -22,7 +22,7 @@ for test_file in "${TEST_FILES[@]}"; do
         echo -n "  🧪 $test_name ... "
 
         # Try to run CostPilot (will fail due to license but shows the system works)
-        if timeout 10s ./costpilot scan "$test_file" --output "/tmp/test_output.json" 2>/dev/null; then
+        if timeout 10s ./bin/costpilot scan "$test_file" --output "/tmp/test_output.json" 2>/dev/null; then
             echo "✅ Executed"
         else
             echo "⚠️  Failed (expected due to license)"

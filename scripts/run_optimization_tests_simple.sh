@@ -4,7 +4,7 @@
 # Configuration
 TEST_DIR="../optimization_tests"
 RESULTS_DIR="../test_results"
-COSTPILOT_CMD="../costpilot"
+COSTPILOT_CMD="../bin/costpilot"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 # Categories to test

@@ -5,7 +5,7 @@
 
 set -e
 
-BINARY="./costpilot"
+BINARY="./bin/costpilot"
 TEST_DIR="optimization_tests/massive_suite"
 OUTPUT_DIR="test_results_$(date +%Y%m%d_%H%M%S)"
 LOG_FILE="${OUTPUT_DIR}/test_log.txt"

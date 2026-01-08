@@ -11,7 +11,7 @@ expected_opt="rightsizing t3.large to smaller instance"
 
 # Run CostPilot
 start_time=$(date +%s%N)
-output=$(../costpilot scan ../optimization_tests/instance_rightsizing/burstable_overprovision.json 2>&1)
+output=$(../bin/costpilot scan ../optimization_tests/instance_rightsizing/burstable_overprovision.json 2>&1)
 exit_code=$?
 end_time=$(date +%s%N)
 

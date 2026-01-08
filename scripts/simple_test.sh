@@ -2,7 +2,7 @@
 
 # Simple CostPilot Test Suite Runner
 
-BINARY="./costpilot"
+BINARY="./bin/costpilot"
 TEST_DIR="optimization_tests/massive_suite"
 OUTPUT_FILE="test_results_$(date +%Y%m%d_%H%M%S).txt"
 

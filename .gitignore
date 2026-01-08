@@ -1,21 +1,58 @@
-# Binary files
+# Binary files and executables
+bin/costpilot
 costpilot
 
 # Internal and sensitive files
 .costpilot/
+config/costpilot.yml
 costpilot.yml
 docs/
 infrastructure/
 pr_comment_assets/
-record_screen.sh
-record_terminal_click.js
-snapshots/
-video_assets/
-terminal_demo.html
-# CostPilot
+scripts/record_screen.sh
+assets/record_terminal_click.js
+assets/snapshots/
+assets/video_assets/
+web/terminal_demo.html
+
+# CostPilot internal data
 .costpilot/snapshots/
 .costpilot/cache/
+
+# Terraform state and plans
+.terraform/
+*.tfstate*
 tfplan.json
 tfplan.binary
-cost-report.md
-node_modules
+infrastructure/tfplan*
+
+# Test outputs and temporary files
+test_results/
+test_framework/snapshots/
+test_framework/stress_tests/
+*.tmp
+*.log
+test_run_output.log
+comprehensive_test_results_*.txt
+test_results_*.txt
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+*.zip
+infrastructure/lambda_function.zip
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
