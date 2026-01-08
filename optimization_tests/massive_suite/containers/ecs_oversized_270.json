@@ -11,7 +11,7 @@
         "after": {
           "family": "oversized_270-task",
           "cpu": "8192",
-          "memory": "4096",
+          "memory": "1024",
           "requires_compatibilities": [
             "FARGATE"
           ],

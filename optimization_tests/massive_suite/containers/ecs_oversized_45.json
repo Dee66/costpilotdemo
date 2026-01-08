@@ -11,7 +11,7 @@
         "after": {
           "family": "oversized_45-task",
           "cpu": "2048",
-          "memory": "16384",
+          "memory": "2048",
           "requires_compatibilities": [
             "FARGATE"
           ],

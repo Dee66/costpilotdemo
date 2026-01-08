@@ -10,8 +10,8 @@
         ],
         "after": {
           "family": "oversized_243-task",
-          "cpu": "2048",
-          "memory": "32768",
+          "cpu": "4096",
+          "memory": "2048",
           "requires_compatibilities": [
             "FARGATE"
           ],
