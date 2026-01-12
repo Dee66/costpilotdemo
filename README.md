@@ -27,21 +27,12 @@ For production use:
 - Never commit real AWS credentials or state files
 - Run analysis in CI/CD pipelines, not locally with production credentials
 
-## Documentation
-
-- [Product Specification](docs/product.yml)
-- [Drift Management Guide](docs/DRIFT_MANAGEMENT.md)
-- [Golden Version Signoff](docs/GOLDEN_VERSION_SIGNOFF.md)
-- [Marketing Review Process](docs/MARKETING_REVIEW.md)
-- [Implementation Checklist](docs/checklist.md)
-
 ## Reproducibility
 
 All analysis is deterministic and reproducible:
 - Same input plan → same output every time
 - No external API calls or network dependencies
 - Versioned snapshots ensure consistent testing
-- PR #42 introduced the baseline terraform configuration
 
 The baseline and pr-change stacks demonstrate typical cost regression scenarios.
 
