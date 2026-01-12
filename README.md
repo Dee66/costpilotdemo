@@ -12,15 +12,32 @@ Perfect for teams wanting cost control in CI without the IAM hassle.
 
 **Live Demo**: [https://dee66.github.io/costpilotdemo/](https://dee66.github.io/costpilotdemo/)
 
-## Quick Start
+## Getting the Real CLI
 
-Get started with CostPilot by purchasing from our official sales platforms: Lemon Squeezy and Gumroad.
+This repository contains a **demo-only implementation** for showcasing CostPilot’s behavior and outputs.
+
+To install the actual CostPilot CLI (Linux / macOS / Windows binaries):
+
+👉 https://shieldcraft-ai.com/costpilot
+
+That page contains:
+- Download instructions
+- Pricing options
+- License delivery details
+
 
 For detailed usage instructions, see the documentation links below.
 
 ## Safety Notes
 
-⚠️ **This is a demo repository** - the CostPilot CLI here is a mock implementation for testing purposes only.
+⚠️ **Demo Repository Only**
+
+This repository does **not** contain the production CostPilot binary.
+It exists solely to demonstrate deterministic outputs, CI flows, and UX.
+
+For the real, licensed CLI, see:
+👉 https://shieldcraft-ai.com/costpilot
+
 
 ## Reproducibility
 
